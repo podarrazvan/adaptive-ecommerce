@@ -1,0 +1,76 @@
+<div class="container">
+  <div *ngIf="showMessage">
+    <app-message [message]="messageToShow" (close)="close()"></app-message>
+  </div>
+  <div *ngIf="deleteAlert">
+    <app-delete-alert itemToDelete="message"></app-delete-alert>
+  </div>
+  <!--Desktop version-->
+  <table class="table" *ngIf="!mobile">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Status</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Message</th>
+        <th scope="col">Date</th>
+        <th scpe="col">Open</th>
+        <th scpe="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let email of fbEmails; let i = index">
+      <tr>
+        <th scope="row">{{ i + 1 }}</th>
+        <th scope="row" *ngIf="!email.seen"><mat-icon> email</mat-icon></th>
+        <th scope="row" *ngIf="email.seen">
+          <mat-icon>mail_outline</mat-icon>
+        </th>
+        <td>{{ email.firstName }}</td>
+        <td>{{ email.lastName }}</td>
+        <td>{{ email.email }}</td>
+        <td>{{ email.message | shorten: 30 }}</td>
+        <td>{{ email.date | date }}</td>
+        <td>
+          <button (click)="openEmail(i)" class="mat-btn">
+            <mat-icon>launch</mat-icon>
+          </button>
+        </td>
+        <td>
+          <button class="mat-btn" (click)="onDelete(i)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<!--Mobile version-->
+<div class="emails" *ngFor="let email of fbEmails; let i = index">
+  <div *ngIf="mobile">
+    <div class="email-card">
+      <div (click)="openEmail(i)">
+        <div class="card-top">
+          <h5>{{ email.date | date }}</h5>
+          <div class="email-status" *ngIf="!email.seen" style="color: red">
+            <mat-icon> email</mat-icon>
+          </div>
+          <div class="email-status" *ngIf="email.seen">
+            <mat-icon> mail_outline</mat-icon>
+          </div>
+        </div>
+        <h5>{{ email.firstName }} {{ email.lastName }}</h5>
+        <p class="card-text">
+          {{ email.message | shorten: 200 }}
+        </p>
+      </div>
+      <hr>
+      <br>
+      <button  class="mat-btn delete-btn" (click)="onDelete(i)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
+<!---->

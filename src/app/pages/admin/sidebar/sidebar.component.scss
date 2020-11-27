@@ -1,0 +1,51 @@
+.side-bar-area {
+  position: relative;
+  width: fit-content;
+}
+.side-bar {
+  position: fixed;
+  margin-top: -70px;
+  height: 110vh;
+  width: 14vw;
+  padding: 80px 60px 50px 0px;
+  background-color: rgb(30, 30, 30);
+}
+
+a {
+  color: white !important;
+}
+
+hr {
+  border-color: white;
+}
+
+.mat-btn {
+  float: right;
+  margin-right: -35px;
+}
+
+@media screen and (max-width: 1088px) {
+  .side-bar {
+    width: 20vw;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .side-bar {
+    width: 30vw;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .side-bar {
+    width: 40vw;
+  }
+}
+
+.hideSidebar {
+  width: 80px !important;
+  margin-right: 90px;
+  ul {
+    display: none;
+  }
+}

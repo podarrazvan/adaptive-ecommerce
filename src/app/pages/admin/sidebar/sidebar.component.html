@@ -1,0 +1,34 @@
+<div class="side-bar" [class.hideSidebar]="hide">
+  <button (click)="hide = !hide" class="mat-btn">
+    <mat-icon style="color: white">list</mat-icon>
+  </button>
+  <br />
+  <br />
+  <ul>
+    <a routerLink="add-product">
+      <li>Add a product</li>
+    </a>
+    <hr />
+    <a routerLink="orders">
+      <li>Orders</li>
+    </a>
+    <hr />
+    <a routerLink="messages">
+      <li>
+        Messages <span *ngIf="unread > 0" class="badge badge-danger">{{ unread }}</span>
+      </li>
+    </a>
+    <hr />
+    <a routerLink="statistics">
+      <li>Statistics</li>
+    </a>
+    <hr />
+    <a routerLink="products">
+      <li>Products</li>
+    </a>
+    <hr />
+    <a routerLink="website-edit">
+      <li>Website edit</li>
+    </a>
+  </ul>
+</div>

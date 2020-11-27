@@ -1,0 +1,16 @@
+.list-group {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.buttons {
+    display: flex;
+    place-content: center space-between;
+}
+
+.inputName {
+    max-width: 50%;
+    margin-right: 10px;
+    margin-left: -10px;
+    margin-bottom: 10px;
+}

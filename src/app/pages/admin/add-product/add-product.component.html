@@ -1,0 +1,168 @@
+<form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+  <div class="form-row">
+    <label for="inputTitle"><b>Title</b></label>
+    <input
+      type="text"
+      class="form-control"
+      id="inputTitle"
+      placeholder="Title"
+      formControlName="title"
+    />
+    <div
+      class="col"
+      *ngIf="
+        !productForm.get('title').valid && productForm.get('title').touched
+      "
+      style="color: red"
+    >
+      <span class="help-blok">Please select a title!</span>
+    </div>
+    <label class="my-1 mr-2" for="inputCategory"><b>Category</b></label>
+    <select
+      formControlName="category"
+      class="custom-select my-1 mr-sm-2"
+      id="inputCategory"
+    >
+      <option *ngFor="let category of categories" [value]="category.name">
+        {{ category.name }}
+      </option>
+    </select>
+    <span
+      class="help-blok"
+      *ngIf="
+        !productForm.get('category').valid &&
+        productForm.get('category').touched
+      "
+      style="color: red"
+      >Please select a category!</span
+    >
+  </div>
+  <hr />
+  <div class="row">
+    <div class="col">
+      <label for="inputPrice"><b>Price</b></label>
+      <div class="price-input">
+        <span class="input-group-text">$</span>
+
+        <input
+          id="inputPrice"
+          type="text"
+          class="form-control"
+          aria-label="Amount (to the nearest dollar)"
+          formControlName="price"
+        />
+
+        <span class="input-group-text">.00</span>
+      </div>
+      <span
+        class="help-blok"
+        *ngIf="
+          !productForm.get('price').valid && productForm.get('price').touched
+        "
+        style="color: red"
+        >Please select a price!</span
+      >
+    </div>
+    <div class="col">
+      <label for="imgInput"><b>Add images</b></label>
+      <input
+        type="file"
+        class="custom-input-file"
+        id="imgInput"
+        accept=".png,.jpg,.jpeg"
+        (change)="upload($event)"
+      />
+    </div>
+  </div>
+  <div class="prev-images">
+    <div class="image" *ngFor="let img of images; let i = index">
+      <div>
+        <button type="button" (click)="deletePhoto(img, i)" class="delete-btn">X</button>
+        <img [src]="img" />
+      </div>
+    </div>
+  </div>
+  <br>
+  <hr />
+  <div class="row">
+    <div class="col">
+      <label for="inputDescription"><b>Description</b></label>
+      <textarea
+        formControlName="description"
+        class="form-control"
+        id="inputDescription"
+        rows="3"
+      ></textarea>
+      <span
+        class="help-blok"
+        *ngIf="
+          !productForm.get('description').valid &&
+          productForm.get('description').touched
+        "
+        style="color: red"
+        >Please select a description!</span
+      >
+    </div>
+  </div>
+  <div class="row">
+    <div class="tags col">
+      <div clas="tags-input">
+        <div class="form-row align-items-center">
+          <div class="col-auto">
+            <label for="tagInput"><b>Tags</b></label>
+            <input
+              type="text"
+              class="form-control"
+              id="tagInput"
+              placeholder="Tag"
+              #tag
+            />
+          </div>
+          <div class="col-auto">
+            <br />
+            <button type="button" (click)="addTag(tag)" class="btn btn-primary">
+              Add tag
+            </button>
+          </div>
+          <div class="col">
+            <div class="quantityInput">
+              <label for="quantityInput"><b>Quantity</b></label>
+              <input
+                type="number"
+                min="1"
+                formControlName="quantity"
+                id="quantityInput"
+                class="form-control"
+                placeholder="Set quantity"
+              />
+              <span
+                class="help-blok"
+                *ngIf="
+                  !productForm.get('quantity').valid &&
+                  productForm.get('quantity').touched
+                "
+                style="color: red"
+                >Please insert the quantity!</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tags-area">
+        <div *ngFor="let tag of tags; let i = index">
+          <button
+            type="button"
+            (click)="deleteTag(i)"
+            class="btn btn-success tag-btn"
+          >
+            {{ tag }} | X
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr />
+  <button [disabled]="!productForm.valid" class="btn btn-danger" type="submit">
+    {{ onEditMode  ? "Edit" : "Add product" }}
+  </button>
+</form>

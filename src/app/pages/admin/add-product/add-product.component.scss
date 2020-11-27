@@ -1,0 +1,55 @@
+.price-input,
+.tags-input {
+    display: flex;
+}
+
+img,
+.image {
+    height: 108px;
+    width: 192px;
+}
+
+.prev-images  {
+    display: block;
+    max-width: 600px;
+    position: relative;
+  }
+
+.delete-btn {
+    position: relative;
+    top: 25px;
+    right: 5px;
+    float: right;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    background-color: red;
+}
+
+.image {
+    display: inline-block;
+    position: relative;
+    margin: 5px;
+}
+
+.tags,
+.tags-area {
+    margin-top: 20px;
+}
+
+.tags-area {
+    min-height: 150px;
+    border: 1px solid #ccc!important;
+    border-radius: 5px;
+    flex-direction: row !important;
+    column-count: 5; //TO FIX!
+}
+
+.tag-btn {
+    margin-top: 10px;
+}
+
+.quantityInput {
+    float: right;
+    max-width: 200px;
+}
