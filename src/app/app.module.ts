@@ -9,7 +9,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from './shared/modules/shared.modules';
 import { PagesModule } from './pages/pages-module';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +20,7 @@ import { PagesModule } from './pages/pages-module';
     FormsModule,
     ReactiveFormsModule,
     PagesModule,
-    SharedModule
+    SharedModule 
   ],
   providers: [],
   bootstrap: [AppComponent],

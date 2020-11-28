@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
 import { BrowserModule } from '@angular/platform-browser';
 import { FooterComponent } from '../components/footer/footer.component';
 import { GetProductComponent } from '../components/get-product/get-product.component';
@@ -18,7 +19,8 @@ const COMPONENTS = [
       ...COMPONENTS
     ],
     imports: [
-      BrowserModule
+      BrowserModule,
+      MatIconModule
     ],
     providers: [DbFetchDataService],
     exports: [...COMPONENTS,]
