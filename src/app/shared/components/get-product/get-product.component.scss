@@ -1,0 +1,28 @@
+.product {
+    width: 225px;
+}
+
+.img-area {
+    width: 225px;
+    height: 225px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 30px rgba(104, 117, 130, 0.05);
+    border-radius: 15px;
+    display: flex;
+    place-content: center;
+}
+
+img {
+    max-width: 200px;
+    max-height: 200px;
+    margin: auto;
+}
+
+.product-body {
+    margin-top: 5px;
+    text-align: center;
+}
+
+.title, .price, button {
+    margin: 5px 0px;
+}

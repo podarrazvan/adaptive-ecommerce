@@ -1,12 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppRoutingModule } from './shared/app-routing.module';
+import { AppRoutingModule } from './shared/modules/app-routing.module';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SharedModule } from './shared/shared.modules';
+import { SharedModule } from './shared/modules/shared.modules';
 import { PagesModule } from './pages/pages-module';
 
 

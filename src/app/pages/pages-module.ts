@@ -1,11 +1,14 @@
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+import { SharedModule } from '../shared/modules/shared.modules';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { AdminComponent } from './admin/admin.component';
 import { CartComponent } from './cart/cart.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { ContactComponent } from './contact/contact.component';
+import { AreaComponent } from './home/area/area.component';
 import { HomeCategoriesComponent } from './home/home-categories/home-categories.component';
 import { HomeTopComponent } from './home/home-top/home-top.component';
 import { HomeComponent } from './home/home.component';
@@ -28,7 +31,8 @@ const COMPONENTS = [
     PageNotFoundComponent,
     CategoriesComponent,
     HomeTopComponent,
-    HomeCategoriesComponent
+    HomeCategoriesComponent,
+    AreaComponent,
 ]
 
 @NgModule({
@@ -37,6 +41,8 @@ const COMPONENTS = [
   ],
   imports: [
     RouterModule.forChild(PagesRoutes),
+    SharedModule,
+    BrowserModule
   ],
   providers: [],
   exports: [...COMPONENTS, RouterModule]

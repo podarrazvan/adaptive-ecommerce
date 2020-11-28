@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthModule } from '../auth/auth.module';
-import { AuthService } from '../auth/auth.service';
-import { HomeComponent } from '../pages/home/home.component';
+import { AuthModule } from 'src/app/auth/auth.module';
+import { AuthService } from 'src/app/auth/auth.service';
+import { HomeComponent } from 'src/app/pages/home/home.component';
+
 
 const routes: Routes = [{
     path: '',
@@ -11,7 +12,7 @@ const routes: Routes = [{
   },
 {
   path: 'auth',
-  loadChildren: () => import('../auth/auth.module').then((m) => m.AuthModule)
+  loadChildren: () => import('../../auth/auth.module').then((m) => m.AuthModule)
 },
 {
   path: '**',

@@ -1,0 +1,11 @@
+<div class="area">
+    <h1>Most popular</h1>
+    <div class="products">
+        <app-get-product
+            *ngFor="let p of times"
+            [img]="product.img"
+            [title]="product.title"
+            [price]="product.price"
+        ></app-get-product>
+    </div>
+</div>
