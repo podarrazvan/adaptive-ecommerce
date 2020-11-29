@@ -1,24 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-
-import { AuthService, AuthResponseData } from './auth.service';
+import { AuthService, AuthResponseData } from 'src/app/auth/auth.service';
 
 @Component({
-  selector: 'app-auth',
-  templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.scss']
+  selector: 'app-login-form',
+  templateUrl: './login-form.component.html',
+  styleUrls: ['./login-form.component.scss']
 })
-export class AuthComponent {
-  isLoginMode = true;
+export class LoginFormComponent implements OnInit {
+
   isLoading = false;
   error: string = null;
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  onSwitchMode() {
-    this.isLoginMode = !this.isLoginMode;
+  ngOnInit(): void {
   }
 
   onSubmit(form: NgForm) {
@@ -32,11 +30,9 @@ export class AuthComponent {
 
     this.isLoading = true;
 
-    if (this.isLoginMode) {
+  
       authObs = this.authService.login(email, password);
-    } else {
-      authObs = this.authService.signup(email, password);
-    }
+  
 
     authObs.subscribe(
       resData => {
@@ -53,4 +49,5 @@ export class AuthComponent {
 
     form.reset();
   }
+
 }

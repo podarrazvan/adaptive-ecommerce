@@ -29,6 +29,29 @@ export class AuthService {
     private http: HttpClient
   ) {}
 
+  signup(email: string, password: string) {
+    return this.http
+      .post<AuthResponseData>(
+        'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyB2LCy0vDlPneQn5OW6ft-h5rOXY-vooQE',
+        {
+          email: email,
+          password: password,
+          returnSecureToken: true
+        }
+      )
+      .pipe(
+        catchError(this.handleError),
+        tap(resData => {
+          this.handleAuthentication(
+            resData.email,
+            resData.localId,
+            resData.idToken,
+            +resData.expiresIn
+          );
+        })
+      );
+  }
+
   login(email: string, password: string) {
     return this.http
       .post<AuthResponseData>(

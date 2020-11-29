@@ -36,12 +36,14 @@
 }
 
 .category-name {
+  transition-duration: 0.4s;
+  cursor: pointer;
   display: flex;
   align-items: center;
   place-content: center;
   position: absolute;
   box-sizing: border-box;
-  width: 48%;
+  width: 47%;
   height: 360px;
   z-index: 3;
 }

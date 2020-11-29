@@ -5,9 +5,9 @@ import { AppRoutingModule } from './shared/modules/app-routing.module';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from './shared/modules/shared.modules';
 import { PagesModule } from './pages/pages-module';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -17,10 +17,9 @@ import { PagesModule } from './pages/pages-module';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
     PagesModule,
-    SharedModule 
+    SharedModule,
+    AuthModule 
   ],
   providers: [],
   bootstrap: [AppComponent],

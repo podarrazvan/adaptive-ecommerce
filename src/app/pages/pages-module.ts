@@ -16,7 +16,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { PagesRoutes} from './pages-routing.module';
 import { ProductComponent } from './product/product.component';
 import { SearchComponent } from './search/search.component';
-import { TernsOfUseComponent } from './terns-of-use/terns-of-use.component';
+import { TermsOfUseComponent } from './terms-of-use/terms-of-use.component';
 
 const COMPONENTS = [
   HomeComponent,
@@ -26,7 +26,7 @@ const COMPONENTS = [
     CartComponent,
     AdminComponent,
     AboutUsComponent,
-    TernsOfUseComponent,
+    TermsOfUseComponent,
     ContactComponent,
     PageNotFoundComponent,
     CategoriesComponent,
@@ -42,7 +42,7 @@ const COMPONENTS = [
   imports: [
     RouterModule.forChild(PagesRoutes),
     SharedModule,
-    BrowserModule
+    BrowserModule,
   ],
   providers: [],
   exports: [...COMPONENTS, RouterModule]

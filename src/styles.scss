@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import "./app/shared/buttons/product-btn.scss";
+@import "./app/shared/buttons/form-btn.scss";
 
 * {
     margin: 0;
@@ -17,11 +18,32 @@ a {
     font-family: sans-serif;
 }
 
+a {
+    text-decoration: none;
+}
+
 ul {
     list-style: none;
 }
 
-.oled-theme {
+.oled-theme, mat-icon  {
     color: #ded6ce;
     background-color: black;
+    
+    mat-icon,a{
+        transition-duration: 0.4s;
+    }
+  
+    a {
+        color: #ded6ce;
+    }
+
+    mat-icon:hover,a:hover {
+        color: #3F6174;
+    }
+}
+
+.category-name:hover  {
+    font-size: 5em;
+    background-color:  #3f617442;
 }
