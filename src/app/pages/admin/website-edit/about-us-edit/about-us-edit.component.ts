@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { DbFetchDataService } from 'src/app/shared/db-fetch-data.service';
-import { DbWebsiteEditService } from 'src/app/shared/db-website-edit.sevice';
+import { DbFetchDataService } from 'src/app/shared/services/database/db-fetch-data.service';
+import { DbWebsiteEditService } from 'src/app/shared/services/database/db-website-edit.sevice';
 
 @Component({
   selector: 'app-about-us-edit',

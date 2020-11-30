@@ -1,6 +1,6 @@
 import { Component, DoCheck, OnInit } from '@angular/core';
-import { DbFetchDataService } from 'src/app/shared/db-fetch-data.service';
-import { SharedDataService } from 'src/app/shared/shared-data.service';
+import { DbFetchDataService } from 'src/app/shared/services/database/db-fetch-data.service';
+import { SharedDataService } from 'src/app/shared/services/shared-data.service';
 
 @Component({
   selector: 'app-top-bar',

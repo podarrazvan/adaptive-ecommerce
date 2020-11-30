@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { DbDeleteService } from 'src/app/shared/db-delete.service';
-import { DbFetchDataService } from 'src/app/shared/db-fetch-data.service';
-import { DbUploadService } from 'src/app/shared/db-upload.service';
-import { DbWebsiteEditService } from 'src/app/shared/db-website-edit.sevice';
-import { HomepageArea } from 'src/app/shared/homepage-area.interface';
-import { Product } from 'src/app/shared/product.interface';
+import { HomepageArea } from 'src/app/shared/interfaces/homepage-area.interface';
+import { Product } from 'src/app/shared/interfaces/product.interface';
+import { DbDeleteService } from 'src/app/shared/services/database/db-delete.service';
+import { DbFetchDataService } from 'src/app/shared/services/database/db-fetch-data.service';
+import { DbUploadService } from 'src/app/shared/services/database/db-upload.service';
+import { DbWebsiteEditService } from 'src/app/shared/services/database/db-website-edit.sevice';
 
 @Component({
   selector: 'app-homepage-edit-alert',

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Category } from 'src/app/shared/category.interface';
-import { DbFetchDataService } from 'src/app/shared/db-fetch-data.service';
-import { DbStatisticsService } from 'src/app/shared/db-statistics.service';
-import { Product } from 'src/app/shared/product.interface';
+import { Category } from 'src/app/shared/interfaces/category.interface';
+import { Product } from 'src/app/shared/interfaces/product.interface';
+import { DbFetchDataService } from 'src/app/shared/services/database/db-fetch-data.service';
+import { DbStatisticsService } from 'src/app/shared/services/database/db-statistics.service';
 
 @Component({
   selector: 'app-statistics',

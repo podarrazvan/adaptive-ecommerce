@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { DbFetchDataService } from 'src/app/shared/db-fetch-data.service';
-import { DbUploadService } from 'src/app/shared/db-upload.service';
-import { Order } from 'src/app/shared/order.interface';
+import { Order } from 'src/app/shared/interfaces/order.interface';
+import { DbFetchDataService } from 'src/app/shared/services/database/db-fetch-data.service';
+import { DbUploadService } from 'src/app/shared/services/database/db-upload.service';
 
 @Component({
   selector: 'app-order',

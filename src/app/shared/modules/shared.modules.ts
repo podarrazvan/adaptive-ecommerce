@@ -27,7 +27,6 @@ const COMPONENTS = [
       ...COMPONENTS
     ],
     imports: [
-      BrowserModule,
       MatIconModule,
       RouterModule,
       FormsModule,

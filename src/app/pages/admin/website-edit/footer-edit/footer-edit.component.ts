@@ -1,10 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DbDeleteService } from 'src/app/shared/db-delete.service';
-import { DbFetchDataService } from 'src/app/shared/db-fetch-data.service';
-import { DbUploadService } from 'src/app/shared/db-upload.service';
-import { DbWebsiteEditService } from 'src/app/shared/db-website-edit.sevice';
-import { Footer } from 'src/app/shared/footer.interface';
+import { DbDeleteService } from 'src/app/shared/services/database/db-delete.service';
+import { DbFetchDataService } from 'src/app/shared/services/database/db-fetch-data.service';
+import { DbUploadService } from 'src/app/shared/services/database/db-upload.service';
+import { DbWebsiteEditService } from 'src/app/shared/services/database/db-website-edit.sevice';
 
 @Component({
   selector: 'app-footer-edit',

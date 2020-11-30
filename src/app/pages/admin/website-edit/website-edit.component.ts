@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { DbDeleteService } from 'src/app/shared/db-delete.service';
-import { DbFetchDataService } from 'src/app/shared/db-fetch-data.service';
-import { DbWebsiteEditService } from 'src/app/shared/db-website-edit.sevice';
-import { HomepageArea } from 'src/app/shared/homepage-area.interface';
+import { HomepageArea } from 'src/app/shared/interfaces/homepage-area.interface';
+import { DbDeleteService } from 'src/app/shared/services/database/db-delete.service';
+import { DbFetchDataService } from 'src/app/shared/services/database/db-fetch-data.service';
+import { DbWebsiteEditService } from 'src/app/shared/services/database/db-website-edit.sevice';
 
 @Component({
   selector: 'app-website-edit',

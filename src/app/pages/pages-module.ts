@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/modules/shared.modules';
 import { AboutUsComponent } from './about-us/about-us.component';
-import { AdminComponent } from './admin/admin.component';
 import { CartComponent } from './cart/cart.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { CheckoutComponent } from './checkout/checkout.component';
@@ -13,7 +11,6 @@ import { HomeCategoriesComponent } from './home/home-categories/home-categories.
 import { HomeTopComponent } from './home/home-top/home-top.component';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { PagesRoutes} from './pages-routing.module';
 import { ProductComponent } from './product/product.component';
 import { SearchComponent } from './search/search.component';
 import { TermsOfUseComponent } from './terms-of-use/terms-of-use.component';
@@ -24,7 +21,6 @@ const COMPONENTS = [
     SearchComponent,
     CheckoutComponent,
     CartComponent,
-    AdminComponent,
     AboutUsComponent,
     TermsOfUseComponent,
     ContactComponent,
@@ -40,11 +36,10 @@ const COMPONENTS = [
     ...COMPONENTS
   ],
   imports: [
-    RouterModule.forChild(PagesRoutes),
     SharedModule,
-    BrowserModule,
+    BrowserModule
   ],
   providers: [],
-  exports: [...COMPONENTS, RouterModule]
+  exports: [...COMPONENTS]
 })
 export class PagesModule { }

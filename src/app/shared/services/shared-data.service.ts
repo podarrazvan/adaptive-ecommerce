@@ -1,6 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { Product } from './product.interface';
 import { BehaviorSubject } from 'rxjs';
+import { Product } from '../interfaces/product.interface';
 
 @Injectable()
 export class SharedDataService implements OnDestroy {

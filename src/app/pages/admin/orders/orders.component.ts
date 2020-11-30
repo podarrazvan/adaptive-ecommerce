@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { DbDeleteService } from 'src/app/shared/db-delete.service';
-import { DbFetchDataService } from 'src/app/shared/db-fetch-data.service';
-import { DbUploadService } from 'src/app/shared/db-upload.service';
-import { DeleteAlertService } from 'src/app/shared/delete-alert/delete-alert.service';
-import { Order } from 'src/app/shared/order.interface';
-import { Product } from 'src/app/shared/product.interface';
-import { SharedDataService } from 'src/app/shared/shared-data.service';
+import { DeleteAlertService } from 'src/app/shared/components/delete-alert/delete-alert.service';
+import { Order } from 'src/app/shared/interfaces/order.interface';
+import { Product } from 'src/app/shared/interfaces/product.interface';
+import { DbDeleteService } from 'src/app/shared/services/database/db-delete.service';
+import { DbFetchDataService } from 'src/app/shared/services/database/db-fetch-data.service';
+import { DbUploadService } from 'src/app/shared/services/database/db-upload.service';
+import { SharedDataService } from 'src/app/shared/services/shared-data.service';
 
 @Component({
   selector: 'app-orders',

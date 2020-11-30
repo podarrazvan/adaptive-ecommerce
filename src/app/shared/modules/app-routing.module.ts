@@ -10,6 +10,11 @@ const routes: Routes = [{
     pathMatch: 'full',
     component: HomeComponent
   },
+  {
+    path: 'admin',
+    loadChildren: () =>
+      import('../../pages/admin/admin.module').then((m) => m.AdminModule),
+  },
 {
   path: 'auth',
   loadChildren: () => import('../../auth/auth.module').then((m) => m.AuthModule)
