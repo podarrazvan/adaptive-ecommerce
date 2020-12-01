@@ -40,7 +40,8 @@ export class MessagesComponent implements OnInit {
     });
   }
 
-  openEmail(index) {
+  openEmail(i) {
+    const index = i.index;
     this.messageToShow = this.fbEmails[index];
     this.showMessage = true;
     if (!this.fbEmails[index].seen) {
@@ -50,8 +51,9 @@ export class MessagesComponent implements OnInit {
     }
   }
 
-  onDelete(index) {
+  onDelete(i) {
     this.deleteAlert = true;
+    const index = i.index;
     this.deleteAlertService.deleteMessage.subscribe((data) => {
       switch (data) {
         case true:

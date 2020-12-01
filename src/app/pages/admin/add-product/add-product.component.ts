@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { SharedDataService } from 'src/app/shared/interfaces/shared-data.service';
 import { DbDeleteService } from 'src/app/shared/services/database/db-delete.service';
 import { DbFetchDataService } from 'src/app/shared/services/database/db-fetch-data.service';
 import { DbUploadService } from 'src/app/shared/services/database/db-upload.service';
+import { SharedDataService } from 'src/app/shared/services/shared-data.service';
 
 @Component({
   selector: 'app-add-product',

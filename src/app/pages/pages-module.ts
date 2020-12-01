@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/modules/shared.modules';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { CartComponent } from './cart/cart.component';
@@ -36,10 +38,15 @@ const COMPONENTS = [
     ...COMPONENTS
   ],
   imports: [
+    RouterModule.forChild([{
+      path:'',
+      component:HomeComponent,
+    }]),
     SharedModule,
-    BrowserModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
-  exports: [...COMPONENTS]
+  exports: [...COMPONENTS, RouterModule]
 })
 export class PagesModule { }

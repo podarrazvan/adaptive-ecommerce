@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Category } from './category.interface';
-import { Footer } from './footer.interface';
+import { Category } from '../../interfaces/category.interface';
+import { Footer } from '../../interfaces/footer.interface';
 
 @Injectable()
 export class DbWebsiteEditService {

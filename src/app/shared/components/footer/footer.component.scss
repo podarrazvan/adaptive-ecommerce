@@ -8,10 +8,12 @@ a {
 }
 
 .footer {
+  position: relative;
   text-align: left;
   margin-bottom: 0px;
   padding: 2% 8% 2% 8%;
   height: fit-content;
+  z-index: 2;
   h1 {
     display: flex;
     align-items: center;

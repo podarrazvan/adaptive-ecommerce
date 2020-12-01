@@ -7,6 +7,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared/modules/shared.modules';
 import { PagesModule } from './pages/pages-module';
 import { AuthModule } from './auth/auth.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AdminModule } from './pages/admin/admin.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,10 @@ import { AuthModule } from './auth/auth.module';
     HttpClientModule,
     PagesModule,
     SharedModule,
-    AuthModule
+    AuthModule,
+    AdminModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

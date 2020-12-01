@@ -1,5 +1,5 @@
-import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Message } from 'src/app/shared/interfaces/message.interface';
 import { SharedDataService } from 'src/app/shared/services/shared-data.service';
 
 @Component({

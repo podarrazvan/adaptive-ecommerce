@@ -1,9 +1,9 @@
-import { Product } from './product.interface';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Message } from './message.interface';
-import { Order } from './order.interface';
+import { Order } from '../../interfaces/order.interface';
+import { Product } from '../../interfaces/product.interface';
+import { Message } from '../../interfaces/message.interface';
 
 @Injectable()
 export class DbUploadService {

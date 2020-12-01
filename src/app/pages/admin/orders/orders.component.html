@@ -1,6 +1,6 @@
-<div class="container" *ngIf="loading">
+<!-- <div class="container" *ngIf="loading">
   <app-loading></app-loading>
-</div>
+</div> -->
 <app-order
   *ngIf="showOrder"
   [order]="orderToShow"
@@ -8,7 +8,7 @@
   (updated)="orderUpdated()"
 ></app-order>
 <div *ngIf="deleteAlert">
-  <app-delete-alert itemToDelete="message"></app-delete-alert>
+  <!-- <app-delete-alert itemToDelete="message"></app-delete-alert> -->
 </div>
 <div class="container"*ngIf="orders.length == 0 && mobileOrders.length == 0" >
   <h1>No orders yet...</h1>
@@ -117,5 +117,4 @@
       </div>
   </div> 
 </div> 
-
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import * as firebase from 'firebase';
+// import * as firebase from 'firebase';
 
 
 @Injectable()
@@ -54,14 +54,16 @@ export class DbDeleteService {
   }
 
   deletePhoto(img: string) {
-    var image = firebase.storage().refFromURL(img);
-    image
-      .delete()
-      .then(function () {
-        console.log('Image deleted!');
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    // NOT WORKING!
+    console.log('Delete img not working!')
+  //   var image = firebase.storage().refFromURL(img);
+  //   image
+  //     .delete()
+  //     .then(function () {
+  //       console.log('Image deleted!');
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
   }
 }
