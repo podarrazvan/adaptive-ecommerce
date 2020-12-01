@@ -21,7 +21,7 @@
   >
     Show
   </button>
-  <hr>
+  <hr />
   <div *ngIf="!homepageAreasHide">
     <form #newArea="ngForm">
       <div class="form-row align-items-center">
@@ -145,7 +145,11 @@
               <mat-icon>delete</mat-icon>
             </button>
 
-            <button *ngIf="editCategoryMode != i" (click)="editCategoryMode=i" class="mat-btn">
+            <button
+              *ngIf="editCategoryMode != i"
+              (click)="editCategoryMode = i"
+              class="mat-btn"
+            >
               <mat-icon>create</mat-icon>
             </button>
             <button
@@ -160,22 +164,22 @@
       </div>
     </ul>
   </div>
-<hr>
+  <hr />
   <h1>Terms of use</h1>
   <button class="btn btn-danger" type="button" (click)="editTermsOfUse()">
     Edit Terms Of Use
   </button>
-<hr>
+  <hr />
   <h1>About Us</h1>
   <button class="btn btn-danger" type="button" (click)="editAboutUs()">
     Edit About Us
   </button>
-  <hr>
+  <hr />
   <h1>Footer</h1>
   <button class="btn btn-danger" type="button" (click)="showEditFooter = true">
     Edit Footer
   </button>
-  <hr>
+  <hr />
   <h1>Website's name</h1>
   <div class="form-inline">
     <div class="form-group mx-sm-3 mb-2">

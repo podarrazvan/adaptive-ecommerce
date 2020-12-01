@@ -21,7 +21,7 @@ export class WebsiteEditComponent implements OnInit {
   editAreaMode: number;
   area;
   categories: string[];
-  editCategoryMode: boolean;
+  editCategoryMode: number;
   category;
 
   showEditTermsOfUse = false;

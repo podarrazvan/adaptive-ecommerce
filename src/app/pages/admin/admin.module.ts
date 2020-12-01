@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
@@ -18,6 +19,9 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { UsersComponent } from './users/users.component';
+import { AboutUsEditComponent } from './website-edit/about-us-edit/about-us-edit.component';
+import { FooterEditComponent } from './website-edit/footer-edit/footer-edit.component';
+import { TermsOfUseEditComponent } from './website-edit/terms-of-use-edit/terms-of-use-edit.component';
 import { WebsiteEditComponent } from './website-edit/website-edit.component';
 
 const COMPONENTS = [
@@ -27,6 +31,9 @@ const COMPONENTS = [
   StatisticsComponent,
   ProductsComponent,
   WebsiteEditComponent,
+  AboutUsEditComponent,
+  FooterEditComponent,
+  TermsOfUseEditComponent,
   UsersComponent,
   OrdersComponent,
   OrderComponent,
@@ -43,6 +50,7 @@ const COMPONENTS = [
     BrowserModule,
     MatIconModule,
     SharedModule,
+    FormsModule,
     RouterModule.forChild([
       {
         path:'admin',

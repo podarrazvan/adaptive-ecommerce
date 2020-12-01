@@ -4,7 +4,7 @@
 @import "./app/shared/buttons/mat-btn.scss";
 
 * {
-    margin: 0;
+  margin: 0;
 }
 
 h1,
@@ -16,48 +16,60 @@ h6,
 p,
 li,
 a {
-    font-family: sans-serif;
+  font-family: sans-serif;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 ul {
-    list-style: none;
+  list-style: none;
 }
 
-.oled-theme, mat-icon  {
+.oled-theme,
+mat-icon {
+  color: #ded6ce;
+  background-color: black;
+
+  mat-icon,
+  a {
+    transition-duration: 0.4s;
+  }
+
+  a {
     color: #ded6ce;
+  }
+
+  mat-icon:hover,
+  a:hover {
+    color: #3f6174;
+    text-decoration: none;
+  }
+
+  table {
+    color: white;
+  }
+
+  .footer,
+  .nav-bar,
+  .side-bar {
     background-color: black;
-    
-    mat-icon,a{
-        transition-duration: 0.4s;
-    }
-  
-    a {
-        color: #ded6ce;
-    }
+  }
 
-    mat-icon:hover,a:hover {
-        color: #3F6174;
-        text-decoration: none;
-    }
+  .alert {
+    color: black;
+  }
 
-    table {
-        color: white;
-    }
-
-    .footer, .nav-bar, .side-bar {
-        background-color: black;
-    }
-
-    .alert {
-        color: black;
-    }
+  .list-group-item {
+    margin: 3px;
+    border: 3px solid white;
+    border-radius: 20px;
+    background-color: transparent !important;
+  }
 }
 
-.category-name:hover  {
-    font-size: 5em;
-    background-color:  #3f617442;
+.category-name:hover {
+  font-size: 5em;
+  background-color: #3f617442;
 }
