@@ -3,9 +3,7 @@ import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
-import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { PageNotFoundComponent } from 'src/app/pages/page-not-found/page-not-found.component';
 import { environment } from 'src/environments/environment';
 import { DeleteAlertService } from '../components/delete-alert/delete-alert.service';
 import { FooterComponent } from '../components/footer/footer.component';
@@ -28,7 +26,6 @@ const COMPONENTS = [
     ShortenPipe,
     SignupFormComponent,
     LoginFormComponent,
-  
 ]
 
 @NgModule({

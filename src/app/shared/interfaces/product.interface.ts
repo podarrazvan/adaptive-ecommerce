@@ -7,5 +7,6 @@ export interface Product {
   tags: string[];
   quantity:number;
   img: any;
+  thumbnail?: string;
   key?: string;
 }

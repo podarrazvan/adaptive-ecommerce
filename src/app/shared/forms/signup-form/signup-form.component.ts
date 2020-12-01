@@ -19,19 +19,17 @@ export class SignupFormComponent implements OnInit {
   ngOnInit(): void {
   }
   onSubmit(form: NgForm) {
-    if (!form.valid) {
-      return;
-    }
+    // if (!form.valid) {
+    //   return;
+    // }
     const email = form.value.email;
     const password = form.value.password;
 
     let authObs: Observable<AuthResponseData>;
-
+    
     this.isLoading = true;
 
-  
-      authObs = this.authService.signup(email, password);
-  
+    authObs = this.authService.signup(email, password);
 
     authObs.subscribe(
       resData => {

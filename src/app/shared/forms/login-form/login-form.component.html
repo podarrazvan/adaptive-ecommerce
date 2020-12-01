@@ -1,4 +1,5 @@
-<h1> Login </h1>
+<h1> {{resetPasswordMode? "Password reset":"Login"}} </h1>
+<h1 *ngIf="error" style="color:red">Your email must be wrong...</h1>
 <form class="auth-form" #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" *ngIf="!isLoading">
   <div class="form-group">
     <label for="email">E-Mail</label>
@@ -13,7 +14,7 @@
       placeholder="email"
     />
   </div>
-  <div class="form-group">
+  <div class="form-group" *ngIf="!resetPasswordMode">
     <label for="password">Password</label>
     <input
       type="password"
@@ -26,13 +27,17 @@
       placeholder="password"
     />
   </div>
+  <div class="form-group">
+    <a class="password-reset" *ngIf="!resetPasswordMode" (click)="resetPasswordMode = true">Oh, no... I forgot my password! :(</a>
+  </div>
   <div>
     <button
       class="form-btn"
       type="submit"
-      [disabled]="!authForm.valid"
+     
     >
-     Login </button>
+    {{resetPasswordMode? "Send email":"Login"}}
+     </button>
    
   </div>
 </form>
