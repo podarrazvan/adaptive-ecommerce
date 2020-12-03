@@ -8,5 +8,6 @@ export interface Product {
   quantity:number;
   img: any;
   thumbnail?: string;
+  rating?: number;
   key?: string;
 }

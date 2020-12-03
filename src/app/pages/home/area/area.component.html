@@ -3,9 +3,7 @@
     <div class="products">
         <app-get-product
             *ngFor="let p of times"
-            [img]="product.img"
-            [title]="product.title"
-            [price]="product.price"
+            [product]="product"
         ></app-get-product>
     </div>
 </div>

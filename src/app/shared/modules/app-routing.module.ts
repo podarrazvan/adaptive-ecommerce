@@ -4,6 +4,7 @@ import { AuthModule } from 'src/app/auth/auth.module';
 import { AuthService } from 'src/app/auth/auth.service';
 import { AdminModule } from 'src/app/pages/admin/admin.module';
 import { PageNotFoundComponent } from 'src/app/pages/page-not-found/page-not-found.component';
+import { ProductModule } from 'src/app/pages/product/product.module';
 
 const routes: Routes = [
   {
@@ -18,6 +19,11 @@ const routes: Routes = [
       import('../../pages/admin/admin.module').then((m) => m.AdminModule),
   },
   {
+    path: 'product',
+    loadChildren: () =>
+      import('../../pages/product/product.module').then((m) => m.ProductModule),
+  },
+  {
     path: 'auth',
     loadChildren: () =>
       import('../../auth/auth.module').then((m) => m.AuthModule),
@@ -26,7 +32,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes), AuthModule, AdminModule],
+  imports: [RouterModule.forRoot(routes), AuthModule, AdminModule, ProductModule],
   exports: [RouterModule],
   providers: [AuthService],
 })

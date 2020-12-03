@@ -1,14 +1,14 @@
 <div class="product">
   <div class="img-area">
-    <img class="product-img" [src]="img[0]" [alt]="title" />
+    <img class="product-img" [src]="product.img[0]" [alt]="product.title" />
   </div>
   <div class="product-body">
-    <p class="title">{{ title }}</p>
+    <p class="title">{{ product.title }}</p>
     <p class="price">
-      <b>{{ price }} $</b>
+      <b>{{ product.price }} $</b>
     </p>
-    <button (click)="openProduct(category, key)" class="product-btn">
-      {{ btnText }}
+    <button (click)="openProduct()" class="product-btn">
+      Open
     </button>
   </div>
 </div>

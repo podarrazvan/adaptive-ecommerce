@@ -1,0 +1,30 @@
+.product {
+    position: relative;
+    text-align: center;
+    margin: 5px;
+    height: 220px;
+    width: 130px;
+    border-radius: 10px;
+    padding: 10px;
+    color: black;
+    background-color: white;
+}
+.img img {
+    max-width: 80px;
+    max-height: 100px;
+}
+
+.product-info {
+    position: absolute;
+    bottom: 0px;
+}
+
+mat-icon {
+    color: rgb(235, 235, 0);
+    background-color: transparent;
+}
+
+.product-rating {
+    position: relative;
+    bottom: 6px;
+}

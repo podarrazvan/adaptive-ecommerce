@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Product } from '../../interfaces/product.interface';
 
 @Component({
   selector: 'app-get-product',
@@ -8,29 +9,17 @@ import { Router } from '@angular/router';
 })
 export class GetProductComponent implements OnInit {
 
-  @Input() img: string[];
-  @Input() title: string;
-  @Input() description: string;
-  @Input() price: number;
-  @Input() homepagePosition: string;
-  @Input() category: string;
-  @Input() key: string;
+  @Input() product: Product;
 
   constructor(private router: Router) { }
 
-  characters = 100;
-  btnText = "Open product";
 
   ngOnInit(): void {
-    if (window.innerWidth < 420) {
-      this.characters = 20
-      this.btnText = "Open";
-    }
-
+   
   }
 
-  openProduct(c: string, k: string) {
-    this.router.navigate(['/product', c, k]);
+  openProduct() {
+    this.router.navigate(['/product', this.product.category, this.product.key]);
   }
 
 }

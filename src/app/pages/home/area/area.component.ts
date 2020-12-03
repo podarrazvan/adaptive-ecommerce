@@ -14,6 +14,8 @@ export class AreaComponent implements OnInit {
   product={
     title:'Iphone 12 Pro Max',
     img: ['https://p1.akcdn.net/full/731721861.apple-iphone-12-pro-max-128gb.jpg'],
+    category: "phones",
+    key:"test",
     price: 999
   }
 

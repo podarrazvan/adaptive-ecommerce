@@ -5,10 +5,13 @@ import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { CarouselComponent } from '../components/carousel/carousel.component';
 import { DeleteAlertService } from '../components/delete-alert/delete-alert.service';
 import { FooterComponent } from '../components/footer/footer.component';
 import { GetProductComponent } from '../components/get-product/get-product.component';
+import { GetRecommendedProductComponent } from '../components/get-recommended-product/get-recommended-product.component';
 import { NavbarComponent } from '../components/navbar/navbar.component';
+import { RatingComponent } from '../components/rating/rating.component';
 import { LoginFormComponent } from '../forms/login-form/login-form.component';
 import { SignupFormComponent } from '../forms/signup-form/signup-form.component';
 import { ShortenPipe } from '../pipes/shorten.pipe';
@@ -26,6 +29,9 @@ const COMPONENTS = [
     ShortenPipe,
     SignupFormComponent,
     LoginFormComponent,
+    RatingComponent,
+    GetRecommendedProductComponent,
+    CarouselComponent
 ]
 
 @NgModule({
