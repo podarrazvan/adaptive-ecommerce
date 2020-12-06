@@ -10,6 +10,7 @@ import { Product } from '../../interfaces/product.interface';
 export class GetProductComponent implements OnInit {
 
   @Input() product: Product;
+  @Input() fullContent: boolean;
 
   constructor(private router: Router) { }
 

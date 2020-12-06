@@ -1,0 +1,24 @@
+.top {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.left,
+.right {
+    width: 45%;
+}
+
+.center {
+    margin: auto;
+    text-align: center;
+    p {
+        margin-top: 20px;
+        font-size: 20px;
+        font-weight: bold;
+    }
+}
+
+.right {
+    float: right
+}

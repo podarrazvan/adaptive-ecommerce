@@ -1,40 +1,22 @@
-.nav-bar {
-  position: relative;
-  display: flex;
-  padding: 20px 25px;
-  height: 65px;
-  z-index: 2;
+.navbar {
+  padding-top:25px;
+  background-color: #f4f4f4;
 }
-.ul-links {
-  margin: auto;
-  padding-right: 220px;
-}
+
 ul {
-  display: inline-flex;
-  vertical-align: middle;
+  display: flex;
 }
 
 li {
   margin: 10px;
+  vertical-align: middle;
 }
 
-.brand-name {
-  display: inline-flex;
-  margin-top: 14px;
+.nav-text {
+  position: relative;
+  bottom: 7px ;
 }
 
-.search-bar {
-  position: absolute;
-  right: 20px;
-  width: 200px;
-}
-
-.search {
-  margin-top: 14px;
-  height: 30px;
-  background: #ffffff;
-  border: 1px solid #bababa;
-  box-sizing: border-box;
-  border-radius: 10px;
-  padding-left: 20px;
+mat-icon {
+  color: black;
 }

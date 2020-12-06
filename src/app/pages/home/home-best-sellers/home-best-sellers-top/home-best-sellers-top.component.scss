@@ -1,0 +1,21 @@
+.content,
+.left, 
+.right {
+    display: flex;
+}
+
+.content {
+    margin-top: 30px;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.left h1{
+    padding-left: 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.right {
+    float: right;
+}

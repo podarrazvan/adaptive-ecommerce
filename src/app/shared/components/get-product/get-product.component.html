@@ -1,14 +1,20 @@
-<div class="product">
-  <div class="img-area">
-    <img class="product-img" [src]="product.img[0]" [alt]="product.title" />
+<div class="product"[class.fullContent]="fullContent">
+  <div class="img">
+      <img [src]="product.img" [alt]="product.title">
   </div>
-  <div class="product-body">
-    <p class="title">{{ product.title }}</p>
-    <p class="price">
-      <b>{{ product.price }} $</b>
-    </p>
-    <button (click)="openProduct()" class="product-btn">
-      Open
-    </button>
+  <div class="product-info">
+    <div class="category">
+      <p>{{product.category}}</p>
+    </div>
+    <div class="title">
+        <h1>
+            {{product.title}}
+        </h1>
+    </div>
+    <div class="price">
+      <h2>
+        $ {{product.price}}
+      </h2>
+    </div>
   </div>
 </div>

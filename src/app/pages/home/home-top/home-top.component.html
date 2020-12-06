@@ -1,20 +1,14 @@
 <div class="top">
-  <div>
-    <h1 class="category-name">Audio</h1>
-  </div>
-  <div class="left-container">
-    <div class="left-black-layer"></div>
-    <img
-      class="left-img"
-      src="https://cdn.shopify.com/s/files/1/0153/8863/files/Headphone-Zone-Best-Audiophile-Headphones-Audeze-LCD-X-Music-Creator-Edition.jpg"
-    />
-  </div>
-
-  <div class="right-container">
-    <div class="right-black-layer"></div>
-    <img
-      class="right-img"
-      src="https://cdn.shopify.com/s/files/1/0899/5804/products/IMG_6976LD_2048x.JPG?v=1552076557"
-    />
-  </div>
+    <div class="left">
+        <h1>A nice LOGO</h1>
+    </div>
+    <div class="center">
+        <app-search-bar></app-search-bar>
+        <app-home-most-searched 
+        [elements]="elements"
+        ></app-home-most-searched>
+    </div>
+    <div class="right">
+        <app-home-top-actions></app-home-top-actions>
+    </div>
 </div>

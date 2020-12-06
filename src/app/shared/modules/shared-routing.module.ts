@@ -24,6 +24,11 @@ const routes: Routes = [
       import('../../pages/product/product.module').then((m) => m.ProductModule),
   },
   {
+    path: 'cart',
+    loadChildren: () =>
+      import('../../pages/cart/cart.module').then((m) => m.CartModule),
+  },
+  {
     path: 'auth',
     loadChildren: () =>
       import('../../auth/auth.module').then((m) => m.AuthModule),
@@ -36,4 +41,4 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: [AuthService],
 })
-export class AppRoutingModule {}
+export class SharedRoutingModule {}

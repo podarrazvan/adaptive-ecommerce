@@ -1,0 +1,9 @@
+<div class="carousel">
+    <div class="product" *ngFor="let slide of singleSlide">
+        <app-get-product
+            [product]="slide"
+        ></app-get-product>
+    </div>
+</div>
+<button (click)="next()">Next</button>
+<button (click)="previous()">Previous</button>

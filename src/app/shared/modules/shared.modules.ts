@@ -10,8 +10,10 @@ import { DeleteAlertService } from '../components/delete-alert/delete-alert.serv
 import { FooterComponent } from '../components/footer/footer.component';
 import { GetProductComponent } from '../components/get-product/get-product.component';
 import { GetRecommendedProductComponent } from '../components/get-recommended-product/get-recommended-product.component';
+import { HorizontalProductComponent } from '../components/horizontal-product/horizontal-product.component';
 import { NavbarComponent } from '../components/navbar/navbar.component';
 import { RatingComponent } from '../components/rating/rating.component';
+import { SearchBarComponent } from '../components/search-bar/search-bar.component';
 import { LoginFormComponent } from '../forms/login-form/login-form.component';
 import { SignupFormComponent } from '../forms/signup-form/signup-form.component';
 import { ShortenPipe } from '../pipes/shorten.pipe';
@@ -31,7 +33,9 @@ const COMPONENTS = [
     LoginFormComponent,
     RatingComponent,
     GetRecommendedProductComponent,
-    CarouselComponent
+    CarouselComponent,
+    SearchBarComponent,
+    HorizontalProductComponent
 ]
 
 @NgModule({

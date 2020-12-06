@@ -3,8 +3,6 @@ import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { Browser } from 'protractor';
-import { AuthGuard } from 'src/app/auth/auth.guard';
 import { DeleteAlertComponent } from 'src/app/shared/components/delete-alert/delete-alert.component';
 import { SharedModule } from 'src/app/shared/modules/shared.modules';
 import { AddProductComponent } from './add-product/add-product.component';

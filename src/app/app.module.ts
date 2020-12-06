@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppRoutingModule } from './shared/modules/app-routing.module';
+import { SharedRoutingModule } from './shared/modules/shared-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared/modules/shared.modules';
@@ -16,7 +16,7 @@ import { AdminModule } from './pages/admin/admin.module';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    SharedRoutingModule,
     HttpClientModule,
     PagesModule,
     SharedModule,

@@ -1,0 +1,25 @@
+<div class="main">
+  <div class="top">
+    <app-home-main-top></app-home-main-top>
+  </div>
+  <div class="bottom">
+    <div class="categories">
+      <app-home-main-categories
+          [categories]="categories"
+      ></app-home-main-categories>
+    </div>
+    <div class="ad">
+      <app-home-main-ad></app-home-main-ad>
+    </div>
+    <div class="product">
+      <app-home-main-product
+          [product]="product"
+      ></app-home-main-product>
+    </div>
+  </div>
+  <div class="products">
+    <app-home-main-bottom-products
+      [products]="products"
+    ></app-home-main-bottom-products>
+  </div>
+</div>

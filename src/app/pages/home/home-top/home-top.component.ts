@@ -9,6 +9,8 @@ export class HomeTopComponent implements OnInit {
 
   constructor() { }
 
+  elements = ['phones','laptops','TV']
+
   ngOnInit(): void {
   }
 
