@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/modules/shared.modules';
 import { HomeFleshDealsCarouselComponent } from './flesh-deals/home-flesh-deals-carousel/home-flesh-deals-carousel.component';
 import { HomeBestSellersBottomComponent } from './home-best-sellers/home-best-sellers-bottom/home-best-sellers-bottom.component';
@@ -15,6 +16,14 @@ import { HomeMainComponent } from './home-main/home-main.component';
 import { HomeMostSearchedComponent } from './home-most-searched/home-most-searched.component';
 import { HomeNewReleasesCarouselComponent } from './home-new-releases/home-new-releases-carousel/home-new-releases-carousel.component';
 import { HomeTopActionsComponent } from './home-top-actions/home-top-actions.component';
+import { ShopByBrandProductsComponent } from './shop-by-brand/shop-by-brand-products/shop-by-brand-products.component';
+import { ShopByBrandLeftComponent } from './shop-by-brand/shop-by-brand-left/shop-by-brand-left.component';
+import { ShopByBrandLogosComponent } from './shop-by-brand/shop-by-brand-logos/shop-by-brand-logos.component';
+import { ShopByBrandTopComponent } from './shop-by-brand/shop-by-brand-top/shop-by-brand-top.component';
+import { ShopByBrandComponent } from './shop-by-brand/shop-by-brand.component';
+import { HomeYouMayLikeComponent } from './home-you-may-like/home-you-may-like.component';
+import { HomeYouMayLikeTopComponent } from './home-you-may-like/home-you-may-like-top/home-you-may-like-top.component';
+import { HomeYouMayLikeProductsComponent } from './home-you-may-like/home-you-may-like-products/home-you-may-like-products.component';
 
 const COMPONENTS = [
   HomeMainCategoriesComponent,
@@ -29,8 +38,15 @@ const COMPONENTS = [
   HomeTopActionsComponent,
   HomeMostSearchedComponent,
   HomeMainComponent,
-  HomeNewReleasesCarouselComponent
-  
+  HomeNewReleasesCarouselComponent,
+  ShopByBrandComponent,
+  ShopByBrandTopComponent,
+  ShopByBrandLogosComponent,
+  ShopByBrandLeftComponent,
+  ShopByBrandProductsComponent, 
+  HomeYouMayLikeComponent,
+  HomeYouMayLikeTopComponent,
+  HomeYouMayLikeProductsComponent
 ]
 
 @NgModule({
@@ -40,7 +56,8 @@ const COMPONENTS = [
     imports: [
         SharedModule,
         CommonModule,
-        MatIconModule
+        MatIconModule,
+        RouterModule
     ],
     providers: [],
     exports: [...COMPONENTS,]

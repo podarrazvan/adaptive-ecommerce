@@ -1,0 +1,9 @@
+<div class="products-card">
+    <div class="product" *ngFor="let product of products">
+        <app-horizontal-product  
+            [product]="product"
+            [small]="true"
+        ></app-horizontal-product>
+    </div>
+    
+</div>

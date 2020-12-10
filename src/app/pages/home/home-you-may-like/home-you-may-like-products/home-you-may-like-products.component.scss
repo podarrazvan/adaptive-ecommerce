@@ -1,0 +1,19 @@
+.products-card,
+.product {
+    margin: 10px;
+    border: 2px solid #f0f0f0;
+    border-radius: 10px;
+}
+
+.products-card {
+    position: relative;
+    top: -11px;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    width: calc( 100% - 10px);
+    height: 100%;
+    margin-left: 10px;
+    border: 2px solid #f0f0f0;
+    border-radius: 10px;
+    padding: 30px 11px;
+}

@@ -1,46 +1,12 @@
 <div class="products">
     <div class="left">
-        <div class="product">
-            <div class="product-info">
-                <div class="title">
-                    <h1>
-                        {{products[0].title}}
-                    </h1>
-                </div>
-                <div class="price">
-                    <h2>
-                        From <span>{{products[0].price}}$</span>
-                    </h2>
-                </div>
-                <div class="link">
-                    <h3>Shop now <span><mat-icon>keyboard_arrow_right</mat-icon></span></h3>
-                </div>
-            </div>
-            <div class="product-img">
-                <img [src]="products[0].img" [alt]="products[0].title">
-            </div>
-        </div>
+        <app-horizontal-product 
+            [product]="products[0]"
+        ></app-horizontal-product>
     </div>
     <div class="right">
-        <div class="product">
-            <div class="product-info">
-                <div class="title">
-                    <h1>
-                        {{products[1].title}}
-                    </h1>
-                </div>
-                <div class="price">
-                    <h2>
-                        From <span>{{products[1].price}}$</span>
-                    </h2>
-                </div>
-                <div class="link">
-                    <h3>Shop now <span><mat-icon>keyboard_arrow_right</mat-icon></span></h3>
-                </div>
-            </div>
-            <div class="product-img">
-                <img [src]="products[1].img" [alt]="products[1].title">
-            </div>
-        </div>
+        <app-horizontal-product 
+            [product]="products[1]"
+        ></app-horizontal-product>
     </div>
 </div>

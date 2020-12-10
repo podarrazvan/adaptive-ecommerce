@@ -1,0 +1,13 @@
+.brands {
+    display: flex;
+    img {
+        cursor: pointer;
+        max-height: 100px;
+        width: 100px;
+        margin: 20px 50px;
+    }
+    img:hover {
+        transform: scale(1.25);
+        transition: all 1s linear;
+      }
+}

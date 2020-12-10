@@ -47,7 +47,7 @@ const COMPONENTS = [
       RouterModule,
       FormsModule,
       CommonModule,
-      AngularFireModule.initializeApp(environment.firebase)
+      AngularFireModule.initializeApp(environment.firebase),
     ],
     providers: [DbUploadService,DbFetchDataService,DbWebsiteEditService,DbDeleteService,SharedDataService, DeleteAlertService,DbStatisticsService],
     exports: [...COMPONENTS,]

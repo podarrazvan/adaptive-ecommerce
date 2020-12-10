@@ -1,0 +1,5 @@
+<div class="brands">
+    <div (click)="brandSelected(i)" *ngFor="let brand of brands; let i = index">
+        <img [src]="brand.img">
+    </div>
+</div>

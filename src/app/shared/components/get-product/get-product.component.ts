@@ -12,6 +12,8 @@ export class GetProductComponent implements OnInit {
   @Input() product: Product;
   @Input() fullContent: boolean;
 
+  showHiddenBtn = false;
+
   constructor(private router: Router) { }
 
 

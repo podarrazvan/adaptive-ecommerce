@@ -4,6 +4,8 @@ import { Product } from '../interfaces/product.interface';
 
 @Injectable()
 export class SharedDataService implements OnDestroy {
+
+  brand = new BehaviorSubject<{name:string, img: string}>({name:"",img:""});
   emptyCart = new BehaviorSubject<boolean>(true);
   isAuthenticated = new BehaviorSubject<boolean>(false);
 
@@ -15,7 +17,7 @@ export class SharedDataService implements OnDestroy {
   unreadMessages: number;
   totalCart: number;
   mobile: boolean;
-
+  
   ngOnDestroy() {
     this.productEdit = null;
     this.product = null;
@@ -30,4 +32,9 @@ export class SharedDataService implements OnDestroy {
   updateAuth(newStatus) {
     this.isAuthenticated.next(newStatus);
   }
+  
+  updateBrand(newBrand) {
+    this.brand.next(newBrand);
+  }
+  
 }
