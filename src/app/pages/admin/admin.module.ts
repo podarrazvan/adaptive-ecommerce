@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { DeleteAlertComponent } from 'src/app/shared/components/delete-alert/delete-alert.component';
 import { SharedModule } from 'src/app/shared/modules/shared.modules';
 import { AddProductComponent } from './add-product/add-product.component';
+import { AdminTopBarComponent } from './admin-top-bar/admin-top-bar.component';
 import { AdminComponent } from './admin.component';
 import { DesktopVersionMessagesComponent } from './messages/desktop-version-messages/desktop-version-messages.component';
 import { MessageComponent } from './messages/message/message.component';
@@ -15,7 +16,6 @@ import { OrdersComponent } from './orders/orders.component';
 import { ProductsComponent } from './products/products.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { StatisticsComponent } from './statistics/statistics.component';
-import { TopBarComponent } from './top-bar/top-bar.component';
 import { UsersComponent } from './users/users.component';
 import { AboutUsEditComponent } from './website-edit/about-us-edit/about-us-edit.component';
 import { FooterEditComponent } from './website-edit/footer-edit/footer-edit.component';
@@ -36,7 +36,7 @@ const COMPONENTS = [
   OrdersComponent,
   OrderComponent,
   SidebarComponent,
-  TopBarComponent, 
+  AdminTopBarComponent, 
   DeleteAlertComponent,
   MessageComponent,
   DesktopVersionMessagesComponent

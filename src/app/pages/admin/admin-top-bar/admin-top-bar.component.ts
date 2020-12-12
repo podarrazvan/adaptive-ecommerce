@@ -3,11 +3,11 @@ import { DbFetchDataService } from 'src/app/shared/services/database/db-fetch-da
 import { SharedDataService } from 'src/app/shared/services/shared-data.service';
 
 @Component({
-  selector: 'app-top-bar',
-  templateUrl: './top-bar.component.html',
-  styleUrls: ['./top-bar.component.scss']
+  selector: 'app-admin-top-bar',
+  templateUrl: './admin-top-bar.component.html',
+  styleUrls: ['./admin-top-bar.component.scss']
 })
-export class TopBarComponent implements OnInit, DoCheck  {
+export class AdminTopBarComponent implements OnInit, DoCheck  {
 
   constructor(
     private dbFetchDataService: DbFetchDataService,

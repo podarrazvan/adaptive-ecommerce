@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import { CarouselComponent } from '../components/carousel/carousel.component';
 import { DeleteAlertService } from '../components/delete-alert/delete-alert.service';
 import { FooterComponent } from '../components/footer/footer.component';
 import { GetProductComponent } from '../components/get-product/get-product.component';
@@ -14,6 +13,10 @@ import { HorizontalProductComponent } from '../components/horizontal-product/hor
 import { NavbarComponent } from '../components/navbar/navbar.component';
 import { RatingComponent } from '../components/rating/rating.component';
 import { SearchBarComponent } from '../components/search-bar/search-bar.component';
+import { TopActionsComponent } from '../components/website-top/top-actions/top-actions.component';
+import { TopBarComponent } from '../components/website-top/top-bar.component/top-bar.component';
+import { TopMostSearchedComponent } from '../components/website-top/top-most-searched/top-most-searched.component';
+import { WebsiteTopComponent } from '../components/website-top/website-top.component';
 import { LoginFormComponent } from '../forms/login-form/login-form.component';
 import { SignupFormComponent } from '../forms/signup-form/signup-form.component';
 import { ShortenPipe } from '../pipes/shorten.pipe';
@@ -26,6 +29,10 @@ import { SharedDataService } from '../services/shared-data.service';
 
 const COMPONENTS = [
     NavbarComponent,
+    WebsiteTopComponent,
+    TopMostSearchedComponent,
+    TopActionsComponent,
+    TopBarComponent,
     FooterComponent,
     GetProductComponent,
     ShortenPipe,
@@ -33,7 +40,6 @@ const COMPONENTS = [
     LoginFormComponent,
     RatingComponent,
     GetRecommendedProductComponent,
-    CarouselComponent,
     SearchBarComponent,
     HorizontalProductComponent
 ]

@@ -1,0 +1,50 @@
+<div class="product-details">
+  <div class="category">
+    <p>{{ product.category }}</p>
+  </div>
+  <div class="rating">
+    <app-rating [rating]="product.rating"></app-rating>
+  </div>
+  <div class="title">
+    <h1>{{ product.title }}</h1>
+  </div>
+  <div class="price">
+    <h2>{{ product.price }} $</h2>
+  </div>
+  <div class="availability">
+    <p>
+      Availability :
+      <span [class.green]="product.availability">{{
+        product.availability ? "In stock" : "Out of stock"
+      }}</span>
+    </p>
+  </div>
+  <div class="brand">
+    <p>Brand</p>
+    <img [src]="product.brand" />
+  </div>
+  <div class="id">
+    <p>
+      Id: <span>{{ product.id }}</span>
+    </p>
+  </div>
+  <div class="product-model" *ngIf="product.models">
+    <p>Model:</p>
+    <div class="model">
+      <button class="simple-btn" *ngFor="let model of product.models">
+        {{ model }}
+      </button>
+    </div>
+  </div>
+  <div>
+    <button class="add-to-cart-btn">
+      <input
+        class="form-input"
+        type="number"
+        min="1"
+        value="1"
+        [max]="product.quantity"
+      /><span> Add to cart</span><img src="../../../../assets/shopping-cart.svg">
+    </button>
+  </div>
+</div>
