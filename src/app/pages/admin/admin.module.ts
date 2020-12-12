@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
@@ -49,6 +49,7 @@ const COMPONENTS = [
     MatIconModule,
     SharedModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forChild([
       {
         path:'admin',
