@@ -1,0 +1,7 @@
+<editor
+  [apiKey]="APIKey"
+  [(ngModel)]="initialValue"
+  (onKeyUp)="contentChanged.emit(this.initialValue)"
+  (onChange)="contentChanged.emit(this.initialValue)"
+  [init]="Init"
+></editor>

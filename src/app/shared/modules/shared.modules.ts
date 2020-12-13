@@ -13,6 +13,7 @@ import { HorizontalProductComponent } from '../components/horizontal-product/hor
 import { NavbarComponent } from '../components/navbar/navbar.component';
 import { RatingComponent } from '../components/rating/rating.component';
 import { SearchBarComponent } from '../components/search-bar/search-bar.component';
+import { TinyMCEComponent } from '../components/tinymce/tinymce.component';
 import { TopActionsComponent } from '../components/website-top/top-actions/top-actions.component';
 import { TopBarComponent } from '../components/website-top/top-bar.component/top-bar.component';
 import { TopMostSearchedComponent } from '../components/website-top/top-most-searched/top-most-searched.component';
@@ -26,6 +27,7 @@ import { DbStatisticsService } from '../services/database/db-statistics.service'
 import { DbUploadService } from '../services/database/db-upload.service';
 import { DbWebsiteEditService } from '../services/database/db-website-edit.sevice';
 import { SharedDataService } from '../services/shared-data.service';
+import { EditorModule } from '@tinymce/tinymce-angular';
 
 const COMPONENTS = [
     NavbarComponent,
@@ -41,7 +43,8 @@ const COMPONENTS = [
     RatingComponent,
     GetRecommendedProductComponent,
     SearchBarComponent,
-    HorizontalProductComponent
+    HorizontalProductComponent,
+    TinyMCEComponent
 ]
 
 @NgModule({
@@ -54,6 +57,7 @@ const COMPONENTS = [
       FormsModule,
       CommonModule,
       AngularFireModule.initializeApp(environment.firebase),
+      EditorModule 
     ],
     providers: [DbUploadService,DbFetchDataService,DbWebsiteEditService,DbDeleteService,SharedDataService, DeleteAlertService,DbStatisticsService],
     exports: [...COMPONENTS,]

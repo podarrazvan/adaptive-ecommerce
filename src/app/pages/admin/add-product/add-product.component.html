@@ -88,12 +88,9 @@
     <div class="row">
       <div class="col">
         <label for="inputDescription"><b>Description</b></label>
-        <textarea
-          formControlName="description"
-          class="form-control"
-          id="inputDescription"
-          rows="3"
-        ></textarea>
+        <text-editor
+          #tinyMce
+        ></text-editor>
         <span
           class="help-blok"
           *ngIf="

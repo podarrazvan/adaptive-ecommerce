@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { TinyMCEComponent } from 'src/app/shared/components/tinymce/tinymce.component';
 import { DbDeleteService } from 'src/app/shared/services/database/db-delete.service';
 import { DbFetchDataService } from 'src/app/shared/services/database/db-fetch-data.service';
 import { DbUploadService } from 'src/app/shared/services/database/db-upload.service';
@@ -18,6 +19,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
     private dbDeleteService: DbDeleteService,
     private sharedData: SharedDataService
   ) {}
+  public tinyMCE: TinyMCEComponent;
 
   productForm: FormGroup;
 

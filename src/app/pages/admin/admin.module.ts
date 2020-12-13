@@ -3,6 +3,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+import { EditorModule } from '@tinymce/tinymce-angular';
+
 import { DeleteAlertComponent } from 'src/app/shared/components/delete-alert/delete-alert.component';
 import { SharedModule } from 'src/app/shared/modules/shared.modules';
 import { AddProductComponent } from './add-product/add-product.component';
@@ -50,6 +52,7 @@ const COMPONENTS = [
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
+    EditorModule,
     RouterModule.forChild([
       {
         path:'admin',
