@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { TinyMCEComponent } from 'src/app/shared/components/tinymce/tinymce.component';
+import { Category } from 'src/app/shared/interfaces/category.interface';
 import { DbDeleteService } from 'src/app/shared/services/database/db-delete.service';
 import { DbFetchDataService } from 'src/app/shared/services/database/db-fetch-data.service';
 import { DbUploadService } from 'src/app/shared/services/database/db-upload.service';
@@ -29,8 +30,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
   images: string[] = [];
 
   products = [];
-  categories: string[];
-  category;
+  categories: Category[];
 
   notComplete = true;
 
@@ -121,7 +121,6 @@ export class AddProductComponent implements OnInit, OnDestroy {
   getCategories() {
     this.categories = [];
     this.dbFetchDataService.fetchCategories().subscribe((categories) => {
-      this.category = categories;
       for (let category of categories) {
         this.categories.push(category);
       }

@@ -45,12 +45,12 @@
         <td>{{ order.total }}</td>
         <td>{{ order.date | date }}</td>
         <td>
-          <button (click)="openOrder(order)" class="mat-btn">
+          <button (click)="openOrder(order)" class="empty-btn">
             <mat-icon>launch</mat-icon>
           </button>
         </td>
         <td>
-          <button class="mat-btn" (click)="onDelete(i)">
+          <button class="empty-btn" (click)="onDelete(i)">
             <mat-icon>delete</mat-icon>
           </button>
         </td>
@@ -111,7 +111,7 @@
         <button (click)="updateOrder('canceled', order)" class="btn btn-danger">
           Cancel
         </button>
-        <button  class="mat-btn delete-btn" (click)="onDelete(i)">
+        <button  class="empty-btn delete-btn" (click)="onDelete(i)">
           <mat-icon>delete</mat-icon>
         </button>
       </div>

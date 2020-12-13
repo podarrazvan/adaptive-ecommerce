@@ -15,7 +15,18 @@
 .brand {
     display: flex;
     img {
+        height: 30px;
         width: 30px;
+    }
+}
+
+.availability {
+    p span {
+        color: red;
+    }
+
+    .green {
+        color: green!important;
     }
 }
 
@@ -24,6 +35,13 @@
         margin: 10px;
     }
 }
+
+.brand,
+.id, 
+.product-model {
+    margin-top: 20px;
+}
+
 
 .add-to-cart-btn {
     width: 210px;

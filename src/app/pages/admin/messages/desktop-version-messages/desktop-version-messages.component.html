@@ -25,12 +25,12 @@
         <td>{{ email.message | shorten: 30 }}</td>
         <td>{{ email.date | date }}</td>
         <td>
-          <button (click)="openEmail(i)" class="mat-btn">
+          <button (click)="openEmail(i)" class="empty-btn">
             <mat-icon>launch</mat-icon>
           </button>
         </td>
         <td>
-          <button class="mat-btn" (click)="onDelete(i)">
+          <button class="empty-btn" (click)="onDelete(i)">
             <mat-icon>delete</mat-icon>
           </button>
         </td>

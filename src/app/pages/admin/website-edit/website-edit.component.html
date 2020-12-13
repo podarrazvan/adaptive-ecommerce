@@ -64,14 +64,14 @@
           />
           <hr />
           <div class="buttons">
-            <button (click)="delete(i, area.key, 'area')" class="mat-btn">
+            <button (click)="delete(i, area.key, 'area')" class="empty-btn">
               <mat-icon>delete</mat-icon>
             </button>
 
             <button
               *ngIf="editAreaMode != i"
               (click)="editAreaMode = i"
-              class="mat-btn"
+              class="empty-btn"
             >
               <mat-icon>create</mat-icon>
             </button>
@@ -140,7 +140,7 @@
           <div class="buttons">
             <button
               (click)="delete(i, category.key, 'category')"
-              class="mat-btn"
+              class="empty-btn"
             >
               <mat-icon>delete</mat-icon>
             </button>
@@ -148,7 +148,7 @@
             <button
               *ngIf="editCategoryMode != i"
               (click)="editCategoryMode = i"
-              class="mat-btn"
+              class="empty-btn"
             >
               <mat-icon>create</mat-icon>
             </button>
