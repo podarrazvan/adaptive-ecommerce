@@ -1,69 +1,82 @@
 .product-details {
-    flex-direction: column;
-    display: flex;
-    place-content: flex-start center;
-    align-items: flex-start;
+  flex-direction: column;
+  display: flex;
+  place-content: flex-start center;
+  align-items: flex-start;
 }
 
 .category p {
-    color: #999;
-    font-size: 12px;
-    text-transform: capitalize;
-    margin-bottom: 8px;
-}
-
-.brand {
-    display: flex;
-    img {
-        height: 30px;
-        width: 30px;
-    }
+  color: #999;
+  font-size: 12px;
+  text-transform: capitalize;
+  margin-bottom: 8px;
 }
 
 .availability {
-    p span {
-        color: red;
-    }
+  p {
+    color: #999999;
+  }
 
-    .green {
-        color: green!important;
-    }
+  p span {
+    color: red;
+  }
+
+  .green {
+    color: green !important;
+  }
+}
+.brand {
+  font-weight: bold;
+  img {
+    height: 30px;
+    width: 30px;
+  }
+}
+
+.id {
+  p {
+    font-weight: bold;
+  }
+  span {
+    font-size: 14px;
+    color: #999999;
+  }
 }
 
 .model {
-    .simple-btn {
-        margin: 10px;
-    }
+  .simple-btn {
+    margin: 10px;
+  }
 }
 
 .brand,
-.id, 
+.id,
 .product-model {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
-
 .add-to-cart-btn {
-    width: 210px;
-    height: 47px;
-    span {
-        color: #fff;
-        font-weight: 800;
-    }
-    background: #54f0ff;
-    background-image: linear-gradient(122deg, #54f0ff,#c26af5);
+  width: 210px;
+  height: 47px;
+  span {
+    color: #fff;
+    font-weight: 800;
+  }
+  background: #54f0ff;
+  background-image: linear-gradient(122deg, #54f0ff, #c26af5);
+  border: none;
+  border-radius: 999px;
+  padding-left: 5px;
+  padding-right: 19px;
+  input {
+    border-radius: 30px;
     border: none;
-    border-radius: 999px;
-    padding-left: 5px;
-    padding-right: 19px;
-    input {
-        border-radius: 30px;
-        border: none;
-        padding: 5px;
-        padding-left: 15px;
-        width: 50px;
-    }
-    span, input {
-        margin-right: 5px;
-    }
+    padding: 5px;
+    padding-left: 15px;
+    width: 50px;
+  }
+  span,
+  input {
+    margin-right: 5px;
+  }
 }

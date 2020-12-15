@@ -1,0 +1,73 @@
+@import "../../../shared/colors.scss";
+
+.item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 20px;
+}
+
+.delete-btn {
+    button {
+        font-size: 28px;
+        color: $brightest-text;
+    }
+}
+
+.product-img {
+    display: flex;
+    place-items: center;
+    place-content: center;
+    margin-left: -80px;
+    width: 79px;
+    height: 79px;;
+    border-radius: 7px;
+    border: 1px solid $border-card;
+    img {
+        max-width: 80%;
+        max-height: 80%;
+    }
+}
+
+.product-title {
+    margin-left: -80px;
+    display: block;
+    width: 120px;
+    a {
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 800;
+        color: #000000;
+    }
+}
+
+.quantity {
+    width: 65px;
+    height: 39px;
+    text-align: left;
+    margin-right: 0;
+    position: relative;
+    background: #fff;
+    border: 2px solid $border;
+    color: $bright-text;
+    border-radius: 999px;
+    input {
+        width: 100%;
+        border: 0;
+        height: 39px;
+        background: 0 0;
+        padding: 0;
+        font-weight: 500;
+        font-size: 16px;
+        text-align: center;
+    }
+}
+
+.price {
+    p {
+        margin-right: 50px;
+        font-size: 18px;
+        color: $brighter-text;
+    }
+}
