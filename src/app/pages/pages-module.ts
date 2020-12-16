@@ -20,7 +20,6 @@ import { TermsOfUseComponent } from './terms-of-use/terms-of-use.component';
 const COMPONENTS = [
     HomeComponent,
     SearchComponent,
-    CheckoutComponent,
     AboutUsComponent,
     TermsOfUseComponent,
     ContactComponent,

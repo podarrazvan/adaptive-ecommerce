@@ -9,6 +9,7 @@ import { PagesModule } from './pages/pages-module';
 import { AuthModule } from './auth/auth.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminModule } from './pages/admin/admin.module';
+import { CheckoutModule } from './pages/checkout/checkout.module';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { AdminModule } from './pages/admin/admin.module';
     AdminModule,
     FormsModule,
     ReactiveFormsModule,
+    CheckoutModule
   ],
   providers: [],
   bootstrap: [AppComponent],

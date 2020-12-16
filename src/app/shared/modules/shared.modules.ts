@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { environment } from 'src/environments/environment';
@@ -55,6 +55,7 @@ const COMPONENTS = [
       MatIconModule,
       RouterModule,
       FormsModule,
+      ReactiveFormsModule,
       CommonModule,
       AngularFireModule.initializeApp(environment.firebase),
       EditorModule 

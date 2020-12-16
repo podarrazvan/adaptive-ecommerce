@@ -1,0 +1,60 @@
+<form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="inputName"> Name <span>*</span></label>
+      <input
+        formControlName="name"
+        type="text"
+        class="form-input"
+        id="inputName"
+        placeholder="Your Name"
+      />
+    </div>
+    <div class="form-group">
+      <label for="inputEmail">Email <span>*</span></label>
+      <input
+        formControlName="email"
+        type="email"
+        class="form-input"
+        id="inputEmail"
+        placeholder="exemple@exemple.com"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="inputAddress">Address <span>*</span></label>
+      <input
+        formControlName="adress"
+        type="text"
+        class="form-input"
+        id="inputAddress"
+        placeholder="1234 Main St"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="inputCity">City <span>*</span></label>
+      <input
+        formControlName="city"
+        type="text"
+        class="form-input"
+        id="inputCity"
+      />
+    </div>
+    <div class="form-group">
+      <label for="inputState">State <span>*</span></label>
+      <input formControlName="state" id="inputState" class="form-input" />
+    </div>
+    <div class="form-group">
+      <label for="inputZip">Zip <span>*</span></label>
+      <input
+        formControlName="zipCode"
+        type="text"
+        class="form-input"
+        id="inputZip"
+      />
+    </div>
+    <div class="create-account">
+      <input type="radio" value="create-account" id="create-account">
+      <label for="create-account">Create an account?</label>
+    </div>
+  </form>

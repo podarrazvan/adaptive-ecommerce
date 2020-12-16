@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { DbUploadService } from 'src/app/shared/services/database/db-upload.service';
+import { SharedDataService } from 'src/app/shared/services/shared-data.service';
 
 @Component({
   selector: 'app-checkout',
@@ -7,9 +11,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CheckoutComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private sharedDataService: SharedDataService,
+  ) {}
 
+ 
   ngOnInit(): void {
+    // if (this.sharedDataService.totalCart == null) {
+    //   this.router.navigate(['../cart']);
+    // }
+
   }
 
 }
