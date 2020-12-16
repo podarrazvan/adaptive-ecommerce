@@ -30,6 +30,10 @@ import { SharedDataService } from '../services/shared-data.service';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { BottomProductsComponent } from '../components/bottom-products/bottom-products.component';
 import { SimpleHorizontalProductComponent } from '../components/simple-horizontal-product/simple-horizontal-product.component';
+import { FooterAddressComponent } from '../components/footer/footer-address/footer-address.component';
+import { FooterQuickMenuComponent } from '../components/footer/footer-quick-menu/footer-quick-menu.component';
+import { CustomerServiceComponent } from '../components/footer/customer-service/customer-service.component';
+import { FooterFollowUsComponent } from '../components/footer/footer-follow-us/footer-follow-us.component';
 
 const COMPONENTS = [
     NavbarComponent,
@@ -48,7 +52,11 @@ const COMPONENTS = [
     HorizontalProductComponent,
     TinyMCEComponent,
     BottomProductsComponent,
-    SimpleHorizontalProductComponent
+    SimpleHorizontalProductComponent,
+    FooterAddressComponent,
+    FooterQuickMenuComponent,
+    CustomerServiceComponent,
+    FooterFollowUsComponent
 ]
 
 @NgModule({

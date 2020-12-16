@@ -1,0 +1,13 @@
+@import "../../../colors.scss";
+
+.customer-service {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    a {
+        padding: 8px;
+    }
+    a:hover {
+        color: $link-hover;
+    }
+}

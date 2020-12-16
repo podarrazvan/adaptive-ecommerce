@@ -1,0 +1,10 @@
+@import "../../../colors.scss";
+
+.info {
+    display: flex;
+    padding: 10px;
+}
+
+mat-icon {
+    color: $brighter-text;
+}
