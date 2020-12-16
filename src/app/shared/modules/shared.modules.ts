@@ -28,6 +28,8 @@ import { DbUploadService } from '../services/database/db-upload.service';
 import { DbWebsiteEditService } from '../services/database/db-website-edit.sevice';
 import { SharedDataService } from '../services/shared-data.service';
 import { EditorModule } from '@tinymce/tinymce-angular';
+import { BottomProductsComponent } from '../components/bottom-products/bottom-products.component';
+import { SimpleHorizontalProductComponent } from '../components/simple-horizontal-product/simple-horizontal-product.component';
 
 const COMPONENTS = [
     NavbarComponent,
@@ -44,7 +46,9 @@ const COMPONENTS = [
     GetRecommendedProductComponent,
     SearchBarComponent,
     HorizontalProductComponent,
-    TinyMCEComponent
+    TinyMCEComponent,
+    BottomProductsComponent,
+    SimpleHorizontalProductComponent
 ]
 
 @NgModule({

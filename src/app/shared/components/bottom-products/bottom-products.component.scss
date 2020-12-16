@@ -1,0 +1,19 @@
+.products {
+    display: flex;
+    justify-content: space-between;
+}
+
+.left,
+.center,
+.right {
+    width: 33%;
+    padding: 20px;
+}
+
+.center {
+    margin: auto;
+}
+
+.right {
+    float: right;
+}

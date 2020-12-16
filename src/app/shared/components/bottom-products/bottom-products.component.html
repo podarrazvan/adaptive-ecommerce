@@ -1,0 +1,26 @@
+<div class="products">
+    <div class="left">
+        <h1>Featured Products
+        </h1>
+        <app-simple-horizontal-product
+            *ngFor="let prod of featuredProducts"
+            [product]="prod"
+        ></app-simple-horizontal-product>
+    </div>
+    <div class="center">
+        <h1>Top Rated Products
+        </h1>
+        <app-simple-horizontal-product
+            *ngFor="let prod of topRatedProducts"
+            [product]="prod"
+        ></app-simple-horizontal-product>
+    </div>
+    <div class="right">
+        <h1>Top Selling Products
+        </h1>
+        <app-simple-horizontal-product
+            *ngFor="let prod of topSellingProducts"
+            [product]="prod"
+        ></app-simple-horizontal-product>
+    </div>
+</div>
