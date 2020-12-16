@@ -14,6 +14,12 @@
   box-shadow: 0 2px 8px rbga(0, 0, 0, 0.26);
 }
 
+.alert {
+  // THIS IS WRONG!!!
+  margin-left: -300px;
+  //
+}
+
 .sender {
   margin-top: 20px;
   margin-bottom: 30px;

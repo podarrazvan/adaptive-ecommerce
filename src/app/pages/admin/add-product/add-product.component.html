@@ -1,6 +1,5 @@
-<!-- <form [formGroup]="productForm" (ngSubmit)="onSubmit()"> -->
-  <div class="content">
-    <form>
+<div class="content">
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
     <div class="form-row">
       <label for="inputTitle"><b>Title</b></label>
       <input
@@ -69,7 +68,7 @@
         <label for="imgInput"><b>Add images</b></label>
         <input
           type="file"
-          class="custom-input-file"
+          class="custom-input-files"
           id="imgInput"
           accept=".png,.jpg,.jpeg"
           (change)="upload($event)"
@@ -89,12 +88,9 @@
     <div class="row">
       <div class="col">
         <label for="inputDescription"><b>Description</b></label>
-        <textarea
-          formControlName="description"
-          class="form-control"
-          id="inputDescription"
-          rows="3"
-        ></textarea>
+        <text-editor
+          #tinyMce
+        ></text-editor>
         <span
           class="help-blok"
           *ngIf="

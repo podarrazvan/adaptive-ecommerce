@@ -1,0 +1,13 @@
+.black-btn {
+    border: none;
+    border-radius: 50px;
+    padding: 20px 50px;
+    transition: all 0.3s ease 0s;
+    background-color: black;
+    color: white;
+}
+
+.black-btn:hover {
+    background-color: white;
+    color: black;
+}

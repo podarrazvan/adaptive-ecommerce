@@ -11,7 +11,6 @@ import { ContactComponent } from './contact/contact.component';
 import { FleshDealsComponent } from './home/flesh-deals/flesh-deals.component';
 import { HomeBestSellersComponent } from './home/home-best-sellers/home-best-sellers.component';
 import { HomeNewReleasesComponent } from './home/home-new-releases/home-new-releases.component';
-import { HomeTopComponent } from './home/home-top/home-top.component';
 import { HomeComponent } from './home/home.component';
 import { HomeModules } from './home/home.modules';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -20,9 +19,7 @@ import { TermsOfUseComponent } from './terms-of-use/terms-of-use.component';
 
 const COMPONENTS = [
     HomeComponent,
-    HomeTopComponent,
     SearchComponent,
-    CheckoutComponent,
     AboutUsComponent,
     TermsOfUseComponent,
     ContactComponent,
@@ -30,7 +27,7 @@ const COMPONENTS = [
     CategoriesComponent,
     FleshDealsComponent,
     HomeBestSellersComponent,
-    HomeNewReleasesComponent
+    HomeNewReleasesComponent,
 ]
 
 @NgModule({

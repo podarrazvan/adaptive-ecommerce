@@ -51,18 +51,18 @@
           </button>
         </td>
         <td *ngIf="!product.homepagePosition">
-          <button (click)="openEdit('homepage', product)" class="mat-btn">
+          <button (click)="openEdit('homepage', product)" class="empty-btn">
             <mat-icon>add</mat-icon>
           </button>
         </td>
         <td>
-          <button class="mat-btn" (click)="openEditProduct(product)">
+          <button class="empty-btn" (click)="openEditProduct(product)">
             <mat-icon>edit</mat-icon>
           </button>
         </td>
         <td>
           <button
-            class="mat-btn"
+            class="empty-btn"
             (click)="onDelete(product.category, product.key, i, product.img)"
           >
             <mat-icon>delete</mat-icon>
@@ -91,12 +91,12 @@
         </div>
         <hr>
         <button
-        class="mat-btn"
+        class="empty-btn"
         (click)="onDelete(product.category, product.key, i, product.img)"
         >
         <mat-icon>delete</mat-icon>
       </button>
-      <button class="mat-btn" (click)="openEditProduct(product)">
+      <button class="empty-btn" (click)="openEditProduct(product)">
         <mat-icon>edit</mat-icon>
       </button>
       <hr>
@@ -110,7 +110,7 @@
       <button
         *ngIf="!product.homepagePosition"
         (click)="openEdit('homepage', product)"
-        class="mat-btn"
+        class="empty-btn"
       >
         <mat-icon>add</mat-icon>
       </button>

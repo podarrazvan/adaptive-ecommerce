@@ -1,39 +1,20 @@
 <div class="product-page">
   <div class="top">
     <div class="product">
-      <app-carousel 
-        [images]="product.img"
-      ></app-carousel>
+     <app-product-img
+      [product]="product"
+     ></app-product-img>
     </div>
-    <div class="left">
-      <div class="product-details">
-        <div class="title">
-          <h1>{{ product.title }}</h1>
-        </div>
-        <div class="buy-group">
-          <div class="price">
-            <h2>{{ product.price }} $</h2>
-          </div>
-          <div class="quantity">
-            <input
-              class="form-input"
-              type="number"
-              min="1"
-              value="1"
-              [max]="product.quantity"
-            />
-          </div>
-          <div class="buy-button">
-            <button class="buy-btn">Buy</button>
-          </div>
-        </div>
-        <div class="rating">
-          <app-rating [rating]="product.rating"></app-rating>
-        </div>
-      </div>
+    <div class="center">
+      <app-product-details
+        [product]="product"
+      ></app-product-details>
+    </div>
+    <div class="right">
+      <app-website-features></app-website-features>
     </div>
   </div>
-  <div class="recommended-products">
+  <!-- <div class="recommended-products">
     <h1>Recommanded:</h1>
     <div class="products">
       <app-get-recommended-product
@@ -41,7 +22,7 @@
         [product]="recommendedProduct"
       ></app-get-recommended-product>
     </div>
-  </div>
+  </div> -->
   <div class="short-description">
     <h3>{{product.shortDescription}} </h3>
   </div>

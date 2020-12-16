@@ -62,7 +62,7 @@ export class DbFetchDataService {
   fetchCategories() {
     const categoriesArray = [];
     return this.http
-      .get<{ key: string }>(
+      .get<Category[]>(
         `https://shop-436e8.firebaseio.com/categories/.json`
       )
       .pipe(

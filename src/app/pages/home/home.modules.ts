@@ -11,11 +11,8 @@ import { HomeMainAdComponent } from './home-main/home-main-ad/home-main-ad.compo
 import { HomeMainBottomProductsComponent } from './home-main/home-main-bottom-products/home-main-bottom-products.component';
 import { HomeMainCategoriesComponent } from './home-main/home-main-categories/home-main-categories.component';
 import { HomeMainProductComponent } from './home-main/home-main-product/home-main-product.component';
-import { HomeMainTopComponent } from './home-main/home-main-top/home-main-top.component';
 import { HomeMainComponent } from './home-main/home-main.component';
-import { HomeMostSearchedComponent } from './home-most-searched/home-most-searched.component';
 import { HomeNewReleasesCarouselComponent } from './home-new-releases/home-new-releases-carousel/home-new-releases-carousel.component';
-import { HomeTopActionsComponent } from './home-top-actions/home-top-actions.component';
 import { ShopByBrandProductsComponent } from './shop-by-brand/shop-by-brand-products/shop-by-brand-products.component';
 import { ShopByBrandLeftComponent } from './shop-by-brand/shop-by-brand-left/shop-by-brand-left.component';
 import { ShopByBrandLogosComponent } from './shop-by-brand/shop-by-brand-logos/shop-by-brand-logos.component';
@@ -29,14 +26,11 @@ const COMPONENTS = [
   HomeMainCategoriesComponent,
   HomeMainAdComponent,
   HomeMainProductComponent,
-  HomeMainTopComponent,
   HomeMainBottomProductsComponent,
   HomeBestSellersTopComponent,
   HomeBestSellersMiddleComponent,
   HomeBestSellersBottomComponent,
   HomeFleshDealsCarouselComponent,
-  HomeTopActionsComponent,
-  HomeMostSearchedComponent,
   HomeMainComponent,
   HomeNewReleasesCarouselComponent,
   ShopByBrandComponent,

@@ -3,11 +3,15 @@ import { NgModule } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/modules/shared.modules';
+import { CartCouponComponent } from './cart-coupon/cart-coupon.component';
+import { CartItemComponent } from './cart-item/cart-item.component';
 import { CartComponent } from './cart.component';
 
 @NgModule({ 
     declarations: [
-      CartComponent
+      CartComponent,
+      CartItemComponent,
+      CartCouponComponent
   ],
     imports: [ 
       CommonModule,

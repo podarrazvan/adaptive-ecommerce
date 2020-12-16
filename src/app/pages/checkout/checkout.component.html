@@ -1,1 +1,28 @@
-<p>checkout works!</p>
+<div class="checkout">
+  <div class="left">
+    <div class="left-container">
+      <div class="top">
+        <h1>Billing details</h1>
+      </div>
+      <app-checkout-form></app-checkout-form>
+    </div>
+    <div class="left-container bottom">
+      <div class="top">
+        <h1>Shipping Details</h1>
+      </div>
+      <p>Order Notes</p>
+      <div class="extra-info">
+        <textarea
+          name="message"
+          rows="8"
+          id="message"
+          class="form-control form-note"
+          placeholder="Notes about your order, e.g. special notes for delivery."
+        ></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="right">
+    <app-checkout-right></app-checkout-right>
+  </div>
+</div>
