@@ -10,6 +10,7 @@ import { AuthModule } from './auth/auth.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminModule } from './pages/admin/admin.module';
 import { CheckoutModule } from './pages/checkout/checkout.module';
+import { ProfileModule } from './pages/profile/profile.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { CheckoutModule } from './pages/checkout/checkout.module';
     AdminModule,
     FormsModule,
     ReactiveFormsModule,
-    CheckoutModule
+    CheckoutModule,
+    ProfileModule
   ],
   providers: [],
   bootstrap: [AppComponent],

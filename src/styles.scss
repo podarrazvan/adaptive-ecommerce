@@ -63,3 +63,22 @@ ul {
   align-items: center;
   margin: auto;
 }
+
+
+.card-top {
+  position: relative;
+  top: -31px; 
+  left: 0; 
+  right: 0; 
+  margin-left: auto; 
+  margin-right: auto;
+  display: flex;
+  place-content: center;
+  align-items: center;
+  border: 2px solid #333333;
+  line-height: 50px;
+  font-weight: 800;
+  border-radius: 999px;
+  font-size: 18px;
+  background-color: white;
+}
