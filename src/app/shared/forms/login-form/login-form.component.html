@@ -3,7 +3,7 @@
   <h1 *ngIf="error" style="color:red">Your email must be wrong...</h1>
   <form class="auth-form" #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" *ngIf="!isLoading">
     <div class="form-group">
-      <label for="email">E-Mail</label>
+      <label for="email">E-Mail <span class="required-field"> *</span></label>
       <input
         type="email"
         id="email"
@@ -16,7 +16,7 @@
       />
     </div>
     <div class="form-group" *ngIf="!resetPasswordMode">
-      <label for="password">Password</label>
+      <label for="password">Password <span class="required-field"> *</span></label>
       <input
         type="password"
         id="password"
