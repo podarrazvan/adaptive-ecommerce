@@ -86,3 +86,10 @@ ul {
 .required-field {
   color: red;
 }
+
+.products-grid {
+  padding: 20px 100px;
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  grid-column-gap: 10px;
+}

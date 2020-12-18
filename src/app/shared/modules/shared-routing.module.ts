@@ -7,6 +7,7 @@ import { CheckoutComponent } from 'src/app/pages/checkout/checkout.component';
 import { PageNotFoundComponent } from 'src/app/pages/page-not-found/page-not-found.component';
 import { ProductModule } from 'src/app/pages/product/product.module';
 import { ProfileComponent } from 'src/app/pages/profile/profile.component';
+import { SearchComponent } from 'src/app/pages/search/search.component';
 import { WishlistComponent } from 'src/app/pages/wishlist/wishlist.component';
 
 const routes: Routes = [
@@ -30,6 +31,7 @@ const routes: Routes = [
   //     import('../../pages/profile/profile.module').then((m) => m.ProfileModule),
   // },
   {path:'wishlist', component: WishlistComponent},
+  {path: 'search/:search', component: SearchComponent},
   {
     path: 'product',
     loadChildren: () =>

@@ -1,10 +1,26 @@
+@import "../../colors.scss";
+
 .product {
   width: 225px;
   position: relative;
 }
 
+.cut {
+  position: absolute;
+  top: -50px;
+  width: 46px;
+  height: 46px;
+  line-height: 46px;
+  text-align: center;
+  display: inline-block;
+  border-radius: 50%;
+  color: white;
+  background-color: $main-red;
+}
+
 .img {
   width: 100%;
+  margin-top: 50px;
   img {
     display: flex;
     max-width: 200px;
@@ -75,7 +91,7 @@
   float: right;
 }
 
-.product:hover {  
+.product:hover {
   .product-button-group {
     visibility: visible;
     bottom: -19px;
