@@ -34,6 +34,7 @@ import { FooterAddressComponent } from '../components/footer/footer-address/foot
 import { FooterQuickMenuComponent } from '../components/footer/footer-quick-menu/footer-quick-menu.component';
 import { CustomerServiceComponent } from '../components/footer/customer-service/customer-service.component';
 import { FooterFollowUsComponent } from '../components/footer/footer-follow-us/footer-follow-us.component';
+import { WishlistItemComponent } from 'src/app/pages/wishlist-item/wishlist-item.component';
 
 const COMPONENTS = [
     NavbarComponent,
@@ -56,7 +57,8 @@ const COMPONENTS = [
     FooterAddressComponent,
     FooterQuickMenuComponent,
     CustomerServiceComponent,
-    FooterFollowUsComponent
+    FooterFollowUsComponent,
+    WishlistItemComponent
 ]
 
 @NgModule({
