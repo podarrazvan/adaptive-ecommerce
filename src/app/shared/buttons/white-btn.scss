@@ -1,0 +1,15 @@
+@import "../colors.scss";
+
+.white-btn {
+    border: 1px solid $border;
+    border-radius: 50px;
+    padding: 10px 25px;
+    transition: all 0.3s ease 0s;
+    background-color: white;
+    color: black;
+}
+
+.white-btn:hover {
+    background-color: black;
+    color: white;    
+}

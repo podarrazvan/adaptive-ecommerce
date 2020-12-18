@@ -6,6 +6,8 @@ import { AdminModule } from 'src/app/pages/admin/admin.module';
 import { CheckoutComponent } from 'src/app/pages/checkout/checkout.component';
 import { PageNotFoundComponent } from 'src/app/pages/page-not-found/page-not-found.component';
 import { ProductModule } from 'src/app/pages/product/product.module';
+import { ProfileComponent } from 'src/app/pages/profile/profile.component';
+import { WishlistComponent } from 'src/app/pages/wishlist/wishlist.component';
 
 const routes: Routes = [
   {
@@ -19,6 +21,15 @@ const routes: Routes = [
     loadChildren: () =>
       import('../../pages/admin/admin.module').then((m) => m.AdminModule),
   },
+  {path: 'profile', component: ProfileComponent}
+  ,
+
+  // {
+  //   path: 'profile',
+  //   loadChildren: () =>
+  //     import('../../pages/profile/profile.module').then((m) => m.ProfileModule),
+  // },
+  {path:'wishlist', component: WishlistComponent},
   {
     path: 'product',
     loadChildren: () =>

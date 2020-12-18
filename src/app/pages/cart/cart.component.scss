@@ -28,25 +28,11 @@
     }
 }
 
-.top {
-    position: relative;
-    top: -31px; 
-    left: 0; 
-    right: 0; 
-    margin-left: auto; 
-    margin-right: auto;
-    display: flex;
-    place-content: center;
-    align-items: center;
-    border: 2px solid #333333;
+.card-top {
     padding-top: 10px;
-    line-height: 50px;
-    width: 116px;
-    font-weight: 800;
-    border-radius: 999px;
-    font-size: 18px;
-    background-color: white;
+    width: 160px;
 }
+
 .shipping,
 .subtotal,
 .total-top {

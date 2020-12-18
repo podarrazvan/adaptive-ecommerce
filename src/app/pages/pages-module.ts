@@ -16,6 +16,7 @@ import { HomeModules } from './home/home.modules';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { SearchComponent } from './search/search.component';
 import { TermsOfUseComponent } from './terms-of-use/terms-of-use.component';
+import { WishlistComponent } from './wishlist/wishlist.component';
 
 const COMPONENTS = [
     HomeComponent,
@@ -28,6 +29,7 @@ const COMPONENTS = [
     FleshDealsComponent,
     HomeBestSellersComponent,
     HomeNewReleasesComponent,
+    WishlistComponent
 ]
 
 @NgModule({

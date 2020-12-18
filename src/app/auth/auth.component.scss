@@ -1,20 +1,18 @@
 .content {
-    height: 85vh;
-    flex-direction: column;
-    box-sizing: border-box;
-    display: flex;
-    place-content: center;
-    align-items: center;
+  height: 85vh;
+  flex-direction: column;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  margin-top: 100px;
 }
 
 .auth-form {
-    max-width: 500px;
-    // padding: 50px;
-    // border-radius: 20px;
-    // color: black;
-    // background-color: whitesmoke;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
-.form-btn {
-    margin-top: 20px;
+.white-btn {
+  margin-top: 20px;
 }
