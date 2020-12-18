@@ -2,11 +2,13 @@
   <div class="alert alert-danger" *ngIf="error">
     <p>{{ error }}</p>
   </div>
-  <div class="auth-foorm">
+  <div class="auth-form">
     <app-signup-form *ngIf="!isLoginMode"></app-signup-form>
     <app-login-form *ngIf="isLoginMode"></app-login-form>
-    <button class="form-btn" (click)="onSwitchMode()" type="button">
+    <button class="white-btn" (click)="onSwitchMode()" type="button">
       Switch to {{ isLoginMode ? "Sign Up" : "Login" }}
     </button>
   </div>
 </div>
+
+

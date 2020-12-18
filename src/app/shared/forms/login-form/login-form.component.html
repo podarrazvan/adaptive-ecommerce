@@ -1,43 +1,45 @@
-<h1> {{resetPasswordMode? "Password reset":"Login"}} </h1>
-<h1 *ngIf="error" style="color:red">Your email must be wrong...</h1>
-<form class="auth-form" #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" *ngIf="!isLoading">
-  <div class="form-group">
-    <label for="email">E-Mail</label>
-    <input
-      type="email"
-      id="email"
-      class="form-control"
-      ngModel
-      name="email"
-      required
-      email
-      placeholder="email"
-    />
-  </div>
-  <div class="form-group" *ngIf="!resetPasswordMode">
-    <label for="password">Password</label>
-    <input
-      type="password"
-      id="password"
-      class="form-control"
-      ngModel
-      name="password"
-      required
-      minlength="6"
-      placeholder="password"
-    />
-  </div>
-  <div class="form-group">
-    <a class="password-reset" *ngIf="!resetPasswordMode" (click)="resetPasswordMode = true">Oh, no... I forgot my password! :(</a>
-  </div>
-  <div>
-    <button
-      class="form-btn"
-      type="submit"
+<div class="login">
+  <h3 class="card-top"> {{resetPasswordMode? "Password reset":"Login"}} </h3>
+  <h1 *ngIf="error" style="color:red">Your email must be wrong...</h1>
+  <form class="auth-form" #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" *ngIf="!isLoading">
+    <div class="form-group">
+      <label for="email">E-Mail</label>
+      <input
+        type="email"
+        id="email"
+        class="form-control"
+        ngModel
+        name="email"
+        required
+        email
+        placeholder="email"
+      />
+    </div>
+    <div class="form-group" *ngIf="!resetPasswordMode">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        class="form-control"
+        ngModel
+        name="password"
+        required
+        minlength="6"
+        placeholder="password"
+      />
+    </div>
+    <div class="form-group">
+      <a class="password-reset" *ngIf="!resetPasswordMode" (click)="resetPasswordMode = true">Oh, no... I forgot my password! :(</a>
+    </div>
+    <div class="login-btn">
+      <button
+        class="white-btn"
+        type="submit"
+       
+      >
+      {{resetPasswordMode? "Send email":"Login"}}
+       </button>
      
-    >
-    {{resetPasswordMode? "Send email":"Login"}}
-     </button>
-   
-  </div>
-</form>
+    </div>
+  </form>
+</div>

@@ -1,3 +1,28 @@
+@import "../../colors.scss";
+
 .password-reset {
     cursor: pointer;
+}
+
+.login {
+    border: 1px solid $border-card;
+    border-radius: 10px;
+    width: 100%;
+    padding: 20px;
+
+}
+
+.card-top {
+    width: 100px;
+    margin: auto;
+    top: -35px;
+}
+
+.login-btn {
+   display: flex;
+   align-items: center;
+   padding-right: 15px;
+    button {
+        margin: auto;
+    }
 }

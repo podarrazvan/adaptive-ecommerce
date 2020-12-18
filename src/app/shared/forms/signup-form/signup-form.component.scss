@@ -1,0 +1,21 @@
+@import "../../colors.scss";
+
+.sign-up {
+    border: 1px solid $border-card;
+    border-radius: 10px;
+    width: 100%;
+    padding: 20px;
+}
+
+.card-top {
+    top: -35px;
+}
+
+.signup-btn {
+    display: flex;
+    align-items: center;
+    padding-right: 15px;
+     button {
+         margin: auto;
+     }
+}
