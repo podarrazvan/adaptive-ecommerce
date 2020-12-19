@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { AdminModule } from 'src/app/pages/admin/admin.module';
 import { CategoriesComponent } from 'src/app/pages/categories/categories.component';
 import { CheckoutComponent } from 'src/app/pages/checkout/checkout.component';
+import { ContactComponent } from 'src/app/pages/contact/contact.component';
 import { PageNotFoundComponent } from 'src/app/pages/page-not-found/page-not-found.component';
 import { ProductModule } from 'src/app/pages/product/product.module';
 import { ProfileComponent } from 'src/app/pages/profile/profile.component';
@@ -45,6 +46,7 @@ const routes: Routes = [
   },
   {path: 'checkout', component: CheckoutComponent},
   {path: 'category/:category', component: CategoriesComponent},
+  {path: 'contact', component: ContactComponent},
   // {
   //   path: 'checkout',
   //   loadChildren: () =>

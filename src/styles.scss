@@ -7,12 +7,13 @@
 @import "./app/shared/buttons/gray-btn.scss";
 @import "./app/shared/buttons/gradient-btn.scss";
 @import "./app/shared/buttons/custom-input-files.scss";
+@import "./app/shared/colors.scss";
 
 * {
   margin: 0;
   font-family: "Helvetica Neue LT Std", sans-serif;
-    color: #333333;
-    font-size: 14px;
+  color: #333333;
+  font-size: 14px;
 }
 
 .carousel-control-next-icon {
@@ -40,7 +41,8 @@ a {
   color: inherit;
 }
 
-a:hover, a:hover span {
+a:hover,
+a:hover span {
   color: #ff5050;
 }
 
@@ -64,13 +66,12 @@ ul {
   margin: auto;
 }
 
-
 .card-top {
   position: relative;
-  top: -31px; 
-  left: 0; 
-  right: 0; 
-  margin-left: auto; 
+  top: -31px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
   margin-right: auto;
   display: flex;
   place-content: center;
@@ -92,4 +93,18 @@ ul {
   display: grid;
   grid-template-columns: repeat(3, auto);
   grid-column-gap: 10px;
+}
+
+input {
+  border: 1px solid $border;
+  border-radius: 999px;
+  padding: 10px 20px;
+}
+
+textarea {
+  border: 1px solid $border;
+  padding-left: 33px;
+  padding-top: 24px;
+  border-radius: 22px;
+  resize: none;
 }
