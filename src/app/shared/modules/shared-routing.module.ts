@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthModule } from 'src/app/auth/auth.module';
 import { AuthService } from 'src/app/auth/auth.service';
 import { AdminModule } from 'src/app/pages/admin/admin.module';
+import { CategoriesComponent } from 'src/app/pages/categories/categories.component';
 import { CheckoutComponent } from 'src/app/pages/checkout/checkout.component';
 import { PageNotFoundComponent } from 'src/app/pages/page-not-found/page-not-found.component';
 import { ProductModule } from 'src/app/pages/product/product.module';
@@ -43,6 +44,7 @@ const routes: Routes = [
       import('../../pages/cart/cart.module').then((m) => m.CartModule),
   },
   {path: 'checkout', component: CheckoutComponent},
+  {path: 'category/:category', component: CategoriesComponent},
   // {
   //   path: 'checkout',
   //   loadChildren: () =>
