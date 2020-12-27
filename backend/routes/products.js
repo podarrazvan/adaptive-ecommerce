@@ -10,7 +10,7 @@ router.post("",(req, res, next) => {
         title: req.body.title,
         category: req.body.category,
         price: req.body.price,
-        // tags:req.body.tags,
+        tags:req.body.tags,
         description:req.body.description,
         thumbnail:req.body.thumbnail,
         images:req.body.img,

@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
         title: {type: String, require: true},
         category: {type: String, require: true},
         price: {type: Number, require: true},
-        tags: {type: String, require: true},
+        tags: [{type: String, require: true}],
         description: {type: String, require: true},
         thumbnail:{type: String, require: true},
         images:[{type: String, require: true}],
