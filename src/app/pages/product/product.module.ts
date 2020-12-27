@@ -21,7 +21,7 @@ import { WebsiteFeaturesComponent } from './website-features/website-features.co
     CommonModule,
     SharedModule,
     MatIconModule,
-    RouterModule.forChild([{ path: 'product/:category/:key', component: ProductComponent }]),
+    RouterModule.forChild([{ path: 'product/:key', component: ProductComponent }]),
   ],
   exports: [RouterModule],
 })

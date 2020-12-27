@@ -23,6 +23,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
   public tinyMCE: TinyMCEComponent;
 
   productForm: FormGroup;
+  autoMode = false;
 
   tags: string[] = [];
   tag: string;
@@ -44,9 +45,11 @@ export class AddProductComponent implements OnInit, OnDestroy {
         category: [this.sharedData.product.category, Validators.required],
         price: [this.sharedData.product.price, Validators.required],
         img: '',
-        description: [this.sharedData.product.description, Validators.required],
+        description: [this.sharedData.product.description],
         tags: [''],
         quantity: [this.sharedData.product.quantity, Validators.required],
+        minPrice: [''],
+        salesWeekTarget: [''],
       });
       this.tags = this.sharedData.product.tags;
       this.images = this.sharedData.product.img;
@@ -56,9 +59,11 @@ export class AddProductComponent implements OnInit, OnDestroy {
         category: ['', Validators.required],
         price: ['', Validators.required],
         img: '',
-        description: ['', Validators.required],
+        description: [''],
         tags: [''],
         quantity: ['', Validators.required],
+        minPrice: [''],
+        salesWeekTarget: [''],
       });
     }
     this.getCategories();
@@ -72,13 +77,10 @@ export class AddProductComponent implements OnInit, OnDestroy {
       });
       if (this.sharedData.productEdit) {
         this.dbUploadService
-          .updateProduct(
-            this.productForm.value,
-            this.sharedData.product.homepagePosition,
-            this.sharedData.product.key
-          )
+          .updateProduct(this.productForm.value, this.sharedData.product.key)
           .subscribe((response) => console.log(response));
       } else {
+        console.log(this.productForm.value);
         this.dbUploadService.createAndStoreProduct(
           this.productForm.value.title,
           this.productForm.value.category,
@@ -86,23 +88,28 @@ export class AddProductComponent implements OnInit, OnDestroy {
           this.productForm.value.img,
           this.productForm.value.description,
           this.productForm.value.tags,
-          this.productForm.value.quantity
+          this.productForm.value.quantity,
+          this.productForm.value.minPrice,
+          this.productForm.value.salesWeekTarge
         );
       }
       this.notComplete = false;
       this.tags = [];
       this.images = [];
-      this.productForm.reset();
+      // this.productForm.reset();
     } else {
       alert('Please add at last one photo!');
     }
   }
 
-  public async upload(event: any): Promise<void> {
-    const randomId = Math.random().toString(36).substring(2);
-
-    const imagePath = await this.dbUploadService.upload(event, randomId);
-    this.images.push(imagePath);
+  upload(img: any) {
+    const image = (img.target as HTMLInputElement).files[0];
+    this.dbUploadService
+      .uploadImg(image)
+      .subscribe((responseData) => {
+        console.log(responseData);
+        this.images.push(responseData.url);
+      });
   }
 
   deletePhoto(img, i) {
@@ -128,11 +135,17 @@ export class AddProductComponent implements OnInit, OnDestroy {
     });
   }
 
+  ckeditorContentChanged(content) {
+    const div = document.createElement('div');
+    div.innerHTML = content;
+    this.productForm.get('description').patchValue(div.innerHTML);
+  }
+
   ngOnDestroy(): void {
     this.sharedData.product = null;
     this.sharedData.productEdit = false;
-    if(this.notComplete && !this.onEditMode) {
-      for(let img of this.images) {
+    if (this.notComplete && !this.onEditMode) {
+      for (let img of this.images) {
         this.dbDeleteService.deletePhoto(img);
       }
     }

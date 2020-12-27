@@ -80,9 +80,10 @@ export class CartComponent implements OnInit, DoCheck {
   }
 
   getProduct(category: string, key: string, quantity: string) {
-    this.dbFetchDataService.fetchProduct(category, key).subscribe((response) => {
-      this.cart.push({ product: response, quantity: quantity, key: key });
-      this.total += +response.price * +quantity;
+    this.dbFetchDataService.fetchProduct(key).subscribe((response) => {
+      const product = response.product;
+      this.cart.push({ product: product, quantity: quantity, key: key });
+      this.total += +product.price * +quantity;
     });
   }
 

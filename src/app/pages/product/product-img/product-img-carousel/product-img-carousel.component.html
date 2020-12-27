@@ -1,8 +1,8 @@
 <div class="carousel">
     <button class="empty-btn"><mat-icon>keyboard_arrow_up</mat-icon></button>
     <div *ngFor="let img of images; let i = index">
-        <div class="secondary-img" *ngIf="i != 0">
-          <img [src]="img" alt="secondary image" />
+        <div class="secondary-img" *ngIf="i != selectedImgIndex">
+          <img (click)="imgSelected(i)" [src]="img" alt="secondary image" />
         </div>
       </div>
     <button class="empty-btn"><mat-icon>keyboard_arrow_down</mat-icon></button>

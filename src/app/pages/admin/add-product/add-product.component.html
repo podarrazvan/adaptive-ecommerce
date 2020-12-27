@@ -44,7 +44,7 @@
         <label for="inputPrice"><b>Price</b></label>
         <div class="price-input">
           <span class="input-group-text">$</span>
-  
+
           <input
             id="inputPrice"
             type="text"
@@ -52,7 +52,7 @@
             aria-label="Amount (to the nearest dollar)"
             formControlName="price"
           />
-  
+
           <span class="input-group-text">.00</span>
         </div>
         <span
@@ -78,20 +78,24 @@
     <div class="prev-images">
       <div class="image" *ngFor="let img of images; let i = index">
         <div>
-          <button type="button" (click)="deletePhoto(img, i)" class="delete-btn">X</button>
+          <button
+            type="button"
+            (click)="deletePhoto(img, i)"
+            class="delete-btn"
+          >
+            X
+          </button>
           <img [src]="img" />
         </div>
       </div>
     </div>
-    <br>
+    <br />
     <hr />
     <div class="row">
       <div class="col">
         <label for="inputDescription"><b>Description</b></label>
         <app-description-styles></app-description-styles>
-        <text-editor
-          #tinyMce
-        ></text-editor>
+        <text-editor (contentChanged)="ckeditorContentChanged($event)" #tinyMce></text-editor>
         <span
           class="help-blok"
           *ngIf="
@@ -119,7 +123,11 @@
             </div>
             <div class="col-auto">
               <br />
-              <button type="button" (click)="addTag(tag)" class="btn btn-primary">
+              <button
+                type="button"
+                (click)="addTag(tag)"
+                class="btn btn-primary"
+              >
                 Add tag
               </button>
             </div>
@@ -161,8 +169,33 @@
       </div>
     </div>
     <hr />
-    <button [disabled]="!productForm.valid" class="btn btn-danger" type="submit">
-      {{ onEditMode  ? "Edit" : "Add product" }}
+    <mat-checkbox (click)="autoMode = !autoMode">Auto Mode</mat-checkbox>
+    <div class="auto-mode" *ngIf="autoMode">
+      <mat-form-field>
+        <input
+          matInput
+          type="number"
+          formControlName="minPrice"
+          placeholder="Minimum price"
+        />
+      </mat-form-field>
+      <mat-form-field class="sales-target">
+        <input
+          matInput
+          type="number"
+          formControlName="salesWeekTarget"
+          placeholder="Week sales target"
+        />
+      </mat-form-field>
+    </div>
+    <hr />
+    <button
+    class="btn btn-danger"
+    type="submit"
+    >
+      {{ onEditMode ? "Edit" : "Add product" }}
     </button>
   </form>
-  </div>
+</div>
+
+  <!-- [disabled]="!productForm.valid" -->

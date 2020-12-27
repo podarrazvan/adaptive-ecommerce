@@ -11,4 +11,7 @@ export interface Product {
   rating?: number;
   key?: string;
   cut?: number;
+  minPrice: number,
+  salesWeekTarget: number,
+  views: number
 }
