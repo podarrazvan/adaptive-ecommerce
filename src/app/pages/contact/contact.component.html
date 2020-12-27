@@ -1,1 +1,31 @@
-<p>contact works!</p>
+<div class="container">
+  
+  <h1>Leave a message</h1>
+
+  <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+    <input type="text" placeholder="Ex. Albert" formControlName="firstName" />
+
+    <input type="text" placeholder="Ex. Einstein" formControlName="lastName" />
+
+    <input
+      type="email"
+      id="inputEmailAddress"
+      placeholder="exemple@exemple.com"
+      formControlName="email"
+    />
+
+    <textarea
+      rows="3"
+      formControlName="message"
+      placeholder="Your message here"
+    ></textarea>
+
+    <button
+      [disabled]="!contactForm.valid"
+      class="gradient-btn"
+      type="submit"
+    >
+      Send
+    </button>
+  </form>
+</div>

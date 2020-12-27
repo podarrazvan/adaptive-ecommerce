@@ -10,4 +10,5 @@ export interface Product {
   thumbnail?: string;
   rating?: number;
   key?: string;
+  cut?: number;
 }

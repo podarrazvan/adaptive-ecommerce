@@ -1,7 +1,9 @@
-<div class="search">
-<input type="text" name="" id="" placeholder="I am shoping for...">
-    <div class="search-actions">
-        <button class="toggle-btn">All categories <span><mat-icon>keyboard_arrow_down</mat-icon></span></button>
-        <button class="search-btn"><mat-icon>search</mat-icon></button>
-    </div>
-</div>
+<form class="search" [formGroup]="searchBar" (ngSubmit)="onSearch()">
+  <input type="text" formControlName="search" placeholder="I am shoping for..." />
+  <div class="search-actions">
+    <button class="toggle-btn">
+      All categories <span><mat-icon>keyboard_arrow_down</mat-icon></span>
+    </button>
+    <button class="search-btn"><mat-icon>search</mat-icon></button>
+  </div>
+</form>
