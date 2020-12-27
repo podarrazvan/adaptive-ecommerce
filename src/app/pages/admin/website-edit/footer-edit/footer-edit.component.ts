@@ -80,18 +80,18 @@ export class FooterEditComponent implements OnInit {
     this.close.emit();
   }
 
-  async facebookLogo(event: any) {
-    const randomId = Math.random().toString(36).substring(2);
-    this.facebookLogoPath = await this.dbUploadService.upload(event, randomId);
-  }
+  // async facebookLogo(event: any) {
+  //   const randomId = Math.random().toString(36).substring(2);
+  //   this.facebookLogoPath = await this.dbUploadService.uploadImg(event, randomId);
+  // }
 
-  async twitterLogo(event: any) {
-    const randomId = Math.random().toString(36).substring(2);
-    this.twitterLogPath = await this.dbUploadService.upload(event, randomId);
-  }
+  // async twitterLogo(event: any) {
+  //   const randomId = Math.random().toString(36).substring(2);
+  //   this.twitterLogPath = await this.dbUploadService.uploadImg(event, randomId);
+  // }
 
-  async instagramLogo(event: any) {
-    const randomId = Math.random().toString(36).substring(2);
-    this.instagramLogoPath = await this.dbUploadService.upload(event, randomId);
-  }
+  // async instagramLogo(event: any) {
+  //   const randomId = Math.random().toString(36).substring(2);
+  //   this.instagramLogoPath = await this.dbUploadService.uploadImg(event, randomId);
+  // }
 }

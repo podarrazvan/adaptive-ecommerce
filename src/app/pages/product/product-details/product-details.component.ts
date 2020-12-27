@@ -11,7 +11,7 @@ export class ProductDetailsComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit() {
   }
 
 }

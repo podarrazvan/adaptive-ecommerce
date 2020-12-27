@@ -110,16 +110,16 @@ export class StatisticsComponent implements OnInit {
     this.dbFetchDataService
       .fetchProductsByCategory(cat)
       .subscribe((products) => {
-        for (let product of products) {
-          this.dbStatisticsService
-            .getProductViews(product.key)
-            .subscribe((responseViews) => {
-              this.products.push({
-                product: product,
-                views: responseViews.views,
-              });
-            });
-        }
+        // for (let product of products) {
+        //   this.dbStatisticsService
+        //     .getProductViews(product.key)
+        //     .subscribe((responseViews) => {
+        //       this.products.push({
+        //         product: product,
+        //         views: responseViews.views,
+        //       });
+        //     });
+        // }
       });
     this.loading = false;
     console.log(this.products);

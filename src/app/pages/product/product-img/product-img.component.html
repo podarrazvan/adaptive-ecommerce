@@ -1,8 +1,8 @@
 <div class="images">
   <div class="secondary-images">
-    <app-product-img-carousel [images]="product.img"></app-product-img-carousel>
+    <app-product-img-carousel [images]="product.images" (index)="mainImgIndex = $event"></app-product-img-carousel>
   </div>
   <div class="main-img">
-    <img [src]="product.img[0]" alt="main image" />
+    <img [src]="product.images[mainImgIndex? mainImgIndex : 0]" alt="main image" />
   </div>
 </div>

@@ -81,9 +81,9 @@ export class OrdersComponent implements OnInit {
           this.mobileOrder.products.splice(0, 1);
           for (let prod of order.cart) {
             this.dbFetchDataService
-              .fetchProduct(prod.category, prod.product)
+              .fetchProduct(prod.product)
               .subscribe((mobOrder) => {
-                product.product = mobOrder;
+                product.product = mobOrder.product;
                 product.quantity = prod.quantity;
                 this.mobileOrder.products.push(product);
               });

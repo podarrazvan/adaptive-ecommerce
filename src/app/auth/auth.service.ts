@@ -10,13 +10,11 @@ export interface Id {
 }
 
 export interface AuthResponseData {
-  kind: string;
   idToken: string;
   email: string;
   refreshToken: string;
   expiresIn: string;
   localId: string;
-  registered?: boolean;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -29,11 +27,12 @@ export class AuthService {
     private http: HttpClient
   ) {}
 
-  signup(email: string, password: string) {
+  signup(username: string ,email: string, password: string) {
     return this.http
       .post<AuthResponseData>(
-        'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyB2LCy0vDlPneQn5OW6ft-h5rOXY-vooQE',
+        'http://localhost:3000/api/users/signup',
         {
+          username: username,
           email: email,
           password: password,
           returnSecureToken: true
@@ -55,7 +54,7 @@ export class AuthService {
   login(email: string, password: string) {
     return this.http
       .post<AuthResponseData>(
-        'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyB2LCy0vDlPneQn5OW6ft-h5rOXY-vooQE',
+        'http://localhost:3000/api/users/login',
         {
           email: email,
           password: password,

@@ -8,6 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class ProductImgComponent implements OnInit {
 
   @Input() product;
+  mainImgIndex;
 
   constructor() { }
 

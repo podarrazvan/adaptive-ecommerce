@@ -17,27 +17,15 @@ export class DbFetchDataService {
   categories: Category[];
   category;
 
-  fetchProductsByCategory(category) {
-    const productsArray = [];
+  fetchProductsByCategory(category: string) {
     return this.http
-      .get<{ key: string }>(
-        `https://shop-436e8.firebaseio.com/products/${category}/.json`
-      )
-      .pipe(
-        map((responseData) => {
-          for (const key in responseData) {
-            if (responseData.hasOwnProperty(key)) {
-              productsArray.push({ ...responseData[key], key });
-            }
-          }
-          return productsArray;
-        })
-      );
+      .get<[Product]>(
+        `http://localhost:3000/api/products/category/${category}`);
   }
 
-  fetchProduct(category: string, key: string) {
-    return this.http.get<Product>(
-      `https://shop-436e8.firebaseio.com/products/${category}/${key}.json`
+  fetchProduct(key: string) {
+    return this.http.get<{product: Product}>(
+      `http://localhost:3000/api/products/id/${key}`
     );
   }
 

@@ -1,4 +1,3 @@
-import { AngularFireStorage } from '@angular/fire/storage';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Order } from '../../interfaces/order.interface';
@@ -8,26 +7,26 @@ import { Message } from '../../interfaces/message.interface';
 @Injectable()
 export class DbUploadService {
   constructor(
-    private afStorage: AngularFireStorage,
     private http: HttpClient
   ) {}
  
-  public upload(event: any, filename: string): Promise<string> {
-    return this.afStorage
-      .upload(filename, event.target.files[0])
-      .then((result) => result.ref.getDownloadURL());
+  uploadImg(image: File){
+    const img = new FormData();
+    img.append("image", image);
+    return this.http.post<{url: string}>('http://localhost:3000/api/images', img);
   }
 
   createAndStoreProduct(
     title: string,
     category: string,
     price: number,
-    img: any,
+    img: String[],
     description: string,
     tags: any,
-    quantity: number
+    quantity: number,
+    minPrice: number,
+    salesWeekTarget: number
   ) {
-    const user = JSON.parse(localStorage.getItem('userData'));
     const productData: Product = {
       title: title,
       category: category,
@@ -36,10 +35,14 @@ export class DbUploadService {
       description: description,
       tags: tags,
       quantity: quantity,
+      views:0,
+      minPrice: minPrice,
+      salesWeekTarget: salesWeekTarget
     };
+    console.log(productData);
     this.http
       .post<{ name: string }>(
-        `https://shop-436e8.firebaseio.com/products/${category}/.json?auth=${user._token}`,
+        'http://localhost:3000/api/products',
         productData,
         {
           observe: 'response',
@@ -55,7 +58,7 @@ export class DbUploadService {
       );
   }
 
-  updateProduct(product: Product, homepagePosition: string, key?: string) {
+  updateProduct(product: Product, key?: string) {
     if(key == undefined) {
       key = product.key;
     }
@@ -68,7 +71,9 @@ export class DbUploadService {
       description: product.description,
       tags: product.tags,
       quantity: product.quantity,
-      homepagePosition: homepagePosition,
+      minPrice: product.minPrice,
+      salesWeekTarget: product.salesWeekTarget,
+      views: product.views
     };
     return this.http.put(
       `https://shop-436e8.firebaseio.com/products/${product.category}/${key}/.json?auth=${user._token}`,

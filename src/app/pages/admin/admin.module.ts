@@ -5,6 +5,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { AuthGuard } from 'src/app/auth/auth.guard';
+import { MatInputModule } from '@angular/material/input';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 import { DeleteAlertComponent } from 'src/app/shared/components/delete-alert/delete-alert.component';
 import { SharedModule } from 'src/app/shared/modules/shared.modules';
@@ -56,6 +59,9 @@ const COMPONENTS = [
     FormsModule,
     ReactiveFormsModule,
     EditorModule,
+    MatFormFieldModule,
+    MatCheckboxModule,
+    MatInputModule,
     RouterModule.forChild([
       {
         path:'admin',

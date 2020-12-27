@@ -3,7 +3,7 @@
     <p>{{ product.category }}</p>
   </div>
   <div class="rating">
-    <app-rating [rating]="product.rating"></app-rating>
+    <!-- <app-rating [rating]="product.rating"></app-rating> -->
   </div>
   <div class="title">
     <h1>{{ product.title }}</h1>
@@ -14,18 +14,18 @@
   <div class="availability">
     <p>
       Availability :
-      <span [class.green]="product.availability">{{
-        product.availability ? "In stock" : "Out of stock"
+      <span [class.green]="product.quantity > 0">{{
+        product.quantity > 0 ? "In stock" : "Out of stock"
       }}</span>
     </p>
   </div>
   <div class="brand">
     <p>Brand</p>
-    <img [src]="product.brand" />
+    <!-- <img [src]="product.brand" /> -->
   </div>
   <div class="id">
     <p>
-      Id: <span>{{ product.id }}</span>
+      <!-- Id: <span>{{ product.id }}</span> -->
     </p>
   </div>
   <div class="product-model" *ngIf="product.models">

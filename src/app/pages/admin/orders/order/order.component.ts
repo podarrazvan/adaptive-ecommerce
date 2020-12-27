@@ -27,11 +27,12 @@ export class OrderComponent implements OnInit {
   ngOnInit(): void {
     this.products.splice(0,1);
     for(let product of this.order.cart) {
-      this.dbFetchDataService.fetchProduct(product.category, product.product).subscribe(data => {
-        const total = data.price * product.quantity;
+      this.dbFetchDataService.fetchProduct( product.product).subscribe(data => {
+        const prod = data.product;
+        const total = prod.price * product.quantity;
         this.products.push({
           quantity: product.quantity,
-          name: data.title,
+          name: prod.title,
           total: total,
           category: product.category,
           id: product.product

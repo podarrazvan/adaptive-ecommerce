@@ -25,6 +25,7 @@ export class AuthComponent {
     if (!form.valid) {
       return;
     }
+    const username = form.value.username;
     const email = form.value.email;
     const password = form.value.password;
 
@@ -35,7 +36,7 @@ export class AuthComponent {
     if (this.isLoginMode) {
       authObs = this.authService.login(email, password);
     } else {
-      authObs = this.authService.signup(email, password);
+      authObs = this.authService.signup(username,email, password);
     }
 
     authObs.subscribe(
