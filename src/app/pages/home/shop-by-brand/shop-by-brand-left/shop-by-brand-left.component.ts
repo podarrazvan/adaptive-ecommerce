@@ -13,7 +13,7 @@ export class ShopByBrandLeftComponent implements OnInit {
   brand:{name:string, img:string};
 
   ngOnInit(): void {
-    this.sharedDataService.brand.subscribe(brand => this.brand = brand);
+    this.sharedDataService.brand$.subscribe(brand => this.brand = brand);
   }
 
 }

@@ -13,11 +13,13 @@ export class AboutUsEditComponent implements OnInit {
   constructor(private dbFetchDataService: DbFetchDataService,
               private dbWebsiteEditService: DbWebsiteEditService ) {}
 
-  aboutUs;
+  aboutUs: string;
+  id: string;
 
   ngOnInit(): void {
-    this. dbFetchDataService.fetchAboutUs().subscribe((about) => {
-      this.aboutUs = about.aboutUs;
+    this.dbWebsiteEditService.fetchPages('about-us').subscribe((about) => {
+      this.aboutUs = about.info[0].content;
+      this.id = about.info[0]._id;
     });
   }
 
@@ -26,7 +28,7 @@ export class AboutUsEditComponent implements OnInit {
   }
 
   onSave(aboutUs) {
-    this.dbWebsiteEditService.editAboutUs(aboutUs.value);
+    this.dbWebsiteEditService.editPages(aboutUs.value,'about-us',this.id);
     this.close.emit();
   }
 }

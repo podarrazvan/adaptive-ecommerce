@@ -13,10 +13,8 @@ export class DbWebsiteEditService {
   category;
 
   websiteDetails(details: WebsiteDetails) {
-    console.log('websiteDetails',details);
     const websiteDetails = { info: details };
     const id = this.sharedDataService.websiteDocId;
-    console.log(id);
     if (id) {
       console.log('put');
       this.http
@@ -36,108 +34,27 @@ export class DbWebsiteEditService {
     );
   }
 
-  addToCarousel(key: string, category: string) {
-    const user = JSON.parse(localStorage.getItem('userData'));
-    const product = { id: key, category: category };
-    this.http
-      .post(
-        `https://shop-436e8.firebaseio.com/homepage/carousel/.json?auth=${user._token}`,
-        product,
-        {
-          observe: 'response',
-        }
-      )
-      .subscribe(
-        (responseData) => {
-          console.log(responseData);
-        },
-        (error) => {
-          console.log('error:', error);
-          error.next(error.message);
-        }
-      );
-  }
-
-  addHomepageArea(name: string) {
-    const user = JSON.parse(localStorage.getItem('userData'));
-    const area = { name: name };
-    this.http
-      .post<{ name: string }>(
-        `https://shop-436e8.firebaseio.com/homepage/areas/.json?auth=${user._token}`,
-        area,
-        {
-          observe: 'response',
-        }
-      )
-      .subscribe(
-        (responseData) => {
-          console.log(responseData);
-        },
-        (error) => {
-          console.log('error:', error);
-          error.next(error.message);
-        }
-      );
-  }
-
-  updateHomepageArea(name: string, id: string) {
-    console.log(name, id);
-    const user = JSON.parse(localStorage.getItem('userData'));
-    const area = { name: name };
-    return this.http.put<{ name: string }>(
-      `https://shop-436e8.firebaseio.com/homepage/areas/${id}/.json?auth=${user._token}`,
-      area,
-      {
-        observe: 'response',
-      }
-    );
-  }
-
-  addCategory(name: string) {
-    const user = JSON.parse(localStorage.getItem('userData'));
-    const category = { name: name };
-    this.http
-      .post<{ name: string }>(
-        `https://shop-436e8.firebaseio.com/categories/.json?auth=${user._token}`,
-        category,
-        {
-          observe: 'response',
-        }
-      )
-      .subscribe(
-        (responseData) => {
-          console.log(responseData);
-        },
-        (error) => {
-          console.log(error.message);
-        }
-      );
-  }
-
-  updateCategory(name: string, id: string) {
-    console.log(name, id);
-    const user = JSON.parse(localStorage.getItem('userData'));
-    const category = { name: name };
-    return this.http.put<{ name: string }>(
-      `https://shop-436e8.firebaseio.com/categories/${id}/.json?auth=${user._token}`,
-      category,
-      {
-        observe: 'response',
-      }
-    );
-  }
-
-  editTermsOfUse(termsOfUse: string) {
-    const user = JSON.parse(localStorage.getItem('userData'));
-    const terms = { termsOfUse: termsOfUse };
-    this.http
+  editPages(content: string,page: string, id?: string) {
+    const pageData = { content: content};
+    console.log(id);
+    if (!id) {
+      this.http
+        .post(
+          `http://localhost:3000/api/pages/${page}`,
+          pageData)
+        .subscribe(
+          (responseData) => {
+            console.log(responseData);
+          },
+          (error) => {
+            console.log(error.message);
+          }
+        );
+    } else {
+      this.http
       .put(
-        `https://shop-436e8.firebaseio.com/terms-of-use/.json?auth=${user._token}`,
-        terms,
-        {
-          observe: 'response',
-        }
-      )
+        `http://localhost:3000/api/pages/${page}/${id}`,
+        pageData)
       .subscribe(
         (responseData) => {
           console.log(responseData);
@@ -146,78 +63,13 @@ export class DbWebsiteEditService {
           console.log(error.message);
         }
       );
+    }
   }
 
-  editAboutUs(aboutUs: string) {
-    const user = JSON.parse(localStorage.getItem('userData'));
-    const about = { aboutUs: aboutUs };
-    this.http
-      .put(
-        `https://shop-436e8.firebaseio.com/about-us/.json?auth=${user._token}`,
-        about,
-        {
-          observe: 'response',
-        }
-      )
-      .subscribe(
-        (responseData) => {
-          console.log(responseData);
-        },
-        (error) => {
-          console.log(error.message);
-        }
-      );
+  fetchPages(page) {
+    return this.http.get<{ info: [{content:string, _id: string}] }>(
+      `http://localhost:3000/api/pages/${page}`);
   }
 
-  setName(name: string) {
-    const user = JSON.parse(localStorage.getItem('userData'));
-    const websiteName = { name: name };
-    this.http
-      .put(
-        `https://shop-436e8.firebaseio.com/website-name/.json?auth=${user._token}`,
-        websiteName,
-        {
-          observe: 'response',
-        }
-      )
-      .subscribe(
-        (responseData) => {
-          console.log(responseData);
-        },
-        (error) => {
-          console.log(error.message);
-        }
-      );
-  }
 
-  footer(footer: Footer) {
-    const user = JSON.parse(localStorage.getItem('userData'));
-    const footerData = {
-      adress: footer.adress,
-      phone: footer.phone,
-      email: footer.email,
-      facebookLink: footer.facebookLink,
-      instagramLink: footer.instagramLink,
-      twitterLink: footer.twitterLink,
-      facebookLogo: footer.facebookLogo,
-      instagramLogo: footer.instagramLogo,
-      twitterLogo: footer.twitterLogo,
-    };
-    this.http
-      .put(
-        `https://shop-436e8.firebaseio.com/footer/.json?auth=${user._token}`,
-        footerData,
-        {
-          observe: 'response',
-        }
-      )
-      .subscribe(
-        (responseData) => {
-          console.log(responseData);
-        },
-        (error) => {
-          console.log(error.message);
-        }
-      );
-  }
 }

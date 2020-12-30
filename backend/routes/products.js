@@ -1,5 +1,5 @@
 const express = require("express");
-const Product = new require('../models/product')
+const Product = require('../models/product')
 
 const router = express.Router();
 
@@ -40,7 +40,7 @@ router.put("/:id",(req, res, next) => {
         content: req.body.content
     });
 
-    Product.updateOne({_id: req.params.id, creator: req.userData.userId},post).then(result => {
+    Product.updateOne({_id: req.params.id, creator: req.userData.userId},product).then(result => {
         console.log(result);
         if(result.nModified > 0) {
             res.status(200).json({message: "Update successful!"});

@@ -7,6 +7,7 @@ const userRoutes = require('./routes/users');
 const productRoutes = require('./routes/products');
 const imagesRoutes = require('./routes/upload-image');
 const websiteDetailsRoutes = require('./routes/website-details');
+const pagesRoutes = require('./routes/pages');
 
 const app = express();
 
@@ -43,3 +44,4 @@ app.use("/api/users", userRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/images", imagesRoutes);
 app.use("/api/website", websiteDetailsRoutes);
+app.use("/api/pages", pagesRoutes);

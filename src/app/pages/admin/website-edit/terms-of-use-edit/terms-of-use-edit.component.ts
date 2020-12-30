@@ -13,11 +13,14 @@ export class TermsOfUseEditComponent implements OnInit {
   constructor(private dbWebsiteEditService: DbWebsiteEditService,
               private dbFetchDataService: DbFetchDataService) {}
 
-  termsOfUse;
+  termsOfUse: string;
+  id: string;
 
   ngOnInit(): void {
-    this.dbFetchDataService.fetchTermsOfUse().subscribe((terms) => {
-      this.termsOfUse = terms.termsOfUse;
+    this.dbWebsiteEditService.fetchPages('terms-of-use').subscribe((terms) => {
+      console.log(terms);
+      this.termsOfUse = terms.info[0].content;
+      this.id = terms.info[0]._id;
     });
   }
 
@@ -26,7 +29,7 @@ export class TermsOfUseEditComponent implements OnInit {
   }
 
   onSave(termsOfUse) {
-    this.dbWebsiteEditService.editTermsOfUse(termsOfUse.value);
+    this.dbWebsiteEditService.editPages(termsOfUse.value,'terms-of-use',this.id);
     this.close.emit();
   }
 }

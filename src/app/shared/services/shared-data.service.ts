@@ -6,11 +6,11 @@ import { WebsiteDetails } from '../interfaces/website-details';
 @Injectable()
 export class SharedDataService implements OnDestroy {
 
-  brand = new BehaviorSubject<{name:string, img: string}>({name:"",img:""});
-  emptyCart = new BehaviorSubject<boolean>(true);
-  isAuthenticated = new BehaviorSubject<boolean>(false);
+  brand$ = new BehaviorSubject<{name:string, img: string}>({name:"",img:""});
+  emptyCart$ = new BehaviorSubject<boolean>(true);
+  isAuthenticated$ = new BehaviorSubject<boolean>(false);
 
-  cast = this.emptyCart.asObservable();
+  cast = this.emptyCart$.asObservable();
   // cast = this.isAuthenticated.asObservable();
 
   websiteDetails = new BehaviorSubject<WebsiteDetails>(null);
@@ -35,15 +35,15 @@ export class SharedDataService implements OnDestroy {
   }
 
   updateCart(newStatus) {
-    this.emptyCart.next(newStatus);
+    this.emptyCart$.next(newStatus);
   }
   
   updateAuth(newStatus) {
-    this.isAuthenticated.next(newStatus);
+    this.isAuthenticated$.next(newStatus);
   }
   
   updateBrand(newBrand) {
-    this.brand.next(newBrand);
+    this.brand$.next(newBrand);
   }
   
 }
