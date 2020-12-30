@@ -1,6 +1,7 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Product } from '../interfaces/product.interface';
+import { WebsiteDetails } from '../interfaces/website-details';
 
 @Injectable()
 export class SharedDataService implements OnDestroy {
@@ -12,12 +13,20 @@ export class SharedDataService implements OnDestroy {
   cast = this.emptyCart.asObservable();
   // cast = this.isAuthenticated.asObservable();
 
+  websiteDetails = new BehaviorSubject<WebsiteDetails>(null);
+  websiteDocId: string;
+
   productEdit: boolean;
   product: Product;
   unreadMessages: number;
   totalCart: number;
   mobile: boolean;
   
+  setWebsiteDetails(details: WebsiteDetails) {
+    this.websiteDetails.next(details);
+    this.websiteDocId = details._id;
+  }
+
   ngOnDestroy() {
     this.productEdit = null;
     this.product = null;

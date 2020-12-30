@@ -82,15 +82,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
       } else {
         console.log(this.productForm.value);
         this.dbUploadService.createAndStoreProduct(
-          this.productForm.value.title,
-          this.productForm.value.category,
-          this.productForm.value.price,
-          this.productForm.value.img,
-          this.productForm.value.description,
-          this.productForm.value.tags,
-          this.productForm.value.quantity,
-          this.productForm.value.minPrice,
-          this.productForm.value.salesWeekTarge
+          this.productForm.value
         );
       }
       this.notComplete = false;

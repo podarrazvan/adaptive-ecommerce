@@ -28,6 +28,8 @@ import { AboutUsEditComponent } from './website-edit/about-us-edit/about-us-edit
 import { FooterEditComponent } from './website-edit/footer-edit/footer-edit.component';
 import { TermsOfUseEditComponent } from './website-edit/terms-of-use-edit/terms-of-use-edit.component';
 import { WebsiteEditComponent } from './website-edit/website-edit.component';
+import { CategoriesEditComponent } from './website-edit/categories-edit/categories-edit.component';
+import { BrandsEditComponent } from './website-edit/brands-edit/brands-edit.component';
 
 const COMPONENTS = [
   AddProductComponent,
@@ -47,11 +49,13 @@ const COMPONENTS = [
   DeleteAlertComponent,
   MessageComponent,
   DesktopVersionMessagesComponent,
-  DescriptionStylesComponent
+  DescriptionStylesComponent,
+  CategoriesEditComponent,
+  BrandsEditComponent
 ];
 
 @NgModule({
-  declarations: [...COMPONENTS, AdminComponent],
+  declarations: [...COMPONENTS, AdminComponent, CategoriesEditComponent],
   imports: [
     BrowserModule,
     MatIconModule,

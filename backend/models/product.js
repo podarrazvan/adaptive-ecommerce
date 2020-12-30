@@ -10,11 +10,13 @@ const mongoose = require('mongoose');
         images:[{type: String, require: true}],
         quantity: {type: Number, require: true},
         views: {type: Number, require: true},
+        productNumber:{type: Number, require: true}, //date in seconds since midnight, 1 Jan 1970
+        brand: {type: String, require: true},
+        productModel: [{type: String, require: true}],
         autoMode: {
             minPrice: {type: Number, require: true}, // min price for auto generated offers
             salesWeekTarget: {type: Number, require: true} // how many should be sold each week in auto mode
         }
-        
     });
 
 module.exports = mongoose.model('Product', userSchema);

@@ -12,32 +12,32 @@ export class DbUploadService {
  
   uploadImg(image: File){
     const img = new FormData();
-    img.append("image", image);
+    const date = new Date().getTime();
+    const imgName = Math.round((date / 1000)-160000000).toString();
+    console.log(imgName);
+    img.append("image", image,imgName);
     return this.http.post<{url: string}>('http://localhost:3000/api/images', img);
   }
 
-  createAndStoreProduct(
-    title: string,
-    category: string,
-    price: number,
-    img: String[],
-    description: string,
-    tags: any,
-    quantity: number,
-    minPrice: number,
-    salesWeekTarget: number
-  ) {
+  createAndStoreProduct( product: Product ) {
+
+    const date = new Date().getTime();
+    const productNumber = Math.round(date / 1000);
+
     const productData: Product = {
-      title: title,
-      category: category,
-      price: price,
-      img: img,
-      description: description,
-      tags: tags,
-      quantity: quantity,
+      title: product.title,
+      category: product.category,
+      price: product.price,
+      img: product.img,
+      description: product.description,
+      tags: product.tags,
+      quantity: product.quantity,
       views:0,
-      minPrice: minPrice,
-      salesWeekTarget: salesWeekTarget
+      minPrice: product.minPrice,
+      salesWeekTarget: product.salesWeekTarget,
+      productNumber: productNumber,
+      brand: product.brand,
+      model: product.model
     };
     console.log(productData);
     this.http
@@ -73,7 +73,10 @@ export class DbUploadService {
       quantity: product.quantity,
       minPrice: product.minPrice,
       salesWeekTarget: product.salesWeekTarget,
-      views: product.views
+      views: product.views,
+      productNumber: product.productNumber,
+      brand: product.brand,
+      model: product.model
     };
     return this.http.put(
       `https://shop-436e8.firebaseio.com/products/${product.category}/${key}/.json?auth=${user._token}`,

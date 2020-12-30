@@ -13,5 +13,8 @@ export interface Product {
   cut?: number;
   minPrice: number,
   salesWeekTarget: number,
-  views: number
+  views: number,
+  productNumber: number,
+  brand: string,
+  model: string
 }

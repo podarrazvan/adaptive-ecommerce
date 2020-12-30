@@ -1,0 +1,72 @@
+<button
+    class="btn btn-danger dropdown-toggle"
+    type="button"
+    (click)="categoriesHide = !categoriesHide"
+  >
+    Show
+  </button>
+  <div *ngIf="!categoriesHide">
+      <div class="form-row align-items-center">
+        <div class="col-auto">
+          <label for="tagInput"><b>Add a new category</b></label>
+          <input
+            type="text"
+            class="form-control"
+            id="tagInput"
+            placeholder="Category"
+            #category
+            required
+          />
+        </div>
+        <div class="col-auto">
+          <!--To do: fix newCategory.valid-->
+          <button
+            type="button"
+            (click)="addNewValue(category)"
+            class="btn btn-primary"
+          >
+            Add a new category
+          </button>
+        </div>
+      </div>
+    <ul class="list-group">
+      <div *ngFor="let category of categories; let i = index">
+        <!--To do: implement active-->
+        <li class="list-group-item">
+          <h1 *ngIf="editCategoryMode != i">{{ category }}</h1>
+
+          <input
+            [hidden]="editCategoryMode != i"
+            type="text"
+            class="form-control"
+            [value]="category"
+            #editedCategory
+          />
+          <hr />
+          <div class="buttons-website-edit">
+            <button
+              (click)="delete(i, category)"
+              class="empty-btn"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+
+            <button
+              *ngIf="editCategoryMode != i"
+              (click)="editCategoryMode = i"
+              class="empty-btn"
+            >
+              <mat-icon>create</mat-icon>
+            </button>
+            <button
+              *ngIf="editCategoryMode == i"
+              (click)="edit(editedCategory, category)"
+              class="btn btn-primary"
+            >
+              Done
+            </button>
+          </div>
+        </li>
+      </div>
+    </ul>
+  </div>

@@ -5,6 +5,7 @@ const router = express.Router();
 
 
 router.post("",(req, res, next) => {
+    console.log(req.body);
   
     const product = new Product ({
         title: req.body.title,
@@ -18,8 +19,8 @@ router.post("",(req, res, next) => {
         views: req.body.views,
         minPrice:req.body.minPrice,
         salesWeekTarget:req.body.salesWeekTarget,
+        productNumber: req.body.productNumber
     });
-    console.log(req.body);
     product.save().then(createdProduct => {
         res.status(201).json({
             message: "Post added successfully",
