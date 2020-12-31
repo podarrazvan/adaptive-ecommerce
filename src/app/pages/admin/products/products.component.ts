@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DeleteAlertService } from 'src/app/shared/components/delete-alert/delete-alert.service';
-import { Category } from 'src/app/shared/interfaces/category.interface';
 import { Product } from 'src/app/shared/interfaces/product.interface';
 import { DbDeleteService } from 'src/app/shared/services/database/db-delete.service';
 import { DbFetchDataService } from 'src/app/shared/services/database/db-fetch-data.service';
@@ -32,7 +31,7 @@ export class ProductsComponent implements OnInit {
   products: Product[];
   productsData;
 
-  categories: Category[];
+  categories: string[];
   category;
 
   showEditHomepage = false;
@@ -44,30 +43,11 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.mobile = this.sharedDataService.mobile;
-    this.getCategories();
   }
 
-  getCategories() {
-    this.categories = [];
-    this.dbFetchDataService.fetchCategories().subscribe((categories) => {
-      this.category = categories;
-      for (let category of categories) {
-        this.getProducts(category.name);
-      }
-    });
-  }
 
   getProducts(cat: string) {
-    this.products = [];
-    this.dbFetchDataService
-      .fetchProductsByCategory(cat)
-      .subscribe((products) => {
-        this.productsData = products;
-        for (let productsData of products) {
-          this.products.push(productsData);
-        }
-        return this.products;
-      });
+  
   }
 
   onDelete(category, key, index, img) {
@@ -115,13 +95,6 @@ export class ProductsComponent implements OnInit {
           this.dbDeleteService.deletePhoto(img);
         }
       });
-    this.dbFetchDataService.fetchFromCarousel().subscribe((data) => {
-      for (let product of data) {
-        if (product.id === this.productToDelete.key) {
-          this.dbDeleteService.deleteFromCarousel(product.key).subscribe();
-        }
-      }
-    });
     this.products.splice(this.productToDeleteIndex, 1);
     this.deleteAlert = false;
   }

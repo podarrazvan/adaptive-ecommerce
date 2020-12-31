@@ -10,6 +10,7 @@ router.post("",(req, res, next) => {
     const product = new Product ({
         title: req.body.title,
         category: req.body.category,
+        brand: req.body.brand,
         price: req.body.price,
         tags:req.body.tags,
         description:req.body.description,

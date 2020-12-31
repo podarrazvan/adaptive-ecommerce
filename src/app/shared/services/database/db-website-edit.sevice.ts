@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Category } from '../../interfaces/category.interface';
-import { Footer } from '../../interfaces/footer.interface';
 import { WebsiteDetails } from '../../interfaces/website-details';
 import { SharedDataService } from '../shared-data.service';
 
@@ -9,7 +7,7 @@ import { SharedDataService } from '../shared-data.service';
 export class DbWebsiteEditService {
   constructor(private http: HttpClient,
               private sharedDataService: SharedDataService) {}
-  categories: Category[];
+  categories: string[];
   category;
 
   websiteDetails(details: WebsiteDetails) {

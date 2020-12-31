@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Category } from 'src/app/shared/interfaces/category.interface';
-import { Product } from 'src/app/shared/interfaces/product.interface';
 import { DbFetchDataService } from 'src/app/shared/services/database/db-fetch-data.service';
 
 @Component({
@@ -18,7 +16,7 @@ export class SearchComponent implements OnInit {
 
   products = [];
   productsData;
-  categories: Category[];
+  categories: string[];
   category;
 
   ngOnInit(): void {
@@ -37,12 +35,12 @@ export class SearchComponent implements OnInit {
   searchResult(search: string[]) {
     this.categories = [];
     this.products = [];
-    this.dbFetchDataService.fetchCategories().subscribe((categories) => {
-      this.category = categories;
-      for (let category of categories) {
-        this.getProducts(category.name, search);
-      }
-    });
+    // this.dbFetchDataService.fetchCategories().subscribe((categories) => {
+    //   this.category = categories;
+    //   for (let category of categories) {
+    //     this.getProducts(category.name, search);
+    //   }
+    // });
   }
 
   getProducts(cat: string, search: string[]) {

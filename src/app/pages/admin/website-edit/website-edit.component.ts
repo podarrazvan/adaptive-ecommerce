@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HomepageArea } from 'src/app/shared/interfaces/homepage-area.interface';
 import { WebsiteDetails } from 'src/app/shared/interfaces/website-details';
-import { DbDeleteService } from 'src/app/shared/services/database/db-delete.service';
-import { DbFetchDataService } from 'src/app/shared/services/database/db-fetch-data.service';
 import { DbWebsiteEditService } from 'src/app/shared/services/database/db-website-edit.sevice';
 import { SharedDataService } from 'src/app/shared/services/shared-data.service';
 
@@ -13,16 +10,7 @@ import { SharedDataService } from 'src/app/shared/services/shared-data.service';
 })
 export class WebsiteEditComponent implements OnInit {
   constructor(private dbWebsiteEditService: DbWebsiteEditService, 
-              private dbDeleteService: DbDeleteService,
-              private dbFetchDataService: DbFetchDataService,
               private sharedDataService: SharedDataService) {}
-
-  homepageAreasHide = true;
- 
-  homepageAreas: HomepageArea[];
-  editAreaMode: number;
-  area;
-
 
   showEditTermsOfUse = false;
 
@@ -68,18 +56,6 @@ export class WebsiteEditComponent implements OnInit {
   //     });
   // }
 
-  getAreas() {
-    this.homepageAreas = [];
-    this.dbFetchDataService
-      .fetchHomepageAreas()
-      .subscribe((areas) => {
-        this.area = areas;
-        for (let area of areas) {
-          this.homepageAreas.push(area);
-        }
-        return this.homepageAreas;
-      });
-  }
 
   editTermsOfUse() {
     this.showEditTermsOfUse = true;
