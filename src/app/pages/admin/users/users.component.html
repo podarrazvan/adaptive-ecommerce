@@ -10,8 +10,22 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-          
+          <tr *ngFor="let userData of users; let i = index">
+            <td>
+              {{i}}
+            </td>
+            <td>
+              {{userData.user.email}}
+            </td>
+            <td>
+              {{userData.user.username}}
+            </td>
+            <td>
+              <!-- is active -->
+            </td>
+            <td>
+              <button class="main-btn">Delete</button>
+            </td>
           </tr>
         </tbody>
       </table>

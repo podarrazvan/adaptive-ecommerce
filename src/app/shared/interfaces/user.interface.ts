@@ -3,6 +3,7 @@ import { Settings } from './settings.interface';
 
 export interface User {
     name: string;
+    username: string;
     email: string;
     password: string;
     settings: Settings;

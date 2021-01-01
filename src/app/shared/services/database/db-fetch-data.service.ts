@@ -5,24 +5,23 @@ import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 import { Footer } from '../../interfaces/footer.interface';
 import { Order } from '../../interfaces/order.interface';
 import { Product } from '../../interfaces/product.interface';
+import { User } from '../../interfaces/user.interface';
 
 @Injectable()
 export class DbFetchDataService {
-  constructor(
-    private http: HttpClient
-  ) { }
+  constructor(private http: HttpClient) {}
 
   categories: string[];
   category;
 
   fetchProductsByCategory(category: string) {
-    return this.http
-      .get<[Product]>(
-        `http://localhost:3000/api/products/category/${category}`);
+    return this.http.get<[Product]>(
+      `http://localhost:3000/api/products/category/${category}`
+    );
   }
 
   fetchProduct(key: string) {
-    return this.http.get<{product: Product}>(
+    return this.http.get<{ product: Product }>(
       `http://localhost:3000/api/products/id/${key}`
     );
   }
@@ -46,27 +45,30 @@ export class DbFetchDataService {
   }
 
   fetchTermsOfUse() {
-    return this.http
-      .get<{ termsOfUse: string }>(`https://shop-436e8.firebaseio.com/terms-of-use/.json`);
+    return this.http.get<{ termsOfUse: string }>(
+      `https://shop-436e8.firebaseio.com/terms-of-use/.json`
+    );
   }
 
   fetchAboutUs() {
-    return this.http
-      .get<{ aboutUs: string }>(`https://shop-436e8.firebaseio.com/about-us/.json`);
-
+    return this.http.get<{ aboutUs: string }>(
+      `https://shop-436e8.firebaseio.com/about-us/.json`
+    );
   }
 
   fetchName() {
-    return this.http
-      .get<{ name: string }>(`https://shop-436e8.firebaseio.com/website-name/.json`);
-
+    return this.http.get<{ name: string }>(
+      `https://shop-436e8.firebaseio.com/website-name/.json`
+    );
   }
 
   fetchOrders() {
     const user = JSON.parse(localStorage.getItem('userData'));
     const ordersArray = [];
     return this.http
-      .get<{ order: Order }>(`https://shop-436e8.firebaseio.com/orders/.json?auth=${user._token}`)
+      .get<{ order: Order }>(
+        `https://shop-436e8.firebaseio.com/orders/.json?auth=${user._token}`
+      )
       .pipe(
         map((responseData) => {
           for (const key in responseData) {
@@ -79,9 +81,20 @@ export class DbFetchDataService {
       );
   }
 
-  fetchFooter() {
+  fetchUsers() {
+    const usersArray = [];
     return this.http
-      .get<{ footer: Footer }>(`https://shop-436e8.firebaseio.com/footer/.json`);
-
+      .get<{ message: string; users: User[] }>(
+        'http://localhost:3000/api/users'
+      )
+      .pipe(
+        map((responseData) => {
+          for (const user of responseData.users) {
+            usersArray.push({ user });
+          }
+          console.log(usersArray);
+          return usersArray;
+        })
+      );
   }
 }

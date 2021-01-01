@@ -1,6 +1,5 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
-// const multer = require("multer");
 const jwt = require("jsonwebtoken");
 
 const User = require("../models/user");
@@ -41,5 +40,13 @@ router.post("/signup", (req, res, next) => {
   });
 });
 
+router.get("", (req, res, next) => {
+  User.find().then(documents => {
+      res.status(200).json({
+          message: "Users fetched successfully",
+          users: documents
+      });
+  })
+});
 
 module.exports = router;
