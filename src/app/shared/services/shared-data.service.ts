@@ -1,6 +1,7 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Product } from '../interfaces/product.interface';
+import { User } from '../interfaces/user.interface';
 import { WebsiteDetails } from '../interfaces/website-details';
 
 @Injectable()
@@ -16,6 +17,8 @@ export class SharedDataService implements OnDestroy {
   websiteDetails = new BehaviorSubject<WebsiteDetails>(null);
   websiteDocId: string;
 
+  userDetails = new BehaviorSubject<User>(null);
+
   productEdit: boolean;
   product: Product;
   unreadMessages: number;
@@ -26,6 +29,15 @@ export class SharedDataService implements OnDestroy {
     console.log(details);
     this.websiteDetails.next(details);
     this.websiteDocId = details._id;
+  }
+
+  setUserDetails(details: User) {
+    this.userDetails.next(details);
+  }
+
+  updateUserDetails(details: User) {
+    localStorage.setItem('userData',JSON.stringify(details));
+    this.userDetails.next(details);
   }
 
   ngOnDestroy() {

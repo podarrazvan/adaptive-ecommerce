@@ -22,7 +22,7 @@ export class GetProductComponent implements OnInit {
   }
 
   openProduct() {
-    this.router.navigate(['/product', this.product.category, this.product.key]);
+    this.router.navigate(['/product', this.product._id]);
   }
 
 }

@@ -10,8 +10,8 @@ export class HomeMainComponent implements OnInit {
   
   constructor(private sharedDataService: SharedDataService) { 
     this.sharedDataService.websiteDetails.subscribe((data) => {
-      console.log(data);
-      this.categories = data.categories;
+      // console.log(data);
+      // this.categories = data.categories;
     });
   }
   

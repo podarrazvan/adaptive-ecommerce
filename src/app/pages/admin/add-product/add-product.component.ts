@@ -85,9 +85,9 @@ export class AddProductComponent implements OnInit, OnDestroy {
         tags: this.tags,
       });
       if (this.sharedDataService.productEdit) {
-        this.dbUploadService
-          .updateProduct(this.productForm.value, this.sharedDataService.product.key)
-          .subscribe((response) => console.log(response));
+        // this.dbUploadService
+        //   .updateProduct(this.productForm.value, this.sharedDataService.product.key)
+        //   .subscribe((response) => console.log(response));
       } else {
         console.log(this.productForm.value);
         this.dbUploadService.createAndStoreProduct(

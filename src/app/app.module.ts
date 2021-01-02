@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { SharedRoutingModule } from './shared/modules/shared-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SharedModule } from './shared/modules/shared.modules';
 import { PagesModule } from './pages/pages-module';
 import { AuthModule } from './auth/auth.module';
@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminModule } from './pages/admin/admin.module';
 import { CheckoutModule } from './pages/checkout/checkout.module';
 import { ProfileModule } from './pages/profile/profile.module';
+import { Interceptor } from './shared/interceptor';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import { ProfileModule } from './pages/profile/profile.module';
     CheckoutModule,
     ProfileModule
   ],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: Interceptor,multi:true}],
   bootstrap: [AppComponent],
   exports: []
 })

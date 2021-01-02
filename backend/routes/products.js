@@ -35,14 +35,25 @@ router.post("",(req, res, next) => {
 });
 
 router.put("/:id",(req, res, next) => {
+    console.log(req.body);
     const product = new Product ({
-        _id: req.body.id,
+        _id: req.params.id,
         title: req.body.title,
-        content: req.body.content
+        category: req.body.category,
+        brand: req.body.brand,
+        price: req.body.price,
+        tags:req.body.tags,
+        description:req.body.description,
+        thumbnail:req.body.thumbnail,
+        images:req.body.img,
+        quantity:req.body.quantity,
+        views: req.body.views,
+        minPrice:req.body.minPrice,
+        salesWeekTarget:req.body.salesWeekTarget,
+        productNumber: req.body.productNumber
     });
 
-    Product.updateOne({_id: req.params.id, creator: req.userData.userId},product).then(result => {
-        console.log(result);
+    Product.updateOne({_id: req.params.id},product).then(result => {
         if(result.nModified > 0) {
             res.status(200).json({message: "Update successful!"});
         } else {

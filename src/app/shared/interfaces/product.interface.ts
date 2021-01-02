@@ -9,7 +9,7 @@ export interface Product {
   img: any;
   thumbnail?: string;
   rating?: number;
-  key?: string;
+  _id?: string;
   cut?: number;
   minPrice: number,
   salesWeekTarget: number,

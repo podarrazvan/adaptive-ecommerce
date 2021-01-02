@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { AuthService } from './auth/auth.service';
 import { DbWebsiteEditService } from './shared/services/database/db-website-edit.sevice';
 import { SharedDataService } from './shared/services/shared-data.service';
 
@@ -12,7 +13,8 @@ export class AppComponent implements OnInit {
 
   constructor(
     private dbWebsiteEdit: DbWebsiteEditService,
-    private sharedData: SharedDataService
+    private sharedData: SharedDataService,
+    private authService: AuthService,
   ) {  this.dbWebsiteEdit.fetchWebsiteDetails().subscribe((data) => {
     try {
       this.sharedData.setWebsiteDetails(data.info[0]);
@@ -41,6 +43,18 @@ export class AppComponent implements OnInit {
   });}
 
   ngOnInit() {
-  
+    if(JSON.parse(localStorage.getItem('userData')) != null){
+      this.sharedData.setUserDetails(JSON.parse(localStorage.getItem('userData')));
+    } else {
+      const date = new Date();
+      const user = {
+        favorite: [],
+        history: [],
+        categories: [],
+        lastVisit: date
+      }
+      this.sharedData.setUserDetails(user);
+    }
+    this.authService.autoLogin();
   }
 }

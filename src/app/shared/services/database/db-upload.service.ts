@@ -58,34 +58,12 @@ export class DbUploadService {
       );
   }
 
-  updateProduct(product: Product, key?: string) {
-    if(key == undefined) {
-      key = product.key;
-    }
-    const user = JSON.parse(localStorage.getItem('userData'));
-    const productData: Product = {
-      title: product.title,
-      category: product.category,
-      price: product.price,
-      img: product.img,
-      description: product.description,
-      tags: product.tags,
-      quantity: product.quantity,
-      minPrice: product.minPrice,
-      salesWeekTarget: product.salesWeekTarget,
-      views: product.views,
-      productNumber: product.productNumber,
-      brand: product.brand,
-      model: product.model
-    };
-    return this.http.put(
-      `https://shop-436e8.firebaseio.com/products/${product.category}/${key}/.json?auth=${user._token}`,
-      productData,
-      {
-        observe: 'response',
-      }
-    );
+  updateProduct(product: Product) {
+    product.views = +product.views + 1;
+    console.log(product.views);
+    this.http.put(`http://localhost:3000/api/products/${product._id}`,product).subscribe(res => console.log(res));
   }
+
   
   addMessage(message: Message) {
     const date = new Date();
