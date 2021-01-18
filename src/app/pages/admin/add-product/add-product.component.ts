@@ -46,7 +46,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
         category: [this.sharedDataService.product.category, Validators.required],
         brand: [this.sharedDataService.product.brand, Validators.required],
         price: [this.sharedDataService.product.price, Validators.required],
-        img: '',
+        images: '',
         description: [this.sharedDataService.product.description],
         tags: [''],
         quantity: [this.sharedDataService.product.quantity, Validators.required],
@@ -54,14 +54,14 @@ export class AddProductComponent implements OnInit, OnDestroy {
         salesWeekTarget: [''],
       });
       this.tags = this.sharedDataService.product.tags;
-      this.images = this.sharedDataService.product.img;
+      this.images = this.sharedDataService.product.images;
     } else {
       this.productForm = this.fb.group({
         title: ['', Validators.required],
         category: ['', Validators.required],
         brand: ['', Validators.required],
         price: ['', Validators.required],
-        img: '',
+        images: '',
         description: [''],
         tags: [''],
         quantity: ['', Validators.required],
@@ -71,8 +71,6 @@ export class AddProductComponent implements OnInit, OnDestroy {
     }
     this.sharedDataService.websiteDetails.subscribe((data) => {
       this.loading = false;
-      console.log(data)
-      console.log(data.brands)
       this.categories = data.categories;
       this.brands = data.brands;
     });
@@ -81,7 +79,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
   onSubmit() {
     if (this.images != undefined) {
       this.productForm.patchValue({
-        img: this.images,
+        images: this.images,
         tags: this.tags,
       });
       if (this.sharedDataService.productEdit) {

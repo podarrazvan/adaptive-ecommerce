@@ -6,7 +6,7 @@ export interface Product {
   homepagePosition?: string;
   tags: string[];
   quantity:number;
-  img: any;
+  images: any;
   thumbnail?: string;
   rating?: number;
   _id?: string;

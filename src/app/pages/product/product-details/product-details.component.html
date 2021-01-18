@@ -37,8 +37,9 @@
     </div>
   </div>
   <div>
-    <button class="add-to-cart-btn">
+    <button (click)="addToCart(quantity)" class="add-to-cart-btn">
       <input
+        #quantity
         class="form-input"
         type="number"
         min="1"

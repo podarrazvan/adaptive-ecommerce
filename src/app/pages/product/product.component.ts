@@ -37,8 +37,6 @@ export class ProductComponent implements OnInit {
           this.dbUploadService.updateProduct(this.product);
         }
       });
-
-  
     });
   }
 

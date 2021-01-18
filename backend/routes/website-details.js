@@ -4,7 +4,7 @@ const WebsiteDetails = new require("../models/website-details");
 const router = express.Router();
 
 router.put("/:id", (req, res, next) => {
-  console.log(req.body)
+  console.log(req.body);
     const website = new WebsiteDetails({
         _id:req.params.id,
         name: req.body.info.name,

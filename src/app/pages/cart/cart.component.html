@@ -5,8 +5,10 @@
     </div>
     <div class="product">
       <app-cart-item
-        *ngFor="let item of products"
+        *ngFor="let item of cart; let i = index"
         [product]="item"
+        [index]='i'
+        (deleteIndex)="onDelete($event)"
       ></app-cart-item>
     </div>
     <div class="bottom">
@@ -19,7 +21,7 @@
     </div>
     <div class="subtotal">
       <p>Subtotal</p>
-      <p class="subtotal-value">$999</p>
+      <p class="subtotal-value">{{subtotal}}</p>
     </div>
     <hr />
     <div class="shipping">
@@ -49,7 +51,7 @@
     <div class="total">
         <div class="total-top">
             <p>Total</p>
-            <p>$ 999</p>
+            <p>$ {{total}}</p>
         </div>
         <button routerLink="../checkout" class="gradient-btn">Proceed to checkout</button>
     </div>

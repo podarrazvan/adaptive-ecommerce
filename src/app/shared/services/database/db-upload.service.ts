@@ -23,12 +23,12 @@ export class DbUploadService {
 
     const date = new Date().getTime();
     const productNumber = Math.round(date / 1000);
-
+    console.log(product)
     const productData: Product = {
       title: product.title,
       category: product.category,
       price: product.price,
-      img: product.img,
+      images: product.images,
       description: product.description,
       tags: product.tags,
       quantity: product.quantity,
@@ -59,6 +59,7 @@ export class DbUploadService {
   }
 
   updateProduct(product: Product) {
+    console.log(product);
     product.views = +product.views + 1;
     console.log(product.views);
     this.http.put(`http://localhost:3000/api/products/${product._id}`,product).subscribe(res => console.log(res));
