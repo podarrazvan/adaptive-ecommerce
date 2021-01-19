@@ -1,11 +1,15 @@
-<button
-    class="btn btn-danger dropdown-toggle"
-    type="button"
-    (click)="brandsHide = !brandsHide"
-  >
-    Show
-  </button>
-  <div *ngIf="!brandsHide">
+<button class="main-btn" type="button" (click)="brandsHide = !brandsHide">
+ Edit
+</button>
+<div *ngIf="!brandsHide">
+  <div class="backdrop"></div>
+  <div class="alert">
+    <div class="alert-box">
+      <div class="cancel-btn">
+        <button (click)="brandsHide = true" class="btn btn-danger">
+          X
+        </button>
+      </div>
       <div class="form-row align-items-center">
         <div class="col-auto">
           <label for="tagInput"><b>Add a new brand</b></label>
@@ -18,11 +22,11 @@
             required
           />
           <input
-          class="custom-input-file"
-          type="file"
-          accept="image/*"
-          (change)="brandLogo($event)"
-        />
+            class="custom-input-file"
+            type="file"
+            accept="image/*"
+            (change)="brandLogo($event)"
+          />
         </div>
         <div class="col-auto">
           <!--To do: fix newCategory.valid-->
@@ -30,52 +34,51 @@
             [disabled]="!valid"
             type="button"
             (click)="addNewValue(brand)"
-            class="btn btn-primary"
+            class="main-btn"
           >
             Add a new brand
           </button>
         </div>
       </div>
-    <ul class="list-group">
-      <div *ngFor="let brand of brands; let i = index">
-        <!--To do: implement active-->
-        <li class="list-group-item">
-          <div *ngIf="editBrandMode != i"> 
-            <h1 >{{ brand.name }}</h1>
-            <img class="brand-img" [src]="brand.image" [alt]="brand.name">
-          </div>
-          <input
-            [hidden]="editBrandMode != i"
-            type="text"
-            class="form-control"
-            [value]="brand"
-            #editedCategory
-          />
-          <hr />
-          <div class="buttons-website-edit">
-            <button
-              (click)="delete(i, brand)"
-              class="empty-btn"
-            >
-              <mat-icon>delete</mat-icon>
-            </button>
+      <ul class="list-group">
+        <div *ngFor="let brand of brands; let i = index">
+          <!--To do: implement active-->
+          <li class="list-group-item">
+            <div *ngIf="editBrandMode != i">
+              <h1>{{ brand.name }}</h1>
+              <img class="brand-img" [src]="brand.image" [alt]="brand.name" />
+            </div>
+            <input
+              [hidden]="editBrandMode != i"
+              type="text"
+              class="form-control"
+              [value]="brand"
+              #editedCategory
+            />
+            <hr />
+            <div class="buttons-website-edit">
+              <button (click)="delete(i, brand)" class="empty-btn">
+                <mat-icon>delete</mat-icon>
+              </button>
 
-            <button
-              *ngIf="editBrandMode != i"
-              (click)="editCategoryMode = i"
-              class="empty-btn"
-            >
-              <mat-icon>create</mat-icon>
-            </button>
-            <button
-              *ngIf="editBrandMode == i"
-              (click)="edit(editedCategory, brand)"
-              class="btn btn-primary"
-            >
-              Done
-            </button>
-          </div>
-        </li>
-      </div>
-    </ul>
+              <button
+                *ngIf="editBrandMode != i"
+                (click)="editCategoryMode = i"
+                class="empty-btn"
+              >
+                <mat-icon>create</mat-icon>
+              </button>
+              <button
+                *ngIf="editBrandMode == i"
+                (click)="edit(editedCategory, brand)"
+                class="btn btn-primary"
+              >
+                Done
+              </button>
+            </div>
+          </li>
+        </div>
+      </ul>
+    </div>
   </div>
+</div>

@@ -30,6 +30,7 @@ import { TermsOfUseEditComponent } from './website-edit/terms-of-use-edit/terms-
 import { WebsiteEditComponent } from './website-edit/website-edit.component';
 import { CategoriesEditComponent } from './website-edit/categories-edit/categories-edit.component';
 import { BrandsEditComponent } from './website-edit/brands-edit/brands-edit.component';
+import { CouponsEditComponent } from './website-edit/coupons-edit/coupons-edit.component';
 
 const COMPONENTS = [
   AddProductComponent,
@@ -51,7 +52,8 @@ const COMPONENTS = [
   DesktopVersionMessagesComponent,
   DescriptionStylesComponent,
   CategoriesEditComponent,
-  BrandsEditComponent
+  BrandsEditComponent,
+  CouponsEditComponent
 ];
 
 @NgModule({

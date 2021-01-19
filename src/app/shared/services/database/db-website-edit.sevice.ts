@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { WebsiteDetails } from '../../interfaces/website-details';
 import { SharedDataService } from '../shared-data.service';
+import { Coupon } from '../../interfaces/coupon.interface';
 
 @Injectable()
 export class DbWebsiteEditService {
@@ -69,5 +70,12 @@ export class DbWebsiteEditService {
       `http://localhost:3000/api/pages/${page}`);
   }
 
+  addCoupon(coupon: Coupon) {
+    const couponToAdd: Coupon = {
+      code: coupon.code,
+      discount: coupon.discount
+    }
+    this.http.post('http://localhost:3000/api/coupons',couponToAdd).subscribe();
+  }
 
 }

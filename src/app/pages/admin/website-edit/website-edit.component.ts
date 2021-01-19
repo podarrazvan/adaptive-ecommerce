@@ -12,6 +12,8 @@ export class WebsiteEditComponent implements OnInit {
   constructor(private dbWebsiteEditService: DbWebsiteEditService, 
               private sharedDataService: SharedDataService) {}
 
+  editName = false;
+
   showEditTermsOfUse = false;
 
   showEditAboutUs = false;
@@ -19,6 +21,8 @@ export class WebsiteEditComponent implements OnInit {
   showEditFooter = false;
 
   websiteDetails: WebsiteDetails;
+
+  coupons: string[] = [];
 
   ngOnInit(): void {
     this.sharedDataService.websiteDetails.subscribe(data => this.websiteDetails = data);
@@ -56,6 +60,13 @@ export class WebsiteEditComponent implements OnInit {
   //     });
   // }
 
+  deleteCategory(index) {
+    this.websiteDetails.categories.splice(index, 1);
+  }
+
+  deleteBrand(index) {
+    this.websiteDetails.brands.splice(index, 1);
+  }
 
   editTermsOfUse() {
     this.showEditTermsOfUse = true;
@@ -74,7 +85,9 @@ export class WebsiteEditComponent implements OnInit {
   }
 
   setName(name) {
+    console.log(name);
     this.websiteDetails.name = name.value;
+    this.editName = false;
   }
 
   footerEdit(footer) {

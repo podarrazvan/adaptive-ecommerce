@@ -1,11 +1,19 @@
 <button
-    class="btn btn-danger dropdown-toggle"
-    type="button"
-    (click)="categoriesHide = !categoriesHide"
-  >
-    Show
-  </button>
-  <div *ngIf="!categoriesHide">
+class="main-btn"
+type="button"
+(click)="categoriesHide = !categoriesHide"
+>
+Edit
+</button>
+<div *ngIf="!categoriesHide">
+  <div class="backdrop"></div>
+  <div class="alert">
+    <div class="alert-box">
+      <div class="cancel-btn">
+        <button (click)="categoriesHide = true" class="btn btn-danger">
+          X
+        </button>
+      </div>
       <div class="form-row align-items-center">
         <div class="col-auto">
           <label for="tagInput"><b>Add a new category</b></label>
@@ -23,50 +31,49 @@
           <button
             type="button"
             (click)="addNewValue(category)"
-            class="btn btn-primary"
+            class="main-btn"
           >
             Add a new category
           </button>
         </div>
       </div>
-    <ul class="list-group">
-      <div *ngFor="let category of categories; let i = index">
-        <!--To do: implement active-->
-        <li class="list-group-item">
-          <h1 *ngIf="editCategoryMode != i">{{ category }}</h1>
+      <ul class="list-group">
+        <div *ngFor="let category of categories; let i = index">
+          <!--To do: implement active-->
+          <li class="list-group-item">
+            <h1 *ngIf="editCategoryMode != i">{{ category }}</h1>
 
-          <input
-            [hidden]="editCategoryMode != i"
-            type="text"
-            class="form-control"
-            [value]="category"
-            #editedCategory
-          />
-          <hr />
-          <div class="buttons-website-edit">
-            <button
-              (click)="delete(i, category)"
-              class="empty-btn"
-            >
-              <mat-icon>delete</mat-icon>
-            </button>
+            <input
+              [hidden]="editCategoryMode != i"
+              type="text"
+              class="form-control"
+              [value]="category"
+              #editedCategory
+            />
+            <hr />
+            <div class="buttons-website-edit">
+              <button (click)="delete(i, category)" class="empty-btn">
+                <mat-icon>delete</mat-icon>
+              </button>
 
-            <button
-              *ngIf="editCategoryMode != i"
-              (click)="editCategoryMode = i"
-              class="empty-btn"
-            >
-              <mat-icon>create</mat-icon>
-            </button>
-            <button
-              *ngIf="editCategoryMode == i"
-              (click)="edit(editedCategory, category)"
-              class="btn btn-primary"
-            >
-              Done
-            </button>
-          </div>
-        </li>
-      </div>
-    </ul>
+              <button
+                *ngIf="editCategoryMode != i"
+                (click)="editCategoryMode = i"
+                class="empty-btn"
+              >
+                <mat-icon>create</mat-icon>
+              </button>
+              <button
+                *ngIf="editCategoryMode == i"
+                (click)="edit(editedCategory, category)"
+                class="btn btn-primary"
+              >
+                Done
+              </button>
+            </div>
+          </li>
+        </div>
+      </ul>
+    </div>
   </div>
+</div>

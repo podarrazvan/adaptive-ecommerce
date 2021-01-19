@@ -1,57 +1,117 @@
-<div *ngIf="showEditTermsOfUse">
-  <app-terms-of-use-edit
-    (close)="closeTermsOfUseEdit()"
-  ></app-terms-of-use-edit>
-</div>
+<div class="website-edit-box">
+  <div *ngIf="showEditTermsOfUse">
+    <app-terms-of-use-edit
+      (close)="closeTermsOfUseEdit()"
+    ></app-terms-of-use-edit>
+  </div>
 
-<div *ngIf="showEditAboutUs">
-  <app-about-us-edit (close)="closeEditAboutUs()"></app-about-us-edit>
-</div>
+  <div *ngIf="showEditAboutUs">
+    <app-about-us-edit (close)="closeEditAboutUs()"></app-about-us-edit>
+  </div>
 
-<div *ngIf="showEditFooter">
-  <app-footer-edit (close)="footerEdit($event)" [websiteDetails]="websiteDetails"></app-footer-edit>
-</div>
+  <div *ngIf="showEditFooter">
+    <app-footer-edit
+      (close)="footerEdit($event)"
+      [websiteDetails]="websiteDetails"
+    ></app-footer-edit>
+  </div>
 
-<div *ngIf="!showEditTermsOfUse || !showEditAboutUs">
-  <h1>Products categories</h1>
-  <app-categories-edit (finalCategories)="websiteDetails.categories" [categories]="websiteDetails.categories"></app-categories-edit>
+  <h1>Settings</h1>
   <hr />
-  <h1>Brands</h1>
-  <app-brands-edit (finalBrands)="websiteDetails.brands" [brands]="websiteDetails.brands"></app-brands-edit>
-  <hr />
-  <h1>Terms of use</h1>
-  <button class="btn btn-danger" type="button" (click)="editTermsOfUse()">
-    Edit Terms Of Use
-  </button>
-  <hr />
-  <h1>About Us</h1>
-  <button class="btn btn-danger" type="button" (click)="editAboutUs()">
-    Edit About Us
-  </button>
-  <hr />
-  <h1>Footer</h1>
-  <button class="btn btn-danger" type="button" (click)="showEditFooter = true">
-    Edit Footer
-  </button>
-  <hr />
-  <h1>Website's name</h1>
-  <div class="form-inline">
-    <div class="form-group mx-sm-3 mb-2">
+  <div class="edit-option">
+    <h2 class="left">Website Name</h2>
+    <div class="name" *ngIf="editName">
       <input
         #websiteName
         type="text"
-        class="form-control inputName"
+        class="form-control inputName center"
         placeholder="Website's name"
         [value]="websiteDetails.name"
       />
       <button
+        class="right"
         (click)="setName(websiteName)"
         type="button"
-        class="btn btn-primary mb-2"
+        class="white-btn"
       >
         Set name
       </button>
     </div>
+    <h2 class="center website-name" *ngIf="!editName">
+      {{ websiteDetails.name }}
+    </h2>
+    <button *ngIf="!editName" (click)="editName = true" class="main-btn website-name-btn">Edit</button>
   </div>
+  <hr />
+  <div class="edit-option">
+    <h2 class="left">Categories</h2>
+    <div class="center">
+      <div
+      *ngFor="let category of websiteDetails.categories; let i = index"
+        class="simple-btn"
+      >
+        {{ category }}
+      </div>
+    </div>
+    <app-categories-edit
+      (finalCategories)="(websiteDetails.categories)"
+      [categories]="websiteDetails.categories"
+    ></app-categories-edit>
+  </div>
+  <hr />
+  <div class="edit-option">
+    <h2 class="left">Brands</h2>
+    <div class="center">
+      <div 
+      *ngFor="let brand of websiteDetails.brands; let i =  index"    
+      class="simple-btn">
+        {{ brand.name }}
+      </div>
+    </div>
+    <app-brands-edit
+      class="right"
+      (finalBrands)="(websiteDetails.brands)"
+      [brands]="websiteDetails.brands"
+    ></app-brands-edit>
+  </div>
+  <hr>
+   <!--Coupons-->
+  <div class="edit-option">
+    <h2 class="left">
+      Coupons
+    </h2>
+    <button class="simple-btn" *ngFor="let coupon of coupons; let i = index"> {{coupon}}</button>
+    <app-coupons-edit></app-coupons-edit>
+  </div>
+  <hr />
+  <!--Terms of use-->
+  <div class="edit-option">
+    <h2 class="left">Terms Of Use</h2>
+    <a class="center" routerLink="../../terms-of-use"> Open </a>
+    <button class="main-btn right" type="button" (click)="editTermsOfUse()">
+      Edit
+    </button>
+  </div>
+
+  <hr />
+  <div class="edit-option">
+    <h2 class="left">About Us</h2>
+    <a class="center" routerLink="../../about-us"> Open </a>
+    <button class="main-btn right" type="button" (click)="editAboutUs()">
+      Edit
+    </button>
+  </div>
+  <hr />
+  <div class="edit-option">
+    <h2 class="left">Footer</h2>
+    <button
+      class="main-btn right"
+      type="button"
+      (click)="showEditFooter = true"
+    >
+      Edit
+    </button>
+  </div>
+  <hr />
   <button class="gradient-btn" (click)="saveInfo()">Update!</button>
 </div>
