@@ -131,4 +131,10 @@ export class CartComponent implements OnInit, DoCheck {
   //   }
   //   localStorage.setItem('cart', JSON.stringify(cartUpdated));
   }
+
+  coupon(discount) {
+    console.log('e aici')
+    console.log(discount);
+    this.subtotal -= discount;
+  }
 }

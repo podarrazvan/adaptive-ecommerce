@@ -43,6 +43,7 @@
     <button *ngIf="!editName" (click)="editName = true" class="main-btn website-name-btn">Edit</button>
   </div>
   <hr />
+
   <div class="edit-option">
     <h2 class="left">Categories</h2>
     <div class="center">
@@ -58,7 +59,8 @@
       [categories]="websiteDetails.categories"
     ></app-categories-edit>
   </div>
-  <hr />
+  <hr>
+
   <div class="edit-option">
     <h2 class="left">Brands</h2>
     <div class="center">
@@ -75,15 +77,27 @@
     ></app-brands-edit>
   </div>
   <hr>
+
    <!--Coupons-->
   <div class="edit-option">
     <h2 class="left">
       Coupons
     </h2>
-    <button class="simple-btn" *ngFor="let coupon of coupons; let i = index"> {{coupon}}</button>
+    <div class="simple-btn" *ngFor="let coupon of coupons; let i = index"> {{coupon}}</div>
     <app-coupons-edit></app-coupons-edit>
   </div>
   <hr />
+
+  <!--Shipping-->
+  <div class="edit-option">
+    <h2 class="left">
+      Shipping
+    </h2>
+    <div class="simple-btn" *ngFor="let shipping of websiteDetails.shipping; let i = index"> {{shipping.name}}</div>
+    <app-shipping-edit [shippings]="websiteDetails.shipping" (newShippings)="websiteDetails.shipping"></app-shipping-edit>
+  </div>
+  <hr />
+
   <!--Terms of use-->
   <div class="edit-option">
     <h2 class="left">Terms Of Use</h2>

@@ -10,6 +10,7 @@ router.put("/:id", (req, res, next) => {
         name: req.body.info.name,
         categories: req.body.info.categories,
         brands: req.body.info.brands,
+        shipping: req.body.shipping,
         footer: {
           adress: req.body.info.adress,
           phone: req.body.info.phone,
@@ -47,6 +48,7 @@ router.post("", (req, res, next) => {
         name: req.body.info.name,
         categories: req.body.info.categories,
         brands: req.body.brands,
+        shipping: req.body.shipping,
         footer: {
           adress: req.body.info.adress,
           phone: req.body.info.phone,

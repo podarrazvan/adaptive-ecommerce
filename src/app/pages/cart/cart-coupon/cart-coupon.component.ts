@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { DbFetchDataService } from 'src/app/shared/services/database/db-fetch-data.service';
 
 @Component({
   selector: 'app-cart-coupon',
@@ -6,10 +7,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cart-coupon.component.scss']
 })
 export class CartCouponComponent implements OnInit {
+  
+  @Output() discount = new EventEmitter<number>();
+  
+  constructor(private dbFetchDataServide: DbFetchDataService) { }
 
-  constructor() { }
 
   ngOnInit(): void {
+  }
+
+  addCoupon(code) {
+    this.dbFetchDataServide.fetchCoupon(code.value).subscribe(response =>  {
+      console.log(typeof(response.coupon[0].discount));
+      this.discount.emit(response.coupon[0].discount);
+    });
   }
 
 }

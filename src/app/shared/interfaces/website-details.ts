@@ -1,9 +1,11 @@
 import { Brand } from './brand.interface';
+import { Shipping } from './shipping.interface';
 
 export interface WebsiteDetails {
   _id?: string;
   name: string;
   categories: string[];
+  shipping:Shipping[];
   brands: Brand[];
   adress: string;
   phone: string;

@@ -24,6 +24,7 @@ export class AppComponent implements OnInit {
         name: 'name',
         categories: [],
         brands:[],
+        shipping:[],
         adress: 'adress',
         phone: 'phone',
         email: 'email',

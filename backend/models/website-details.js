@@ -7,6 +7,10 @@ const websiteSchema = mongoose.Schema({
         name:{type: String, requird: true},
         image:{type: String, requird: true},
     }],
+    shipping:[{
+        name:{type: String},
+        price:{type: Number}
+    }],
     footer: {
         adress: {type: String},
         phone: {type: String},

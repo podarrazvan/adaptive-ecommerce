@@ -14,13 +14,12 @@ export class DbWebsiteEditService {
   websiteDetails(details: WebsiteDetails) {
     const websiteDetails = { info: details };
     const id = this.sharedDataService.websiteDocId;
+    console.log(websiteDetails);
     if (id) {
-      console.log('put');
       this.http
         .put(`http://localhost:3000/api/website/${id}`, websiteDetails)
         .subscribe((error) => console.log(error));
     } else {
-      console.log('post')
       this.http
       .post('http://localhost:3000/api/website', websiteDetails)
       .subscribe(()=>location.reload());

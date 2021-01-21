@@ -42,12 +42,10 @@ router.post("", (req, res, next) => {
   });
 });
 
-router.get("", (req, res, next) => {
-  Coupon.find().then((coupon) => {
+router.get("/:code", (req, res, next) => {
+  Coupon.findOne({code:req.params.code}).then((coupon) => {
     res.status(200).json({
-      id: coupon._id,
-      code: coupon.code,
-      discount: coupon.discount,
+      coupon: coupon
     });
   });
 });

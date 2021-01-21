@@ -6,6 +6,7 @@ import { Footer } from '../../interfaces/footer.interface';
 import { Order } from '../../interfaces/order.interface';
 import { Product } from '../../interfaces/product.interface';
 import { User } from '../../interfaces/user.interface';
+import { Coupon } from '../../interfaces/coupon.interface';
 
 @Injectable()
 export class DbFetchDataService {
@@ -96,5 +97,9 @@ export class DbFetchDataService {
           return usersArray;
         })
       );
+  }
+
+  fetchCoupon(code) {
+    return this.http.get<{coupon: Coupon[]}>(`http://localhost:3000/api/coupons/${code}`);
   }
 }
