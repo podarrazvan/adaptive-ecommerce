@@ -39,6 +39,7 @@ export class AppComponent implements OnInit {
         instagramUrl: 'instagram url',
      
       };
+      this.dbWebsiteEdit.createWebsiteDetails(websiteData);
       this.sharedData.setWebsiteDetails(websiteData);
     }
   });}

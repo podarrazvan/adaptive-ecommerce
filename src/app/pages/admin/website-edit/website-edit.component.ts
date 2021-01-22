@@ -26,14 +26,19 @@ export class WebsiteEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.sharedDataService.websiteDetails.subscribe(data => this.websiteDetails = data);
+    this.dbWebsiteEditService.fetchCoupons().subscribe(data => {
+      for(let coupon of data) {
+        this.coupons.push(coupon.coupon.code);
+      }
+    });
   }
-  addNewValue(value, type) {
-    if (value.value != '' && type === 'category') {
-      console.log(value.value);
-      this.websiteDetails.categories.push(value.value);
-      console.log(this.websiteDetails.categories);
-    }
-  }
+  // addNewValue(value, type) {
+  //   if (value.value != '' && type === 'category') {
+  //     console.log(value.value);
+  //     this.websiteDetails.categories.push(value.value);
+  //     console.log(this.websiteDetails.categories);
+  //   }
+  // }
 
   delete(index, id, type) {
     if (type === 'category') {
@@ -87,6 +92,7 @@ export class WebsiteEditComponent implements OnInit {
   setName(name) {
     console.log(name);
     this.websiteDetails.name = name.value;
+    this.dbWebsiteEditService.updateWebsite('websiteName',name.value);
     this.editName = false;
   }
 
@@ -103,7 +109,7 @@ export class WebsiteEditComponent implements OnInit {
   }
 
   saveInfo() {
-    this.dbWebsiteEditService.websiteDetails(this.websiteDetails);
+    // this.dbWebsiteEditService.websiteDetails(this.websiteDetails);
   }
 
 }

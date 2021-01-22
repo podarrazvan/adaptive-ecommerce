@@ -1,131 +1,134 @@
-<div class="website-edit-box">
-  <div *ngIf="showEditTermsOfUse">
-    <app-terms-of-use-edit
-      (close)="closeTermsOfUseEdit()"
-    ></app-terms-of-use-edit>
-  </div>
 
-  <div *ngIf="showEditAboutUs">
-    <app-about-us-edit (close)="closeEditAboutUs()"></app-about-us-edit>
-  </div>
 
-  <div *ngIf="showEditFooter">
-    <app-footer-edit
-      (close)="footerEdit($event)"
-      [websiteDetails]="websiteDetails"
-    ></app-footer-edit>
-  </div>
-
-  <h1>Settings</h1>
-  <hr />
-  <div class="edit-option">
-    <h2 class="left">Website Name</h2>
-    <div class="name" *ngIf="editName">
-      <input
-        #websiteName
-        type="text"
-        class="form-control inputName center"
-        placeholder="Website's name"
-        [value]="websiteDetails.name"
-      />
-      <button
+<ng-container *ngIf="websiteDetails">
+  <div class="website-edit-box">
+    <div *ngIf="showEditTermsOfUse">
+      <app-terms-of-use-edit
+        (close)="closeTermsOfUseEdit()"
+      ></app-terms-of-use-edit>
+    </div>
+  
+    <div *ngIf="showEditAboutUs">
+      <app-about-us-edit (close)="closeEditAboutUs()"></app-about-us-edit>
+    </div>
+  
+    <div *ngIf="showEditFooter">
+      <app-footer-edit
+        (close)="footerEdit($event)"
+        [websiteDetails]="websiteDetails"
+      ></app-footer-edit>
+    </div>
+  
+    <h1>Settings</h1>
+    <hr />
+    <div class="edit-option">
+      <h2 class="left">Website Name</h2>
+      <div class="name" *ngIf="editName">
+        <input
+          #websiteName
+          type="text"
+          class="form-control inputName center"
+          placeholder="Website's name"
+          [value]="websiteDetails.name"
+        />
+        <button
+          class="right"
+          (click)="setName(websiteName)"
+          type="button"
+          class="white-btn"
+        >
+          Set name
+        </button>
+      </div>
+      <h2 class="center website-name" *ngIf="!editName">
+        {{ websiteDetails.name }}
+      </h2>
+      <button *ngIf="!editName" (click)="editName = true" class="main-btn website-name-btn">Edit</button>
+    </div>
+    <hr />
+  
+    <div class="edit-option">
+      <h2 class="left">Categories</h2>
+      <div class="center" >
+        <div
+        *ngFor="let category of websiteDetails.categories; let i = index"
+          class="simple-btn"
+        >
+          {{ category }}
+        </div>
+      </div>
+      <app-categories-edit
+        (finalCategories)="(websiteDetails.categories)"
+        [categories]="websiteDetails.categories"
+      ></app-categories-edit>
+    </div>
+    <hr>
+  
+    <div class="edit-option">
+      <h2 class="left">Brands</h2>
+      <div class="center">
+        <div 
+        *ngFor="let brand of websiteDetails.brands; let i =  index"    
+        class="simple-btn">
+          {{ brand.name }}
+        </div>
+      </div>
+      <app-brands-edit
         class="right"
-        (click)="setName(websiteName)"
-        type="button"
-        class="white-btn"
-      >
-        Set name
+        (finalBrands)="(websiteDetails.brands)"
+        [brands]="websiteDetails.brands"
+      ></app-brands-edit>
+    </div>
+    <hr>
+  
+     <!--Coupons-->
+    <div class="edit-option">
+      <h2 class="left">
+        Coupons
+      </h2>
+      <div class="simple-btn" *ngFor="let coupon of coupons; let i = index"> {{coupon}}</div>
+      <app-coupons-edit></app-coupons-edit>
+    </div>
+    <hr />
+  
+    <!--Shipping-->
+    <div class="edit-option">
+      <h2 class="left">
+        Shipping
+      </h2>
+      <div class="simple-btn" *ngFor="let shipping of websiteDetails.shipping; let i = index"> {{shipping.name}}</div>
+      <app-shipping-edit [shippings]="websiteDetails.shipping" (newShippings)="websiteDetails.shipping"></app-shipping-edit>
+    </div>
+    <hr />
+  
+    <!--Terms of use-->
+    <div class="edit-option">
+      <h2 class="left">Terms Of Use</h2>
+      <a class="center" routerLink="../../terms-of-use"> Open </a>
+      <button class="main-btn right" type="button" (click)="editTermsOfUse()">
+        Edit
       </button>
     </div>
-    <h2 class="center website-name" *ngIf="!editName">
-      {{ websiteDetails.name }}
-    </h2>
-    <button *ngIf="!editName" (click)="editName = true" class="main-btn website-name-btn">Edit</button>
-  </div>
-  <hr />
-
-  <div class="edit-option">
-    <h2 class="left">Categories</h2>
-    <div class="center">
-      <div
-      *ngFor="let category of websiteDetails.categories; let i = index"
-        class="simple-btn"
+  
+    <hr />
+    <div class="edit-option">
+      <h2 class="left">About Us</h2>
+      <a class="center" routerLink="../../about-us"> Open </a>
+      <button class="main-btn right" type="button" (click)="editAboutUs()">
+        Edit
+      </button>
+    </div>
+    <hr />
+    <div class="edit-option">
+      <h2 class="left">Footer</h2>
+      <button
+        class="main-btn right"
+        type="button"
+        (click)="showEditFooter = true"
       >
-        {{ category }}
-      </div>
+        Edit
+      </button>
     </div>
-    <app-categories-edit
-      (finalCategories)="(websiteDetails.categories)"
-      [categories]="websiteDetails.categories"
-    ></app-categories-edit>
   </div>
-  <hr>
-
-  <div class="edit-option">
-    <h2 class="left">Brands</h2>
-    <div class="center">
-      <div 
-      *ngFor="let brand of websiteDetails.brands; let i =  index"    
-      class="simple-btn">
-        {{ brand.name }}
-      </div>
-    </div>
-    <app-brands-edit
-      class="right"
-      (finalBrands)="(websiteDetails.brands)"
-      [brands]="websiteDetails.brands"
-    ></app-brands-edit>
-  </div>
-  <hr>
-
-   <!--Coupons-->
-  <div class="edit-option">
-    <h2 class="left">
-      Coupons
-    </h2>
-    <div class="simple-btn" *ngFor="let coupon of coupons; let i = index"> {{coupon}}</div>
-    <app-coupons-edit></app-coupons-edit>
-  </div>
-  <hr />
-
-  <!--Shipping-->
-  <div class="edit-option">
-    <h2 class="left">
-      Shipping
-    </h2>
-    <div class="simple-btn" *ngFor="let shipping of websiteDetails.shipping; let i = index"> {{shipping.name}}</div>
-    <app-shipping-edit [shippings]="websiteDetails.shipping" (newShippings)="websiteDetails.shipping"></app-shipping-edit>
-  </div>
-  <hr />
-
-  <!--Terms of use-->
-  <div class="edit-option">
-    <h2 class="left">Terms Of Use</h2>
-    <a class="center" routerLink="../../terms-of-use"> Open </a>
-    <button class="main-btn right" type="button" (click)="editTermsOfUse()">
-      Edit
-    </button>
-  </div>
-
-  <hr />
-  <div class="edit-option">
-    <h2 class="left">About Us</h2>
-    <a class="center" routerLink="../../about-us"> Open </a>
-    <button class="main-btn right" type="button" (click)="editAboutUs()">
-      Edit
-    </button>
-  </div>
-  <hr />
-  <div class="edit-option">
-    <h2 class="left">Footer</h2>
-    <button
-      class="main-btn right"
-      type="button"
-      (click)="showEditFooter = true"
-    >
-      Edit
-    </button>
-  </div>
-  <hr />
-  <button class="gradient-btn" (click)="saveInfo()">Update!</button>
-</div>
+  
+</ng-container>

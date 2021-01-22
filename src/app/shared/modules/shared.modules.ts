@@ -2,8 +2,10 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
+import {MatSelectModule} from '@angular/material/select';
+
 import { environment } from 'src/environments/environment';
 import { DeleteAlertService } from '../components/delete-alert/delete-alert.service';
 import { FooterComponent } from '../components/footer/footer.component';
@@ -21,6 +23,7 @@ import { WebsiteTopComponent } from '../components/website-top/website-top.compo
 import { LoginFormComponent } from '../forms/login-form/login-form.component';
 import { SignupFormComponent } from '../forms/signup-form/signup-form.component';
 import { ShortenPipe } from '../pipes/shorten.pipe';
+
 import { DbDeleteService } from '../services/database/db-delete.service';
 import { DbFetchDataService } from '../services/database/db-fetch-data.service';
 import { DbStatisticsService } from '../services/database/db-statistics.service';
@@ -35,6 +38,7 @@ import { FooterQuickMenuComponent } from '../components/footer/footer-quick-menu
 import { CustomerServiceComponent } from '../components/footer/customer-service/customer-service.component';
 import { FooterFollowUsComponent } from '../components/footer/footer-follow-us/footer-follow-us.component';
 import { WishlistItemComponent } from 'src/app/pages/wishlist-item/wishlist-item.component';
+
 
 const COMPONENTS = [
     NavbarComponent,
@@ -72,7 +76,8 @@ const COMPONENTS = [
       ReactiveFormsModule,
       CommonModule,
       AngularFireModule.initializeApp(environment.firebase),
-      EditorModule 
+      EditorModule,
+      MatSelectModule
     ],
     providers: [DbUploadService,DbFetchDataService,DbWebsiteEditService,DbDeleteService,SharedDataService, DeleteAlertService,DbStatisticsService],
     exports: [...COMPONENTS,]

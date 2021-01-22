@@ -87,6 +87,34 @@ export class AuthService {
       );
   }
 
+  loginAdmin(email: string, password: string) {
+    return this.http
+      .post<AuthResponseData>(
+        'http://localhost:3000/api/users/login/admin',
+        {
+          email: email,
+          password: password,
+          returnSecureToken: true,
+        }
+      )
+      .pipe(
+        catchError(this.handleError),
+        tap((resData) => {
+          console.log(resData);
+          this.handleAuthentication(
+            resData.email,
+            resData.password,
+            resData.userId,
+            resData.token,
+            +resData.expiresIn,
+            resData.history,
+            resData.categories,
+            resData.favorites
+          );
+        })
+      );
+  }
+
   autoLogin() {
     const userData: {
       email: string;

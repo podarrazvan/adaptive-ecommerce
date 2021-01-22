@@ -2,6 +2,8 @@ const express = require("express");
 
 const Coupon = new require("../models/coupon");
 
+const checkAdmin = require("../middleware/check-admin");
+
 const router = express.Router();
 
 router.put("/:id", (req, res, next) => {
@@ -44,6 +46,14 @@ router.post("", (req, res, next) => {
 
 router.get("/:code", (req, res, next) => {
   Coupon.findOne({code:req.params.code}).then((coupon) => {
+    res.status(200).json({
+      coupon: coupon
+    });
+  });
+});
+
+router.get("", (req, res, next) => {
+  Coupon.find().then((coupon) => {
     res.status(200).json({
       coupon: coupon
     });

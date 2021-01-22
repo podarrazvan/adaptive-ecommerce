@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { DbWebsiteEditService } from 'src/app/shared/services/database/db-website-edit.sevice';
 
 @Component({
   selector: 'app-categories-edit',
@@ -7,10 +8,10 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class CategoriesEditComponent implements OnInit {
 
-  @Input() categories: string[];
+  @Input() categories: string[] = [];
   @Output() finalCategories = new EventEmitter<string[]>();
 
-  constructor() { }
+  constructor(private dbWebsiteEditService: DbWebsiteEditService) { }
 
   categoriesHide = true;
   editCategoryMode: number;
@@ -26,6 +27,7 @@ export class CategoriesEditComponent implements OnInit {
     this.newCategories.push(category.value);
     console.log(this.newCategories);
     this.finalCategories.emit(this.newCategories);
+    this.dbWebsiteEditService.updateWebsite('websiteCategories',this.newCategories);
   }
 
   delete(index) {

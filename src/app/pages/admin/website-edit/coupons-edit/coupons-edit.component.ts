@@ -10,8 +10,8 @@ import { DbWebsiteEditService } from 'src/app/shared/services/database/db-websit
 })
 export class CouponsEditComponent implements OnInit {
 
-  @Input() coupons: Coupon[];
-  // @Output() newCoupons = new EventEmitter<Coupon[]>();
+  @Input() coupons: Coupon[] = [];
+  @Output() newCoupons = new EventEmitter<Coupon[]>();
 
   constructor(private dbWebsiteEditService: DbWebsiteEditService) { }
 
@@ -27,8 +27,8 @@ export class CouponsEditComponent implements OnInit {
 
   addNewValue(coupon) {
     console.log(coupon.value);
-    // this.coupons.push(coupon.value);
-    // this.newCoupons.emit(this.coupons);
+    this.coupons.push(coupon.value);
+    this.newCoupons.emit(this.coupons);
     this.dbWebsiteEditService.addCoupon(coupon.value);
   }
 

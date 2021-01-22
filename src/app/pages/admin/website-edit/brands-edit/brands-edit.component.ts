@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Brand } from 'src/app/shared/interfaces/brand.interface';
 import { DbUploadService } from 'src/app/shared/services/database/db-upload.service';
+import { DbWebsiteEditService } from 'src/app/shared/services/database/db-website-edit.sevice';
 
 @Component({
   selector: 'app-brands-edit',
@@ -12,7 +13,8 @@ export class BrandsEditComponent implements OnInit {
   @Input() brands: Brand[];
   @Output() finalBrands = new EventEmitter<Brand[]>();
 
-  constructor(private dbUploadService: DbUploadService) { }
+  constructor(private dbUploadService: DbUploadService,
+              private dbWebsiteEditService: DbWebsiteEditService) { }
 
   brandsHide = true;
   editBrandMode: number;
@@ -32,6 +34,7 @@ export class BrandsEditComponent implements OnInit {
     }
     this.newBrands.push(brand);
     console.log(this.newBrands);
+    this.dbWebsiteEditService.updateWebsite('websiteBrands',brandName.value);
     this.finalBrands.emit(this.newBrands);
   }
 

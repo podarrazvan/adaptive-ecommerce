@@ -27,9 +27,9 @@ export class Interceptor implements HttpInterceptor {
         } catch {
             this.token = '';
         }
-        console.log(this.token);
+        console.log('TOKEN --->', this.token);
         this.request = req.clone({
-                    headers: req.headers.set("Authorization", "Beare "+ this.token)
+                    headers: req.headers.set("Authorization", "Bearer "+ this.token)
                 })
         return next.handle(this.request);
     }

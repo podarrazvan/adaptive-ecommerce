@@ -85,6 +85,47 @@ router.post("/login", (req, res, next) => {
     });
 });
 
+router.post("/login/admin", (req, res, next) => {
+  let fetchedUser;
+  Admin.findOne({ email: req.body.email })
+    .then((user) => {
+      if (!user) {
+        return res.status(401).json({
+          message: "Auth failed",
+        });
+      }
+      fetchedUser = user;
+      return bcrypt.compare(req.body.password, user.password);
+    })
+    .then((result) => {
+      if (!result) {
+        return res.status(401).json({
+          message: "Auth failed",
+        });
+      }
+      const token = jwt.sign(
+        { email: fetchedUser.email, userId: fetchedUser._id },
+        "asdsadvhbhbrejbjhb223bhblbhljbhblbcsdlhbaaakksxa;na;sdknx##1akkkaxxaxalg",
+        { expiresIn: "1h" }
+      );
+      res.status(200).json({
+        token: token,
+        expiresIn: 3600,
+        userId: fetchedUser._id,
+        email: fetchedUser.email,
+        password: fetchedUser.password,
+        favorites: fetchedUser.favorites,
+        categories: fetchedUser.categories,
+        history: fetchedUser.history,
+      });
+    })
+    .catch((err) => {
+      return res.status(401).json({
+        message: "Auth failed",
+      });
+    });
+});
+
 router.put("/update", checkAuth, (req, res, next) => {
   console.log(req.body);
   const user = new User({
