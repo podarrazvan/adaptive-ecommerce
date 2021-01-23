@@ -7,6 +7,7 @@ import { Order } from '../../interfaces/order.interface';
 import { Product } from '../../interfaces/product.interface';
 import { User } from '../../interfaces/user.interface';
 import { Coupon } from '../../interfaces/coupon.interface';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class DbFetchDataService {
@@ -16,14 +17,20 @@ export class DbFetchDataService {
   category;
 
   fetchProductsByCategory(category: string) {
-    return this.http.get<[Product]>(
-      `http://localhost:3000/api/products/category/${category}`
+    return this.http.get<{message: string, products: Product[]}>(
+      `${environment.api}/products/category/${category}`
     );
   }
 
   fetchProduct(key: string) {
     return this.http.get<{ product: Product }>(
-      `http://localhost:3000/api/products/id/${key}`
+      `${environment.api}/products/id/${key}`
+    );
+  }
+
+  fetchProducts() {
+    return this.http.get<{message: string, products: Product[]}>(
+      `${environment.api}/products`
     );
   }
 
@@ -103,3 +110,4 @@ export class DbFetchDataService {
     return this.http.get<{coupon: Coupon[]}>(`http://localhost:3000/api/coupons/${code}`);
   }
 }
+

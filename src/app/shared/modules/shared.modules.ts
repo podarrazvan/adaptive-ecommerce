@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
+import {MatMenuModule} from '@angular/material/menu';
 
 import { environment } from 'src/environments/environment';
 import { DeleteAlertService } from '../components/delete-alert/delete-alert.service';
@@ -77,7 +78,8 @@ const COMPONENTS = [
       CommonModule,
       AngularFireModule.initializeApp(environment.firebase),
       EditorModule,
-      MatSelectModule
+      MatSelectModule, // not used
+      MatMenuModule
     ],
     providers: [DbUploadService,DbFetchDataService,DbWebsiteEditService,DbDeleteService,SharedDataService, DeleteAlertService,DbStatisticsService],
     exports: [...COMPONENTS,]

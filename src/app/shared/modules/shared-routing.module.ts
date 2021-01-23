@@ -34,7 +34,7 @@ const routes: Routes = [
   //     import('../../pages/profile/profile.module').then((m) => m.ProfileModule),
   // },
   {path:'wishlist', component: WishlistComponent},
-  {path: 'search/:search', component: SearchComponent},
+  {path: 'search/:category/:search', component: SearchComponent},
   {
     path: 'product',
     loadChildren: () =>

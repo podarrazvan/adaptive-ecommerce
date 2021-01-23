@@ -62,11 +62,11 @@ router.put("/:id",(req, res, next) => {
     });
 });
 
-router.get("category/:category", (req, res, next) => {
+router.get("/category/:category", (req, res, next) => {
     Product.find({"category": req.params.category}).then(documents => {
         res.status(200).json({
             message: "Products fetched successfully",
-            posts: documents
+            products: documents
         });
     })
 });
@@ -75,6 +75,15 @@ router.get("/id/:id", (req, res, next) => {
     Product.find({_id:req.params.id}).then(prod => {
         res.status(200).json({
             product: prod
+        });
+    })
+});
+
+router.get("", (req, res, next) => {
+    Product.find().then(prod => {
+        res.status(200).json({
+            message: "Products fetched successfully",
+            products: prod
         });
     })
 });

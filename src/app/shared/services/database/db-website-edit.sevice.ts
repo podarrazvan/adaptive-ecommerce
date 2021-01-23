@@ -61,7 +61,6 @@ export class DbWebsiteEditService {
         for (const coupon of responseData.coupon) {
           couponsArray.push({coupon});
         }
-        console.log(couponsArray);
         return couponsArray;
       })
     );;

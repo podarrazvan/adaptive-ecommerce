@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { SharedRoutingModule } from './shared/modules/shared-routing.module';
 import { AppComponent } from './app.component';
@@ -28,7 +29,8 @@ import { Interceptor } from './shared/interceptor';
     FormsModule,
     ReactiveFormsModule,
     CheckoutModule,
-    ProfileModule
+    ProfileModule,
+    BrowserAnimationsModule 
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: Interceptor,multi:true}],
   bootstrap: [AppComponent],

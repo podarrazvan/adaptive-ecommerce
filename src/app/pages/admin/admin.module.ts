@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
-import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { AuthGuard } from 'src/app/auth/auth.guard';
@@ -61,7 +60,6 @@ const COMPONENTS = [
 @NgModule({
   declarations: [...COMPONENTS, AdminComponent, CategoriesEditComponent],
   imports: [
-    BrowserModule,
     MatIconModule,
     SharedModule,
     FormsModule,
