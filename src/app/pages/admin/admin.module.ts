@@ -31,6 +31,7 @@ import { CategoriesEditComponent } from './website-edit/categories-edit/categori
 import { BrandsEditComponent } from './website-edit/brands-edit/brands-edit.component';
 import { CouponsEditComponent } from './website-edit/coupons-edit/coupons-edit.component';
 import { ShippingEditComponent } from './website-edit/shipping-edit/shipping-edit.component';
+import { CommonModule } from '@angular/common';
 
 const COMPONENTS = [
   AddProductComponent,
@@ -60,6 +61,7 @@ const COMPONENTS = [
 @NgModule({
   declarations: [...COMPONENTS, AdminComponent, CategoriesEditComponent],
   imports: [
+    CommonModule,
     MatIconModule,
     SharedModule,
     FormsModule,

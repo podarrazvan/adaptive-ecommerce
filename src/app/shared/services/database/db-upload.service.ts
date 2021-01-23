@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Order } from '../../interfaces/order.interface';
 import { Product } from '../../interfaces/product.interface';
 import { Message } from '../../interfaces/message.interface';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class DbUploadService {
@@ -42,7 +43,7 @@ export class DbUploadService {
     console.log(productData);
     this.http
       .post<{ name: string }>(
-        'http://localhost:3000/api/products',
+        `${environment.api}/products`,
         productData,
         {
           observe: 'response',
@@ -69,15 +70,15 @@ export class DbUploadService {
   addMessage(message: Message) {
     const date = new Date();
     const messageToAdd = {
-      firstName: message.firstName,
-      lastName: message.lastName,
+      name: message.name,
+      subject: message.subject,
       email: message.email,
       message: message.message,
       date: date,
       seen: false,
     };
     this.http
-      .post(`https://shop-436e8.firebaseio.com/messages/.json`, messageToAdd, {
+      .post(`${environment.api}/contact`, messageToAdd, {
         observe: 'response',
       })
       .subscribe(
@@ -123,7 +124,7 @@ export class DbUploadService {
       date: order.date,
     };
     return this.http.put(
-      `https://shop-436e8.firebaseio.com/orders/${id}.json?auth=${user._token}`,
+      ``,
       orderToUpdate,
       {
         observe: 'response',
@@ -134,8 +135,8 @@ export class DbUploadService {
   updateMessage(message: Message) {
     const user = JSON.parse(localStorage.getItem('userData'));
     const messageToAdd = {
-      firstName: message.firstName,
-      lastName: message.lastName,
+      name: message.name,
+      subject: message.subject,
       email: message.email,
       message: message.message,
       date: message.date,
@@ -143,7 +144,7 @@ export class DbUploadService {
     };
     this.http
       .put(
-        `https://shop-436e8.firebaseio.com/messages/${message.key}/.json?auth=${user._token}`,
+        `${environment.api}/contact/${message._id}`,
         messageToAdd,
         {
           observe: 'response',

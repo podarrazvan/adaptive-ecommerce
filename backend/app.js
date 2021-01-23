@@ -9,6 +9,7 @@ const imagesRoutes = require('./routes/upload-image');
 const websiteDetailsRoutes = require('./routes/website-details');
 const pagesRoutes = require('./routes/pages');
 const coponsRoutes = require('./routes/coupons');
+const contactRoutes = require('./routes/contact');
 
 const app = express();
 
@@ -46,4 +47,5 @@ app.use("/api/products", productRoutes);
 app.use("/api/images", imagesRoutes);
 app.use("/api/website", websiteDetailsRoutes);
 app.use("/api/pages", pagesRoutes);
-app.use("/api/coupons",coponsRoutes);
+app.use("/api/coupons", coponsRoutes);
+app.use("/api/contact", contactRoutes);

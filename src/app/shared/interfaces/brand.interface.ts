@@ -1,4 +1,4 @@
 export interface Brand {
-    image: string,
+    image: string;
     name: string
 }

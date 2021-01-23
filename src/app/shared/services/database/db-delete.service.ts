@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 // import * as firebase from 'firebase';
 
 
@@ -39,10 +40,10 @@ export class DbDeleteService {
     );
   }
 
-  deleteMessage(key: string) {
+  deleteMessage(id: string) {
     const user = JSON.parse(localStorage.getItem('userData'));
     return this.http.delete(
-      `https://shop-436e8.firebaseio.com/messages/${key}/.json?auth=${user._token}`
+      `${environment.api}/contact/${id}`
     );
   }
 

@@ -6,8 +6,6 @@ import { SharedModule } from '../shared/modules/shared.modules';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { CartModule } from './cart/cart.module';
 import { CategoriesComponent } from './categories/categories.component';
-import { CheckoutComponent } from './checkout/checkout.component';
-import { ContactComponent } from './contact/contact.component';
 import { FleshDealsComponent } from './home/flesh-deals/flesh-deals.component';
 import { HomeBestSellersComponent } from './home/home-best-sellers/home-best-sellers.component';
 import { HomeNewReleasesComponent } from './home/home-new-releases/home-new-releases.component';
@@ -23,7 +21,6 @@ const COMPONENTS = [
     SearchComponent,
     AboutUsComponent,
     TermsOfUseComponent,
-    ContactComponent,
     PageNotFoundComponent,
     CategoriesComponent,
     FleshDealsComponent,

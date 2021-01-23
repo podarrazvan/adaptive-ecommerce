@@ -21,7 +21,7 @@ export class AdminTopBarComponent implements OnInit, DoCheck  {
   ngOnInit(): void {
     this.dbFetchDataService.fetchMessages().subscribe((emails) => {
       this.sharedDataService.unreadMessages = 0;
-      for (let email of emails) {
+      for (let email of emails.messages) {
         if (!email.seen) {
           this.sharedDataService.unreadMessages++;
         }

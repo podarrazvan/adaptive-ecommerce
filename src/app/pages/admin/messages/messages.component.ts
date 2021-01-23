@@ -22,7 +22,7 @@ export class MessagesComponent implements OnInit {
 
   mobile: boolean;
 
-  fbEmails: Message[];
+  emails;
 
   showMessage: boolean;
 
@@ -32,35 +32,35 @@ export class MessagesComponent implements OnInit {
 
   ngOnInit(): void {
     this.mobile = this.sharedDataService.mobile;
-    this.fbEmails = [];
+    this.emails = [];
     this.dbFetchDataService.fetchMessages().subscribe((emails) => {
-      for (let email of emails) {
-        this.fbEmails.push(email);
+      for (let email of emails.messages) {
+        this.emails.push(email);
       }
     });
   }
 
   openEmail(i) {
-    const index = i.index;
-    this.messageToShow = this.fbEmails[index];
+    const index = i;
+    this.messageToShow = this.emails[index];
     this.showMessage = true;
-    if (!this.fbEmails[index].seen) {
-      this.dbUploadService.updateMessage(this.fbEmails[index]);
-      this.fbEmails[index].seen = true;
+    if (!this.emails[index].seen) {
+      this.dbUploadService.updateMessage(this.emails[index]);
+      this.emails[index].seen = true;
       this.sharedDataService.unreadMessages--;
     }
   }
 
   onDelete(i) {
     this.deleteAlert = true;
-    const index = i.index;
+    const index = i;
     this.deleteAlertService.deleteMessage.subscribe((data) => {
       switch (data) {
         case true:
           this.dbDeleteService
-            .deleteMessage(this.fbEmails[index].key)
+            .deleteMessage(this.emails[index]._id)
             .subscribe();
-          this.fbEmails.splice(index, 1);
+          this.emails.splice(index, 1);
           this.deleteAlert = false;
           break;
         case false:

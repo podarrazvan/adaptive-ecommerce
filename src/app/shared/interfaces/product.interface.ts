@@ -11,10 +11,10 @@ export interface Product {
   rating?: number;
   _id?: string;
   cut?: number;
-  minPrice: number,
-  salesWeekTarget: number,
-  views: number,
-  productNumber: number,
-  brand: string,
+  minPrice: number;
+  salesWeekTarget: number;
+  views: number;
+  productNumber: number;
+  brand: string;
   model: string
 }

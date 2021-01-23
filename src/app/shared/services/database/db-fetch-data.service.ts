@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { Message } from '@angular/compiler/src/i18n/i18n_ast';
+
 import { Footer } from '../../interfaces/footer.interface';
 import { Order } from '../../interfaces/order.interface';
 import { Product } from '../../interfaces/product.interface';
 import { User } from '../../interfaces/user.interface';
 import { Coupon } from '../../interfaces/coupon.interface';
 import { environment } from 'src/environments/environment';
+import { Message } from '../../interfaces/message.interface';
 
 @Injectable()
 export class DbFetchDataService {
@@ -35,21 +36,7 @@ export class DbFetchDataService {
   }
 
   fetchMessages() {
-    const messagesArray = [];
-    return this.http
-      .get<{ message: Message }>(
-        `https://shop-436e8.firebaseio.com/messages/.json`
-      )
-      .pipe(
-        map((responseData) => {
-          for (const key in responseData) {
-            if (responseData.hasOwnProperty(key)) {
-              messagesArray.push({ ...responseData[key], key });
-            }
-          }
-          return messagesArray;
-        })
-      );
+    return this.http.get<{messages: Message []}>(`${environment.api}/contact`);
   }
 
   fetchTermsOfUse() {

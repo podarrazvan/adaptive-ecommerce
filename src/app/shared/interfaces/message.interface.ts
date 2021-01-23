@@ -1,9 +1,9 @@
 export interface Message {
-    firstName: string,
-    lastName: string, 
-    email: string,
-    message: string,
-    date: Date,
-    seen: boolean,
-    key?: string
+    name: string;
+    subject: string; 
+    email: string;
+    message: string;
+    date: Date;
+    seen: boolean;
+    _id?: string;
 }
