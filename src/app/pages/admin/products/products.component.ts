@@ -34,7 +34,6 @@ export class ProductsComponent implements OnInit {
   categories: string[];
   category;
 
-  showEditHomepage = false;
   showEditProduct = false;
 
   deleteAlert: boolean;
@@ -43,20 +42,21 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.mobile = this.sharedDataService.mobile;
+    this.getProducts(1,1);
   }
 
 
-  getProducts(cat: string) {
-  
+  getProducts(page, limit) {
+    this.dbFetchDataService.fetchPaginatedProducts(page,limit).subscribe(responseData => this.products = responseData.results);
   }
 
-  onDelete(category, key, index, img) {
+  onDelete(id, index, img) {
     this.deleteAlert = true;
     this.deleteAlertService.deleteProduct.subscribe((data) => {
       switch (data) {
         case true:
           this.productToDeleteIndex = index;
-          this.productToDelete = { category: category, key: key, img: img };
+          this.productToDelete = { id: id, img: img };
           this.deleteAlert = false;
           this.onProductDeleted();
           break;
@@ -68,20 +68,14 @@ export class ProductsComponent implements OnInit {
   }
 
   openEdit(type: string, product: Product) {
-    type === 'homepage'
-      ? (this.showEditHomepage = true)
-      : (this.showEditProduct = true);
-    this.productToAddOnHomepage = product;
+   this.showEditProduct = true;
   }
 
   close(type: string) {
-    type === 'homepage'
-      ? (this.showEditHomepage = false)
-      : (this.showEditProduct = false);
+    this.showEditProduct = false;
   }
 
   openEditProduct(product: Product) {
-    console.log(product);
     this.sharedDataService.product = product;
     this.sharedDataService.productEdit = true;
     this.router.navigate(['admin', 'add-product']);
@@ -89,7 +83,7 @@ export class ProductsComponent implements OnInit {
 
   onProductDeleted() {
     this.dbDeleteService
-      .deleteProduct(this.productToDelete.category, this.productToDelete.key)
+      .deleteProduct(this.productToDelete.id)
       .subscribe(() => {
         for (let img of this.productToDelete.img) {
           this.dbDeleteService.deletePhoto(img);

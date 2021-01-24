@@ -12,10 +12,10 @@ export class DbDeleteService {
     private http: HttpClient
   ) { }
 
-  deleteProduct(category: string, key: string) {
-    const user = JSON.parse(localStorage.getItem('userData'));
+  deleteProduct(id: string) {
+    // const user = JSON.parse(localStorage.getItem('userData'));
     return this.http.delete(
-      `https://shop-436e8.firebaseio.com/products/${category}/${key}/.json?auth=${user._token}`
+      `${environment.api}/products/${id}`
     );
   }
 
@@ -23,13 +23,6 @@ export class DbDeleteService {
     const user = JSON.parse(localStorage.getItem('userData'));
     return this.http.delete(
       `https://shop-436e8.firebaseio.com/homepage/carousel/${key}/.json?auth=${user._token}`
-    );
-  }
-
-  deleteHomepageArea(key: string) {
-    const user = JSON.parse(localStorage.getItem('userData'));
-    return this.http.delete(
-      `https://shop-436e8.firebaseio.com/homepage/areas/${key}/.json?auth=${user._token}`
     );
   }
 

@@ -1,6 +1,22 @@
+@import "../../../shared/colors.scss";
+
 .product-img {
-    height: 90px;
-    width: 160px;
+  display: flex;
+  place-items: center;
+  place-content: center;
+  width: 79px;
+  height: 79px;
+  border-radius: 7px;
+  border: 1px solid $border-card;
+  padding: 5px;
+  img {
+      max-width: 80%;
+      max-height: 80%;
+  }
+}
+
+td {
+  vertical-align: middle;
 }
 
 .products {

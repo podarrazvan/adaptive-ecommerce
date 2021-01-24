@@ -78,8 +78,13 @@ router.get("/id/:id", (req, res, next) => {
         });
     })
 });
+router.get("/paginated", paginatedResults(Product), (req, res, next) => {
+    console.log(res.paginatedResults);
+    res.json(res.paginatedResults);
+});
 
 router.get("", (req, res, next) => {
+    console.log('all')
     Product.find().then(prod => {
         res.status(200).json({
             message: "Products fetched successfully",
@@ -87,6 +92,8 @@ router.get("", (req, res, next) => {
         });
     })
 });
+
+
 
 router.delete("/:id", (req, res, next) => {
     Product.deleteOne({_id: req.params.id}).then(result => {
@@ -98,5 +105,38 @@ router.delete("/:id", (req, res, next) => {
         }
     })
 });
+
+function paginatedResults(model) {
+    return async (req, res, next) => {
+      const page = parseInt(req.query.page)
+      const limit = parseInt(req.query.limit)
+  
+      const startIndex = (page - 1) * limit
+      const endIndex = page * limit
+  
+      const results = {}
+  
+      if (endIndex < await model.countDocuments().exec()) {
+        results.next = {
+          page: page + 1,
+          limit: limit
+        }
+      }
+      
+      if (startIndex > 0) {
+        results.previous = {
+          page: page - 1,
+          limit: limit
+        }
+      }
+      try {
+        results.results = await model.find().limit(limit).skip(startIndex).exec()
+        res.paginatedResults = results
+        next()
+      } catch (e) {
+        res.status(401).json({ message: e.message })
+      }
+    }
+  }
 
 module.exports = router;
