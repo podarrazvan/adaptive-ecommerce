@@ -16,6 +16,10 @@ const mongoose = require('mongoose');
         autoMode: {
             minPrice: {type: Number, require: true}, // min price for auto generated offers
             salesWeekTarget: {type: Number, require: true} // how many should be sold each week in auto mode
+        },
+        discount: {
+            discountPrice: {type: Number, require: true},
+            discountExpirationDate: {type: Date, require: true} 
         }
     });
 

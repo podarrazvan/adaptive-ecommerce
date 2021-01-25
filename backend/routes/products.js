@@ -18,8 +18,14 @@ router.post("",(req, res, next) => {
         images:req.body.images,
         quantity:req.body.quantity,
         views: req.body.views,
-        minPrice:req.body.minPrice,
-        salesWeekTarget:req.body.salesWeekTarget,
+        autoMode:{
+            minPrice:req.body.minPrice,
+            salesWeekTarget:req.body.salesWeekTarget
+        },
+        discount: {
+            discountPrice: req.body.discount,
+            discountExpirationDate: req.body.discountExpirationDate,
+        },
         productNumber: req.body.productNumber
     });
     product.save().then(createdProduct => {
@@ -27,7 +33,7 @@ router.post("",(req, res, next) => {
             message: "Post added successfully",
             post: {
                 ...createdProduct,
-                id: creadedProduct._id
+                id: createdProduct._id
             }
         });
     });
@@ -48,8 +54,14 @@ router.put("/:id",(req, res, next) => {
         images:req.body.images,
         quantity:req.body.quantity,
         views: req.body.views,
-        minPrice:req.body.minPrice,
-        salesWeekTarget:req.body.salesWeekTarget,
+        autoMode:{
+            minPrice:req.body.minPrice,
+            salesWeekTarget:req.body.salesWeekTarget
+        },
+        discount: {
+            discountPrice: req.body.discount,
+            discountExpirationDate: req.body.discountExpirationDate,
+        },
         productNumber: req.body.productNumber
     });
 

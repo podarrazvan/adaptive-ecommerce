@@ -13,6 +13,8 @@ export interface Product {
   cut?: number;
   minPrice: number;
   salesWeekTarget: number;
+  discount: number;
+  discountExpirationDate: Date | boolean;
   views: number;
   productNumber: number;
   brand: string;

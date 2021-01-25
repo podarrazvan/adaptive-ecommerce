@@ -36,11 +36,12 @@ export class DbUploadService {
       views:0,
       minPrice: product.minPrice,
       salesWeekTarget: product.salesWeekTarget,
+      discount: product.discount,
+      discountExpirationDate: product.discountExpirationDate,
       productNumber: productNumber,
       brand: product.brand,
       model: product.model
     };
-    console.log(productData);
     this.http
       .post<{ name: string }>(
         `${environment.api}/products`,

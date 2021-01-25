@@ -25,6 +25,8 @@ export class AddProductComponent implements OnInit, OnDestroy {
   productForm: FormGroup;
   autoMode = false;
 
+  addDiscount = false;
+
   tags: string[] = [];
   tag: string;
 
@@ -52,6 +54,9 @@ export class AddProductComponent implements OnInit, OnDestroy {
         quantity: [this.sharedDataService.product.quantity, Validators.required],
         minPrice: [''],
         salesWeekTarget: [''],
+        discount:[''],
+        discountDays:[''],
+        discountExpirationDate:['']
       });
       this.tags = this.sharedDataService.product.tags;
       this.images = this.sharedDataService.product.images;
@@ -67,6 +72,9 @@ export class AddProductComponent implements OnInit, OnDestroy {
         quantity: ['', Validators.required],
         minPrice: [''],
         salesWeekTarget: [''],
+        discount:[''],
+        discountDays:[''],
+        discountExpirationDate:['']
       });
     }
     this.sharedDataService.websiteDetails.subscribe((data) => {
@@ -77,6 +85,14 @@ export class AddProductComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
+    if (this.productForm.value.discountDays != undefined) {
+      // Try alternative to Date(): https://momentjs.com/ 
+      var discountEnd = new Date();
+      discountEnd.setDate(new Date().getDate()+ this.productForm.value.discountDays);
+      this.productForm.patchValue({
+        discountExpirationDate: discountEnd
+      })
+    } 
     if (this.images != undefined) {
       this.productForm.patchValue({
         images: this.images,
