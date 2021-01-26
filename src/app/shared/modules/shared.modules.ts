@@ -39,6 +39,10 @@ import { FooterQuickMenuComponent } from '../components/footer/footer-quick-menu
 import { CustomerServiceComponent } from '../components/footer/customer-service/customer-service.component';
 import { FooterFollowUsComponent } from '../components/footer/footer-follow-us/footer-follow-us.component';
 import { WishlistItemComponent } from 'src/app/pages/wishlist/wishlist-item/wishlist-item.component';
+import { NewPricePipe } from '../pipes/new-price.pipe';
+import { PercentagePipe } from '../pipes/percentage.pipe';
+import { CountdownModule } from 'ngx-countdown';
+import { CountdownComponent } from '../components/countdown/countdown.component';
 
 
 const COMPONENTS = [
@@ -63,7 +67,10 @@ const COMPONENTS = [
     FooterQuickMenuComponent,
     CustomerServiceComponent,
     FooterFollowUsComponent,
-    WishlistItemComponent
+    WishlistItemComponent,
+    PercentagePipe,
+    NewPricePipe,
+    CountdownComponent,
 ]
 
 @NgModule({
@@ -79,7 +86,8 @@ const COMPONENTS = [
       AngularFireModule.initializeApp(environment.firebase),
       EditorModule,
       MatSelectModule, // not used
-      MatMenuModule
+      MatMenuModule,
+      CountdownModule
     ],
     providers: [DbUploadService,DbFetchDataService,DbWebsiteEditService,DbDeleteService,SharedDataService, DeleteAlertService,DbStatisticsService],
     exports: [...COMPONENTS,]

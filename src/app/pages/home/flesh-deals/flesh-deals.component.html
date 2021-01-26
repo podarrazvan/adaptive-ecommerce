@@ -1,19 +1,21 @@
-<div class="top">
-  <div class="left">
-    <hr />
+<div *ngIf="productsFound">
+  <div class="top">
+    <div class="left">
+      <hr />
+    </div>
+    <div class="center">
+      <img
+        src="http://landing.engotheme.com/html/ecome/demo/img/flash-deals.png"
+      />
+      <p>Flash Deals</p>
+    </div>
+    <div class="right">
+      <hr />
+    </div>
   </div>
-  <div class="center">
-    <img
-      src="http://landing.engotheme.com/html/ecome/demo/img/flash-deals.png"
-    />
-    <p>Flash Deals</p>
-  </div>
-  <div class="right">
-    <hr />
-  </div>
-</div>
-<div class="carousel">
+  <div class="carousel">
     <app-home-flesh-deals-carousel
-        [products]="products"
+      [products]="products"
     ></app-home-flesh-deals-carousel>
+  </div>
 </div>

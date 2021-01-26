@@ -26,7 +26,6 @@ export class HomeNewReleasesCarouselComponent implements OnInit {
     let slide : [{img?: string, title?:string, price?: number, category?: string}] = [{}];
     slide.splice(0,1);
 
-    console.log(this.slides[this.index]);
 
     for(let i = lastIndex; i < this.products.length; i++) {
       times ++;
@@ -42,7 +41,6 @@ export class HomeNewReleasesCarouselComponent implements OnInit {
     }
     
     this.singleSlide = this.slides[this.index]; 
-    console.log(this.singleSlide);
   }
 
   next() {

@@ -14,7 +14,8 @@ export interface Product {
   minPrice: number;
   salesWeekTarget: number;
   discount: number;
-  discountExpirationDate: Date | boolean;
+  discountExpirationDate: Date;
+  initialQuantity:number;
   views: number;
   productNumber: number;
   brand: string;

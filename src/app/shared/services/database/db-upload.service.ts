@@ -38,6 +38,7 @@ export class DbUploadService {
       salesWeekTarget: product.salesWeekTarget,
       discount: product.discount,
       discountExpirationDate: product.discountExpirationDate,
+      initialQuantity:product.quantity,
       productNumber: productNumber,
       brand: product.brand,
       model: product.model

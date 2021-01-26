@@ -10,7 +10,6 @@ const mongoose = require('mongoose');
         images:[{type: String, require: true}],
         quantity: {type: Number, require: true},
         views: {type: Number, require: true},
-        productNumber:{type: Number, require: true}, //date in seconds since midnight, 1 Jan 1970
         brand: {type: String, require: true},
         productModel: [{type: String, require: true}],
         autoMode: {
@@ -20,7 +19,9 @@ const mongoose = require('mongoose');
         discount: {
             discountPrice: {type: Number, require: true},
             discountExpirationDate: {type: Date, require: true} 
-        }
+        },
+        initialQuantity: {type: Number, require: true},
+        productNumber:{type: Number, require: true}, //date in seconds since midnight, 1 Jan 1970
     });
 
 module.exports = mongoose.model('Product', userSchema);

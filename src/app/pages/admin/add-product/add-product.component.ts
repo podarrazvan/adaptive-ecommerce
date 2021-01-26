@@ -86,7 +86,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     if (this.productForm.value.discountDays != undefined) {
-      // Try alternative to Date(): https://momentjs.com/ 
+      //*TODO Try alternative to Date(): https://momentjs.com/ 
       var discountEnd = new Date();
       discountEnd.setDate(new Date().getDate()+ this.productForm.value.discountDays);
       this.productForm.patchValue({

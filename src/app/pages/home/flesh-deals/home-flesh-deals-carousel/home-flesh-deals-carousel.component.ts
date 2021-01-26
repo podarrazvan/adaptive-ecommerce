@@ -9,7 +9,7 @@ export class HomeFleshDealsCarouselComponent implements OnInit {
 
   @Input() products;
 
-  slides: [[{img?: string, title?:string}]] = [[{}]];
+  slides: Slide[][] = [];
   singleSlide: any;
   index = 0;
 
@@ -17,43 +17,51 @@ export class HomeFleshDealsCarouselComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.slides.splice(0,1);
-
     const elements = 3;
     const lastIndex = 0;
     
     let times = 0;
-    let slide : [{img?: string, title?:string}] = [{}];
-    slide.splice(0,1);
-
-    console.log(this.slides[this.index]);
+    let slide : Slide[] = [];
 
     for(let i = lastIndex; i < this.products.length; i++) {
       times ++;
       
-      slide.push(this.products[i]);
+      const product = this.products[i];
+
+      const progressBar = Math.floor(((product.initialQuantity - product.quantity) * 100) / product.initialQuantity)
+      
+      Object.assign(product, {progressBar: progressBar})
+      
+      slide.push(product);
 
       if(times === elements) {
         times = 0;
         this.slides.push(slide);
-        slide = [{}];
-        slide.splice(0,1);
+        slide = [];
       }
     }
-    
+    const slideLength = Object.keys(slide).length;
+    if (slideLength != 0) {
+      for(let i = slideLength - 1; i < elements-1; i++) {
+        slide.push(this.products[i]);
+      }
+      this.slides.push(slide);
+    }
     this.singleSlide = this.slides[this.index]; 
   }
 
   next() {
     this.index == this.singleSlide.length -1 ? this.index = 0 : this.index++;
-    this.singleSlide = this.slides[this.index]; 
-    console.log(this.index);
+    this.singleSlide = this.slides[this.index];
   }
 
   previous() {
     this.index == 0 ? this.index = this.singleSlide.length -1  : this.index--;
     this.singleSlide = this.slides[this.index]; 
-    console.log(this.index);
   }
 
+}
+export interface Slide {
+  img: string;
+  title:string;
 }

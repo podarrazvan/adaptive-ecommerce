@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import * as moment from 'moment';
+import { Product } from 'src/app/shared/interfaces/product.interface';
+import { DbFetchDataService } from 'src/app/shared/services/database/db-fetch-data.service';
 
 @Component({
   selector: 'app-flesh-deals',
@@ -7,16 +10,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FleshDealsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dbFetchDataService: DbFetchDataService) { }
 
-  products=[]
+  products:Product[] = [];
+
+  productsFound = false;
 
   ngOnInit(): void {
-
-    for(let i = 0; i< 10 ; i++){
-      this.products.push({title: "iPhone 12 Pro Max", cut:40, img: 'https://s1.flanco.ro/catalog/product/cache/368/image/400x400/9df78eab33525d08d6e5fb8d27136e95/1/4/143545_2_1.jpg', price: 999})
-    }
-
+    this.dbFetchDataService.fetchPromotions().subscribe(responseData => {
+      this.products = responseData.products;
+      if(this.products.length > 3) {
+        this.productsFound = true;
+      }
+      });
   }
 
 }

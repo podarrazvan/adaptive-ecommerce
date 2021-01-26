@@ -36,10 +36,14 @@ export class DbFetchDataService {
   }
 
   fetchPaginatedProducts(page: number, limit: number) {
-    console.log('paginated')
     return this.http.get<{results: Product[]}>(
       `${environment.api}/products/paginated?page=${page}&limit=${limit}`
     );
+  }
+
+  fetchPromotions() {
+    return this.http.get<{products: Product[]}>(
+      `${environment.api}/products/promotions`);
   }
 
   fetchMessages() {
