@@ -40,24 +40,30 @@ export class HomeFleshDealsCarouselComponent implements OnInit {
         slide = [];
       }
     }
+  
     const slideLength = Object.keys(slide).length;
     if (slideLength != 0) {
       for(let i = slideLength - 1; i < elements-1; i++) {
         slide.push(this.products[i]);
       }
       this.slides.push(slide);
+    
     }
-    this.singleSlide = this.slides[this.index]; 
-  }
-
-  next() {
-    this.index == this.singleSlide.length -1 ? this.index = 0 : this.index++;
     this.singleSlide = this.slides[this.index];
   }
 
+  next() {
+    // ! must be this.singleSlide.length -1 not -2 !
+    this.index == this.singleSlide.length -2 ? this.index = 0 : this.index++;
+    this.singleSlide = this.slides[this.index];
+    console.log(this.index);
+  }
+
   previous() {
-    this.index == 0 ? this.index = this.singleSlide.length -1  : this.index--;
-    this.singleSlide = this.slides[this.index]; 
+    // ! must be this.singleSlide.length -1 not -2 !
+    this.index == 0 ? this.index = this.singleSlide.length -2  : this.index--;
+    this.singleSlide = this.slides[this.index];
+    console.log(this.index);
   }
 
 }

@@ -19,7 +19,6 @@ export class CountdownComponent implements OnInit {
 
   ngOnInit(): void {
     this.end = new Date(this.endDate);
-    console.log(this.end.getTime);
     this.config = {
       format: this.calculateFormatTime(),
       leftTime: this.calculateRemainingTime(),
@@ -31,7 +30,6 @@ export class CountdownComponent implements OnInit {
   }
 
   private calculateFormatTime() {
-    console.log(this.calculateRemainingTime());
     return this.calculateRemainingTime() <= this.secondsInADay
       ? 'HH:mm:ss'
       : 'd HH:mm:ss';

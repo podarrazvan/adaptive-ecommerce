@@ -6,6 +6,6 @@ import { PipeTransform, Pipe} from '@angular/core';
 
 export class PercentagePipe implements PipeTransform {
     transform(initialNumber: number, newNumber: number){
-            return Math.floor(((initialNumber - newNumber) * 100) / initialNumber) + '%';
+            return '-' + Math.floor((((newNumber-initialNumber) * 100) / initialNumber)+100)  + '%';
     }
 } 

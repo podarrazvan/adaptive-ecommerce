@@ -207,28 +207,6 @@
         />
       </mat-form-field>
     </div>
-    <hr>
-
-    <mat-checkbox (click)="addDiscount = !addDiscount">Discount</mat-checkbox>
-    <div class="discount" *ngIf="addDiscount">
-      <mat-form-field>
-        <input
-          matInput
-          type="number"
-          formControlName="minPrice"
-          placeholder="Discount"
-          formControlName="discount"
-        />
-      </mat-form-field>
-      <mat-form-field class="sales-target">
-        <input
-          matInput
-          type="number"
-          placeholder="Days"
-          formControlName="discountDays"
-        />
-      </mat-form-field>
-    </div>    
     <!-- <app-add-discount *ngIf="addDiscount"></app-add-discount> -->
     <hr />
     <button

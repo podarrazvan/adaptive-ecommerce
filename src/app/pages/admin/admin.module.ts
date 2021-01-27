@@ -32,7 +32,7 @@ import { BrandsEditComponent } from './website-edit/brands-edit/brands-edit.comp
 import { CouponsEditComponent } from './website-edit/coupons-edit/coupons-edit.component';
 import { ShippingEditComponent } from './website-edit/shipping-edit/shipping-edit.component';
 import { CommonModule } from '@angular/common';
-import { AddDiscountComponent } from './add-product/add-discount/add-discount.component';
+import { DiscountModalComponent } from './products/discount-modal/discount-modal.component';
 
 const COMPONENTS = [
   AddProductComponent,
@@ -57,7 +57,7 @@ const COMPONENTS = [
   BrandsEditComponent,
   CouponsEditComponent,
   ShippingEditComponent,
-  AddDiscountComponent
+  DiscountModalComponent
 ];
 
 @NgModule({

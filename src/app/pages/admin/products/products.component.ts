@@ -40,9 +40,12 @@ export class ProductsComponent implements OnInit {
   productToDelete;
   productToDeleteIndex;
 
+  discountProductId: string;
+  showDiscount = false;
+
   ngOnInit(): void {
     this.mobile = this.sharedDataService.mobile;
-    this.getProducts(1,1);
+    this.getProducts(1,10);
   }
 
 
@@ -96,4 +99,10 @@ export class ProductsComponent implements OnInit {
   onCancelDelete() {
     this.deleteAlert = false;
   }
+
+  openDiscount(id) {
+    this.discountProductId = id;
+    this.showDiscount = true;
+  }
+
 }

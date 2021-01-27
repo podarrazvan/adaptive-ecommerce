@@ -10,6 +10,7 @@ const websiteDetailsRoutes = require('./routes/website-details');
 const pagesRoutes = require('./routes/pages');
 const coponsRoutes = require('./routes/coupons');
 const contactRoutes = require('./routes/contact');
+const discountRoutes = require('./routes/discounts');
 
 const app = express();
 
@@ -49,3 +50,4 @@ app.use("/api/website", websiteDetailsRoutes);
 app.use("/api/pages", pagesRoutes);
 app.use("/api/coupons", coponsRoutes);
 app.use("/api/contact", contactRoutes);
+app.use("/api/discount", discountRoutes);

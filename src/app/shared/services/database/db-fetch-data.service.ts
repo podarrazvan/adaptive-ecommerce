@@ -9,6 +9,7 @@ import { User } from '../../interfaces/user.interface';
 import { Coupon } from '../../interfaces/coupon.interface';
 import { environment } from 'src/environments/environment';
 import { Message } from '../../interfaces/message.interface';
+import { Discount } from '../../interfaces/discount.interface';
 
 @Injectable()
 export class DbFetchDataService {
@@ -42,8 +43,8 @@ export class DbFetchDataService {
   }
 
   fetchPromotions() {
-    return this.http.get<{products: Product[]}>(
-      `${environment.api}/products/promotions`);
+    return this.http.get<Discount[]>(
+      `${environment.api}/discount`);
   }
 
   fetchMessages() {

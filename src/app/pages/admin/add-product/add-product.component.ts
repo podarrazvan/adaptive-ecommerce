@@ -53,10 +53,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
         tags: [''],
         quantity: [this.sharedDataService.product.quantity, Validators.required],
         minPrice: [''],
-        salesWeekTarget: [''],
-        discount:[''],
-        discountDays:[''],
-        discountExpirationDate:['']
+        salesWeekTarget: ['']
       });
       this.tags = this.sharedDataService.product.tags;
       this.images = this.sharedDataService.product.images;
@@ -71,10 +68,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
         tags: [''],
         quantity: ['', Validators.required],
         minPrice: [''],
-        salesWeekTarget: [''],
-        discount:[''],
-        discountDays:[''],
-        discountExpirationDate:['']
+        salesWeekTarget: ['']
       });
     }
     this.sharedDataService.websiteDetails.subscribe((data) => {
@@ -85,14 +79,6 @@ export class AddProductComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    if (this.productForm.value.discountDays != undefined) {
-      //*TODO Try alternative to Date(): https://momentjs.com/ 
-      var discountEnd = new Date();
-      discountEnd.setDate(new Date().getDate()+ this.productForm.value.discountDays);
-      this.productForm.patchValue({
-        discountExpirationDate: discountEnd
-      })
-    } 
     if (this.images != undefined) {
       this.productForm.patchValue({
         images: this.images,
@@ -103,7 +89,6 @@ export class AddProductComponent implements OnInit, OnDestroy {
         //   .updateProduct(this.productForm.value, this.sharedDataService.product.key)
         //   .subscribe((response) => console.log(response));
       } else {
-        console.log(this.productForm.value);
         this.dbUploadService.createAndStoreProduct(
           this.productForm.value
         );

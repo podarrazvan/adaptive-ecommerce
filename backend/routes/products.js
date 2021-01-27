@@ -20,10 +20,6 @@ router.post("", (req, res, next) => {
       minPrice: req.body.minPrice,
       salesWeekTarget: req.body.salesWeekTarget,
     },
-    discount: {
-      discountPrice: req.body.discount,
-      discountExpirationDate: req.body.discountExpirationDate,
-    },
     initialQuantity: req.body.initialQuantity,
     productNumber: req.body.productNumber,
   });
@@ -54,10 +50,6 @@ router.put("/:id", (req, res, next) => {
     autoMode: {
       minPrice: req.body.minPrice,
       salesWeekTarget: req.body.salesWeekTarget,
-    },
-    discount: {
-      discountPrice: req.body.discount,
-      discountExpirationDate: req.body.discountExpirationDate,
     },
     initialQuantity: req.body.initialQuantity,
     productNumber: req.body.productNumber,
@@ -97,35 +89,6 @@ router.get("", (req, res, next) => {
     res.status(200).json({
       message: "Products fetched successfully",
       products: prod,
-    });
-  });
-});
-
-router.get("/promotions", (req, res, next) => {
-  const today = new Date();
-  Product.find({
-    discount: { $exists: true },
-  }).then((products) => {
-    let activePromotions = [];
-    for (let product of products) {
-      if (product.discount.discountExpirationDate > today) {
-        activePromotions.push(product);
-      } else {
-          //!delete discount
-          Product.findOneAndUpdate(
-            {
-              _id: product._id,
-            },
-  
-            {
-              discount: null,
-            }
-          );
-      }
-    }
-    res.status(200).json({
-      message: "Products fetched successfully",
-      products: activePromotions,
     });
   });
 });

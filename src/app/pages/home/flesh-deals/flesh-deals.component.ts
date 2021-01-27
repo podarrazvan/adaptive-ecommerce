@@ -18,7 +18,20 @@ export class FleshDealsComponent implements OnInit {
 
   ngOnInit(): void {
     this.dbFetchDataService.fetchPromotions().subscribe(responseData => {
-      this.products = responseData.products;
+      for(let promotion of responseData) {
+        const promo = {
+          price: promotion.price,
+          expirationDate: promotion.expirationDate
+        }
+        this.getProducts(promotion.productId, promo);
+      }
+    })
+  }
+  
+  getProducts(id,discount) { 
+    this.dbFetchDataService.fetchProduct(id).subscribe(responseData => {
+      const product = Object.assign(responseData.product[0], {discount: discount});
+      this.products.push(product);
       if(this.products.length > 3) {
         this.productsFound = true;
       }

@@ -26,7 +26,7 @@ const COMPONENTS = [
     FleshDealsComponent,
     HomeBestSellersComponent,
     HomeNewReleasesComponent,
-    WishlistComponent
+    WishlistComponent,
 ]
 
 @NgModule({
@@ -43,7 +43,7 @@ const COMPONENTS = [
     ReactiveFormsModule,
     CommonModule,
     CartModule,
-    HomeModules
+    HomeModules,
   ],
   providers: [],
   exports: [RouterModule]

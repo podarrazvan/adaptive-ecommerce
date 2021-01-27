@@ -1,3 +1,4 @@
+<app-discount-modal [id]="discountProductId" (close)="showDiscount = false" *ngIf="showDiscount"></app-discount-modal>
 <div class="container">
   <div *ngIf="deleteAlert">
     <app-delete-alert itemToDelete="product"></app-delete-alert>
@@ -11,6 +12,7 @@
         <th scope="col">Name</th>
         <th scope="col">Price</th>
         <th scope="col">Quantity</th>
+        <th scope="col">Discount</th>
         <th scpe="col">Edit</th>
         <th scpe="col">Delete</th>
       </tr>
@@ -33,6 +35,10 @@
         </td>
         <td>
           <b>{{ product.quantity }}</b>
+        </td>
+        <td>
+          <button (click)="openDiscount(product._id)" class="empty-btn"><mat-icon> attach_money</mat-icon></button>
+          <!-- <mat-icon> local_offer</mat-icon> -->
         </td>
         <td>
           <button class="empty-btn" (click)="openEditProduct(product)">

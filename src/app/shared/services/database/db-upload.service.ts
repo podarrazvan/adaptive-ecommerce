@@ -4,6 +4,7 @@ import { Order } from '../../interfaces/order.interface';
 import { Product } from '../../interfaces/product.interface';
 import { Message } from '../../interfaces/message.interface';
 import { environment } from 'src/environments/environment';
+import { Discount } from '../../interfaces/discount.interface';
 
 @Injectable()
 export class DbUploadService {
@@ -36,8 +37,6 @@ export class DbUploadService {
       views:0,
       minPrice: product.minPrice,
       salesWeekTarget: product.salesWeekTarget,
-      discount: product.discount,
-      discountExpirationDate: product.discountExpirationDate,
       initialQuantity:product.quantity,
       productNumber: productNumber,
       brand: product.brand,
@@ -65,9 +64,18 @@ export class DbUploadService {
     console.log(product);
     product.views = +product.views + 1;
     console.log(product.views);
-    this.http.put(`http://localhost:3000/api/products/${product._id}`,product).subscribe(res => console.log(res));
+    this.http.put(`${environment.api}/products/${product._id}`,product).subscribe(res => console.log(res));
   }
 
+  createDiscount(discount: Discount) {
+    console.log(discount);
+    const discountData = {
+      price: discount.price,
+      expirationDate: discount.expirationDate,
+      productId: discount.id
+    }
+    this.http.post(`${environment.api}/discount`,discountData).subscribe(res => console.log(res));
+  }
   
   addMessage(message: Message) {
     const date = new Date();

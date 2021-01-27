@@ -2,12 +2,12 @@
     <div class="product" *ngFor="let card of singleSlide">
         <div class="product-img">
             <div class="cut">
-                <p>{{card.price | percentage: card.discount.discountPrice}}</p>
+                <p>{{card.price | percentage: card.discount.price}}</p>
             </div>
             <img [src]="card.images[0]" [alt]="card.title">
         </div>
         <div class="product-price">
-            <span class="new">${{card.price | newPrice:card.discount.discountPrice}}</span>
+            <span class="new">${{card.price | newPrice:card.discount.price}}</span>
             <span class="old">${{card.price }}</span>
         </div>
         <div class="product-title">
@@ -26,7 +26,7 @@
         </div>
         <div class="deal-end">
             <h3>Deal ends in:</h3>
-            <app-countdown [endDate]="card.discount.discountExpirationDate"></app-countdown>
+            <app-countdown [endDate]="card.discount.expirationDate"></app-countdown>
         </div>
     </div>
     <a class="carousel-control-prev" (click)="previous()" role="button" data-slide="prev">

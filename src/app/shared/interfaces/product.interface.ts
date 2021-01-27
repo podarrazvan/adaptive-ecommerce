@@ -13,8 +13,6 @@ export interface Product {
   cut?: number;
   minPrice: number;
   salesWeekTarget: number;
-  discount: number;
-  discountExpirationDate: Date;
   initialQuantity:number;
   views: number;
   productNumber: number;
