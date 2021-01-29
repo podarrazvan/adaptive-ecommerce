@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
-import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { AuthGuard } from 'src/app/auth/auth.guard';
@@ -24,10 +23,15 @@ import { ProductsComponent } from './products/products.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { UsersComponent } from './users/users.component';
-import { AboutUsEditComponent } from './website-edit/about-us-edit/about-us-edit.component';
 import { FooterEditComponent } from './website-edit/footer-edit/footer-edit.component';
-import { TermsOfUseEditComponent } from './website-edit/terms-of-use-edit/terms-of-use-edit.component';
 import { WebsiteEditComponent } from './website-edit/website-edit.component';
+import { CategoriesEditComponent } from './website-edit/categories-edit/categories-edit.component';
+import { BrandsEditComponent } from './website-edit/brands-edit/brands-edit.component';
+import { CouponsEditComponent } from './website-edit/coupons-edit/coupons-edit.component';
+import { ShippingEditComponent } from './website-edit/shipping-edit/shipping-edit.component';
+import { CommonModule } from '@angular/common';
+import { DiscountModalComponent } from './products/discount-modal/discount-modal.component';
+import { PageEditComponent } from './website-edit/page-edit/page-edit.component';
 
 const COMPONENTS = [
   AddProductComponent,
@@ -36,9 +40,7 @@ const COMPONENTS = [
   StatisticsComponent,
   ProductsComponent,
   WebsiteEditComponent,
-  AboutUsEditComponent,
   FooterEditComponent,
-  TermsOfUseEditComponent,
   UsersComponent,
   OrdersComponent,
   OrderComponent,
@@ -47,13 +49,19 @@ const COMPONENTS = [
   DeleteAlertComponent,
   MessageComponent,
   DesktopVersionMessagesComponent,
-  DescriptionStylesComponent
+  DescriptionStylesComponent,
+  CategoriesEditComponent,
+  BrandsEditComponent,
+  CouponsEditComponent,
+  ShippingEditComponent,
+  DiscountModalComponent,
+  PageEditComponent
 ];
 
 @NgModule({
-  declarations: [...COMPONENTS, AdminComponent],
+  declarations: [...COMPONENTS, AdminComponent, CategoriesEditComponent],
   imports: [
-    BrowserModule,
+    CommonModule,
     MatIconModule,
     SharedModule,
     FormsModule,

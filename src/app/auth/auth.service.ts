@@ -4,17 +4,22 @@ import { catchError, tap } from 'rxjs/operators';
 import { throwError, BehaviorSubject } from 'rxjs';
 
 import { User } from './user.model';
+import { environment } from 'src/environments/environment';
 
 export interface Id {
   uid: string;
 }
 
 export interface AuthResponseData {
-  idToken: string;
+  token: string;
   email: string;
+  password: string;
   refreshToken: string;
   expiresIn: string;
-  localId: string;
+  userId: string;
+  history: string[];
+  categories: string[];
+  favorites: string[];
 }
 
 @Injectable({ providedIn: 'root' })
@@ -30,7 +35,7 @@ export class AuthService {
   signup(username: string ,email: string, password: string) {
     return this.http
       .post<AuthResponseData>(
-        'http://localhost:3000/api/users/signup',
+        `${environment.api}/users/signup`,
         {
           username: username,
           email: email,
@@ -43,9 +48,13 @@ export class AuthService {
         tap(resData => {
           this.handleAuthentication(
             resData.email,
-            resData.localId,
-            resData.idToken,
-            +resData.expiresIn
+            resData.password,
+            resData.userId,
+            resData.token,
+            +resData.expiresIn,
+            resData.history,
+            resData.categories,
+            resData.favorites
           );
         })
       );
@@ -54,7 +63,7 @@ export class AuthService {
   login(email: string, password: string) {
     return this.http
       .post<AuthResponseData>(
-        'http://localhost:3000/api/users/login',
+        `${environment.api}/users/login`,
         {
           email: email,
           password: password,
@@ -64,11 +73,44 @@ export class AuthService {
       .pipe(
         catchError(this.handleError),
         tap((resData) => {
+          console.log(resData);
           this.handleAuthentication(
             resData.email,
-            resData.localId,
-            resData.idToken,
-            +resData.expiresIn
+            resData.password,
+            resData.userId,
+            resData.token,
+            +resData.expiresIn,
+            resData.history,
+            resData.categories,
+            resData.favorites
+          );
+        })
+      );
+  }
+
+  loginAdmin(email: string, password: string) {
+    return this.http
+      .post<AuthResponseData>(
+        `${environment.api}/users/login/admin`,
+        {
+          email: email,
+          password: password,
+          returnSecureToken: true,
+        }
+      )
+      .pipe(
+        catchError(this.handleError),
+        tap((resData) => {
+          console.log(resData);
+          this.handleAuthentication(
+            resData.email,
+            resData.password,
+            resData.userId,
+            resData.token,
+            +resData.expiresIn,
+            resData.history,
+            resData.categories,
+            resData.favorites
           );
         })
       );
@@ -77,7 +119,11 @@ export class AuthService {
   autoLogin() {
     const userData: {
       email: string;
+      password: string;
       id: string;
+      history: string[];
+      categories: string[];
+      favorites: string[];
       _token: string;
       _tokenExpirationDate: string;
     } = JSON.parse(localStorage.getItem('userData'));
@@ -87,7 +133,11 @@ export class AuthService {
 
     const loadedUser = new User(
       userData.email,
+      userData.password,
       userData.id,
+      userData.categories,
+      userData.history,
+      userData.favorites,
       userData._token,
       new Date(userData._tokenExpirationDate)
     );
@@ -103,20 +153,42 @@ export class AuthService {
 
   public handleAuthentication(
     email: string,
+    password: string,
     userId: string,
     token: string,
-    expiresIn: number
+    expiresIn: number,
+    history: string[],
+    categories: string[],
+    favorites: string[],
   ) {
-    const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
-    const user = new User(email, userId, token, expirationDate);
+    const expirationDate = new Date(new Date().getTime() + expiresIn * 100);
+    const user = new User(email,password, userId,history, categories, favorites, token, expirationDate);
     this.user.next(user);
-    this.autoLogout(expiresIn * 1000);
+    this.autoLogout(expiresIn * 100);
     localStorage.setItem('userData', JSON.stringify(user));
   }
 
   logout() {
     this.user.next(null);
-    this.router.navigate(['/auth']);
+    const userData: {
+      email: string;
+      password: string;
+      id: string;
+      history: string[];
+      categories: string[];
+      favorites: string[];
+      _token: string;
+      _tokenExpirationDate: string;
+    } = JSON.parse(localStorage.getItem('userData'));
+    this.updateUser(
+      userData.email,
+      userData.password,
+      userData.id,
+      userData._token,
+      userData.categories,
+      userData.history,
+      userData.favorites
+    );
     localStorage.removeItem('userData');
     if (this.tokenExpirationTimer) {
       clearTimeout(this.tokenExpirationTimer);
@@ -125,9 +197,24 @@ export class AuthService {
   }
 
   autoLogout(expirationDuration: number) {
+    console.log(expirationDuration);
     this.tokenExpirationTimer = setTimeout(() => {
       this.logout();
     }, expirationDuration);
+  }
+
+  updateUser( 
+    email: string,
+    password: string,
+    userId: string,
+    token: string,
+    history: string[],
+    categories: string[],
+    favorites: string[]
+    ){
+
+    const user = new User(email,password, userId,history, categories, favorites, token);
+    this.http.put(`${environment.api}/users/update`,user).subscribe();
   }
 
   private handleError(errorRes: HttpErrorResponse) {

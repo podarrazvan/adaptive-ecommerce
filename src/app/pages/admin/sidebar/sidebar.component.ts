@@ -20,7 +20,8 @@ export class SidebarComponent implements OnInit, DoCheck {
   ngOnInit(): void {
     this.dbFetchDataService.fetchMessages().subscribe((emails) => {
       this.sharedDataService.unreadMessages = 0;
-      for (let email of emails) {
+      for (let email of emails.messages) {
+        console.log(email);
         if (!email.seen) {
           this.sharedDataService.unreadMessages++;
         }

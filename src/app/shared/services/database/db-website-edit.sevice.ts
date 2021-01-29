@@ -1,198 +1,79 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Category } from '../../interfaces/category.interface';
-import { Footer } from '../../interfaces/footer.interface';
+import { WebsiteDetails } from '../../interfaces/website-details';
+import { SharedDataService } from '../shared-data.service';
+import { Coupon } from '../../interfaces/coupon.interface';
+import { environment } from 'src/environments/environment';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class DbWebsiteEditService {
-  constructor(private http: HttpClient) {}
-  categories: Category[];
+  constructor(
+    private http: HttpClient,
+    private sharedDataService: SharedDataService
+  ) {}
+  categories: string[];
   category;
 
-  addToCarousel(key: string, category: string) {
-    const user = JSON.parse(localStorage.getItem('userData'));
-    const product = { id: key, category: category };
+  createWebsiteDetails(details: WebsiteDetails) {
     this.http
-      .post(
-        `https://shop-436e8.firebaseio.com/homepage/carousel/.json?auth=${user._token}`,
-        product,
-        {
-          observe: 'response',
-        }
-      )
-      .subscribe(
-        (responseData) => {
-          console.log(responseData);
-        },
-        (error) => {
-          console.log('error:', error);
-          error.next(error.message);
-        }
-      );
+      .post(`${environment.api}/website`, details)
+      .subscribe(() => location.reload());
   }
 
-  addHomepageArea(name: string) {
-    const user = JSON.parse(localStorage.getItem('userData'));
-    const area = { name: name };
-    this.http
-      .post<{ name: string }>(
-        `https://shop-436e8.firebaseio.com/homepage/areas/.json?auth=${user._token}`,
-        area,
-        {
-          observe: 'response',
-        }
-      )
-      .subscribe(
-        (responseData) => {
-          console.log(responseData);
-        },
-        (error) => {
-          console.log('error:', error);
-          error.next(error.message);
-        }
-      );
+  updateWebsite(sectionName: string, value) {
+    const data = {data: value};
+    const id = this.sharedDataService.websiteDocId;
+    this.http.put(`${environment.api}/website/${id}/${sectionName}`,data).subscribe((error) => console.log(error));
   }
 
-  updateHomepageArea(name: string, id: string) {
-    console.log(name, id);
-    const user = JSON.parse(localStorage.getItem('userData'));
-    const area = { name: name };
-    return this.http
-      .put<{ name: string }>(
-        `https://shop-436e8.firebaseio.com/homepage/areas/${id}/.json?auth=${user._token}`,
-        area,
-        {
-          observe: 'response',
-        }
-      )
+  fetchWebsiteDetails() {
+    return this.http.get<{ info: WebsiteDetails }>(
+      `${environment.api}/website`
+    );
   }
 
-  addCategory(name: string) {
-    const user = JSON.parse(localStorage.getItem('userData'));
-    const category = { name: name };
-    this.http
-      .post<{ name: string }>(
-        `https://shop-436e8.firebaseio.com/categories/.json?auth=${user._token}`,
-        category,
-        {
-          observe: 'response',
+  fetchCoupons() {
+    let couponsArray = []
+    return this.http.get<{coupon: Coupon[]}>(`${environment.api}/coupons`).pipe(
+      map((responseData) => {
+        for (const coupon of responseData.coupon) {
+          couponsArray.push({coupon});
         }
-      )
-      .subscribe(
-        (responseData) => {
-          console.log(responseData);
-        },
-        (error) => {
-          console.log(error.message);
-        }
-      );
+        return couponsArray;
+      })
+    );;
   }
 
-  updateCategory(name: string, id: string) {
-    console.log(name, id);
-    const user = JSON.parse(localStorage.getItem('userData'));
-    const category = { name: name };
-    return this.http
-      .put<{ name: string }>(
-        `https://shop-436e8.firebaseio.com/categories/${id}/.json?auth=${user._token}`,
-        category,
-        {
-          observe: 'response',
-        }
-      )
+  editPages(content: string, page: string) {
+    const id = this.sharedDataService.websiteDocId;
+    console.log(content);
+    const pageContent = {content}
+      this.http
+        .put(`${environment.api}/pages/${page}/${id}`, pageContent)
+        .subscribe(
+          (responseData) => {
+            console.log(responseData);
+          },
+          (error) => {
+            console.log(error.message);
+          }
+        );
   }
 
-  editTermsOfUse(termsOfUse: string) {
-    const user = JSON.parse(localStorage.getItem('userData'));
-    const terms = { termsOfUse: termsOfUse };
-    this.http
-      .put(
-        `https://shop-436e8.firebaseio.com/terms-of-use/.json?auth=${user._token}`,
-        terms,
-        {
-          observe: 'response',
-        }
-      )
-      .subscribe(
-        (responseData) => {
-          console.log(responseData);
-        },
-        (error) => {
-          console.log(error.message);
-        }
-      );
+  fetchPages(page) {
+    return this.http.get<{ info: [{ content: string; _id: string }] }>(
+      `${environment.api}/pages/${page}`
+    );
   }
 
-  editAboutUs(aboutUs: string) {
-    const user = JSON.parse(localStorage.getItem('userData'));
-    const about = { aboutUs: aboutUs };
-    this.http
-      .put(
-        `https://shop-436e8.firebaseio.com/about-us/.json?auth=${user._token}`,
-        about,
-        {
-          observe: 'response',
-        }
-      )
-      .subscribe(
-        (responseData) => {
-          console.log(responseData);
-        },
-        (error) => {
-          console.log(error.message);
-        }
-      );
-  }
-
-  setName(name: string) {
-    const user = JSON.parse(localStorage.getItem('userData'));
-    const websiteName = { name: name };
-    this.http
-      .put(
-        `https://shop-436e8.firebaseio.com/website-name/.json?auth=${user._token}`,
-        websiteName,
-        {
-          observe: 'response',
-        }
-      )
-      .subscribe(
-        (responseData) => {
-          console.log(responseData);
-        },
-        (error) => {
-          console.log(error.message);
-        }
-      );
-  }
-
-  footer(footer: Footer) {
-    const user = JSON.parse(localStorage.getItem('userData'));
-    const footerData = {
-      adress: footer.adress,
-      phone: footer.phone,
-      email: footer.email,
-      facebookLink: footer.facebookLink,
-      instagramLink: footer.instagramLink,
-      twitterLink: footer.twitterLink,
-      facebookLogo: footer.facebookLogo,
-      instagramLogo: footer.instagramLogo,
-      twitterLogo: footer.twitterLogo,
+  addCoupon(coupon: Coupon) {
+    const couponToAdd: Coupon = {
+      code: coupon.code,
+      discount: coupon.discount,
     };
     this.http
-      .put(
-        `https://shop-436e8.firebaseio.com/footer/.json?auth=${user._token}`,
-        footerData,
-        {
-          observe: 'response',
-        }
-      )
-      .subscribe(
-        (responseData) => {
-          console.log(responseData);
-        },
-        (error) => {
-          console.log(error.message);
-        }
-      );
+      .post(`${environment.api}/coupons`, couponToAdd)
+      .subscribe();
   }
 }

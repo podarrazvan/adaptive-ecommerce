@@ -1,16 +1,23 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Product } from '../interfaces/product.interface';
+import { User } from '../interfaces/user.interface';
+import { WebsiteDetails } from '../interfaces/website-details';
 
 @Injectable()
 export class SharedDataService implements OnDestroy {
 
-  brand = new BehaviorSubject<{name:string, img: string}>({name:"",img:""});
-  emptyCart = new BehaviorSubject<boolean>(true);
-  isAuthenticated = new BehaviorSubject<boolean>(false);
+  brand$ = new BehaviorSubject<{name:string, img: string}>({name:"",img:""});
+  emptyCart$ = new BehaviorSubject<boolean>(true);
+  isAuthenticated$ = new BehaviorSubject<boolean>(false);
 
-  cast = this.emptyCart.asObservable();
+  cast = this.emptyCart$.asObservable();
   // cast = this.isAuthenticated.asObservable();
+
+  websiteDetails = new BehaviorSubject<WebsiteDetails>(null);
+  websiteDocId: string;
+
+  userDetails = new BehaviorSubject<User>(null);
 
   productEdit: boolean;
   product: Product;
@@ -18,6 +25,20 @@ export class SharedDataService implements OnDestroy {
   totalCart: number;
   mobile: boolean;
   
+  setWebsiteDetails(details: WebsiteDetails) {
+    this.websiteDetails.next(details);
+    this.websiteDocId = details._id;
+  }
+
+  setUserDetails(details: User) {
+    this.userDetails.next(details);
+  }
+
+  updateUserDetails(details: User) {
+    localStorage.setItem('userData',JSON.stringify(details));
+    this.userDetails.next(details);
+  }
+
   ngOnDestroy() {
     this.productEdit = null;
     this.product = null;
@@ -26,15 +47,15 @@ export class SharedDataService implements OnDestroy {
   }
 
   updateCart(newStatus) {
-    this.emptyCart.next(newStatus);
+    this.emptyCart$.next(newStatus);
   }
   
   updateAuth(newStatus) {
-    this.isAuthenticated.next(newStatus);
+    this.isAuthenticated$.next(newStatus);
   }
   
   updateBrand(newBrand) {
-    this.brand.next(newBrand);
+    this.brand$.next(newBrand);
   }
   
 }

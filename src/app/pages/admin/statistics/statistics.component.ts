@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Category } from 'src/app/shared/interfaces/category.interface';
 import { Product } from 'src/app/shared/interfaces/product.interface';
 import { DbFetchDataService } from 'src/app/shared/services/database/db-fetch-data.service';
 import { DbStatisticsService } from 'src/app/shared/services/database/db-statistics.service';
@@ -34,7 +33,7 @@ export class StatisticsComponent implements OnInit {
 
   products: [{ product?: Product; views?: number }];
   productsData;
-  categories: Category[];
+  categories: string[];
   category;
 
   constructor(
@@ -94,7 +93,6 @@ export class StatisticsComponent implements OnInit {
     this.showWebsite = false;
     this.showProducts = !this.showProducts;
     this.showOrders = false;
-    this.getCategories();
   }
 
   statisticsOrders() {
@@ -123,16 +121,6 @@ export class StatisticsComponent implements OnInit {
       });
     this.loading = false;
     console.log(this.products);
-  }
-
-  getCategories() {
-    this.categories = [];
-    this.dbFetchDataService.fetchCategories().subscribe((categories) => {
-      this.category = categories;
-      for (let category of categories) {
-        this.getProducts(category.name);
-      }
-    });
   }
 
   openProduct(category: string, key: string) {

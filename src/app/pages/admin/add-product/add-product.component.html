@@ -1,5 +1,5 @@
 <div class="content">
-  <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+  <form *ngIf="!loading" [formGroup]="productForm" (ngSubmit)="onSubmit()">
     <div class="form-row">
       <label for="inputTitle"><b>Title</b></label>
       <input
@@ -24,8 +24,8 @@
         class="custom-select my-1 mr-sm-2"
         id="inputCategory"
       >
-        <option *ngFor="let category of categories" [value]="category.name">
-          {{ category.name }}
+        <option *ngFor="let category of categories" [value]="category">
+          {{ category }}
         </option>
       </select>
       <span
@@ -36,6 +36,25 @@
         "
         style="color: red"
         >Please select a category!</span
+      >
+      <label class="my-1 mr-2" for="inputBrand"><b>Brand</b></label>
+      <select
+        formControlName="brand"
+        class="custom-select my-1 mr-sm-2"
+        id="inputBrand"
+      >
+        <option *ngFor="let brand of brands" [value]="brand.name">
+          {{ brand.name }}
+        </option>
+      </select>
+      <span
+        class="help-blok"
+        *ngIf="
+          !productForm.get('brand').valid &&
+          productForm.get('brand').touched
+        "
+        style="color: red"
+        >Please select a brand!</span
       >
     </div>
     <hr />
@@ -94,7 +113,7 @@
     <div class="row">
       <div class="col">
         <label for="inputDescription"><b>Description</b></label>
-        <app-description-styles></app-description-styles>
+        <!-- <app-description-styles></app-description-styles> -->
         <text-editor (contentChanged)="ckeditorContentChanged($event)" #tinyMce></text-editor>
         <span
           class="help-blok"
@@ -188,6 +207,7 @@
         />
       </mat-form-field>
     </div>
+    <!-- <app-add-discount *ngIf="addDiscount"></app-add-discount> -->
     <hr />
     <button
     class="btn btn-danger"

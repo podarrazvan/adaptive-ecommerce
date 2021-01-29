@@ -61,9 +61,9 @@ ul {
 }
 
 .alert {
-  place-content: center;
-  align-items: center;
-  margin: auto;
+    place-content: center;
+    align-items: center;
+    margin: auto;
 }
 
 .card-top {
@@ -107,4 +107,9 @@ textarea {
   padding-top: 24px;
   border-radius: 22px;
   resize: none;
+}
+
+.buttons-website-edit {
+  display: flex;
+  place-content: center space-between;
 }

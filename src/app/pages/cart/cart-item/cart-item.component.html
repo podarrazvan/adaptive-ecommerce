@@ -1,6 +1,6 @@
 <div class="item">
     <div class="delete-btn">
-        <button class="empty-btn">
+        <button (click)="onDelete()" class="empty-btn">
             X
         </button>
     </div>
@@ -14,7 +14,7 @@
         <input type="number" [value]="product.quantity">
     </div>
     <div class="price">
-        <p>$ {{product.price}}</p>
+        <p>$ {{product.total}}</p>
     </div>
 </div>
 <hr>

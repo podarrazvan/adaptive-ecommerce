@@ -1,201 +1,150 @@
-<div *ngIf="showEditTermsOfUse">
-  <app-terms-of-use-edit
-    (close)="closeTermsOfUseEdit()"
-  ></app-terms-of-use-edit>
-</div>
+<ng-container *ngIf="websiteDetails">
+  <div class="website-edit-box">
+    <div *ngIf="showEditTermsOfUse">
+      <app-page-edit
+        (close)="closeTermsOfUseEdit()"
+        [content]="this.websiteDetails.termsOfUse"
+        pageName="terms-of-use"
+      ></app-page-edit>
+    </div>
 
-<div *ngIf="showEditAboutUs">
-  <app-about-us-edit (close)="closeEditAboutUs()"></app-about-us-edit>
-</div>
+    <div *ngIf="showEditAboutUs">
+      <app-page-edit
+        (close)="closeEditAboutUs()"
+        [content]="this.websiteDetails.aboutUs"
+        pageName="about-us"
+      ></app-page-edit>
+    </div>
 
-<div *ngIf="showEditFooter">
-  <app-footer-edit (close)="showEditFooter = false"></app-footer-edit>
-</div>
+    <div *ngIf="showEditFooter">
+      <app-footer-edit
+        (close)="footerEdit($event)"
+        [websiteDetails]="websiteDetails"
+      ></app-footer-edit>
+    </div>
 
-<div *ngIf="!showEditTermsOfUse || !showEditAboutUs">
-  <h1>Homepage areas</h1>
-  <button
-    class="btn btn-danger dropdown-toggle"
-    type="button"
-    (click)="homepageAreasHide = !homepageAreasHide"
-  >
-    Show
-  </button>
-  <hr />
-  <div *ngIf="!homepageAreasHide">
-    <form #newArea="ngForm">
-      <div class="form-row align-items-center">
-        <div class="col-auto">
-          <label for="areaInput"><b>Add a new area</b></label>
-          <input
-            type="text"
-            class="form-control"
-            id="areaInput"
-            placeholder="Area"
-            #area
-            required
-          />
-        </div>
-        <div class="col-auto">
-          <!--To do: fix newArea.valid-->
-          <button
-            [disabled]="!newArea.valid"
-            type="button"
-            (click)="addNewValue(area, 'area')"
-            class="btn btn-primary"
-          >
-            Add new area
-          </button>
-        </div>
+    <h1>Settings</h1>
+    <hr />
+    <div class="edit-option">
+      <h2 class="left">Website Name</h2>
+      <div class="name" *ngIf="editName">
+        <input
+          #websiteName
+          type="text"
+          class="form-control inputName center"
+          placeholder="Website's name"
+          [value]="websiteDetails.name"
+        />
+        <button
+          class="right"
+          (click)="setName(websiteName)"
+          type="button"
+          class="white-btn"
+        >
+          Set name
+        </button>
       </div>
-    </form>
-    <ul class="list-group">
-      <div *ngFor="let area of homepageAreas; let i = index">
-        <!--To do: implement active-->
-        <li class="list-group-item">
-          <h1 *ngIf="editAreaMode != i">{{ area.name }}</h1>
-
-          <input
-            [hidden]="editAreaMode != i"
-            type="text"
-            class="form-control"
-            [value]="area.name"
-            #editedArea
-          />
-          <hr />
-          <div class="buttons">
-            <button (click)="delete(i, area.key, 'area')" class="empty-btn">
-              <mat-icon>delete</mat-icon>
-            </button>
-
-            <button
-              *ngIf="editAreaMode != i"
-              (click)="editAreaMode = i"
-              class="empty-btn"
-            >
-              <mat-icon>create</mat-icon>
-            </button>
-
-            <button
-              *ngIf="editAreaMode == i"
-              (click)="edit(editedArea, area.key, 'area')"
-              class="btn btn-primary"
-            >
-              Done
-            </button>
-          </div>
-        </li>
-      </div>
-    </ul>
-  </div>
-  <h1>Products categories</h1>
-  <button
-    class="btn btn-danger dropdown-toggle"
-    type="button"
-    (click)="categoriesHide = !categoriesHide"
-  >
-    Show
-  </button>
-  <div *ngIf="!categoriesHide">
-    <form #newCategory="ngForm">
-      <div class="form-row align-items-center">
-        <div class="col-auto">
-          <label for="tagInput"><b>Add a new category</b></label>
-          <input
-            type="text"
-            class="form-control"
-            id="tagInput"
-            placeholder="Category"
-            #category
-            required
-          />
-        </div>
-        <div class="col-auto">
-          <!--To do: fix newCategory.valid-->
-          <button
-            [disabled]="!newCategory.valid"
-            type="button"
-            (click)="addNewValue(category, 'category')"
-            class="btn btn-primary"
-          >
-            Add a new category
-          </button>
-        </div>
-      </div>
-    </form>
-    <ul class="list-group">
-      <div *ngFor="let category of categories; let i = index">
-        <!--To do: implement active-->
-        <li class="list-group-item">
-          <h1 *ngIf="editCategoryMode != i">{{ category.name }}</h1>
-
-          <input
-            [hidden]="editCategoryMode != i"
-            type="text"
-            class="form-control"
-            [value]="category.name"
-            #editedCategory
-          />
-          <hr />
-          <div class="buttons">
-            <button
-              (click)="delete(i, category.key, 'category')"
-              class="empty-btn"
-            >
-              <mat-icon>delete</mat-icon>
-            </button>
-
-            <button
-              *ngIf="editCategoryMode != i"
-              (click)="editCategoryMode = i"
-              class="empty-btn"
-            >
-              <mat-icon>create</mat-icon>
-            </button>
-            <button
-              *ngIf="editCategoryMode == i"
-              (click)="edit(editedCategory, category.key, 'category')"
-              class="btn btn-primary"
-            >
-              Done
-            </button>
-          </div>
-        </li>
-      </div>
-    </ul>
-  </div>
-  <hr />
-  <h1>Terms of use</h1>
-  <button class="btn btn-danger" type="button" (click)="editTermsOfUse()">
-    Edit Terms Of Use
-  </button>
-  <hr />
-  <h1>About Us</h1>
-  <button class="btn btn-danger" type="button" (click)="editAboutUs()">
-    Edit About Us
-  </button>
-  <hr />
-  <h1>Footer</h1>
-  <button class="btn btn-danger" type="button" (click)="showEditFooter = true">
-    Edit Footer
-  </button>
-  <hr />
-  <h1>Website's name</h1>
-  <div class="form-inline">
-    <div class="form-group mx-sm-3 mb-2">
-      <input
-        #websiteName
-        type="text"
-        class="form-control inputName"
-        placeholder="Website's name"
-      />
+      <h2 class="center website-name" *ngIf="!editName">
+        {{ websiteDetails.name }}
+      </h2>
       <button
-        (click)="setName(websiteName)"
-        type="button"
-        class="btn btn-primary mb-2"
+        *ngIf="!editName"
+        (click)="editName = true"
+        class="main-btn website-name-btn"
       >
-        Set name
+        Edit
+      </button>
+    </div>
+    <hr />
+
+    <div class="edit-option">
+      <h2 class="left">Categories</h2>
+      <div class="center">
+        <div
+          *ngFor="let category of websiteDetails.categories; let i = index"
+          class="simple-btn"
+        >
+          {{ category }}
+        </div>
+      </div>
+      <app-categories-edit
+        (finalCategories)="(websiteDetails.categories)"
+        [categories]="websiteDetails.categories"
+      ></app-categories-edit>
+    </div>
+    <hr />
+
+    <div class="edit-option">
+      <h2 class="left">Brands</h2>
+      <div class="center">
+        <div
+          *ngFor="let brand of websiteDetails.brands; let i = index"
+          class="simple-btn"
+        >
+          {{ brand.name }}
+        </div>
+      </div>
+      <app-brands-edit
+        class="right"
+        (finalBrands)="(websiteDetails.brands)"
+        [brands]="websiteDetails.brands"
+      ></app-brands-edit>
+    </div>
+    <hr />
+
+    <!--Coupons-->
+    <div class="edit-option">
+      <h2 class="left">Coupons</h2>
+      <div class="simple-btn" *ngFor="let coupon of coupons; let i = index">
+        {{ coupon }}
+      </div>
+      <app-coupons-edit></app-coupons-edit>
+    </div>
+    <hr />
+
+    <!--Shipping-->
+    <div class="edit-option">
+      <h2 class="left">Shipping</h2>
+      <div
+        class="simple-btn"
+        *ngFor="let shipping of websiteDetails.shipping; let i = index"
+      >
+        {{ shipping.name }}
+      </div>
+      <app-shipping-edit
+        [shippings]="websiteDetails.shipping"
+        (newShippings)="(websiteDetails.shipping)"
+      ></app-shipping-edit>
+    </div>
+    <hr />
+
+    <!--Terms of use-->
+    <div class="edit-option">
+      <h2 class="left">Terms Of Use</h2>
+      <a class="center" routerLink="../../terms-of-use"> Open </a>
+      <button class="main-btn right" type="button" (click)="editTermsOfUse()">
+        Edit
+      </button>
+    </div>
+
+    <hr />
+    <div class="edit-option">
+      <h2 class="left">About Us</h2>
+      <a class="center" routerLink="../../about-us"> Open </a>
+      <button class="main-btn right" type="button" (click)="editAboutUs()">
+        Edit
+      </button>
+    </div>
+    <hr />
+    <div class="edit-option">
+      <h2 class="left">Footer</h2>
+      <button
+        class="main-btn right"
+        type="button"
+        (click)="showEditFooter = true"
+      >
+        Edit
       </button>
     </div>
   </div>
-</div>
+</ng-container>

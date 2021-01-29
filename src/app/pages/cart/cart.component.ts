@@ -21,33 +21,27 @@ export class CartComponent implements OnInit, DoCheck {
 
   cart;
   showCart = false;
+
+  subtotal=0;
+
+  shipping = 0;
+
   total = 0;
-
-  product = {
-    title: "iPhone 12 Pro Max",
-    price: 999,
-    img: "https://s13emagst.akamaized.net/products/33382/33381513/images/res_9c502e664bde724a8f8e180bbe1582c9.jpg?width=450&height=450&hash=B5A412328A8BC51D19BCDA6A18A27080",
-    quantity: 2,
-  }
-
-  products = [this.product, this.product];
 
   mobile: boolean;
 
   paidFor = false;
 
   ngOnInit(): void {
-    // this.mobile = this.sharedDataService.mobile;
-    // this.cart = [];
-    // const products = JSON.parse(localStorage.getItem('cart'));
-    // products.length > 0 ? this.emptyCart  = false : this.emptyCart = true;
-    // for (let product of products) {
-    //   const category = product.category;
-    //   const key = product.product;
-    //   const quantity = product.quantity;
-    //   this.getProduct(category, key, quantity);
-    // }
-    // this.showCart = true;
+    this.mobile = this.sharedDataService.mobile;
+    const products = JSON.parse(localStorage.getItem('cart'));
+    products.length > 0 ? this.emptyCart  = false : this.emptyCart = true;
+    for (let product of products) {
+      const key = product.id;
+      const quantity = product.quantity;
+      this.getProduct(key, quantity);
+    }
+    this.showCart = true;
     paypal
     .Buttons({
       createOrder: (data, actions) => {
@@ -75,20 +69,30 @@ export class CartComponent implements OnInit, DoCheck {
   }
   // Use observable 
   ngDoCheck() {
-    this.sharedDataService.totalCart = this.total;
-    console.log(this.sharedDataService.totalCart);
+    // this.sharedDataService.totalCart = this.total;
+    // console.log(this.sharedDataService.totalCart);
   }
 
-  getProduct(category: string, key: string, quantity: string) {
+  getProduct(key: string, quantity: number) {
+    this.cart = [];
+    let itemTotal=0;
     this.dbFetchDataService.fetchProduct(key).subscribe((response) => {
-      const product = response.product;
-      this.cart.push({ product: product, quantity: quantity, key: key });
-      this.total += +product.price * +quantity;
+      const product = response.product[0];
+      itemTotal += +product.price *quantity;
+      this.cart.push({
+        img: product.images[0],
+        title: product.title,
+        quantity: quantity,
+        total: itemTotal
+      });
+      this.subtotal += itemTotal;
+      this.total = this.subtotal + this.shipping;
     });
   }
 
   onDelete(index: number) {
-    this.total -= this.cart[index].product.price * this.cart[index].quantity;
+    console.log(index);
+    // this.total -= this.cart[index].product.price * this.cart[index].quantity;
     this.cart.splice(index, 1);
     if(this.cart.length === 0){
       this.sharedDataService.updateCart(true);
@@ -116,15 +120,21 @@ export class CartComponent implements OnInit, DoCheck {
   }
 
   updateLocalstorage() {
-    let cartUpdated = [];
-    for (let product of this.cart) {
-      console.log(product);
-      cartUpdated.push({
-        category: product.product.category,
-        product: product.key,
-        quantity: product.quantity,
-      });
-    }
-    localStorage.setItem('cart', JSON.stringify(cartUpdated));
+  //   let cartUpdated = [];
+  //   for (let product of this.cart) {
+  //     console.log(product);
+  //     cartUpdated.push({
+  //       category: product.product.category,
+  //       product: product.key,
+  //       quantity: product.quantity,
+  //     });
+  //   }
+  //   localStorage.setItem('cart', JSON.stringify(cartUpdated));
+  }
+
+  coupon(discount) {
+    console.log('e aici')
+    console.log(discount);
+    this.subtotal -= discount;
   }
 }

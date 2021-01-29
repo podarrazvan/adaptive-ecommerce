@@ -1,0 +1,90 @@
+<button
+class="main-btn"
+type="button"
+(click)="shippingHide = false"
+>
+Edit
+</button>
+<div *ngIf="!shippingHide">
+  <div class="backdrop"></div>
+  <div class="alert">
+    <div class="alert-box">
+      <div class="cancel-btn">
+        <button (click)="shippingHide = true" class="btn btn-danger">
+          X
+        </button>
+      </div>
+      <form (ngSubmit)="addNewValue(shippingForm)" #shippingForm="ngForm">
+          <div class="form-row align-items-center">
+            <div class="col-auto">
+              <label for="shippingInput"><b>Add a new shipping method</b></label>
+              <input
+                type="text"
+                class="form-control"
+                id="shippingInput"
+                placeholder="Name"
+                name="name"
+                ngModel
+                required
+              />
+              <input
+                type="number"
+                class="form-control"
+                id="couponInput"
+                placeholder="Price"
+                name="price"
+                ngModel
+                required
+              />
+            </div>
+            <div class="col-auto">
+              <button
+                type="submit"
+                class="main-btn"
+              >
+                Add
+              </button>
+            </div>
+          </div>
+      </form>
+      <ul class="list-group">
+        <div *ngFor="let shipping of shippings; let i = index">
+          <!--To do: implement active-->
+          <li class="list-group-item">
+            <h1 *ngIf="editShippingMode != i">{{ shipping.name }}</h1>
+
+            <input
+              [hidden]="editShippingMode != i"
+              type="text"
+              class="form-control"
+              [value]="shipping"
+              #editedCoupon
+            />
+            <hr />
+            <div class="buttons-website-edit">
+              <button (click)="delete(i, shipping)" class="empty-btn">
+                <mat-icon>delete</mat-icon>
+              </button>
+
+              <button
+                *ngIf="editShippingMode != i"
+                (click)="editCouponMode = i"
+                class="empty-btn"
+              >
+                <mat-icon>create</mat-icon>
+              </button>
+              <button
+                *ngIf="editShippingMode == i"
+                (click)="edit(editedCoupon, shipping)"
+                class="btn btn-primary"
+              >
+                Done
+              </button>
+            </div>
+          </li>
+        </div>
+      </ul>
+    </div>
+  </div>
+</div>
+

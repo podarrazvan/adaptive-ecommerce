@@ -51,7 +51,7 @@ export class CategoriesComponent implements OnInit {
     this.dbFetchDataService
       .fetchProductsByCategory(category)
       .subscribe((response) => {
-        for (let product of response) {
+        for (let product of response.products) {
           this.products.push(product);
         }
         this.isLoading = false;

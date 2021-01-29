@@ -1,32 +1,32 @@
 <div class="carousel">
-    <div class="product" *ngFor="let slide of singleSlide">
+    <div class="product" *ngFor="let card of singleSlide">
         <div class="product-img">
             <div class="cut">
-                <p>-40%</p>
+                <p>{{card.price | percentage: card.discount.price}}</p>
             </div>
-            <img [src]="slide.img" [alt]="slide.title">
+            <img [src]="card.images[0]" [alt]="card.title">
         </div>
         <div class="product-price">
-            <span class="red">$79.00</span>
-            <span class="old">$99.00</span>
+            <span class="new">${{card.price | newPrice:card.discount.price}}</span>
+            <span class="old">${{card.price }}</span>
         </div>
         <div class="product-title">
             <h3>
-                <a routerLink="">{{slide.title}}</a>
+                <a [routerLink]="['product',card._id]">{{card.title}}</a>
             </h3>
         </div>
         <div class="deal-progress">
             <div class="deal-stock">
-                <span class="stock-sold">19% already claimed</span>
-                <span class="stock-available">Available: <strong>22</strong></span>
+                <span class="stock-sold">{{card.initialQuantity | percentage: card.quantity}} already claimed</span>
+                <span class="stock-available">Available: <strong>{{card.quantity}}</strong></span>
             </div>
             <div class="progress">
-                <span class="progress-bar" style="width:50.5956%"></span>
+                <span class="progress-bar" [ngStyle]="{'width.%':card.progressBar}"></span>
             </div>
         </div>
         <div class="deal-end">
             <h3>Deal ends in:</h3>
-            <h4>20:04:30</h4>
+            <app-countdown [endDate]="card.discount.expirationDate"></app-countdown>
         </div>
     </div>
     <a class="carousel-control-prev" (click)="previous()" role="button" data-slide="prev">

@@ -1,9 +1,14 @@
 <form class="search" [formGroup]="searchBar" (ngSubmit)="onSearch()">
   <input type="text" formControlName="search" placeholder="I am shoping for..." />
   <div class="search-actions">
-    <button class="toggle-btn">
-      All categories <span><mat-icon>keyboard_arrow_down</mat-icon></span>
+    <button type="button" class="toggle-btn" mat-button [matMenuTriggerFor]="cat">
+     {{ selectedCategory? selectedCategory : "All categories"}} <span><mat-icon>keyboard_arrow_down</mat-icon></span>
     </button>
-    <button class="search-btn"><mat-icon>search</mat-icon></button>
+    <button type="submit" class="search-btn"><mat-icon class="material-icons">search</mat-icon></button>
   </div>
 </form>
+
+<mat-menu #cat="matMenu">
+  <button  mat-menu-item (click)="searchInCategories('all')">All categories</button>
+  <button  mat-menu-item *ngFor="let category of categories" (click)="searchInCategories(category)">{{category}}</button>
+</mat-menu>

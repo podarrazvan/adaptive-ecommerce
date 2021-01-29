@@ -3,9 +3,9 @@
   <h1>Leave a message</h1>
 
   <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
-    <input type="text" placeholder="Ex. Albert" formControlName="firstName" />
+    <input type="text" placeholder="Name, ex. Albert Einstein" formControlName="name" />
 
-    <input type="text" placeholder="Ex. Einstein" formControlName="lastName" />
+    <input type="text" placeholder="Subject" formControlName="subject" />
 
     <input
       type="email"

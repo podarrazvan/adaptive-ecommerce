@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DeleteAlertService } from 'src/app/shared/components/delete-alert/delete-alert.service';
-import { Category } from 'src/app/shared/interfaces/category.interface';
 import { Product } from 'src/app/shared/interfaces/product.interface';
 import { DbDeleteService } from 'src/app/shared/services/database/db-delete.service';
 import { DbFetchDataService } from 'src/app/shared/services/database/db-fetch-data.service';
@@ -32,51 +31,35 @@ export class ProductsComponent implements OnInit {
   products: Product[];
   productsData;
 
-  categories: Category[];
+  categories: string[];
   category;
 
-  showEditHomepage = false;
   showEditProduct = false;
 
   deleteAlert: boolean;
   productToDelete;
   productToDeleteIndex;
 
+  discountProductId: string;
+  showDiscount = false;
+
   ngOnInit(): void {
     this.mobile = this.sharedDataService.mobile;
-    this.getCategories();
+    this.getProducts(1,10);
   }
 
-  getCategories() {
-    this.categories = [];
-    this.dbFetchDataService.fetchCategories().subscribe((categories) => {
-      this.category = categories;
-      for (let category of categories) {
-        this.getProducts(category.name);
-      }
-    });
+
+  getProducts(page, limit) {
+    this.dbFetchDataService.fetchPaginatedProducts(page,limit).subscribe(responseData => this.products = responseData.results);
   }
 
-  getProducts(cat: string) {
-    this.products = [];
-    this.dbFetchDataService
-      .fetchProductsByCategory(cat)
-      .subscribe((products) => {
-        this.productsData = products;
-        for (let productsData of products) {
-          this.products.push(productsData);
-        }
-        return this.products;
-      });
-  }
-
-  onDelete(category, key, index, img) {
+  onDelete(id, index, img) {
     this.deleteAlert = true;
     this.deleteAlertService.deleteProduct.subscribe((data) => {
       switch (data) {
         case true:
           this.productToDeleteIndex = index;
-          this.productToDelete = { category: category, key: key, img: img };
+          this.productToDelete = { id: id, img: img };
           this.deleteAlert = false;
           this.onProductDeleted();
           break;
@@ -88,20 +71,14 @@ export class ProductsComponent implements OnInit {
   }
 
   openEdit(type: string, product: Product) {
-    type === 'homepage'
-      ? (this.showEditHomepage = true)
-      : (this.showEditProduct = true);
-    this.productToAddOnHomepage = product;
+   this.showEditProduct = true;
   }
 
   close(type: string) {
-    type === 'homepage'
-      ? (this.showEditHomepage = false)
-      : (this.showEditProduct = false);
+    this.showEditProduct = false;
   }
 
   openEditProduct(product: Product) {
-    console.log(product);
     this.sharedDataService.product = product;
     this.sharedDataService.productEdit = true;
     this.router.navigate(['admin', 'add-product']);
@@ -109,19 +86,12 @@ export class ProductsComponent implements OnInit {
 
   onProductDeleted() {
     this.dbDeleteService
-      .deleteProduct(this.productToDelete.category, this.productToDelete.key)
+      .deleteProduct(this.productToDelete.id)
       .subscribe(() => {
         for (let img of this.productToDelete.img) {
           this.dbDeleteService.deletePhoto(img);
         }
       });
-    this.dbFetchDataService.fetchFromCarousel().subscribe((data) => {
-      for (let product of data) {
-        if (product.id === this.productToDelete.key) {
-          this.dbDeleteService.deleteFromCarousel(product.key).subscribe();
-        }
-      }
-    });
     this.products.splice(this.productToDeleteIndex, 1);
     this.deleteAlert = false;
   }
@@ -129,4 +99,10 @@ export class ProductsComponent implements OnInit {
   onCancelDelete() {
     this.deleteAlert = false;
   }
+
+  openDiscount(id) {
+    this.discountProductId = id;
+    this.showDiscount = true;
+  }
+
 }

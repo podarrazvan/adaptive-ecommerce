@@ -9,24 +9,18 @@ export class HomeNewReleasesCarouselComponent implements OnInit {
 
   @Input() products;
 
-  slides: [[{img?: string, title?:string, price?: number, category?: string}]] = [[{}]];
+  slides: Slide[][] = [[]];
   singleSlide: any;
   index = 0;
 
-  constructor() { }
-
   ngOnInit(): void {
-
-    this.slides.splice(0,1);
 
     const elements = 3;
     const lastIndex = 0;
     
     let times = 0;
-    let slide : [{img?: string, title?:string, price?: number, category?: string}] = [{}];
-    slide.splice(0,1);
+    let slide: Slide[] = [];
 
-    console.log(this.slides[this.index]);
 
     for(let i = lastIndex; i < this.products.length; i++) {
       times ++;
@@ -36,13 +30,11 @@ export class HomeNewReleasesCarouselComponent implements OnInit {
       if(times === elements) {
         times = 0;
         this.slides.push(slide);
-        slide = [{}];
-        slide.splice(0,1);
+        slide = [];
       }
     }
     
     this.singleSlide = this.slides[this.index]; 
-    console.log(this.singleSlide);
   }
 
   next() {
@@ -57,4 +49,11 @@ export class HomeNewReleasesCarouselComponent implements OnInit {
     console.log(this.index);
   }
 
+}
+
+export interface Slide {
+  img: string;
+  title:string;
+  price: number;
+  category: string;
 }

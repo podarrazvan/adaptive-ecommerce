@@ -1,0 +1,30 @@
+<div class="backdrop"></div>
+<div class="alert">
+  <div class="alert-box">
+    <form [formGroup]="discountForm" (ngSubmit)="onSubmit()">
+      <div class="discount">
+        <div class="left">
+          <mat-form-field>
+            <input
+              matInput
+              type="number"
+              formControlName="price"
+              placeholder="Discount"
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              matInput
+              type="number"
+              formControlName="expirationDate"
+              placeholder="Days"
+            />
+          </mat-form-field>
+        </div>
+        <div class="right">
+          <button type="submit" class="white-btn">Add</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

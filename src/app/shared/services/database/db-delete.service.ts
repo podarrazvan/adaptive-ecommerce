@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 // import * as firebase from 'firebase';
 
 
@@ -11,24 +12,10 @@ export class DbDeleteService {
     private http: HttpClient
   ) { }
 
-  deleteProduct(category: string, key: string) {
-    const user = JSON.parse(localStorage.getItem('userData'));
+  deleteProduct(id: string) {
+    // const user = JSON.parse(localStorage.getItem('userData'));
     return this.http.delete(
-      `https://shop-436e8.firebaseio.com/products/${category}/${key}/.json?auth=${user._token}`
-    );
-  }
-
-  deleteFromCarousel(key: string) {
-    const user = JSON.parse(localStorage.getItem('userData'));
-    return this.http.delete(
-      `https://shop-436e8.firebaseio.com/homepage/carousel/${key}/.json?auth=${user._token}`
-    );
-  }
-
-  deleteHomepageArea(key: string) {
-    const user = JSON.parse(localStorage.getItem('userData'));
-    return this.http.delete(
-      `https://shop-436e8.firebaseio.com/homepage/areas/${key}/.json?auth=${user._token}`
+      `${environment.api}/products/${id}`
     );
   }
 
@@ -39,10 +26,10 @@ export class DbDeleteService {
     );
   }
 
-  deleteMessage(key: string) {
+  deleteMessage(id: string) {
     const user = JSON.parse(localStorage.getItem('userData'));
     return this.http.delete(
-      `https://shop-436e8.firebaseio.com/messages/${key}/.json?auth=${user._token}`
+      `${environment.api}/contact/${id}`
     );
   }
 
@@ -55,15 +42,6 @@ export class DbDeleteService {
 
   deletePhoto(img: string) {
     // NOT WORKING!
-    console.log('Delete img not working!')
-  //   var image = firebase.storage().refFromURL(img);
-  //   image
-  //     .delete()
-  //     .then(function () {
-  //       console.log('Image deleted!');
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error);
-  //     });
+    console.log('Delete img not working!');
   }
 }

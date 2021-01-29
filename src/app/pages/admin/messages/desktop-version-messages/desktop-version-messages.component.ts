@@ -8,17 +8,17 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class DesktopVersionMessagesComponent implements OnInit {
 
   @Input() emails;
-  @Output() open = new EventEmitter();
-  @Output() delete = new EventEmitter();
+  @Output() open = new EventEmitter<number>();
+  @Output() delete = new EventEmitter<number>();
 
   ngOnInit(): void {
-
   }
+  
   openEmail(i) {
-    this.open.emit({index: i});
+    this.open.emit(i);
   }
 
   onDelete(i) {
-    this.delete.emit({index: i});
+    this.delete.emit(i);
   }
 }

@@ -6,12 +6,16 @@ export interface Product {
   homepagePosition?: string;
   tags: string[];
   quantity:number;
-  img: any;
+  images: any;
   thumbnail?: string;
   rating?: number;
-  key?: string;
+  _id?: string;
   cut?: number;
-  minPrice: number,
-  salesWeekTarget: number,
-  views: number
+  minPrice: number;
+  salesWeekTarget: number;
+  initialQuantity:number;
+  views: number;
+  productNumber: number;
+  brand: string;
+  model: string
 }

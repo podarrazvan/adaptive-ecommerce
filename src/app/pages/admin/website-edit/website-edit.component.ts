@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HomepageArea } from 'src/app/shared/interfaces/homepage-area.interface';
-import { DbDeleteService } from 'src/app/shared/services/database/db-delete.service';
-import { DbFetchDataService } from 'src/app/shared/services/database/db-fetch-data.service';
+import { WebsiteDetails } from 'src/app/shared/interfaces/website-details';
 import { DbWebsiteEditService } from 'src/app/shared/services/database/db-website-edit.sevice';
+import { SharedDataService } from 'src/app/shared/services/shared-data.service';
 
 @Component({
   selector: 'app-website-edit',
@@ -11,18 +10,9 @@ import { DbWebsiteEditService } from 'src/app/shared/services/database/db-websit
 })
 export class WebsiteEditComponent implements OnInit {
   constructor(private dbWebsiteEditService: DbWebsiteEditService, 
-              private dbDeleteService: DbDeleteService,
-              private dbFetchDataService: DbFetchDataService) {}
+              private sharedDataService: SharedDataService) {}
 
-  homepageAreasHide = true;
-  categoriesHide = true;
-
-  homepageAreas: HomepageArea[];
-  editAreaMode: number;
-  area;
-  categories: string[];
-  editCategoryMode: number;
-  category;
+  editName = false;
 
   showEditTermsOfUse = false;
 
@@ -30,90 +20,28 @@ export class WebsiteEditComponent implements OnInit {
 
   showEditFooter = false;
 
+  websiteDetails: WebsiteDetails;
+
+  coupons: string[] = [];
+
   ngOnInit(): void {
-    this.getAreas();
-    this.getCategories();
+    this.sharedDataService.websiteDetails.subscribe(data => this.websiteDetails = data);
+    this.dbWebsiteEditService.fetchCoupons().subscribe(data => {
+      for(let coupon of data) {
+        this.coupons.push(coupon.coupon.code);
+      }
+    });
   }
-
-  addNewValue(value, type) {
-    if (value.value != '' && type === 'area') {
-      this.dbWebsiteEditService.addHomepageArea(value.value);
-      this.getAreas();
-    }
-    if (value.value != '' && type === 'category') {
-      this.dbWebsiteEditService.addCategory(value.value);
-      this.getCategories();
-    }
-  }
-
-  delete(index, id, type) {
-    if (type === 'area') {
-      this.dbDeleteService.deleteHomepageArea(id).subscribe(() => {
-        this.homepageAreas.splice(index, 1);
-        this.getAreas();
-      });
-    } else {
-      this.dbDeleteService.deleteCategory(id).subscribe(() => {
-        this.categories.splice(index, 1);
-        this.getAreas();
-      });
-    }
-  }
-
 
   edit(newValue, id, type) {
-    if (type === 'area') {
-      this.editAreaMode = null;
-      this.dbWebsiteEditService.updateHomepageArea(newValue.value,id).subscribe(
-        (responseData) => {
-          this.getAreas();
-          console.log(responseData);
-        },
-        (error) => {
-          console.log('error:', error);
-          error.next(error.message);
-        }
-      );
-     
-    } else {
-      this.editCategoryMode = null;
-      this.dbWebsiteEditService.updateCategory(newValue.value,id).subscribe(
-        (responseData) => {
-          this.getAreas();
-          console.log(responseData);
-        },
-        (error) => {
-          console.log('error:', error);
-          error.next(error.message);
-        }
-      );
-    }
+  
+  }
+  deleteCategory(index) {
+    this.websiteDetails.categories.splice(index, 1);
   }
 
-  getCategories() {
-    this.categories = [];
-    this.dbFetchDataService
-      .fetchCategories()
-      .subscribe((categories) => {
-        this.category = categories;
-        for (let category of categories) {
-          this.categories.push(category);
-        }
-        return this.categories;
-      });
-  }
-
-  getAreas() {
-    this.homepageAreas = [];
-    this.dbFetchDataService
-      .fetchHomepageAreas()
-      .subscribe((areas) => {
-        this.area = areas;
-        for (let area of areas) {
-          this.homepageAreas.push(area);
-        }
-        return this.homepageAreas;
-      });
+  deleteBrand(index) {
+    this.websiteDetails.brands.splice(index, 1);
   }
 
   editTermsOfUse() {
@@ -133,6 +61,25 @@ export class WebsiteEditComponent implements OnInit {
   }
 
   setName(name) {
-    this.dbWebsiteEditService.setName(name.value);
+    this.websiteDetails.name = name.value;
+    this.dbWebsiteEditService.updateWebsite('websiteName',name.value);
+    this.editName = false;
   }
+
+  footerEdit(footer) {
+    this.showEditFooter = false
+    this.websiteDetails.adress = footer.adress;
+    this.websiteDetails.email = footer.email;
+    this.websiteDetails.phone = footer.phone;
+    this.websiteDetails.program = footer.program;
+    this.websiteDetails.facebookImage = footer.facebookLogo;
+    this.websiteDetails.twitterImage = footer.twitterLogo;
+    this.websiteDetails.instagramImage = footer.instagramLogo;
+    // this.websiteDetails.youtube.image = footer.youtubeLogo;
+  }
+
+  saveInfo() {
+    // this.dbWebsiteEditService.websiteDetails(this.websiteDetails);
+  }
+
 }

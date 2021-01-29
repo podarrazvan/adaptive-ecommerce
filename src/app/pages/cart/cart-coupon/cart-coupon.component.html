@@ -1,8 +1,8 @@
 <div class="coupon">
     <div class="coupon-input">
         <img src="../../../../assets/tickets.svg" alt="coupon">
-        <input type="text" placeholder="Coupon code">
-        <button class="black-btn">Add coupon</button>
+        <input #code type="text" placeholder="Coupon code">
+        <button (click)="addCoupon(code)" class="black-btn">Add coupon</button>
     </div>
     <button class="gray-btn">Update cart</button>
 </div>

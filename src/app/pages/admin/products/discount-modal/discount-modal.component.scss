@@ -1,0 +1,30 @@
+.alert-box {
+  position: fixed;
+  top: 30vh;
+  width: 400px;
+  padding: 16px;
+  z-index: 100;
+  margin-left: -100px; //! FIX IT!
+  border-radius: 10px;
+  background: white;
+  box-shadow: 0 2px 8px rbga(0, 0, 0, 0.26);
+}
+
+.btn-danger {
+  float: right;
+}
+
+.discount {
+  display: flex;
+  height: 100%;
+}
+
+.right {
+  width: 200px;
+  display: flex;
+  align-items: center;
+  place-content: center;
+  button {
+    margin-top: 12px;
+  }
+}

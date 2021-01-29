@@ -7,13 +7,13 @@
   </div>
   <!--Desktop version-->
  <app-desktop-version-messages *ngIf="!mobile"
-  [emails]="fbEmails"
+  [emails]="emails"
   (open)="openEmail($event)"
   (delete)="onDelete($event)"
  ></app-desktop-version-messages>
 </div>
 <!--Mobile version-->
-<div class="emails" *ngFor="let email of fbEmails; let i = index">
+<div class="emails" *ngFor="let email of emails; let i = index">
   <div *ngIf="mobile">
     <div class="email-card">
       <div (click)="openEmail(i)">
@@ -39,4 +39,4 @@
     </div>
   </div>
 </div>
-<!---->
+

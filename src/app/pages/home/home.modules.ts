@@ -51,7 +51,7 @@ const COMPONENTS = [
         SharedModule,
         CommonModule,
         MatIconModule,
-        RouterModule
+        RouterModule,
     ],
     providers: [],
     exports: [...COMPONENTS,]

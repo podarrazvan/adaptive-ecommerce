@@ -1,9 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { TinyMCEComponent } from 'src/app/shared/components/tinymce/tinymce.component';
-import { Category } from 'src/app/shared/interfaces/category.interface';
+import { Brand } from 'src/app/shared/interfaces/brand.interface';
 import { DbDeleteService } from 'src/app/shared/services/database/db-delete.service';
-import { DbFetchDataService } from 'src/app/shared/services/database/db-fetch-data.service';
 import { DbUploadService } from 'src/app/shared/services/database/db-upload.service';
 import { SharedDataService } from 'src/app/shared/services/shared-data.service';
 
@@ -16,14 +15,17 @@ export class AddProductComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private dbUploadService: DbUploadService,
-    private dbFetchDataService: DbFetchDataService,
     private dbDeleteService: DbDeleteService,
-    private sharedData: SharedDataService
+    private sharedDataService: SharedDataService
   ) {}
   public tinyMCE: TinyMCEComponent;
 
+  loading = true;
+
   productForm: FormGroup;
   autoMode = false;
+
+  addDiscount = false;
 
   tags: string[] = [];
   tag: string;
@@ -31,66 +33,64 @@ export class AddProductComponent implements OnInit, OnDestroy {
   images: string[] = [];
 
   products = [];
-  categories: Category[];
+  categories: string[];
+  brands: Brand[];
 
   notComplete = true;
 
   onEditMode: boolean;
 
   ngOnInit(): void {
-    this.onEditMode = this.sharedData.productEdit;
+    this.onEditMode = this.sharedDataService.productEdit;
     if (this.onEditMode) {
       this.productForm = this.fb.group({
-        title: [this.sharedData.product.title, Validators.required],
-        category: [this.sharedData.product.category, Validators.required],
-        price: [this.sharedData.product.price, Validators.required],
-        img: '',
-        description: [this.sharedData.product.description],
+        title: [this.sharedDataService.product.title, Validators.required],
+        category: [this.sharedDataService.product.category, Validators.required],
+        brand: [this.sharedDataService.product.brand, Validators.required],
+        price: [this.sharedDataService.product.price, Validators.required],
+        images: '',
+        description: [this.sharedDataService.product.description],
         tags: [''],
-        quantity: [this.sharedData.product.quantity, Validators.required],
+        quantity: [this.sharedDataService.product.quantity, Validators.required],
         minPrice: [''],
-        salesWeekTarget: [''],
+        salesWeekTarget: ['']
       });
-      this.tags = this.sharedData.product.tags;
-      this.images = this.sharedData.product.img;
+      this.tags = this.sharedDataService.product.tags;
+      this.images = this.sharedDataService.product.images;
     } else {
       this.productForm = this.fb.group({
         title: ['', Validators.required],
         category: ['', Validators.required],
+        brand: ['', Validators.required],
         price: ['', Validators.required],
-        img: '',
+        images: '',
         description: [''],
         tags: [''],
         quantity: ['', Validators.required],
         minPrice: [''],
-        salesWeekTarget: [''],
+        salesWeekTarget: ['']
       });
     }
-    this.getCategories();
+    this.sharedDataService.websiteDetails.subscribe((data) => {
+      this.loading = false;
+      this.categories = data.categories;
+      this.brands = data.brands;
+    });
   }
 
   onSubmit() {
     if (this.images != undefined) {
       this.productForm.patchValue({
-        img: this.images,
+        images: this.images,
         tags: this.tags,
       });
-      if (this.sharedData.productEdit) {
-        this.dbUploadService
-          .updateProduct(this.productForm.value, this.sharedData.product.key)
-          .subscribe((response) => console.log(response));
+      if (this.sharedDataService.productEdit) {
+        // this.dbUploadService
+        //   .updateProduct(this.productForm.value, this.sharedDataService.product.key)
+        //   .subscribe((response) => console.log(response));
       } else {
-        console.log(this.productForm.value);
         this.dbUploadService.createAndStoreProduct(
-          this.productForm.value.title,
-          this.productForm.value.category,
-          this.productForm.value.price,
-          this.productForm.value.img,
-          this.productForm.value.description,
-          this.productForm.value.tags,
-          this.productForm.value.quantity,
-          this.productForm.value.minPrice,
-          this.productForm.value.salesWeekTarge
+          this.productForm.value
         );
       }
       this.notComplete = false;
@@ -125,16 +125,6 @@ export class AddProductComponent implements OnInit, OnDestroy {
     this.tags.splice(index, 1);
   }
 
-  getCategories() {
-    this.categories = [];
-    this.dbFetchDataService.fetchCategories().subscribe((categories) => {
-      for (let category of categories) {
-        this.categories.push(category);
-      }
-      return this.categories;
-    });
-  }
-
   ckeditorContentChanged(content) {
     const div = document.createElement('div');
     div.innerHTML = content;
@@ -142,8 +132,8 @@ export class AddProductComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.sharedData.product = null;
-    this.sharedData.productEdit = false;
+    this.sharedDataService.product = null;
+    this.sharedDataService.productEdit = false;
     if (this.notComplete && !this.onEditMode) {
       for (let img of this.images) {
         this.dbDeleteService.deletePhoto(img);

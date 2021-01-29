@@ -1,128 +1,81 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { Message } from '@angular/compiler/src/i18n/i18n_ast';
-import { Category } from '../../interfaces/category.interface';
+
 import { Footer } from '../../interfaces/footer.interface';
-import { HomepageArea } from '../../interfaces/homepage-area.interface';
 import { Order } from '../../interfaces/order.interface';
 import { Product } from '../../interfaces/product.interface';
+import { User } from '../../interfaces/user.interface';
+import { Coupon } from '../../interfaces/coupon.interface';
+import { environment } from 'src/environments/environment';
+import { Message } from '../../interfaces/message.interface';
+import { Discount } from '../../interfaces/discount.interface';
 
 @Injectable()
 export class DbFetchDataService {
-  constructor(
-    private http: HttpClient
-  ) { }
+  constructor(private http: HttpClient) {}
 
-  categories: Category[];
+  categories: string[];
   category;
 
   fetchProductsByCategory(category: string) {
-    return this.http
-      .get<[Product]>(
-        `http://localhost:3000/api/products/category/${category}`);
-  }
-
-  fetchProduct(key: string) {
-    return this.http.get<{product: Product}>(
-      `http://localhost:3000/api/products/id/${key}`
+    return this.http.get<{message: string, products: Product[]}>(
+      `${environment.api}/products/category/${category}`
     );
   }
 
-  fetchHomepageAreas() {
-    const homepageAreasArray: HomepageArea[] = [];
-    return this.http
-      .get<{ key: string }>(
-        `https://shop-436e8.firebaseio.com/homepage/areas/.json`
-      )
-      .pipe(
-        map((responseData) => {
-          for (const key in responseData) {
-            if (responseData.hasOwnProperty(key)) {
-              homepageAreasArray.push({ ...responseData[key], key });
-            }
-          }
-          return homepageAreasArray;
-        })
-      );
+  fetchProduct(key: string) {
+    return this.http.get<{ product: Product }>(
+      `${environment.api}/products/id/${key}`
+    );
   }
 
-  fetchCategories() {
-    const categoriesArray = [];
-    return this.http
-      .get<Category[]>(
-        `https://shop-436e8.firebaseio.com/categories/.json`
-      )
-      .pipe(
-        map((responseData) => {
-          for (const key in responseData) {
-            if (responseData.hasOwnProperty(key)) {
-              categoriesArray.push({ ...responseData[key], key });
-            }
-          }
-          return categoriesArray;
-        })
-      );
+  fetchProducts() {
+    return this.http.get<{message: string, products: Product[]}>(
+      `${environment.api}/products`
+    );
   }
 
-  fetchFromCarousel() {
-    const carouselArray = [];
-    return this.http
-      .get<{ category: string; id: string; key: string }>(
-        `https://shop-436e8.firebaseio.com/homepage/carousel/.json`
-      )
-      .pipe(
-        map((responseData) => {
-          for (const key in responseData) {
-            if (responseData.hasOwnProperty(key)) {
-              carouselArray.push({ ...responseData[key], key });
-            }
-          }
-          return carouselArray;
-        })
-      );
+  fetchPaginatedProducts(page: number, limit: number) {
+    return this.http.get<{results: Product[]}>(
+      `${environment.api}/products/paginated?page=${page}&limit=${limit}`
+    );
+  }
+
+  fetchPromotions() {
+    return this.http.get<Discount[]>(
+      `${environment.api}/discount`);
   }
 
   fetchMessages() {
-    const messagesArray = [];
-    return this.http
-      .get<{ message: Message }>(
-        `https://shop-436e8.firebaseio.com/messages/.json`
-      )
-      .pipe(
-        map((responseData) => {
-          for (const key in responseData) {
-            if (responseData.hasOwnProperty(key)) {
-              messagesArray.push({ ...responseData[key], key });
-            }
-          }
-          return messagesArray;
-        })
-      );
+    return this.http.get<{messages: Message []}>(`${environment.api}/contact`);
   }
 
   fetchTermsOfUse() {
-    return this.http
-      .get<{ termsOfUse: string }>(`https://shop-436e8.firebaseio.com/terms-of-use/.json`);
+    return this.http.get<{ termsOfUse: string }>(
+      `https://shop-436e8.firebaseio.com/terms-of-use/.json`
+    );
   }
 
   fetchAboutUs() {
-    return this.http
-      .get<{ aboutUs: string }>(`https://shop-436e8.firebaseio.com/about-us/.json`);
-
+    return this.http.get<{ aboutUs: string }>(
+      `https://shop-436e8.firebaseio.com/about-us/.json`
+    );
   }
 
   fetchName() {
-    return this.http
-      .get<{ name: string }>(`https://shop-436e8.firebaseio.com/website-name/.json`);
-
+    return this.http.get<{ name: string }>(
+      `https://shop-436e8.firebaseio.com/website-name/.json`
+    );
   }
 
   fetchOrders() {
     const user = JSON.parse(localStorage.getItem('userData'));
     const ordersArray = [];
     return this.http
-      .get<{ order: Order }>(`https://shop-436e8.firebaseio.com/orders/.json?auth=${user._token}`)
+      .get<{ order: Order }>(
+        `https://shop-436e8.firebaseio.com/orders/.json?auth=${user._token}`
+      )
       .pipe(
         map((responseData) => {
           for (const key in responseData) {
@@ -135,9 +88,25 @@ export class DbFetchDataService {
       );
   }
 
-  fetchFooter() {
+  fetchUsers() {
+    const usersArray = [];
     return this.http
-      .get<{ footer: Footer }>(`https://shop-436e8.firebaseio.com/footer/.json`);
+      .get<{ message: string; users: User[] }>(
+        'http://localhost:3000/api/users'
+      )
+      .pipe(
+        map((responseData) => {
+          for (const user of responseData.users) {
+            usersArray.push({ user });
+          }
+          console.log(usersArray);
+          return usersArray;
+        })
+      );
+  }
 
+  fetchCoupon(code) {
+    return this.http.get<{coupon: Coupon[]}>(`http://localhost:3000/api/coupons/${code}`);
   }
 }
+

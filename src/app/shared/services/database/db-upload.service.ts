@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Order } from '../../interfaces/order.interface';
 import { Product } from '../../interfaces/product.interface';
 import { Message } from '../../interfaces/message.interface';
+import { environment } from 'src/environments/environment';
+import { Discount } from '../../interfaces/discount.interface';
 
 @Injectable()
 export class DbUploadService {
@@ -12,37 +14,37 @@ export class DbUploadService {
  
   uploadImg(image: File){
     const img = new FormData();
-    img.append("image", image);
+    const date = new Date().getTime();
+    const imgName = Math.round((date / 1000)-160000000).toString();
+    console.log(imgName);
+    img.append("image", image,imgName);
     return this.http.post<{url: string}>('http://localhost:3000/api/images', img);
   }
 
-  createAndStoreProduct(
-    title: string,
-    category: string,
-    price: number,
-    img: String[],
-    description: string,
-    tags: any,
-    quantity: number,
-    minPrice: number,
-    salesWeekTarget: number
-  ) {
+  createAndStoreProduct( product: Product ) {
+
+    const date = new Date().getTime();
+    const productNumber = Math.round(date / 1000);
+    console.log(product)
     const productData: Product = {
-      title: title,
-      category: category,
-      price: price,
-      img: img,
-      description: description,
-      tags: tags,
-      quantity: quantity,
+      title: product.title,
+      category: product.category,
+      price: product.price,
+      images: product.images,
+      description: product.description,
+      tags: product.tags,
+      quantity: product.quantity,
       views:0,
-      minPrice: minPrice,
-      salesWeekTarget: salesWeekTarget
+      minPrice: product.minPrice,
+      salesWeekTarget: product.salesWeekTarget,
+      initialQuantity:product.quantity,
+      productNumber: productNumber,
+      brand: product.brand,
+      model: product.model
     };
-    console.log(productData);
     this.http
       .post<{ name: string }>(
-        'http://localhost:3000/api/products',
+        `${environment.api}/products`,
         productData,
         {
           observe: 'response',
@@ -58,44 +60,35 @@ export class DbUploadService {
       );
   }
 
-  updateProduct(product: Product, key?: string) {
-    if(key == undefined) {
-      key = product.key;
+  updateProduct(product: Product) {
+    console.log(product);
+    product.views = +product.views + 1;
+    console.log(product.views);
+    this.http.put(`${environment.api}/products/${product._id}`,product).subscribe(res => console.log(res));
+  }
+
+  createDiscount(discount: Discount) {
+    console.log(discount);
+    const discountData = {
+      price: discount.price,
+      expirationDate: discount.expirationDate,
+      productId: discount.id
     }
-    const user = JSON.parse(localStorage.getItem('userData'));
-    const productData: Product = {
-      title: product.title,
-      category: product.category,
-      price: product.price,
-      img: product.img,
-      description: product.description,
-      tags: product.tags,
-      quantity: product.quantity,
-      minPrice: product.minPrice,
-      salesWeekTarget: product.salesWeekTarget,
-      views: product.views
-    };
-    return this.http.put(
-      `https://shop-436e8.firebaseio.com/products/${product.category}/${key}/.json?auth=${user._token}`,
-      productData,
-      {
-        observe: 'response',
-      }
-    );
+    this.http.post(`${environment.api}/discount`,discountData).subscribe(res => console.log(res));
   }
   
   addMessage(message: Message) {
     const date = new Date();
     const messageToAdd = {
-      firstName: message.firstName,
-      lastName: message.lastName,
+      name: message.name,
+      subject: message.subject,
       email: message.email,
       message: message.message,
       date: date,
       seen: false,
     };
     this.http
-      .post(`https://shop-436e8.firebaseio.com/messages/.json`, messageToAdd, {
+      .post(`${environment.api}/contact`, messageToAdd, {
         observe: 'response',
       })
       .subscribe(
@@ -141,7 +134,7 @@ export class DbUploadService {
       date: order.date,
     };
     return this.http.put(
-      `https://shop-436e8.firebaseio.com/orders/${id}.json?auth=${user._token}`,
+      ``,
       orderToUpdate,
       {
         observe: 'response',
@@ -152,8 +145,8 @@ export class DbUploadService {
   updateMessage(message: Message) {
     const user = JSON.parse(localStorage.getItem('userData'));
     const messageToAdd = {
-      firstName: message.firstName,
-      lastName: message.lastName,
+      name: message.name,
+      subject: message.subject,
       email: message.email,
       message: message.message,
       date: message.date,
@@ -161,7 +154,7 @@ export class DbUploadService {
     };
     this.http
       .put(
-        `https://shop-436e8.firebaseio.com/messages/${message.key}/.json?auth=${user._token}`,
+        `${environment.api}/contact/${message._id}`,
         messageToAdd,
         {
           observe: 'response',

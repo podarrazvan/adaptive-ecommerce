@@ -18,23 +18,20 @@ const routes: Routes = [
     path: '',
     loadChildren: () =>
       import('../../pages/pages-module').then((m) => m.PagesModule),
-    
   },
   {
     path: 'admin',
     loadChildren: () =>
       import('../../pages/admin/admin.module').then((m) => m.AdminModule),
   },
-  {path: 'profile', canActivate: [AuthGuard], component: ProfileComponent}
-  ,
-
+  { path: 'profile', canActivate: [AuthGuard], component: ProfileComponent },
   // {
   //   path: 'profile',
   //   loadChildren: () =>
   //     import('../../pages/profile/profile.module').then((m) => m.ProfileModule),
   // },
-  {path:'wishlist', component: WishlistComponent},
-  {path: 'search/:search', component: SearchComponent},
+  { path: 'wishlist', component: WishlistComponent },
+  { path: 'search/:category/:search', component: SearchComponent },
   {
     path: 'product',
     loadChildren: () =>
@@ -45,9 +42,13 @@ const routes: Routes = [
     loadChildren: () =>
       import('../../pages/cart/cart.module').then((m) => m.CartModule),
   },
-  {path: 'checkout', component: CheckoutComponent},
-  {path: 'category/:category', component: CategoriesComponent},
-  {path: 'contact', component: ContactComponent},
+  { path: 'checkout', component: CheckoutComponent },
+  { path: 'category/:category', component: CategoriesComponent },
+  {
+    path: 'contact',
+    loadChildren: () =>
+      import('../../pages/contact/contact.module').then((m) => m.ContactModule),
+  },
   // {
   //   path: 'checkout',
   //   loadChildren: () =>
@@ -62,7 +63,12 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes), AuthModule, AdminModule, ProductModule],
+  imports: [
+    RouterModule.forRoot(routes),
+    AuthModule,
+    AdminModule,
+    ProductModule,
+  ],
   exports: [RouterModule],
   providers: [AuthService],
 })
