@@ -28,24 +28,19 @@ export class AuthService {
 
   user = new BehaviorSubject<User>(null);
 
-  constructor(
-    private http: HttpClient
-  ) {}
+  constructor(private http: HttpClient) {}
 
-  signup(username: string ,email: string, password: string) {
+  signup(username: string, email: string, password: string) {
     return this.http
-      .post<AuthResponseData>(
-        `${environment.api}/users/signup`,
-        {
-          username: username,
-          email: email,
-          password: password,
-          returnSecureToken: true
-        }
-      )
+      .post<AuthResponseData>(`${environment.api}/users/signup`, {
+        username: username,
+        email: email,
+        password: password,
+        returnSecureToken: true,
+      })
       .pipe(
         catchError(this.handleError),
-        tap(resData => {
+        tap((resData) => {
           this.handleAuthentication(
             resData.email,
             resData.password,
@@ -62,42 +57,11 @@ export class AuthService {
 
   login(email: string, password: string) {
     return this.http
-      .post<AuthResponseData>(
-        `${environment.api}/users/login`,
-        {
-          email: email,
-          password: password,
-          returnSecureToken: true,
-        }
-      )
-      .pipe(
-        catchError(this.handleError),
-        tap((resData) => {
-          console.log(resData);
-          this.handleAuthentication(
-            resData.email,
-            resData.password,
-            resData.userId,
-            resData.token,
-            +resData.expiresIn,
-            resData.history,
-            resData.categories,
-            resData.favorites
-          );
-        })
-      );
-  }
-
-  loginAdmin(email: string, password: string) {
-    return this.http
-      .post<AuthResponseData>(
-        `${environment.api}/users/login/admin`,
-        {
-          email: email,
-          password: password,
-          returnSecureToken: true,
-        }
-      )
+      .post<AuthResponseData>(`${environment.api}/users/login`, {
+        email: email,
+        password: password,
+        returnSecureToken: true,
+      })
       .pipe(
         catchError(this.handleError),
         tap((resData) => {
@@ -159,10 +123,19 @@ export class AuthService {
     expiresIn: number,
     history: string[],
     categories: string[],
-    favorites: string[],
+    favorites: string[]
   ) {
     const expirationDate = new Date(new Date().getTime() + expiresIn * 100);
-    const user = new User(email,password, userId,history, categories, favorites, token, expirationDate);
+    const user = new User(
+      email,
+      password,
+      userId,
+      history,
+      categories,
+      favorites,
+      token,
+      expirationDate
+    );
     this.user.next(user);
     this.autoLogout(expiresIn * 100);
     localStorage.setItem('userData', JSON.stringify(user));
@@ -203,7 +176,7 @@ export class AuthService {
     }, expirationDuration);
   }
 
-  updateUser( 
+  updateUser(
     email: string,
     password: string,
     userId: string,
@@ -211,10 +184,17 @@ export class AuthService {
     history: string[],
     categories: string[],
     favorites: string[]
-    ){
-
-    const user = new User(email,password, userId,history, categories, favorites, token);
-    this.http.put(`${environment.api}/users/update`,user).subscribe();
+  ) {
+    const user = new User(
+      email,
+      password,
+      userId,
+      history,
+      categories,
+      favorites,
+      token
+    );
+    this.http.put(`${environment.api}/users/update`, user).subscribe();
   }
 
   private handleError(errorRes: HttpErrorResponse) {

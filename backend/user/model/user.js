@@ -10,7 +10,8 @@ const userSchema = mongoose.Schema({
         id: {type: String}, //product's id
         time: {type: Number} //time spent on a product in seconds
     }],
-    categories: [{type: String}] //top most viewed categories
+    categories: [{type: String}], //top most viewed categories
+    isAdmin: {type: Boolean}
 });
 
 userSchema.plugin(uniqueValidator);

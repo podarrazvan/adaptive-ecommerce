@@ -17,7 +17,6 @@ export class LoginFormComponent implements OnInit {
   error = false;
   auth;
   resetPasswordMode = false;
-  admin = false;
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -55,12 +54,8 @@ export class LoginFormComponent implements OnInit {
 
     this.isLoading = true;
 
-    if(this.admin) {
-      authObs = this.authService.loginAdmin(email, password);
-    } else {
-      authObs = this.authService.login(email, password);
-    }
-
+    authObs = this.authService.login(email, password);
+    
     authObs.subscribe(
       (resData) => {
         console.log(resData);

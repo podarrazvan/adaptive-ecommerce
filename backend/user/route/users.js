@@ -5,7 +5,6 @@ const jwt = require("jsonwebtoken");
 const checkAuth = require("../../shared/middlewares/check-auth");
 
 const User = require("../model/user");
-const Admin = require("../model/admin");
 
 const router = express.Router();
 
@@ -13,10 +12,11 @@ router.post("/signup", (req, res, next) => {
   let user;
   bcrypt.hash(req.body.password, 10).then((hash) => {
     if ("admin" === req.body.username) {
-      user = new Admin({
+      user = new User({
         username: req.body.username,
         email: req.body.email,
         password: hash,
+        isAdmin: true
       });
     } else {
       user = new User({
