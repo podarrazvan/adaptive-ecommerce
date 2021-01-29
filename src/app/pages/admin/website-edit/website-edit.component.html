@@ -1,24 +1,28 @@
-
-
 <ng-container *ngIf="websiteDetails">
   <div class="website-edit-box">
     <div *ngIf="showEditTermsOfUse">
-      <app-terms-of-use-edit
+      <app-page-edit
         (close)="closeTermsOfUseEdit()"
-      ></app-terms-of-use-edit>
+        [content]="this.websiteDetails.termsOfUse"
+        pageName="terms-of-use"
+      ></app-page-edit>
     </div>
-  
+
     <div *ngIf="showEditAboutUs">
-      <app-about-us-edit (close)="closeEditAboutUs()"></app-about-us-edit>
+      <app-page-edit
+        (close)="closeEditAboutUs()"
+        [content]="this.websiteDetails.aboutUs"
+        pageName="about-us"
+      ></app-page-edit>
     </div>
-  
+
     <div *ngIf="showEditFooter">
       <app-footer-edit
         (close)="footerEdit($event)"
         [websiteDetails]="websiteDetails"
       ></app-footer-edit>
     </div>
-  
+
     <h1>Settings</h1>
     <hr />
     <div class="edit-option">
@@ -43,15 +47,21 @@
       <h2 class="center website-name" *ngIf="!editName">
         {{ websiteDetails.name }}
       </h2>
-      <button *ngIf="!editName" (click)="editName = true" class="main-btn website-name-btn">Edit</button>
+      <button
+        *ngIf="!editName"
+        (click)="editName = true"
+        class="main-btn website-name-btn"
+      >
+        Edit
+      </button>
     </div>
     <hr />
-  
+
     <div class="edit-option">
       <h2 class="left">Categories</h2>
-      <div class="center" >
+      <div class="center">
         <div
-        *ngFor="let category of websiteDetails.categories; let i = index"
+          *ngFor="let category of websiteDetails.categories; let i = index"
           class="simple-btn"
         >
           {{ category }}
@@ -62,14 +72,15 @@
         [categories]="websiteDetails.categories"
       ></app-categories-edit>
     </div>
-    <hr>
-  
+    <hr />
+
     <div class="edit-option">
       <h2 class="left">Brands</h2>
       <div class="center">
-        <div 
-        *ngFor="let brand of websiteDetails.brands; let i =  index"    
-        class="simple-btn">
+        <div
+          *ngFor="let brand of websiteDetails.brands; let i = index"
+          class="simple-btn"
+        >
           {{ brand.name }}
         </div>
       </div>
@@ -79,28 +90,34 @@
         [brands]="websiteDetails.brands"
       ></app-brands-edit>
     </div>
-    <hr>
-  
-     <!--Coupons-->
+    <hr />
+
+    <!--Coupons-->
     <div class="edit-option">
-      <h2 class="left">
-        Coupons
-      </h2>
-      <div class="simple-btn" *ngFor="let coupon of coupons; let i = index"> {{coupon}}</div>
+      <h2 class="left">Coupons</h2>
+      <div class="simple-btn" *ngFor="let coupon of coupons; let i = index">
+        {{ coupon }}
+      </div>
       <app-coupons-edit></app-coupons-edit>
     </div>
     <hr />
-  
+
     <!--Shipping-->
     <div class="edit-option">
-      <h2 class="left">
-        Shipping
-      </h2>
-      <div class="simple-btn" *ngFor="let shipping of websiteDetails.shipping; let i = index"> {{shipping.name}}</div>
-      <app-shipping-edit [shippings]="websiteDetails.shipping" (newShippings)="websiteDetails.shipping"></app-shipping-edit>
+      <h2 class="left">Shipping</h2>
+      <div
+        class="simple-btn"
+        *ngFor="let shipping of websiteDetails.shipping; let i = index"
+      >
+        {{ shipping.name }}
+      </div>
+      <app-shipping-edit
+        [shippings]="websiteDetails.shipping"
+        (newShippings)="(websiteDetails.shipping)"
+      ></app-shipping-edit>
     </div>
     <hr />
-  
+
     <!--Terms of use-->
     <div class="edit-option">
       <h2 class="left">Terms Of Use</h2>
@@ -109,7 +126,7 @@
         Edit
       </button>
     </div>
-  
+
     <hr />
     <div class="edit-option">
       <h2 class="left">About Us</h2>
@@ -130,5 +147,4 @@
       </button>
     </div>
   </div>
-  
 </ng-container>

@@ -37,6 +37,8 @@ export class AppComponent implements OnInit {
         youtubeUrl: 'youtube url',
         instagramImage: 'empty',
         instagramUrl: 'instagram url',
+        termsOfUse: '',
+        aboutUs:'',
      
       };
       this.dbWebsiteEdit.createWebsiteDetails(websiteData);

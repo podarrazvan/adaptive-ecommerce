@@ -19,4 +19,6 @@ export interface WebsiteDetails {
   youtubeUrl: string;
   instagramImage: string;
   instagramUrl: string;
+  aboutUs: string;
+  termsOfUse: string;
 }

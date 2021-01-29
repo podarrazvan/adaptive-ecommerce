@@ -4,6 +4,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { throwError, BehaviorSubject } from 'rxjs';
 
 import { User } from './user.model';
+import { environment } from 'src/environments/environment';
 
 export interface Id {
   uid: string;
@@ -34,7 +35,7 @@ export class AuthService {
   signup(username: string ,email: string, password: string) {
     return this.http
       .post<AuthResponseData>(
-        'http://localhost:3000/api/users/signup',
+        `${environment.api}/users/signup`,
         {
           username: username,
           email: email,
@@ -62,7 +63,7 @@ export class AuthService {
   login(email: string, password: string) {
     return this.http
       .post<AuthResponseData>(
-        'http://localhost:3000/api/users/login',
+        `${environment.api}/users/login`,
         {
           email: email,
           password: password,
@@ -90,7 +91,7 @@ export class AuthService {
   loginAdmin(email: string, password: string) {
     return this.http
       .post<AuthResponseData>(
-        'http://localhost:3000/api/users/login/admin',
+        `${environment.api}/users/login/admin`,
         {
           email: email,
           password: password,
@@ -168,7 +169,6 @@ export class AuthService {
   }
 
   logout() {
-    console.log('deconectare')
     this.user.next(null);
     const userData: {
       email: string;
@@ -214,7 +214,7 @@ export class AuthService {
     ){
 
     const user = new User(email,password, userId,history, categories, favorites, token);
-    this.http.put(`http://localhost:3000/api/users/update`,user).subscribe();
+    this.http.put(`${environment.api}/users/update`,user).subscribe();
   }
 
   private handleError(errorRes: HttpErrorResponse) {

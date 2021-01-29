@@ -19,13 +19,6 @@ export class DbDeleteService {
     );
   }
 
-  deleteFromCarousel(key: string) {
-    const user = JSON.parse(localStorage.getItem('userData'));
-    return this.http.delete(
-      `https://shop-436e8.firebaseio.com/homepage/carousel/${key}/.json?auth=${user._token}`
-    );
-  }
-
   deleteCategory(key: string) {
     const user = JSON.parse(localStorage.getItem('userData'));
     return this.http.delete(
@@ -49,15 +42,6 @@ export class DbDeleteService {
 
   deletePhoto(img: string) {
     // NOT WORKING!
-    console.log('Delete img not working!')
-  //   var image = firebase.storage().refFromURL(img);
-  //   image
-  //     .delete()
-  //     .then(function () {
-  //       console.log('Image deleted!');
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error);
-  //     });
+    console.log('Delete img not working!');
   }
 }

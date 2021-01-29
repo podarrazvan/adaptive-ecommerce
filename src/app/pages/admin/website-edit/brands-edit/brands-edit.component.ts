@@ -33,8 +33,8 @@ export class BrandsEditComponent implements OnInit {
       name: brandName.value
     }
     this.newBrands.push(brand);
-    console.log(this.newBrands);
-    this.dbWebsiteEditService.updateWebsite('websiteBrands',brandName.value);
+    console.log('brands\n',this.newBrands);
+    this.dbWebsiteEditService.updateWebsite('websiteBrands',brand);
     this.finalBrands.emit(this.newBrands);
   }
 

@@ -32,39 +32,10 @@ export class WebsiteEditComponent implements OnInit {
       }
     });
   }
-  // addNewValue(value, type) {
-  //   if (value.value != '' && type === 'category') {
-  //     console.log(value.value);
-  //     this.websiteDetails.categories.push(value.value);
-  //     console.log(this.websiteDetails.categories);
-  //   }
-  // }
-
-  delete(index, id, type) {
-    if (type === 'category') {
-    this.websiteDetails.categories.splice(index, 1);
-    }
-     
-  }
-
 
   edit(newValue, id, type) {
   
   }
-
-  // getCategories() {
-  //   this.categories = [];
-  //   this.dbFetchDataService
-  //     .fetchCategories()
-  //     .subscribe((categories) => {
-  //       this.category = categories;
-  //       for (let category of categories) {
-  //         this.categories.push(category);
-  //       }
-  //       return this.categories;
-  //     });
-  // }
-
   deleteCategory(index) {
     this.websiteDetails.categories.splice(index, 1);
   }
@@ -90,7 +61,6 @@ export class WebsiteEditComponent implements OnInit {
   }
 
   setName(name) {
-    console.log(name);
     this.websiteDetails.name = name.value;
     this.dbWebsiteEditService.updateWebsite('websiteName',name.value);
     this.editName = false;

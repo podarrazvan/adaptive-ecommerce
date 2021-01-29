@@ -16,37 +16,16 @@ export class DbWebsiteEditService {
   category;
 
   createWebsiteDetails(details: WebsiteDetails) {
-    const websiteDetails = { info: details };
-    const id = this.sharedDataService.websiteDocId;
-    console.log(websiteDetails);
-
     this.http
-      .post(`${environment.api}/website`, websiteDetails)
+      .post(`${environment.api}/website`, details)
       .subscribe(() => location.reload());
   }
 
   updateWebsite(sectionName: string, value) {
-    const data = {info: value};
+    const data = {data: value};
     const id = this.sharedDataService.websiteDocId;
     this.http.put(`${environment.api}/website/${id}/${sectionName}`,data).subscribe((error) => console.log(error));
   }
-
-  updateWebsiteName(name: string) {
-    const id = this.sharedDataService.websiteDocId;
-    const newName = { info: name };
-    this.http
-      .put(`${environment.api}/website/${id}/websiteName`, newName)
-      .subscribe((error) => console.log(error));
-  }
-  
-  updateWebsiteCategories(categories: string[]) {
-    const id = this.sharedDataService.websiteDocId;
-    const newCategories = { info: categories };
-    this.http
-      .put(`${environment.api}/website/${id}/websiteCategories`, newCategories)
-      .subscribe((error) => console.log(error));
-  }
-
 
   fetchWebsiteDetails() {
     return this.http.get<{ info: WebsiteDetails }>(
@@ -66,12 +45,12 @@ export class DbWebsiteEditService {
     );;
   }
 
-  editPages(content: string, page: string, id?: string) {
-    const pageData = { content: content };
-    console.log(id);
-    if (!id) {
+  editPages(content: string, page: string) {
+    const id = this.sharedDataService.websiteDocId;
+    console.log(content);
+    const pageContent = {content}
       this.http
-        .post(`${environment.api}/pages/${page}`, pageData)
+        .put(`${environment.api}/pages/${page}/${id}`, pageContent)
         .subscribe(
           (responseData) => {
             console.log(responseData);
@@ -80,18 +59,6 @@ export class DbWebsiteEditService {
             console.log(error.message);
           }
         );
-    } else {
-      this.http
-        .put(`${environment.api}/pages/${page}/${id}`, pageData)
-        .subscribe(
-          (responseData) => {
-            console.log(responseData);
-          },
-          (error) => {
-            console.log(error.message);
-          }
-        );
-    }
   }
 
   fetchPages(page) {

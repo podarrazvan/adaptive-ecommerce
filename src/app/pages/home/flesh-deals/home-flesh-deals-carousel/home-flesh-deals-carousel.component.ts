@@ -13,8 +13,6 @@ export class HomeFleshDealsCarouselComponent implements OnInit {
   singleSlide: any;
   index = 0;
 
-  constructor() { }
-
   ngOnInit(): void {
 
     const elements = 3;
