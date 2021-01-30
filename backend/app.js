@@ -1,3 +1,4 @@
+require('dotenv').config({path:'./.env'});
 const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -12,6 +13,8 @@ const coponsRoutes = require('./coupon/route/coupons.route');
 const contactRoutes = require('./contact/route/contact.route');
 const discountRoutes = require('./discount/route/discounts.route');
 
+ console.log(process.env.DB_URL);
+
 const app = express();
 
 //
@@ -23,7 +26,8 @@ app.use(cookieParser());
 
 module.exports = app;
 
-mongoose.connect("mongodb+srv://admin:admin@backend-test.6tqwn.mongodb.net/ecommerce", { useUnifiedTopology: true }, { useNewUrlParser: true }).then(()=>{
+
+mongoose.connect(process.env.DB_URL, { useUnifiedTopology: true }, { useNewUrlParser: true }).then(()=>{
     console.log("Connected!");
 });
 
