@@ -24,7 +24,7 @@ export class DbWebsiteEditService {
   updateWebsite(sectionName: string, value) {
     const data = {data: value};
     const id = this.sharedDataService.websiteDocId;
-    this.http.put(`${environment.api}/website/${id}/${sectionName}`,data).subscribe((error) => console.log(error));
+    this.http.put(`${environment.api}/website/${id}/${sectionName}`,data).subscribe();
   }
 
   fetchWebsiteDetails() {
@@ -47,18 +47,10 @@ export class DbWebsiteEditService {
 
   editPages(content: string, page: string) {
     const id = this.sharedDataService.websiteDocId;
-    console.log(content);
     const pageContent = {content}
       this.http
         .put(`${environment.api}/pages/${page}/${id}`, pageContent)
-        .subscribe(
-          (responseData) => {
-            console.log(responseData);
-          },
-          (error) => {
-            console.log(error.message);
-          }
-        );
+        .subscribe();
   }
 
   fetchPages(page) {

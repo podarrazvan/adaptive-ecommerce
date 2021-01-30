@@ -39,14 +39,12 @@ export class HomeNewReleasesCarouselComponent implements OnInit {
 
   next() {
     this.index == this.singleSlide.length -1 ? this.index = 0 : this.index++;
-    this.singleSlide = this.slides[this.index]; 
-    console.log(this.index);
+    this.singleSlide = this.slides[this.index];
   }
 
   previous() {
     this.index == 0 ? this.index = this.singleSlide.length -1  : this.index--;
     this.singleSlide = this.slides[this.index]; 
-    console.log(this.index);
   }
 
 }

@@ -26,7 +26,6 @@ export class CouponsEditComponent implements OnInit {
   }
 
   addNewValue(coupon) {
-    console.log(coupon.value);
     this.coupons.push(coupon.value);
     this.newCoupons.emit(this.coupons);
     this.dbWebsiteEditService.addCoupon(coupon.value);

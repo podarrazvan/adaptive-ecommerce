@@ -41,7 +41,6 @@ export class DbDeleteService {
   }
 
   deletePhoto(img: string) {
-    // NOT WORKING!
-    console.log('Delete img not working!');
+    // TODO
   }
 }

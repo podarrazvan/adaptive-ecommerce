@@ -54,14 +54,12 @@ export class HomeFleshDealsCarouselComponent implements OnInit {
     // ! must be this.singleSlide.length -1 not -2 !
     this.index == this.singleSlide.length -2 ? this.index = 0 : this.index++;
     this.singleSlide = this.slides[this.index];
-    console.log(this.index);
   }
 
   previous() {
     // ! must be this.singleSlide.length -1 not -2 !
     this.index == 0 ? this.index = this.singleSlide.length -2  : this.index--;
     this.singleSlide = this.slides[this.index];
-    console.log(this.index);
   }
 
 }

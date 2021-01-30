@@ -65,7 +65,6 @@ export class AuthService {
       .pipe(
         catchError(this.handleError),
         tap((resData) => {
-          console.log(resData);
           this.handleAuthentication(
             resData.email,
             resData.password,
@@ -170,7 +169,6 @@ export class AuthService {
   }
 
   autoLogout(expirationDuration: number) {
-    console.log(expirationDuration);
     this.tokenExpirationTimer = setTimeout(() => {
       this.logout();
     }, expirationDuration);

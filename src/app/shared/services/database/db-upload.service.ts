@@ -16,7 +16,6 @@ export class DbUploadService {
     const img = new FormData();
     const date = new Date().getTime();
     const imgName = Math.round((date / 1000)-160000000).toString();
-    console.log(imgName);
     img.append("image", image,imgName);
     return this.http.post<{url: string}>('http://localhost:3000/api/images', img);
   }
@@ -25,7 +24,6 @@ export class DbUploadService {
 
     const date = new Date().getTime();
     const productNumber = Math.round(date / 1000);
-    console.log(product)
     const productData: Product = {
       title: product.title,
       category: product.category,
@@ -50,31 +48,21 @@ export class DbUploadService {
           observe: 'response',
         }
       )
-      .subscribe(
-        (responseData) => {
-          console.log(responseData);
-        },
-        (error) => {
-          console.log(error.message);
-        }
-      );
+      .subscribe();
   }
 
   updateProduct(product: Product) {
-    console.log(product);
     product.views = +product.views + 1;
-    console.log(product.views);
-    this.http.put(`${environment.api}/products/${product._id}`,product).subscribe(res => console.log(res));
+    this.http.put(`${environment.api}/products/${product._id}`,product).subscribe();
   }
 
   createDiscount(discount: Discount) {
-    console.log(discount);
     const discountData = {
       price: discount.price,
       expirationDate: discount.expirationDate,
       productId: discount.id
     }
-    this.http.post(`${environment.api}/discount`,discountData).subscribe(res => console.log(res));
+    this.http.post(`${environment.api}/discount`,discountData).subscribe();
   }
   
   addMessage(message: Message) {
@@ -91,14 +79,7 @@ export class DbUploadService {
       .post(`${environment.api}/contact`, messageToAdd, {
         observe: 'response',
       })
-      .subscribe(
-        (responseData) => {
-          console.log(responseData);
-        },
-        (error) => {
-          console.log(error.message);
-        }
-      );
+      .subscribe();
   }
 
   addOrder(order: Order) {
@@ -114,14 +95,7 @@ export class DbUploadService {
       .post(`https://shop-436e8.firebaseio.com/orders/.json`, orderToAdd, {
         observe: 'response',
       })
-      .subscribe(
-        (responseData) => {
-          console.log(responseData);
-        },
-        (error) => {
-          console.log(error.message);
-        }
-      );
+      .subscribe();
   }
 
   updateOrder(order: Order, status: string, id: string) {
@@ -160,13 +134,6 @@ export class DbUploadService {
           observe: 'response',
         }
       )
-      .subscribe(
-        (responseData) => {
-          console.log(responseData);
-        },
-        (error) => {
-          console.log(error.message);
-        }
-      );
+      .subscribe();
   }
 }

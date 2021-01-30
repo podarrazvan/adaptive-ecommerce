@@ -58,12 +58,10 @@ export class LoginFormComponent implements OnInit {
     
     authObs.subscribe(
       (resData) => {
-        console.log(resData);
         this.isLoading = false;
         this.router.navigate(['../']);
       },
       (errorMessage) => {
-        console.log(errorMessage);
         this.error = errorMessage;
         this.isLoading = false;
       }

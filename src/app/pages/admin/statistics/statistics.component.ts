@@ -120,7 +120,6 @@ export class StatisticsComponent implements OnInit {
         // }
       });
     this.loading = false;
-    console.log(this.products);
   }
 
   openProduct(category: string, key: string) {

@@ -1,41 +1,19 @@
 const express = require("express");
 
-const Discount = new require("../model/discount");
+const Discount = new require("../model/discount.schema");
+
+import { LOGS } from "../../shared/errors";
 
 const router = express.Router();
 
-router.put("/:id", (req, res, next) => {
-  console.log(req.body);
-
-  const discount = new Discount({
-    _id: req.params.id,
-    price: req.body.price,
-    expirationDate: req.body.expirationDate,
-    productId: req.body.productId,
-  });
-
-  Discount.updateOne({ _id: req.params.id }, discount).then((result) => {
-    console.log(result);
-    if (result.nModified > 0) {
-      res.status(200).json({ message: "Discount updated successful!" });
-    } else {
-      res.status(401).json({ message: "Not authorized!" });
-    }
-  });
-});
-
 router.post("", (req, res, next) => {
-  console.log(req.body);
 
-  const discount = new Discount({
-    price: req.body.price,
-    expirationDate: req.body.expirationDate,
-    productId: req.body.productId,
-  });
+  const {price, expirationDate, productId} = req.body;
+  const discount = new Discount({price, expirationDate, productId});
 
   discount.save().then((createdDiscount) => {
     res.status(201).json({
-      message: "Discount created successfully",
+      message: LOGS.DISCOUNTS.CREATED,
       post: {
         ...createdDiscount,
         id: createdDiscount._id,
@@ -68,6 +46,22 @@ router.get("", (req, res, next) => {
      activePromotions,
     );
   });
+});
+
+router.put("/:id", (req, res, next) => {
+
+  const _id = req.params.id;
+  const {price, expirationDate, productId} = req.body;
+  const discount = new Discount({_id, price, expirationDate, productId});
+
+  Discount.updateOne({ _id: req.params.id }, discount).then(
+    (result) => {
+      res.status(200).json({ message: LOGS.DISCOUNTS.CREATED });
+    },
+    (err) => {
+      res.status(401).json({ message: LOGS.DISCOUNTS.NOT_CREATED });
+    }
+  );
 });
 
 module.exports = router;

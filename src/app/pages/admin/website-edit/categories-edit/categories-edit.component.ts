@@ -23,9 +23,7 @@ export class CategoriesEditComponent implements OnInit {
   }
 
   addNewValue(category) {
-    console.log(category.value);
     this.newCategories.push(category.value);
-    console.log(this.newCategories);
     this.finalCategories.emit(this.newCategories);
     this.dbWebsiteEditService.updateWebsite('websiteCategories',this.newCategories);
   }

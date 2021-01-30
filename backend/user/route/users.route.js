@@ -4,9 +4,18 @@ const jwt = require("jsonwebtoken");
 
 const checkAuth = require("../../shared/middlewares/check-auth");
 
-const User = require("../model/user");
+const User = require("../model/user.schema");
 
 const router = express.Router();
+
+router.get("", (req, res, next) => {
+  User.find().then((documents) => {
+    res.status(200).json({
+      message: "Users fetched successfully",
+      users: documents,
+    });
+  });
+});
 
 router.post("/signup", (req, res, next) => {
   let user;
@@ -16,7 +25,7 @@ router.post("/signup", (req, res, next) => {
         username: req.body.username,
         email: req.body.email,
         password: hash,
-        isAdmin: true
+        isAdmin: true,
       });
     } else {
       user = new User({
@@ -85,57 +94,24 @@ router.post("/login", (req, res, next) => {
     });
 });
 
-router.post("/login/admin", (req, res, next) => {
-  let fetchedUser;
-  Admin.findOne({ email: req.body.email })
-    .then((user) => {
-      if (!user) {
-        return res.status(401).json({
-          message: "Auth failed",
-        });
-      }
-      fetchedUser = user;
-      return bcrypt.compare(req.body.password, user.password);
-    })
-    .then((result) => {
-      if (!result) {
-        return res.status(401).json({
-          message: "Auth failed",
-        });
-      }
-      const token = jwt.sign(
-        { email: fetchedUser.email, userId: fetchedUser._id },
-        "asdsadvhbhbrejbjhb223bhblbhljbhblbcsdlhbaaakksxa;na;sdknx##1akkkaxxaxalg",
-        { expiresIn: "1h" }
-      );
-      res.status(200).json({
-        token: token,
-        expiresIn: 3600,
-        userId: fetchedUser._id,
-        email: fetchedUser.email,
-        password: fetchedUser.password,
-        favorites: fetchedUser.favorites,
-        categories: fetchedUser.categories,
-        history: fetchedUser.history,
-      });
-    })
-    .catch((err) => {
-      return res.status(401).json({
-        message: "Auth failed",
-      });
-    });
-});
-
 router.put("/update", checkAuth, (req, res, next) => {
-  console.log(req.body);
+  const {
+    _id,
+    username,
+    email,
+    password,
+    favorites,
+    categories,
+    history,
+  } = req.body;
   const user = new User({
-    _id: req.body.id,
-    username: req.body.username,
-    email: req.body.email,
-    password: req.body.password,
-    favorites: req.body.favorites,
-    categories: req.body.categories,
-    history: req.body.history,
+    _id,
+    username,
+    email,
+    password,
+    favorites,
+    categories,
+    history,
   });
   User.updateOne({ _id: req.body.id }, user).then((result) => {
     if (result.nModified > 0) {
@@ -143,15 +119,6 @@ router.put("/update", checkAuth, (req, res, next) => {
     } else {
       res.status(401).json({ message: "Not authorized!" });
     }
-  });
-});
-
-router.get("", (req, res, next) => {
-  User.find().then((documents) => {
-    res.status(200).json({
-      message: "Users fetched successfully",
-      users: documents,
-    });
   });
 });
 

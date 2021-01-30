@@ -1,31 +1,48 @@
 const express = require("express");
-const Product = require("../model/product");
+const Product = require("../model/product.schema");
+
+import {LOGS} from "../../shared/errors";
 
 const router = express.Router();
 
 router.post("", (req, res, next) => {
-
+  const {
+    title,
+    caregory,
+    brand,
+    price,
+    tags,
+    description,
+    thumbnail,
+    images,
+    quantity,
+    views,
+    initialQuantity,
+    productNumber,
+    minPrice,
+    salesWeekTarget
+  } = req.body;
   const product = new Product({
-    title: req.body.title,
-    category: req.body.category,
-    brand: req.body.brand,
-    price: req.body.price,
-    tags: req.body.tags,
-    description: req.body.description,
-    thumbnail: req.body.thumbnail,
-    images: req.body.images,
-    quantity: req.body.quantity,
-    views: req.body.views,
+    title,
+    caregory,
+    brand,
+    price,
+    tags,
+    description,
+    thumbnail,
+    images,
+    quantity,
+    views,
+    initialQuantity,
+    productNumber,
     autoMode: {
-      minPrice: req.body.minPrice,
-      salesWeekTarget: req.body.salesWeekTarget,
+      minPrice,
+      salesWeekTarget
     },
-    initialQuantity: req.body.initialQuantity,
-    productNumber: req.body.productNumber,
   });
   product.save().then((createdProduct) => {
     res.status(201).json({
-      message: "Post added successfully",
+      message: LOGS.PRODUCT.CREATED,
       post: {
         ...createdProduct,
         id: createdProduct._id,
@@ -35,39 +52,58 @@ router.post("", (req, res, next) => {
 });
 
 router.put("/:id", (req, res, next) => {
+  const _id = req.params.id;
+  const {
+    title,
+    caregory,
+    brand,
+    price,
+    tags,
+    description,
+    thumbnail,
+    images,
+    quantity,
+    views,
+    initialQuantity,
+    productNumber,
+    minPrice,
+    salesWeekTarget
+  } = req.body;
   const product = new Product({
-    _id: req.params.id,
-    title: req.body.title,
-    category: req.body.category,
-    brand: req.body.brand,
-    price: req.body.price,
-    tags: req.body.tags,
-    description: req.body.description,
-    thumbnail: req.body.thumbnail,
-    images: req.body.images,
-    quantity: req.body.quantity,
-    views: req.body.views,
+    _id,
+    title,
+    caregory,
+    brand,
+    price,
+    tags,
+    description,
+    thumbnail,
+    images,
+    quantity,
+    views,
+    initialQuantity,
+    productNumber,
     autoMode: {
-      minPrice: req.body.minPrice,
-      salesWeekTarget: req.body.salesWeekTarget,
+      minPrice,
+      salesWeekTarget
     },
     initialQuantity: req.body.initialQuantity,
     productNumber: req.body.productNumber,
   });
 
-  Product.updateOne({ _id: req.params.id }, product).then((result) => {
-    if (result.nModified > 0) {
-      res.status(200).json({ message: "Update successful!" });
-    } else {
-      res.status(401).json({ message: "Not authorized!" });
+  Product.updateOne({ _id: req.params.id }, product).then(
+    (result) => {
+      res.status(200).json({ message: LOGS.PRODUCT.UPDATE });
+    },
+    (err) => {
+      res.status(401).json({ message: LOGS.PRODUCT.FAILED });
     }
-  });
+  );
 });
 
 router.get("/category/:category", (req, res, next) => {
   Product.find({ category: req.params.category }).then((documents) => {
     res.status(200).json({
-      message: "Products fetched successfully",
       products: documents,
     });
   });
@@ -87,20 +123,20 @@ router.get("/paginated", paginatedResults(Product), (req, res, next) => {
 router.get("", (req, res, next) => {
   Product.find().then((prod) => {
     res.status(200).json({
-      message: "Products fetched successfully",
       products: prod,
     });
   });
 });
 
 router.delete("/:id", (req, res, next) => {
-  Product.deleteOne({ _id: req.params.id }).then((result) => {
-    if (result.n > 0) {
-      res.status(200).json({ message: "Deletion successful!" });
-    } else {
-      res.status(401).json({ message: "Not authorized!" });
+  Product.deleteOne({ _id: req.params.id }).then(
+    (result) => {
+      res.status(200).json({ message: LOGS.PRODUCT.DELETED });
+    },
+    (err) => {
+      res.status(401).json({ message: LOGS.PRODUCT.DELETE_FAILED });
     }
-  });
+  );
 });
 
 function paginatedResults(model) {

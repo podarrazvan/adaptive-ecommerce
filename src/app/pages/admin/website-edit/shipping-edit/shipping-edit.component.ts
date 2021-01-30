@@ -26,7 +26,6 @@ export class ShippingEditComponent implements OnInit {
 
   addNewValue(form) {
     this.shippings.push(form.value);
-    console.log(this.shippings);
     this.dbWebsiteEditService.updateWebsite('websiteShipping',form.value);
     this.newShippings.emit(this.shippings);
   }

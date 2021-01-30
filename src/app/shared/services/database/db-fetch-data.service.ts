@@ -99,7 +99,6 @@ export class DbFetchDataService {
           for (const user of responseData.users) {
             usersArray.push({ user });
           }
-          console.log(usersArray);
           return usersArray;
         })
       );

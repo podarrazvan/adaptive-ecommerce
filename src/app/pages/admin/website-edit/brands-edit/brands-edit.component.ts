@@ -27,13 +27,11 @@ export class BrandsEditComponent implements OnInit {
   }
 
   addNewValue(brandName) {
-    console.log(brandName.value);
     const brand: Brand = {
       image: this.brandLogoPath,
       name: brandName.value
     }
     this.newBrands.push(brand);
-    console.log('brands\n',this.newBrands);
     this.dbWebsiteEditService.updateWebsite('websiteBrands',brand);
     this.finalBrands.emit(this.newBrands);
   }

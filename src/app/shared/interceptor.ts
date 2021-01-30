@@ -13,7 +13,6 @@ export class Interceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         // OK but not working!
         // this.sharedDataService.userDetails.subscribe(data => {
-        //     console.log(data);
         //     this.token = data.token
         //     this.request = req.clone({
         //         headers: req.headers.set("Authorization", "Beare "+ this.token)

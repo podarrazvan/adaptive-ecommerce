@@ -18,7 +18,6 @@ export class CartCouponComponent implements OnInit {
 
   addCoupon(code) {
     this.dbFetchDataServide.fetchCoupon(code.value).subscribe(response =>  {
-      console.log(typeof(response.coupon[0].discount));
       this.discount.emit(response.coupon[0].discount);
     });
   }

@@ -55,7 +55,6 @@ export class CategoriesComponent implements OnInit {
           this.products.push(product);
         }
         this.isLoading = false;
-        console.log(this.products);
       });
   }
 }
