@@ -11,7 +11,6 @@ const router = express.Router();
 router.get("", (req, res, next) => {
   User.find().then((documents) => {
     res.status(200).json({
-      message: "Users fetched successfully",
       users: documents,
     });
   });
@@ -19,29 +18,30 @@ router.get("", (req, res, next) => {
 
 router.post("/signup", (req, res, next) => {
   let user;
-  bcrypt.hash(req.body.password, 10).then((hash) => {
-    if ("admin" === req.body.username) {
+  const {username, email,password, favorites, categories, history} = req.body;
+  bcrypt.hash(password, 10).then((hash) => {
+    if ("admin" === username) {
       user = new User({
-        username: req.body.username,
-        email: req.body.email,
+        username,
+        email,
         password: hash,
         isAdmin: true,
       });
     } else {
       user = new User({
-        username: req.body.username,
-        email: req.body.email,
+        username,
+        email,
         password: hash,
-        favorites: req.body.favorites,
-        categories: req.body.categories,
-        history: req.body.history,
+        favorites,
+        categories,
+        history,
       });
     }
     user
       .save()
       .then((result) => {
         res.status(201).json({
-          message: "User created!",
+          message: LOGS.USER.CREATED,
           result: result,
         });
       })
@@ -54,26 +54,27 @@ router.post("/signup", (req, res, next) => {
 });
 
 router.post("/login", (req, res, next) => {
+  const {email, password} = req.body.email;
   let fetchedUser;
-  User.findOne({ email: req.body.email })
+  User.findOne({ email })
     .then((user) => {
       if (!user) {
         return res.status(401).json({
-          message: "Auth failed",
+          message: LOGS.USER.AUTH_FAILED,
         });
       }
       fetchedUser = user;
-      return bcrypt.compare(req.body.password, user.password);
+      return bcrypt.compare(password, user.password);
     })
     .then((result) => {
       if (!result) {
         return res.status(401).json({
-          message: "Auth failed",
+          message: LOGS.USER.AUTH_FAILED,
         });
       }
       const token = jwt.sign(
         { email: fetchedUser.email, userId: fetchedUser._id },
-        process.env.SECRET_CODE,
+        "asdsadvhbhbrejbjhb223bhblbhljbhblbcsdlhbaaakksxa;na;sdknx##1akkkaxxaxalg",
         { expiresIn: "1h" }
       );
       res.status(200).json({
@@ -89,7 +90,7 @@ router.post("/login", (req, res, next) => {
     })
     .catch((err) => {
       return res.status(401).json({
-        message: "Auth failed",
+        message: LOGS.USER.AUTH_FAILED,
       });
     });
 });
@@ -113,13 +114,14 @@ router.put("/update", checkAuth, (req, res, next) => {
     categories,
     history,
   });
-  User.updateOne({ _id: req.body.id }, user).then((result) => {
-    if (result.nModified > 0) {
-      res.status(200).json({ message: "Update successful!" });
-    } else {
-      res.status(401).json({ message: "Not authorized!" });
-    }
-  });
+  User.updateOne({ _id: req.body.id }, user).then(
+      (result) => {
+        res.status(200).json({ message: LOGS.USER.UPDATED });
+      },
+      (err) => {
+        res.status(401).json({ message: LOGS.USER.DELETED });
+      }
+    );
 });
 
 module.exports = router;

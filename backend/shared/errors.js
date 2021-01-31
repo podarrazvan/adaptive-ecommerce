@@ -18,6 +18,13 @@ export const LOGS = {
     UPDATED:"Discount updated successfully",
     NOT_UPDATED:"Discount was not updated"
   },
+  USER: {
+    CREATED:"User created",
+    UPDATED:"User updated",
+    DELETED:"User deleted",
+    AUTH_FAILED:"Auth failed"
+  }
+  ,
   CONFIGS: {
     SET: "Website configs added successfully",
     NAME: {
