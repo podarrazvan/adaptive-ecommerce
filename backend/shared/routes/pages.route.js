@@ -2,7 +2,7 @@ const express = require("express");
 
 const Configs = new require('../../config/model/configs.schema');
 
-// import { LOGS } from "../errors";
+const LOGS = require("../../shared/logs")
 
 const router = express.Router();
 

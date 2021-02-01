@@ -1,7 +1,7 @@
 const express = require("express");
 const Product = require("../model/product.schema");
 
-// import { LOGS } from "../../shared/errors";
+const LOGS = require("../../shared/logs")
 
 const router = express.Router();
 

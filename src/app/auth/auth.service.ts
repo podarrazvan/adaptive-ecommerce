@@ -5,23 +5,13 @@ import { throwError, BehaviorSubject } from 'rxjs';
 
 import { User } from './user.model';
 import { environment } from 'src/environments/environment';
-
-export interface Id {
-  uid: string;
-}
-
-export interface AuthResponseData {
-  token: string;
-  email: string;
-  password: string;
-  refreshToken: string;
-  expiresIn: string;
-  userId: string;
-  history: string[];
-  categories: string[];
-  favorites: string[];
-}
-
+import {
+  AuthResponseData,
+  AuthUserInfoDto,
+  AutoLogout,
+  Logout,
+  NewUserDto
+} from './entities';
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   [x: string]: any;
@@ -30,27 +20,16 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  signup(username: string, email: string, password: string) {
+  signup(newUser: NewUserDto) {
     return this.http
       .post<AuthResponseData>(`${environment.api}/users/signup`, {
-        username: username,
-        email: email,
-        password: password,
+        ...newUser,
         returnSecureToken: true,
       })
       .pipe(
         catchError(this.handleError),
         tap((resData) => {
-          this.handleAuthentication(
-            resData.email,
-            resData.password,
-            resData.userId,
-            resData.token,
-            +resData.expiresIn,
-            resData.history,
-            resData.categories,
-            resData.favorites
-          );
+          this.handleAuthentication(resData);
         })
       );
   }
@@ -65,44 +44,36 @@ export class AuthService {
       .pipe(
         catchError(this.handleError),
         tap((resData) => {
-          this.handleAuthentication(
-            resData.email,
-            resData.password,
-            resData.userId,
-            resData.token,
-            +resData.expiresIn,
-            resData.history,
-            resData.categories,
-            resData.favorites
-          );
+          this.handleAuthentication(resData);
         })
       );
   }
 
   autoLogin() {
-    const userData: {
-      email: string;
-      password: string;
-      id: string;
-      history: string[];
-      categories: string[];
-      favorites: string[];
-      _token: string;
-      _tokenExpirationDate: string;
-    } = JSON.parse(localStorage.getItem('userData'));
+    const userData: AutoLogout = JSON.parse(localStorage.getItem('userData'));
+    const {
+      email,
+      password,
+      id,
+      history,
+      categories,
+      favorites,
+      _token,
+      _tokenExpirationDate,
+    } = userData;
     if (!userData) {
       return;
     }
 
     const loadedUser = new User(
-      userData.email,
-      userData.password,
-      userData.id,
-      userData.categories,
-      userData.history,
-      userData.favorites,
-      userData._token,
-      new Date(userData._tokenExpirationDate)
+      email,
+      password,
+      id,
+      categories,
+      history,
+      favorites,
+      _token,
+      new Date(_tokenExpirationDate)
     );
 
     if (loadedUser.token) {
@@ -114,21 +85,22 @@ export class AuthService {
     }
   }
 
-  public handleAuthentication(
-    email: string,
-    password: string,
-    userId: string,
-    token: string,
-    expiresIn: number,
-    history: string[],
-    categories: string[],
-    favorites: string[]
-  ) {
-    const expirationDate = new Date(new Date().getTime() + expiresIn * 100);
+  public handleAuthentication(authUserInfo: AuthUserInfoDto) {
+    const {
+      email,
+      password,
+      id,
+      history,
+      categories,
+      favorites,
+      token,
+      expiresIn,
+    } = authUserInfo;
+    const expirationDate = new Date(new Date().getTime() + +expiresIn * 100);
     const user = new User(
       email,
       password,
-      userId,
+      id,
       history,
       categories,
       favorites,
@@ -136,31 +108,14 @@ export class AuthService {
       expirationDate
     );
     this.user.next(user);
-    this.autoLogout(expiresIn * 100);
+    this.autoLogout(+expiresIn * 100);
     localStorage.setItem('userData', JSON.stringify(user));
   }
 
   logout() {
     this.user.next(null);
-    const userData: {
-      email: string;
-      password: string;
-      id: string;
-      history: string[];
-      categories: string[];
-      favorites: string[];
-      _token: string;
-      _tokenExpirationDate: string;
-    } = JSON.parse(localStorage.getItem('userData'));
-    this.updateUser(
-      userData.email,
-      userData.password,
-      userData.id,
-      userData._token,
-      userData.categories,
-      userData.history,
-      userData.favorites
-    );
+    const userData: Logout = JSON.parse(localStorage.getItem('userData'));
+    this.updateUser(userData);
     localStorage.removeItem('userData');
     if (this.tokenExpirationTimer) {
       clearTimeout(this.tokenExpirationTimer);
@@ -174,19 +129,20 @@ export class AuthService {
     }, expirationDuration);
   }
 
-  updateUser(
-    email: string,
-    password: string,
-    userId: string,
-    token: string,
-    history: string[],
-    categories: string[],
-    favorites: string[]
-  ) {
+  updateUser(updateUser: AuthUserInfoDto) {
+    const {
+      email,
+      password,
+      id,
+      history,
+      categories,
+      favorites,
+      token,
+    } = updateUser;
     const user = new User(
       email,
       password,
-      userId,
+      id,
       history,
       categories,
       favorites,

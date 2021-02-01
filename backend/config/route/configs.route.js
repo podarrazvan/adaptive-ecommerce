@@ -1,6 +1,6 @@
 const express = require("express");
 const collection = new require("../model/configs.schema");
-// import LOGS from "../../shared/errors.js";
+const LOGS = require("../../shared/logs")
 
 const router = express.Router();
 

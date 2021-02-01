@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AuthService, AuthResponseData } from 'src/app/auth/auth.service';
-import firebase from 'firebase';
-import {environment} from "../../../../environments/environment.prod"
+import { AuthService } from 'src/app/auth/auth.service';
+import { AuthResponseData } from 'src/app/auth/entities';
 // export const Firebase = !firebase.apps.length ? firebase.initializeApp(firebaseConfig) : firebase.app()
 
 @Component({
@@ -21,22 +20,7 @@ export class LoginFormComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    firebase.initializeApp(environment.firebase);
-  }
-
-  resetPassword(emailAddress) {
-    this.auth = firebase.auth();
-
-    firebase.auth()
-      .sendPasswordResetEmail(emailAddress)
-      .then(function () {
-        this.resetPasswordMode = false;
-        alert("Check your email!");
-        this.router.navigate(['../']);
-      })
-      .catch(function (error) {
-       this.error = true;
-      });
+   
   }
 
   onSubmit(form: NgForm) {
@@ -47,7 +31,7 @@ export class LoginFormComponent implements OnInit {
     const password = form.value.password;
 
     if(this.resetPasswordMode){
-      this.resetPassword(password);
+      // TODO password reset
     }
    
     let authObs: Observable<AuthResponseData>;

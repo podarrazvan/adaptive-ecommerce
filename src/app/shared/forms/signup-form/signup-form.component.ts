@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AuthResponseData, AuthService } from 'src/app/auth/auth.service';
+import { AuthService } from 'src/app/auth/auth.service';
+import { AuthResponseData } from 'src/app/auth/entities';
 
 @Component({
   selector: 'app-signup-form',
@@ -30,7 +31,7 @@ export class SignupFormComponent implements OnInit {
     
     this.isLoading = true;
 
-    authObs = this.authService.signup(username,email, password);
+    authObs = this.authService.signup(form.value);
 
     authObs.subscribe(
       resData => {

@@ -1,4 +1,4 @@
-export const LOGS = {
+module.exports = {
   MESSAGES: {
     SENT: "Message sent!",
     NOT_SENT: "Message not sent!",
@@ -91,3 +91,4 @@ export const LOGS = {
     DELETE_FAILED: 'Product delete failed'
   }
 };
+

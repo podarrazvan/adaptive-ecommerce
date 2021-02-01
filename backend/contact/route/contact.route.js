@@ -2,7 +2,7 @@ const express = require("express");
 
 const Message = new require("../model/contact.schema");
 
-// import {LOGS} from "../../shared/errors"
+const LOGS = require("../../shared/logs");
 
 const router = express.Router();
 

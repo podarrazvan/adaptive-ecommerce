@@ -2,7 +2,7 @@ const express = require("express");
 
 const Coupon = new require("../model/coupon.schema");
 
-// import { LOGS } from '../../shared/errors';
+const LOGS = require("../../shared/logs")
 
 const router = express.Router();
 

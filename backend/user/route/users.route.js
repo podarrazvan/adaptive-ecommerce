@@ -2,6 +2,8 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
+const LOGS = require("../../shared/logs")
+
 const checkAuth = require("../../shared/middlewares/check-auth");
 
 const User = require("../model/user.schema");
@@ -54,7 +56,7 @@ router.post("/signup", (req, res, next) => {
 });
 
 router.post("/login", (req, res, next) => {
-  const {email, password} = req.body.email;
+  const {email, password} = req.body;
   let fetchedUser;
   User.findOne({ email })
     .then((user) => {

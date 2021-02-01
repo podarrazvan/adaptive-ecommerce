@@ -11,7 +11,7 @@
 .delete-btn {
     button {
         font-size: 28px;
-        color: $brightest-text;
+        color: $gray-30;
     }
 }
 
@@ -50,7 +50,7 @@
     position: relative;
     background: #fff;
     border: 2px solid $border;
-    color: $bright-text;
+    color: $gray-10;
     border-radius: 999px;
     input {
         width: 100%;
@@ -68,6 +68,6 @@
     p {
         margin-right: 50px;
         font-size: 18px;
-        color: $brighter-text;
+        color: $gray-20;
     }
 }

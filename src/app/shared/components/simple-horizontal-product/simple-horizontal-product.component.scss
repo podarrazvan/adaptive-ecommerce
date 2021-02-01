@@ -16,7 +16,7 @@ img {
 
 .product:hover {
     img {
-        border-image: linear-gradient(to right, #c26af5, #57eeff);
+        border-image: linear-gradient(to right, $main-color-10, $main-color-20);
         border-image-slice: 1;
     }
 }
@@ -30,11 +30,11 @@ img {
     }
 
     a:hover {
-        color:$brightest-text
+        color:$gray-30
     }
 
     p {
         margin-top: 20px;
-        color: $brighter-text;
+        color: $gray-20;
     }
 }
