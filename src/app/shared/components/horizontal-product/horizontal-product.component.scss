@@ -1,3 +1,5 @@
+@import "../../colors.scss";
+
 .product {
     display: flex;
     justify-content: space-between;
@@ -6,7 +8,6 @@
     border-radius: 10px;
     padding: 40px;
     padding-top: 50px;
-    background-color:rgba(220, 220, 220, 0.20);
 }
 
 .product-info {
@@ -24,20 +25,20 @@
 .price {
     font-size: 16px;
     font-weight: 500;
-    color: #999999;
+    color: $gray-30;
     margin-bottom: 20px;
     span {
-        color: #ff5050;
+        color: $main-red;
         font-size: 30px;
     }
 }
 
 .link h3{
-    color: #ff5050;
+    color: $main-red;
     font-weight: 500;
     span mat-icon{
         position: relative;
-        color: #ff5050!important;
+        color: $main-red!important;
         top: 5px;
     }
 }

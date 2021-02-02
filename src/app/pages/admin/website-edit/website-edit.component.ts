@@ -68,10 +68,10 @@ export class WebsiteEditComponent implements OnInit {
 
   footerEdit(footer) {
     this.showEditFooter = false
-    this.websiteDetails.adress = footer.adress;
-    this.websiteDetails.email = footer.email;
-    this.websiteDetails.phone = footer.phone;
-    this.websiteDetails.program = footer.program;
+    this.websiteDetails.footer.adress = footer.adress;
+    this.websiteDetails.footer.email = footer.email;
+    this.websiteDetails.footer.phone = footer.phone;
+    this.websiteDetails.footer.program = footer.program;
     this.websiteDetails.facebookImage = footer.facebookLogo;
     this.websiteDetails.twitterImage = footer.twitterLogo;
     this.websiteDetails.instagramImage = footer.instagramLogo;
