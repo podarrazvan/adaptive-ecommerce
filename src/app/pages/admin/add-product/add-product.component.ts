@@ -107,7 +107,6 @@ export class AddProductComponent implements OnInit, OnDestroy {
     this.dbUploadService
       .uploadImg(image)
       .subscribe((responseData) => {
-        console.log(responseData);
         this.images.push(responseData.url);
       });
   }

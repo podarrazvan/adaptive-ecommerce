@@ -54,9 +54,9 @@ export class FooterEditComponent implements OnInit {
       // }
       try {
         this.footerEditForm = this.fb.group({
-          adress: [this.websiteDetails.adress, Validators.required],
-          phone: [this.websiteDetails.phone, Validators.required],
-          email: [this.websiteDetails.email, Validators.required],
+          adress: [this.websiteDetails.footer.adress, Validators.required],
+          phone: [this.websiteDetails.footer.phone, Validators.required],
+          email: [this.websiteDetails.footer.email, Validators.required],
           // program: [this.websiteDetails.program, Validators.required],
           facebookLink: [this.websiteDetails.facebookUrl],
           instagramLink: [this.websiteDetails.instagramUrl],

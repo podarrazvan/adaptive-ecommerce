@@ -21,7 +21,6 @@ export class SidebarComponent implements OnInit, DoCheck {
     this.dbFetchDataService.fetchMessages().subscribe((emails) => {
       this.sharedDataService.unreadMessages = 0;
       for (let email of emails.messages) {
-        console.log(email);
         if (!email.seen) {
           this.sharedDataService.unreadMessages++;
         }

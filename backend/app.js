@@ -1,16 +1,19 @@
+// require('dotenv').config({path:'./.env'});
 const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
-const userRoutes = require('./user/route/users');
-const productRoutes = require('./product/route/products');
-const imagesRoutes = require('./shared/routes/upload-image');
-const websiteDetailsRoutes = require('./config/route/website-configs');
-const pagesRoutes = require('./shared/routes/pages');
-const coponsRoutes = require('./coupon/route/coupons');
-const contactRoutes = require('./contact/route/contact');
-const discountRoutes = require('./discount/route/discounts');
+const userRoutes = require('./user/route/users.route');
+const productRoutes = require('./product/route/products.route');
+const imagesRoutes = require('./shared/routes/upload-image.route');
+const websiteDetailsRoutes = require('./config/route/configs.route');
+const pagesRoutes = require('./shared/routes/pages.route');
+const coponsRoutes = require('./coupon/route/coupons.route');
+const contactRoutes = require('./contact/route/contact.route');
+const discountRoutes = require('./discount/route/discounts.route');
+
+//  console.log(process.env.DB_URL);
 
 const app = express();
 
@@ -22,6 +25,7 @@ app.use(cookieParser());
 //
 
 module.exports = app;
+
 
 mongoose.connect("mongodb+srv://admin:admin@backend-test.6tqwn.mongodb.net/ecommerce", { useUnifiedTopology: true }, { useNewUrlParser: true }).then(()=>{
     console.log("Connected!");

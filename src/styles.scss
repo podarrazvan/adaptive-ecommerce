@@ -113,3 +113,9 @@ textarea {
   display: flex;
   place-content: center space-between;
 }
+
+.product-box {
+  border-radius: 10px;
+  box-shadow: 0 7px 20px 0 rgba(36, 41, 66, 0.15);
+  padding: 50px;
+}

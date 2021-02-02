@@ -95,7 +95,6 @@ export class OrdersComponent implements OnInit {
       }
       this.loading = false;
       this.orders = this.orders.reverse();
-      console.log(this.mobileOrder);
     });
   }
 

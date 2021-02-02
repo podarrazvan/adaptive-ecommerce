@@ -17,7 +17,6 @@ export class ProductDetailsComponent implements OnInit {
   brand: Brand;
 
   ngOnInit() {
-    console.log(this.product);
     this.sharedDataService.websiteDetails.subscribe((data)=> {
       this.brand = data.brands.find( ({ name }) => name === this.product.brand );
     })

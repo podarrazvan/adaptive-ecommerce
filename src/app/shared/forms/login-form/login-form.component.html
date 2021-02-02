@@ -1,6 +1,5 @@
 <div class="login">
-  <h3 (click)="admin = true" class="card-top" [class.cardTop]="resetPasswordMode"> {{resetPasswordMode? "Password reset":"Login"}} </h3>
-  <h2 *ngIf="admin">Admin</h2>
+  <h3 class="card-top" [class.cardTop]="resetPasswordMode"> {{resetPasswordMode? "Password reset":"Login"}} </h3>
   <h1 *ngIf="error" style="color:red">Your email must be wrong...</h1>
   <form class="auth-form" #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" *ngIf="!isLoading">
     <div class="form-group">

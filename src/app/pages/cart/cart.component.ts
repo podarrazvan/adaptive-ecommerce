@@ -67,7 +67,7 @@ export class CartComponent implements OnInit, DoCheck {
     })
     .render(this.paypalElement.nativeElement);
   }
-  // Use observable 
+  // *TODO Use observable 
   ngDoCheck() {
     // this.sharedDataService.totalCart = this.total;
     // console.log(this.sharedDataService.totalCart);
@@ -91,7 +91,6 @@ export class CartComponent implements OnInit, DoCheck {
   }
 
   onDelete(index: number) {
-    console.log(index);
     // this.total -= this.cart[index].product.price * this.cart[index].quantity;
     this.cart.splice(index, 1);
     if(this.cart.length === 0){
@@ -133,8 +132,6 @@ export class CartComponent implements OnInit, DoCheck {
   }
 
   coupon(discount) {
-    console.log('e aici')
-    console.log(discount);
     this.subtotal -= discount;
   }
 }

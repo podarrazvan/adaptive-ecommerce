@@ -30,6 +30,10 @@ export class SharedDataService implements OnDestroy {
     this.websiteDocId = details._id;
   }
 
+  getWebsiteConfigs() {
+    return this.websiteDetails.value;
+  }
+
   setUserDetails(details: User) {
     this.userDetails.next(details);
   }

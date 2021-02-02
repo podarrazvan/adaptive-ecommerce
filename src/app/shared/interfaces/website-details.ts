@@ -7,10 +7,12 @@ export interface WebsiteDetails {
   categories: string[];
   shipping:Shipping[];
   brands: Brand[];
-  adress: string;
-  phone: string;
-  email: string;
-  program: string;
+  footer: {
+    adress: string;
+    phone: string;
+    email: string;
+    program: string;
+  }
   facebookImage: string;
   facebookUrl: string;
   twitterImage: string;

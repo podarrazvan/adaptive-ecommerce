@@ -18,7 +18,6 @@ export class DbStatisticsService {
       date.getDate()
     ).subscribe((view) => {
       try {
-        console.log(view);
         this.addWebsiteViews(view.views);
       } catch {
         this.addWebsiteViews(0);
@@ -39,14 +38,7 @@ export class DbStatisticsService {
           observe: 'response',
         }
       )
-      .subscribe(
-        (responseData) => {
-          console.log(responseData);
-        },
-        (error) => {
-          console.log(error.message);
-        }
-      );
+      .subscribe();
   }
 
   getWebsiteViews(year, month, day) {
@@ -75,13 +67,6 @@ export class DbStatisticsService {
           observe: 'response',
         }
       )
-      .subscribe(
-        (responseData) => {
-          console.log(responseData);
-        },
-        (error) => {
-          console.log(error.message);
-        }
-      );
+      .subscribe();
   }
 }
