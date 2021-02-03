@@ -18,10 +18,9 @@ export class HomeComponent {
       this.sharedDataService.setWebsiteDetails(response.webConfig.info[0]);
 
       // !SORIN - DACA VREI SA ACCESEZI PROPRIETATILE
-      console.log(
-        'WEBSITE CONFIG --->',
-        this.sharedDataService.getWebsiteConfigs()
-      );
+      // console.log(
+      //   this.sharedDataService.getWebsiteConfigs()
+      // );
     });
   }
 }
