@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -10,15 +10,13 @@ import { AuthResponseData } from '../../../auth/entities';
   templateUrl: './signup-form.component.html',
   styleUrls: ['./signup-form.component.scss']
 })
-export class SignupFormComponent implements OnInit {
+export class SignupFormComponent{
 
   isLoading = false;
   error: string = null;
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  ngOnInit(): void {
-  }
   onSubmit(form: NgForm) {
     // if (!form.valid) {
     //   return;

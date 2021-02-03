@@ -14,8 +14,6 @@ export class RatingComponent implements OnInit {
 
   times;
 
-  constructor() { }
-
   ngOnInit(): void {
     this.rating % 2 === 0 ? this.halfStar = false : this.halfStar = true;
     this.fullStars = Math.floor(this.rating);

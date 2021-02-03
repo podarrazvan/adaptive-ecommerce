@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-bottom-products',
   templateUrl: './bottom-products.component.html',
   styleUrls: ['./bottom-products.component.scss']
 })
-export class BottomProductsComponent implements OnInit {
+export class BottomProductsComponent  {
 
   product1 = {img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrLV8locO81b2WCuM3H29R6IF4SMpfa95QuJlygT-z6EbWVp4yoodzSiz6IXf18FKg8kIkA04&usqp=CAc", title:"Samsung Galaxy S20", price:999};
 
@@ -18,10 +18,5 @@ export class BottomProductsComponent implements OnInit {
   topRatedProducts = [this.product3, this.product2, this.product1];
 
   topSellingProducts = [this.product2, this.product3, this.product1];
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }

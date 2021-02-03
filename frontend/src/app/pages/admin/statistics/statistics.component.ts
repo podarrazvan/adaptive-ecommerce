@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Product } from '../../../shared/interfaces/product.interface';
 import { DbFetchDataService } from '../../../shared/services/database/db-fetch-data.service';
@@ -9,7 +9,7 @@ import { DbStatisticsService } from '../../../shared/services/database/db-statis
   templateUrl: './statistics.component.html',
   styleUrls: ['./statistics.component.scss'],
 })
-export class StatisticsComponent implements OnInit {
+export class StatisticsComponent {
   loading: boolean;
 
   showWebsite = false;
@@ -41,8 +41,6 @@ export class StatisticsComponent implements OnInit {
     private dbFetchDataService: DbFetchDataService,
     private router: Router
   ) {}
-
-  ngOnInit(): void {}
 
   websiteWiews() {
     this.websiteStatistics = [{}];

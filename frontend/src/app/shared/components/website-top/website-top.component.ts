@@ -1,17 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-website-top',
   templateUrl: './website-top.component.html',
   styleUrls: ['./website-top.component.scss']
 })
-export class WebsiteTopComponent implements OnInit {
+export class WebsiteTopComponent {
 
-  constructor() { }
-
-  elements = ['phones','laptops','TV']
-
-  ngOnInit(): void {
-  }
+  elements = ['phones','laptops','TV'];
 
 }

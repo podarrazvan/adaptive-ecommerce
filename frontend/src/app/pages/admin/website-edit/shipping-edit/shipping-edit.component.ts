@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Shipping } from '../../../../shared/interfaces/shipping.interface';
 import { DbWebsiteEditService } from '../../../../shared/services/database/db-website-edit.sevice';
 
@@ -7,7 +7,7 @@ import { DbWebsiteEditService } from '../../../../shared/services/database/db-we
   templateUrl: './shipping-edit.component.html',
   styleUrls: ['./shipping-edit.component.scss']
 })
-export class ShippingEditComponent implements OnInit {
+export class ShippingEditComponent {
   @Input() shippings: Shipping[];
   @Output() newShippings = new EventEmitter<Shipping[]>();
 
@@ -17,8 +17,6 @@ export class ShippingEditComponent implements OnInit {
 
   editShippingMode: number;
 
-  ngOnInit(): void {
-  }
 
   delete(index){}
 

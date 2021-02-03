@@ -1,4 +1,4 @@
-import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Product } from '../../interfaces/product.interface';
 
@@ -7,7 +7,7 @@ import { Product } from '../../interfaces/product.interface';
   templateUrl: './get-product.component.html',
   styleUrls: ['./get-product.component.scss']
 })
-export class GetProductComponent implements OnInit {
+export class GetProductComponent {
 
   @Input() product: Product;
   @Input() fullContent: boolean;
@@ -15,11 +15,6 @@ export class GetProductComponent implements OnInit {
   showHiddenBtn = false;
 
   constructor(private router: Router) { }
-
-
-  ngOnInit(): void {
-   
-  }
 
   openProduct() {
     this.router.navigate(['/product', this.product._id]);
