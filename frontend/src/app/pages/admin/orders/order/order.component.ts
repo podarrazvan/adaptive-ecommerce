@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { DbGetDataService } from 'src/app/shared/services/database/db-get-data.service';
 import { Order } from '../../../../shared/interfaces/order.interface';
-import { DbFetchDataService } from '../../../../shared/services/database/db-fetch-data.service';
 import { DbUploadService } from '../../../../shared/services/database/db-upload.service';
 
 @Component({
@@ -16,7 +16,7 @@ export class OrderComponent implements OnInit {
   @Output() close = new EventEmitter<void>();
   @Output() updated = new EventEmitter<void>();
 
-  constructor(private dbFetchDataService: DbFetchDataService,
+  constructor(private dbGetDataService: DbGetDataService,
               private dbUploadService: DbUploadService,
               private router: Router) { }
 
@@ -27,7 +27,7 @@ export class OrderComponent implements OnInit {
   ngOnInit(): void {
     this.products.splice(0,1);
     for(let product of this.order.cart) {
-      this.dbFetchDataService.fetchProduct( product.product).subscribe(data => {
+      this.dbGetDataService.getProduct( product.product).subscribe(data => {
         const prod = data.product;
         const total = prod.price * product.quantity;
         this.products.push({

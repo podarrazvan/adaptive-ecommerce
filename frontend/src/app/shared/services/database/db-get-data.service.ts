@@ -1,4 +1,4 @@
-import { environment } from './../../../../environments/environment';
+import { environment } from '../../../../environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
@@ -11,64 +11,46 @@ import { Message } from '../../interfaces/message.interface';
 import { Discount } from '../../interfaces/discount.interface';
 
 @Injectable()
-export class DbFetchDataService {
+export class DbGetDataService {
   constructor(private http: HttpClient) {}
 
   categories: string[];
   category;
 
-  fetchProductsByCategory(category: string) {
+  getProductsByCategory(category: string) {
     return this.http.get<{message: string, products: Product[]}>(
       `${environment.api}/products/category/${category}`
     );
   }
 
-  fetchProduct(key: string) {
+  getProduct(key: string) {
     return this.http.get<{ product: Product }>(
       `${environment.api}/products/id/${key}`
     );
   }
 
-  fetchProducts() {
+  getProducts() {
     return this.http.get<{message: string, products: Product[]}>(
       `${environment.api}/products`
     );
   }
 
-  fetchPaginatedProducts(page: number, limit: number) {
+  getPaginatedProducts(page: number, limit: number) {
     return this.http.get<{results: Product[]}>(
       `${environment.api}/products/paginated?page=${page}&limit=${limit}`
     );
   }
 
-  fetchPromotions() {
+  getPromotions() {
     return this.http.get<Discount[]>(
       `${environment.api}/discount`);
   }
 
-  fetchMessages() {
+  getMessages() {
     return this.http.get<{messages: Message []}>(`${environment.api}/contact`);
   }
-
-  fetchTermsOfUse() {
-    return this.http.get<{ termsOfUse: string }>(
-      `https://shop-436e8.firebaseio.com/terms-of-use/.json`
-    );
-  }
-
-  fetchAboutUs() {
-    return this.http.get<{ aboutUs: string }>(
-      `https://shop-436e8.firebaseio.com/about-us/.json`
-    );
-  }
-
-  fetchName() {
-    return this.http.get<{ name: string }>(
-      `https://shop-436e8.firebaseio.com/website-name/.json`
-    );
-  }
-
-  fetchOrders() {
+  
+  getOrders() {
     const user = JSON.parse(localStorage.getItem('userData'));
     const ordersArray = [];
     return this.http
@@ -87,7 +69,7 @@ export class DbFetchDataService {
       );
   }
 
-  fetchUsers() {
+  getUsers() {
     const usersArray = [];
     return this.http
       .get<{ message: string; users: User[] }>(
@@ -103,7 +85,7 @@ export class DbFetchDataService {
       );
   }
 
-  fetchCoupon(code) {
+  getCoupon(code) {
     return this.http.get<{coupon: Coupon[]}>(`http://localhost:3000/api/coupons/${code}`);
   }
 }

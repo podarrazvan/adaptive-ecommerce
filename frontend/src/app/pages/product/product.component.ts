@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { DbGetDataService } from 'src/app/shared/services/database/db-get-data.service';
 import { User } from '../../shared/interfaces/user.interface';
-import { DbFetchDataService } from '../../shared/services/database/db-fetch-data.service';
 import { DbUploadService } from '../../shared/services/database/db-upload.service';
 import { SharedDataService } from '../../shared/services/shared-data.service';
 
@@ -17,7 +17,7 @@ export class ProductComponent implements OnInit {
   user: User;
 
   constructor(
-    private dbFetchDataService: DbFetchDataService,
+    private dbGetDataService: DbGetDataService,
     private dbUploadService: DbUploadService,
     private route: ActivatedRoute,
     public sanitizer: DomSanitizer,
@@ -26,7 +26,7 @@ export class ProductComponent implements OnInit {
 
   ngOnInit(): void {
     const key = this.route.snapshot.params['key'];
-    this.dbFetchDataService.fetchProduct(key).subscribe((productData) => {
+    this.dbGetDataService.getProduct(key).subscribe((productData) => {
       this.product = productData.product[0];
       this.loading = false;
       this.sharedDataService.userDetails.subscribe((data) => {

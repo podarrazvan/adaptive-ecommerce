@@ -1,5 +1,5 @@
 import { Component, DoCheck, OnInit } from '@angular/core';
-import { DbFetchDataService } from '../../../shared/services/database/db-fetch-data.service';
+import { DbGetDataService } from 'src/app/shared/services/database/db-get-data.service';
 import { SharedDataService } from '../../../shared/services/shared-data.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { SharedDataService } from '../../../shared/services/shared-data.service'
 })
 export class SidebarComponent implements OnInit, DoCheck {
   constructor(
-    private dbFetchDataService: DbFetchDataService,
+    private dbGetDataService: DbGetDataService,
     private sharedDataService: SharedDataService
   ) {}
 
@@ -18,7 +18,7 @@ export class SidebarComponent implements OnInit, DoCheck {
   hide = false;
 
   ngOnInit(): void {
-    this.dbFetchDataService.fetchMessages().subscribe((emails) => {
+    this.dbGetDataService.getMessages().subscribe((emails) => {
       this.sharedDataService.unreadMessages = 0;
       for (let email of emails.messages) {
         if (!email.seen) {

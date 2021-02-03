@@ -1,5 +1,6 @@
-import { DbFetchDataService } from 'src/app/shared/services/database/db-fetch-data.service';
+
 import { Component, EventEmitter, Output } from '@angular/core';
+import { DbGetDataService } from 'src/app/shared/services/database/db-get-data.service';
 
 @Component({
   selector: 'app-cart-coupon',
@@ -10,10 +11,10 @@ export class CartCouponComponent {
 
   @Output() discount = new EventEmitter<number>();
 
-  constructor(private dbFetchDataServide: DbFetchDataService) { }
+  constructor(private dbGetDataService: DbGetDataService) { }
 
   addCoupon(code) {
-    this.dbFetchDataServide.fetchCoupon(code.value).subscribe(response =>  {
+    this.dbGetDataService.getCoupon(code.value).subscribe(response =>  {
       this.discount.emit(response.coupon[0].discount);
     });
   }

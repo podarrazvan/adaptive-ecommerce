@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { DbGetDataService } from 'src/app/shared/services/database/db-get-data.service';
 import { DeleteAlertService } from '../../../shared/components/delete-alert/delete-alert.service';
 import { Order } from '../../../shared/interfaces/order.interface';
 import { Product } from '../../../shared/interfaces/product.interface';
 import { DbDeleteService } from '../../../shared/services/database/db-delete.service';
-import { DbFetchDataService } from '../../../shared/services/database/db-fetch-data.service';
 import { DbUploadService } from '../../../shared/services/database/db-upload.service';
 import { SharedDataService } from '../../../shared/services/shared-data.service';
 
@@ -15,7 +15,7 @@ import { SharedDataService } from '../../../shared/services/shared-data.service'
 })
 export class OrdersComponent implements OnInit {
   constructor(
-    private dbFetchDataService: DbFetchDataService,
+    private dbGetDataService: DbGetDataService,
     private dbDeleteService: DbDeleteService,
     private deleteAlertService: DeleteAlertService,
     private sharedDataService: SharedDataService,
@@ -62,7 +62,7 @@ export class OrdersComponent implements OnInit {
 
   getOrders() {
     this.orders = [];
-    this.dbFetchDataService.fetchOrders().subscribe((orders) => {
+    this.dbGetDataService.getOrders().subscribe((orders) => {
       for (let order of orders) {
         if (this.mobile) {
           this.mobileOrder = {};
@@ -81,8 +81,8 @@ export class OrdersComponent implements OnInit {
           this.mobileOrder.products = [{}];
           this.mobileOrder.products.splice(0, 1);
           for (let prod of order.cart) {
-            this.dbFetchDataService
-              .fetchProduct(prod.product)
+            this.dbGetDataService
+              .getProduct(prod.product)
               .subscribe((mobOrder) => {
                 product.product = mobOrder.product;
                 product.quantity = prod.quantity;

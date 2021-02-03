@@ -1,7 +1,7 @@
 import { SharedDataService } from './../../shared/services/shared-data.service';
-import { DbFetchDataService } from './../../shared/services/database/db-fetch-data.service';
 import { Component, DoCheck, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { DbGetDataService } from 'src/app/shared/services/database/db-get-data.service';
 
 declare var paypal;
 @Component({
@@ -12,7 +12,7 @@ declare var paypal;
 export class CartComponent implements OnInit, DoCheck {
   @ViewChild('paypal', { static: true }) paypalElement: ElementRef;
   constructor(
-    private dbFetchDataService: DbFetchDataService,
+    private dbGetDataService: DbGetDataService,
     private sharedDataService: SharedDataService,
     private router: Router
   ) {}
@@ -76,7 +76,7 @@ export class CartComponent implements OnInit, DoCheck {
   getProduct(key: string, quantity: number) {
     this.cart = [];
     let itemTotal=0;
-    this.dbFetchDataService.fetchProduct(key).subscribe((response) => {
+    this.dbGetDataService.getProduct(key).subscribe((response) => {
       const product = response.product[0];
       itemTotal += +product.price *quantity;
       this.cart.push({

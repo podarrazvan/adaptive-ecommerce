@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { DbGetDataService } from 'src/app/shared/services/database/db-get-data.service';
 import { DeleteAlertService } from '../../../shared/components/delete-alert/delete-alert.service';
 import { Product } from '../../../shared/interfaces/product.interface';
 import { DbDeleteService } from '../../../shared/services/database/db-delete.service';
-import { DbFetchDataService } from '../../../shared/services/database/db-fetch-data.service';
 import { SharedDataService } from '../../../shared/services/shared-data.service';
 
 @Component({
@@ -19,7 +19,7 @@ export class ProductsComponent implements OnInit {
   idOfProductToAddOnHomepage: string;
 
   constructor(
-    private dbFetchDataService: DbFetchDataService,
+    private dbGetDataService: DbGetDataService,
     private sharedDataService: SharedDataService,
     private router: Router,
     private deleteAlertService: DeleteAlertService,
@@ -50,7 +50,7 @@ export class ProductsComponent implements OnInit {
 
 
   getProducts(page, limit) {
-    this.dbFetchDataService.fetchPaginatedProducts(page,limit).subscribe(responseData => this.products = responseData.results);
+    this.dbGetDataService.getPaginatedProducts(page,limit).subscribe(responseData => this.products = responseData.results);
   }
 
   onDelete(id, index, img) {

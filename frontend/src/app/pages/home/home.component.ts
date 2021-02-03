@@ -15,7 +15,7 @@ export class HomeComponent {
     // !SORIN - STEP 3: inainte sa se incarce componenta asta, deja am datele
     // acum le pun unde am nevoie si facem asta O SINGURA DATA, ca e un config
     route.data.subscribe((response) => {
-      this.sharedDataService.setWebsiteDetails(response.webConfig.info[0]);
+      this.sharedDataService.setWebsiteDetails(response.webConfig[0]);
 
       // !SORIN - DACA VREI SA ACCESEZI PROPRIETATILE
       // console.log(

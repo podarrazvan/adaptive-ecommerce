@@ -1,8 +1,8 @@
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 import { Component, OnInit } from '@angular/core';
+import { DbGetDataService } from 'src/app/shared/services/database/db-get-data.service';
 import { DeleteAlertService } from '../../../shared/components/delete-alert/delete-alert.service';
 import { DbDeleteService } from '../../../shared/services/database/db-delete.service';
-import { DbFetchDataService } from '../../../shared/services/database/db-fetch-data.service';
 import { DbUploadService } from '../../../shared/services/database/db-upload.service';
 import { SharedDataService } from '../../../shared/services/shared-data.service';
 
@@ -13,7 +13,7 @@ import { SharedDataService } from '../../../shared/services/shared-data.service'
 })
 export class MessagesComponent implements OnInit {
   constructor(
-    private dbFetchDataService: DbFetchDataService,
+    private dbGetDataService: DbGetDataService,
     private sharedDataService: SharedDataService,
     private dbUploadService: DbUploadService,
     private dbDeleteService: DbDeleteService,
@@ -33,7 +33,7 @@ export class MessagesComponent implements OnInit {
   ngOnInit(): void {
     this.mobile = this.sharedDataService.mobile;
     this.emails = [];
-    this.dbFetchDataService.fetchMessages().subscribe((emails) => {
+    this.dbGetDataService.getMessages().subscribe((emails) => {
       for (let email of emails.messages) {
         this.emails.push(email);
       }

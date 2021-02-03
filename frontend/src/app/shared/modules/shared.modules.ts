@@ -25,7 +25,6 @@ import { SignupFormComponent } from '../forms/signup-form/signup-form.component'
 import { ShortenPipe } from '../pipes/shorten.pipe';
 
 import { DbDeleteService } from '../services/database/db-delete.service';
-import { DbFetchDataService } from '../services/database/db-fetch-data.service';
 import { DbStatisticsService } from '../services/database/db-statistics.service';
 import { DbUploadService } from '../services/database/db-upload.service';
 import { DbWebsiteEditService } from '../services/database/db-website-edit.sevice';
@@ -41,6 +40,7 @@ import { NewPricePipe } from '../pipes/new-price.pipe';
 import { PercentagePipe } from '../pipes/percentage.pipe';
 import { CountdownModule } from 'ngx-countdown';
 import { CountdownComponent } from '../components/countdown/countdown.component';
+import { DbGetDataService } from '../services/database/db-get-data.service';
 
 
 const COMPONENTS = [
@@ -86,7 +86,7 @@ const COMPONENTS = [
       MatMenuModule,
       CountdownModule
     ],
-    providers: [DbUploadService,DbFetchDataService,DbWebsiteEditService,DbDeleteService,SharedDataService, DeleteAlertService,DbStatisticsService],
+    providers: [DbUploadService,DbGetDataService,DbWebsiteEditService,DbDeleteService,SharedDataService, DeleteAlertService,DbStatisticsService],
     exports: [...COMPONENTS,]
   })
   export class SharedModule { }

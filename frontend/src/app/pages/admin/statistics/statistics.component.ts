@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { DbGetDataService } from 'src/app/shared/services/database/db-get-data.service';
 import { Product } from '../../../shared/interfaces/product.interface';
-import { DbFetchDataService } from '../../../shared/services/database/db-fetch-data.service';
 import { DbStatisticsService } from '../../../shared/services/database/db-statistics.service';
 
 @Component({
@@ -38,7 +38,7 @@ export class StatisticsComponent {
 
   constructor(
     private dbStatisticsService: DbStatisticsService,
-    private dbFetchDataService: DbFetchDataService,
+    private dbGetDataService: DbGetDataService,
     private router: Router
   ) {}
 
@@ -103,8 +103,8 @@ export class StatisticsComponent {
   getProducts(cat: string) {
     this.products = [{}];
     this.products.splice(0, 1);
-    this.dbFetchDataService
-      .fetchProductsByCategory(cat)
+    this.dbGetDataService
+      .getProductsByCategory(cat)
       .subscribe((products) => {
         // for (let product of products) {
         //   this.dbStatisticsService

@@ -57,7 +57,7 @@ router.post("/signup", (req, res, next) => {
 
 router.post("/login", (req, res, next) => {
   const {email, password} = req.body;
-  let fetchedUser;
+  let getUser;
   User.findOne({ email })
     .then((user) => {
       if (!user) {
@@ -65,7 +65,7 @@ router.post("/login", (req, res, next) => {
           message: LOGS.USER.AUTH_FAILED,
         });
       }
-      fetchedUser = user;
+      getUser = user;
       return bcrypt.compare(password, user.password);
     })
     .then((result) => {
@@ -75,19 +75,19 @@ router.post("/login", (req, res, next) => {
         });
       }
       const token = jwt.sign(
-        { email: fetchedUser.email, userId: fetchedUser._id },
+        { email: getUser.email, userId: getUser._id },
         "asdsadvhbhbrejbjhb223bhblbhljbhblbcsdlhbaaakksxa;na;sdknx##1akkkaxxaxalg",
         { expiresIn: "1h" }
       );
       res.status(200).json({
         token: token,
         expiresIn: 3600,
-        userId: fetchedUser._id,
-        email: fetchedUser.email,
-        password: fetchedUser.password,
-        favorites: fetchedUser.favorites,
-        categories: fetchedUser.categories,
-        history: fetchedUser.history,
+        userId: getUser._id,
+        email: getUser.email,
+        password: getUser.password,
+        favorites: getUser.favorites,
+        categories: getUser.categories,
+        history: getUser.history,
       });
     })
     .catch((err) => {

@@ -29,13 +29,13 @@ export class DbWebsiteEditService {
       .subscribe();
   }
 
-  fetchWebsiteDetails() {
-    return this.http.get<{ info: WebsiteDetails }>(
+  getWebsiteDetails() {
+    return this.http.get<WebsiteDetails>(
       `${environment.api}/website`
     );
   }
 
-  fetchCoupons() {
+  getCoupons() {
     let couponsArray = [];
     return this.http
       .get<{ coupon: Coupon[] }>(`${environment.api}/coupons`)
@@ -57,7 +57,7 @@ export class DbWebsiteEditService {
       .subscribe();
   }
 
-  fetchPages(page) {
+  getPages(page) {
     return this.http.get<{ info: [{ content: string; _id: string }] }>(
       `${environment.api}/pages/${page}`
     );

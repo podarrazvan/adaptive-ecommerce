@@ -9,7 +9,6 @@ import { SharedDataService } from '../../../../shared/services/shared-data.servi
 export class ShopByBrandLogosComponent implements OnInit {
   constructor(private sharedDataService: SharedDataService) {}
 
-  // TODO SORIN uncomment below code, replace images that fail to fetch / get. they were annoying
   brands = [
     // {
     //   img:

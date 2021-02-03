@@ -9,7 +9,7 @@ export class WebConfigResolver implements Resolve<any> {
 
   // !SORIN STEP - 1 : Am creat un resolver, asta se apeleaza inainte sa se initieze componenta
   async resolve(route: ActivatedRouteSnapshot) {
-    return this.dbWebsiteEdit.fetchWebsiteDetails().toPromise();
+    return this.dbWebsiteEdit.getWebsiteDetails().toPromise();
   }
 }
 
