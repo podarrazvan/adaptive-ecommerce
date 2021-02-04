@@ -6,14 +6,15 @@ import { SharedDataService } from '../../services/shared-data.service';
 @Component({
   selector: 'app-search-bar',
   templateUrl: './search-bar.component.html',
-  styleUrls: ['./search-bar.component.scss']
+  styleUrls: ['./search-bar.component.scss'],
 })
 export class SearchBarComponent implements OnInit {
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private sharedDataService: SharedDataService
+  ) {}
 
-  constructor(private fb: FormBuilder,
-              private router: Router,
-              private sharedDataService: SharedDataService) { }
-  
   searchBar: FormGroup;
 
   categories: string[] = [];
@@ -21,29 +22,36 @@ export class SearchBarComponent implements OnInit {
   selectedCategory: string;
 
   ngOnInit(): void {
-    this.sharedDataService.websiteDetails.subscribe(data => {
+    this.sharedDataService.websiteDetails.subscribe((response) => {
       try {
-        this.categories = data.categories
+        this.categories = response.categories;
       } catch {
         ///
       }
-    });
-    this.searchBar = this.fb.group({
-      search: ['',Validators.required],
-      category:['all']
+      this.buildFormGroup();
     });
   }
 
   onSearch() {
     const search = this.searchBar.value.search;
-    this.router.navigate(['../search',this.searchBar.value.category ,search.replace(/\s/g, '-')]);
+    this.router.navigate([
+      '../search',
+      this.searchBar.value.category,
+      search.replace(/\s/g, '-'),
+    ]);
   }
 
   searchInCategories(category) {
     this.searchBar.patchValue({
-      category: category
+      category: category,
     });
     this.selectedCategory = category;
   }
-
+  
+  private buildFormGroup() {
+    this.searchBar = this.fb.group({
+      search: ['', Validators.required],
+      category: ['all'],
+    });
+  }
 }

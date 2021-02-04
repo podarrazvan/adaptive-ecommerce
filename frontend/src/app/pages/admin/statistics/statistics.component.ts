@@ -49,12 +49,12 @@ export class StatisticsComponent {
     const startYear = +date.getFullYear();
     let startMonth = +date.getMonth();
     let startDay = +date.getDate();
-    this.dbStatisticsService.getAllWebsiteViews().subscribe((responseData) => {
+    this.dbStatisticsService.getAllWebsiteViews().subscribe((response) => {
       for (let year = startYear; year > 2019; year--) {
         for (let month = startMonth; month > 0; month--) {
           for (let day = startDay; day > 0; day--) {
             try {
-              responseData[year][month][day].views;
+              response[year][month][day].views;
               if (day === 0) {
                 startDay = 31;
               }
@@ -65,7 +65,7 @@ export class StatisticsComponent {
                 year: year,
                 month: month + 1,
                 day: day,
-                views: responseData[year][month][day].views,
+                views: response[year][month][day].views,
               };
               this.websiteStatistics.push(singleDay);
             } catch {

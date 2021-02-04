@@ -103,17 +103,13 @@ router.put("/:id", (req, res, next) => {
 
 router.get("/category/:category", (req, res, next) => {
   Product.find({ category: req.params.category }).then((documents) => {
-    res.status(200).json({
-      products: documents,
-    });
+    res.status(200).json(documents);
   });
 });
 
 router.get("/id/:id", (req, res, next) => {
-  Product.find({ _id: req.params.id }).then((prod) => {
-    res.status(200).json({
-      product: prod,
-    });
+  Product.findOne({ _id: req.params.id }).then((prod) => {
+    res.status(200).json(prod);
   });
 });
 router.get("/paginated", paginatedResults(Product), (req, res, next) => {
@@ -121,10 +117,8 @@ router.get("/paginated", paginatedResults(Product), (req, res, next) => {
 });
 
 router.get("", (req, res, next) => {
-  Product.find().then((prod) => {
-    res.status(200).json({
-      products: prod,
-    });
+  Product.find().then((products) => {
+    res.status(200).json(products);
   });
 });
 

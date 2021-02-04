@@ -1,4 +1,5 @@
-@import "../../../shared/colors.scss";
+@import "../../../shared/styles/colors.scss";
+@import "../../../shared/styles/border-radius.scss";
 
 .product-img {
   display: flex;
@@ -6,7 +7,7 @@
   place-content: center;
   width: 79px;
   height: 79px;
-  border-radius: 7px;
+  border-radius: $small-border-radius;
   border: 1px solid $border-card;
   padding: 5px;
   img {

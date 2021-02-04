@@ -1,4 +1,4 @@
-@import "../../../colors.scss";
+@import "../../../styles/colors.scss";
 
 .bar {
     display: flex;
@@ -20,7 +20,7 @@ li {
     cursor: pointer;
     font-size: 16px;
     font-weight: 500;
-    color: #666666;
+    color: $gray-20;
     line-height: 18px;
     padding: 24px 20px 24px 20px;
   }
@@ -39,7 +39,7 @@ li {
   border: none;
   border-radius: 90px;
   font-size: 1.5rem;
-  color: #ffffff;
+  color: $non-color-2;
   mat-icon {
     padding-top: 10px;
   }

@@ -27,8 +27,8 @@ export class OrderComponent implements OnInit {
   ngOnInit(): void {
     this.products.splice(0,1);
     for(let product of this.order.cart) {
-      this.dbGetDataService.getProduct( product.product).subscribe(data => {
-        const prod = data.product;
+      this.dbGetDataService.getProduct( product.product).subscribe(response => {
+        const prod = response;
         const total = prod.price * product.quantity;
         this.products.push({
           quantity: product.quantity,

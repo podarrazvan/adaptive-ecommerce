@@ -18,9 +18,9 @@ export class SidebarComponent implements OnInit, DoCheck {
   hide = false;
 
   ngOnInit(): void {
-    this.dbGetDataService.getMessages().subscribe((emails) => {
+    this.dbGetDataService.getMessages().subscribe((response) => {
       this.sharedDataService.unreadMessages = 0;
-      for (let email of emails.messages) {
+      for (let email of response) {
         if (!email.seen) {
           this.sharedDataService.unreadMessages++;
         }

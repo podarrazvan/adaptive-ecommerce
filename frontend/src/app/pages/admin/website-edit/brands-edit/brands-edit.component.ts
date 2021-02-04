@@ -47,8 +47,8 @@ export class BrandsEditComponent implements OnInit {
 
   brandLogo(img: Event) {
     const image = (img.target as HTMLInputElement).files[0];
-    this.dbUploadService.uploadImg(image).subscribe((responsePath) =>{
-      this.brandLogoPath = responsePath.url;
+    this.dbUploadService.uploadImg(image).subscribe((response) =>{
+      this.brandLogoPath = response.url;
       this.valid = true;
     });
   }

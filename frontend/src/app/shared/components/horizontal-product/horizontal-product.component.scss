@@ -1,11 +1,12 @@
-@import "../../colors.scss";
+@import "../../styles/colors.scss";
+@import "../../styles/border-radius.scss";
 
 .product {
     display: flex;
     justify-content: space-between;
     width: 100%;
     height: 100%;
-    border-radius: 10px;
+    border-radius: $small-border-radius;
     padding: 40px;
     padding-top: 50px;
 }

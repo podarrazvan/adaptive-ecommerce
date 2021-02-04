@@ -1,0 +1,16 @@
+@import "../border-radius.scss";
+@import "../colors.scss";
+
+.custom-input-files::-webkit-file-upload-button {
+    visibility: hidden;
+  }
+  
+  .custom-input-files {
+    border-radius: $small-border-radius;
+    padding: 5px 8px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 10pt;
+    background: linear-gradient(122deg, $main-color-10, $main-color-20);
+    color: $non-color-2;
+  }

@@ -1,3 +1,6 @@
+@import "../../../../shared/styles/colors.scss";
+@import "../../../../shared/styles/border-radius.scss";
+
 .btn-danger {
   float: right;
 }
@@ -5,7 +8,7 @@
   margin-top: 20px;
 }
 
-.custom-input-file{
+.custom-input-file {
   margin: 10px;
 }
 
@@ -18,8 +21,8 @@
   // width: 60vw;
   padding: 16px;
   z-index: 100;
-  border-radius: 10px;
-  background: white;
+  border-radius: $small-border-radius;
+  background: $non-color-2;
   box-shadow: 0 2px 8px rbga(0, 0, 0, 0.26);
 }
 

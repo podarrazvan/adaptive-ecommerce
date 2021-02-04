@@ -19,14 +19,6 @@ router.put("/about-us/:id",(req, res, next) => {
     );
     });
 
-router.get("/about-us", (req, res, next) => {
-    Configs.find().then(inf => {
-        res.status(200).json({
-            info: inf
-        });
-    })
-});
-
 router.put("/terms-of-use/:id",(req, res, next) => {
     const termsOfUse = req.body.content
 
@@ -38,14 +30,6 @@ router.put("/terms-of-use/:id",(req, res, next) => {
         res.status(401).json({ message: LOGS.ABOUT_US.FAILED });
       }
     );
-});
-
-router.get("/terms-of-use", (req, res, next) => {
-    Configs.find().then(inf => {
-        res.status(200).json({
-            info: inf
-        });
-    })
 });
 
 module.exports = router;

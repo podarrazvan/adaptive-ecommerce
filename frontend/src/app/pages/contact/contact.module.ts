@@ -9,12 +9,8 @@ import { EditorModule } from '@tinymce/tinymce-angular';
 import { SharedModule } from '../../shared/modules/shared.modules';
 import { ContactComponent } from './contact.component';
 
-const COMPONENTS  = [
-
-]
-
 @NgModule({
-  declarations: [...COMPONENTS, ContactComponent],
+  declarations: [ContactComponent],
   imports: [
     MatIconModule,
     SharedModule,
@@ -31,6 +27,6 @@ const COMPONENTS  = [
       },
     ]),
   ],
-  exports: [...COMPONENTS, RouterModule],
+  exports: [RouterModule],
 })
 export class ContactModule {}

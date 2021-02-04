@@ -15,7 +15,7 @@ export class CartCouponComponent {
 
   addCoupon(code) {
     this.dbGetDataService.getCoupon(code.value).subscribe(response =>  {
-      this.discount.emit(response.coupon[0].discount);
+      this.discount.emit(response.discount);
     });
   }
 

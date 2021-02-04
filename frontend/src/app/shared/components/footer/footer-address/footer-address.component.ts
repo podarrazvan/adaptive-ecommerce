@@ -9,17 +9,20 @@ import { Component, OnInit } from '@angular/core';
 export class FooterAddressComponent implements OnInit {
   footer: Footer;
 
-  constructor(private sharedDataService: SharedDataService) {}
-
-  ngOnInit(): void {
-    this.sharedDataService.websiteDetails.subscribe((data) => {
+  constructor(private sharedDataService: SharedDataService) {
+    this.sharedDataService.websiteDetails.subscribe((response) => {
+      console.log(response);
       try {
-        const { adress, phone, email } = data.footer;
+        const { adress, phone, email } = response.footer;
         this.footer = { adress, phone, email };
       } catch {
        //
       }
     });
+  }
+
+  ngOnInit(): void {
+  
   }
 }
 

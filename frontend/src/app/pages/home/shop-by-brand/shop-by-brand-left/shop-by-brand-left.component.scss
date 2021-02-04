@@ -1,11 +1,13 @@
-@import "../../../../shared/colors.scss";
+@import "../../../../shared/styles/colors.scss";
+@import "../../../../shared/styles/border-radius.scss";
 
 .brand-card {
     display: flex;
     flex-direction: column;
     width: 300px;
-    border: 2px solid #f0f0f0;
-    border-radius: 10px;
+    height: 502px;
+    border: 2px solid $gray-80;
+    border-radius: $small-border-radius;
     padding: 104px 11px;
 }
 
@@ -30,10 +32,10 @@ button {
     display: inline-block;
     font-weight: 500;
     border: none;
-    border-radius: 999px;
-    color: white;
-    background: #54f0ff;
-    background-image: linear-gradient(122deg, #c26af5, #54f0ff);
+    border-radius: $huge-border-radius;
+    color: $non-color-2;
+    background: $main-color-20;
+    background-image: linear-gradient(122deg, $main-color-10, $main-color-20);;
     -webkit-transition: all 0.3s ease 0s;
     transition: all 0.3s ease 0s;
 }

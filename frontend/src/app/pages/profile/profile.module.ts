@@ -4,7 +4,7 @@ import { ProfileComponent } from './profile.component';
 
 @NgModule({
     declarations: [ProfileComponent],
-    imports: [ RouterModule.forChild([{ path: 'profilee', component: ProfileComponent }]),
+    imports: [ RouterModule.forChild([{ path: 'profile', component: ProfileComponent }]),
     ],
   })
   export class ProfileModule {}

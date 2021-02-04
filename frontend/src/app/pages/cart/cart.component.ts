@@ -16,26 +16,20 @@ export class CartComponent implements OnInit, DoCheck {
     private sharedDataService: SharedDataService,
     private router: Router
   ) {}
-
-  emptyCart: boolean;
-
+ 
   cart;
   showCart = false;
 
   subtotal=0;
-
   shipping = 0;
-
   total = 0;
 
   mobile: boolean;
-
   paidFor = false;
 
   ngOnInit(): void {
     this.mobile = this.sharedDataService.mobile;
     const products = JSON.parse(localStorage.getItem('cart'));
-    products.length > 0 ? this.emptyCart  = false : this.emptyCart = true;
     for (let product of products) {
       const key = product.id;
       const quantity = product.quantity;
@@ -77,7 +71,7 @@ export class CartComponent implements OnInit, DoCheck {
     this.cart = [];
     let itemTotal=0;
     this.dbGetDataService.getProduct(key).subscribe((response) => {
-      const product = response.product[0];
+      const product = response;
       itemTotal += +product.price *quantity;
       this.cart.push({
         img: product.images[0],

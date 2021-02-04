@@ -1,8 +1,9 @@
-@import "../../colors.scss";
+@import "../../styles/colors.scss";
+@import "../../styles/border-radius.scss";
 
 .sign-up {
     border: 1px solid $border-card;
-    border-radius: 10px;
+    border-radius: $small-border-radius;
     width: 100%;
     padding: 20px;
 }

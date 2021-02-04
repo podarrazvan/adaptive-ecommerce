@@ -1,6 +1,8 @@
+@import "../../styles/colors.scss";
+
 .navbar {
   height: 60px;
-  background-color: #f4f4f4;
+  background-color: $gray-80;
 }
 
 ul {
@@ -18,5 +20,5 @@ li {
 }
 
 mat-icon {
-  color: black;
+  color: $non-color-1;
 }

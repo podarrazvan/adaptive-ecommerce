@@ -41,40 +41,11 @@ export class AddProductComponent implements OnInit, OnDestroy {
   onEditMode: boolean;
 
   ngOnInit(): void {
-    this.onEditMode = this.sharedDataService.productEdit;
-    if (this.onEditMode) {
-      this.productForm = this.fb.group({
-        title: [this.sharedDataService.product.title, Validators.required],
-        category: [this.sharedDataService.product.category, Validators.required],
-        brand: [this.sharedDataService.product.brand, Validators.required],
-        price: [this.sharedDataService.product.price, Validators.required],
-        images: '',
-        description: [this.sharedDataService.product.description],
-        tags: [''],
-        quantity: [this.sharedDataService.product.quantity, Validators.required],
-        minPrice: [''],
-        salesWeekTarget: ['']
-      });
-      this.tags = this.sharedDataService.product.tags;
-      this.images = this.sharedDataService.product.images;
-    } else {
-      this.productForm = this.fb.group({
-        title: ['', Validators.required],
-        category: ['', Validators.required],
-        brand: ['', Validators.required],
-        price: ['', Validators.required],
-        images: '',
-        description: [''],
-        tags: [''],
-        quantity: ['', Validators.required],
-        minPrice: [''],
-        salesWeekTarget: ['']
-      });
-    }
-    this.sharedDataService.websiteDetails.subscribe((data) => {
+    this.buildFormGroup();
+    this.sharedDataService.websiteDetails.subscribe((response) => {
       this.loading = false;
-      this.categories = data.categories;
-      this.brands = data.brands;
+      this.categories = response.categories;
+      this.brands = response.brands;
     });
   }
 
@@ -89,9 +60,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
         //   .updateProduct(this.productForm.value, this.sharedDataService.product.key)
         //   .subscribe((response) => console.log(response));
       } else {
-        this.dbUploadService.createAndStoreProduct(
-          this.productForm.value
-        );
+        this.dbUploadService.createAndStoreProduct(this.productForm.value);
       }
       this.notComplete = false;
       this.tags = [];
@@ -104,11 +73,9 @@ export class AddProductComponent implements OnInit, OnDestroy {
 
   upload(img: any) {
     const image = (img.target as HTMLInputElement).files[0];
-    this.dbUploadService
-      .uploadImg(image)
-      .subscribe((responseData) => {
-        this.images.push(responseData.url);
-      });
+    this.dbUploadService.uploadImg(image).subscribe((responseData) => {
+      this.images.push(responseData.url);
+    });
   }
 
   deletePhoto(img, i) {
@@ -137,6 +104,45 @@ export class AddProductComponent implements OnInit, OnDestroy {
       for (let img of this.images) {
         this.dbDeleteService.deletePhoto(img);
       }
+    }
+  }
+
+  private buildFormGroup() {
+    this.onEditMode = this.sharedDataService.productEdit;
+    if (this.onEditMode) {
+      this.productForm = this.fb.group({
+        title: [this.sharedDataService.product.title, Validators.required],
+        category: [
+          this.sharedDataService.product.category,
+          Validators.required,
+        ],
+        brand: [this.sharedDataService.product.brand, Validators.required],
+        price: [this.sharedDataService.product.price, Validators.required],
+        images: '',
+        description: [this.sharedDataService.product.description],
+        tags: [''],
+        quantity: [
+          this.sharedDataService.product.quantity,
+          Validators.required,
+        ],
+        minPrice: [''],
+        salesWeekTarget: [''],
+      });
+      this.tags = this.sharedDataService.product.tags;
+      this.images = this.sharedDataService.product.images;
+    } else {
+      this.productForm = this.fb.group({
+        title: ['', Validators.required],
+        category: ['', Validators.required],
+        brand: ['', Validators.required],
+        price: ['', Validators.required],
+        images: '',
+        description: [''],
+        tags: [''],
+        quantity: ['', Validators.required],
+        minPrice: [''],
+        salesWeekTarget: [''],
+      });
     }
   }
 }

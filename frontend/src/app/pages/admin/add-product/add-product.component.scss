@@ -1,75 +1,79 @@
+@import "../../../shared/styles/border-radius.scss";
+@import "../../../shared/styles/colors.scss";
+
 .content {
-    border-radius: 20px;
-    padding: 20px;
-    background-color: white;
+  border-radius: 20px;
+  padding: 20px;
+  background-color: $non-color-2;
 }
 
 form {
-    color: black;
+  color: $non-color-1;
 }
 
 .price-input,
 .tags-input {
-    display: flex;
+  display: flex;
 }
 
 img,
 .image {
-    height: 108px;
-    width: 192px;
+  height: 108px;
+  width: 192px;
 }
 
-.prev-images  {
-    display: block;
-    max-width: 600px;
-    position: relative;
-  }
+.prev-images {
+  display: block;
+  max-width: 600px;
+  position: relative;
+}
 
 .delete-btn {
-    position: relative;
-    top: 25px;
-    right: 5px;
-    float: right;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    background-color: red;
+  position: relative;
+  top: 25px;
+  right: 5px;
+  float: right;
+  border: none;
+  border-radius: $very-small-border-radius;
+  color: $non-color-2;
+  background-color: red;
 }
 
 .image {
-    display: inline-block;
-    position: relative;
-    margin: 5px;
+  display: inline-block;
+  position: relative;
+  margin: 5px;
 }
 
 .tags,
 .tags-area {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 .tags-area {
-    min-height: 150px;
-    border: 1px solid #ccc!important;
-    border-radius: 5px;
-    flex-direction: row !important;
-    column-count: 5; //TO FIX!
+  min-height: 150px;
+  border: 1px solid #ccc !important;
+  border-radius: $very-small-border-radius;
+  flex-direction: row !important;
+  column-count: 5; //TO FIX!
 }
 
 .tag-btn {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 .quantityInput {
-    float: right;
-    max-width: 200px;
+  float: right;
+  max-width: 200px;
 }
 
-.auto-mode, .discount {
-    position: relative;
-    width: 100%;
+.auto-mode,
+.discount {
+  position: relative;
+  width: 100%;
 }
 
 .sales-target {
-   position: absolute;
-   right: 0px;
+  position: absolute;
+  right: 0px;
 }

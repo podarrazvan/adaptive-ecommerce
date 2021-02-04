@@ -5,37 +5,39 @@ import { DbUploadService } from '../../../../shared/services/database/db-upload.
 @Component({
   selector: 'app-discount-modal',
   templateUrl: './discount-modal.component.html',
-  styleUrls: ['./discount-modal.component.scss']
+  styleUrls: ['./discount-modal.component.scss'],
 })
-export class DiscountModalComponent implements OnInit {
-
+export class DiscountModalComponent {
   @Input() id: string;
   @Output() close = new EventEmitter();
 
-  constructor(private formBuilder: FormBuilder,
-              private dbUploadService: DbUploadService) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private dbUploadService: DbUploadService
+  ) {
+    this.buildFormGroup();
+  }
 
   discountForm: FormGroup;
+  onSubmit() {
+    //*TODO Try alternative to Date(): https://momentjs.com/
+    const expDate = new Date();
+    expDate.setDate(
+      new Date().getDate() + this.discountForm.value.expirationDate
+    );
 
-  ngOnInit(): void {
+    this.discountForm.patchValue({
+      id: this.id,
+      expirationDate: expDate,
+    });
+    this.dbUploadService.createDiscount(this.discountForm.value);
+    this.close.emit();
+  }
+  private buildFormGroup() {
     this.discountForm = this.formBuilder.group({
       price: ['', Validators.required],
       expirationDate: ['', Validators.required],
       id: [''],
     });
   }
-  onSubmit() {
-
-    //*TODO Try alternative to Date(): https://momentjs.com/
-    const expDate = new Date();
-    expDate.setDate(new Date().getDate()+ this.discountForm.value.expirationDate);
-
-    this.discountForm.patchValue({
-      id:this.id,
-      expirationDate: expDate
-    });
-    this.dbUploadService.createDiscount(this.discountForm.value);
-    this.close.emit();
-  }
-
 }

@@ -1,9 +1,12 @@
+@import "../../../shared/styles/colors.scss";
+@import "../../../shared/styles/border-radius.scss";
+
 .orders {
   margin-bottom: 150px;
 }
 
 .vl {
-  border-left: 1px solid rgb(200, 200, 200);
+  border-left: 1px solid $gray-40;
   height: 200px;
   padding: 5px;
 }
@@ -11,8 +14,8 @@
 .order-card {
     margin-top: 10px;
     width: 700px !important;
-    border: 1px solid rgb(190, 190, 190);
-    border-radius: 5px;
+    border: 1px solid $gray-30;
+    border-radius: $very-small-border-radius;
     padding: 10px 30px 10px 10px;
   }
   

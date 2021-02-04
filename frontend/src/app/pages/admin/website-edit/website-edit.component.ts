@@ -25,10 +25,10 @@ export class WebsiteEditComponent implements OnInit {
   coupons: string[] = [];
 
   ngOnInit(): void {
-    this.sharedDataService.websiteDetails.subscribe(data => this.websiteDetails = data);
-    this.dbWebsiteEditService.getCoupons().subscribe(data => {
-      for(let coupon of data) {
-        this.coupons.push(coupon.coupon.code);
+    this.sharedDataService.websiteDetails.subscribe(response => this.websiteDetails = response);
+    this.dbWebsiteEditService.getCoupons().subscribe(response=> {
+      for(let coupon of response) {
+        this.coupons.push(coupon.code);
       }
     });
   }

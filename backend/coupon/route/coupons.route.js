@@ -21,10 +21,8 @@ router.post("", (req, res, next) => {
 });
 
 router.get("", (req, res, next) => {
-  Coupon.find().then((coupon) => {
-    res.status(200).json({
-      coupon: coupon
-    });
+  Coupon.find().then((coupons) => {
+    res.status(200).json(coupons);
   });
 });
 
@@ -45,9 +43,7 @@ router.put("/:id", (req, res, next) => {
 
 router.get("/:code", (req, res, next) => {
   Coupon.findOne({code:req.params.code}).then((coupon) => {
-    res.status(200).json({
-      coupon: coupon
-    });
+    res.status(200).json(coupon);
   });
 });
 

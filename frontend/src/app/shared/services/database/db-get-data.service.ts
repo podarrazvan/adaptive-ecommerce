@@ -18,25 +18,25 @@ export class DbGetDataService {
   category;
 
   getProductsByCategory(category: string) {
-    return this.http.get<{message: string, products: Product[]}>(
+    return this.http.get<Product[]>(
       `${environment.api}/products/category/${category}`
     );
   }
 
   getProduct(key: string) {
-    return this.http.get<{ product: Product }>(
+    return this.http.get<Product>(
       `${environment.api}/products/id/${key}`
     );
   }
 
   getProducts() {
-    return this.http.get<{message: string, products: Product[]}>(
+    return this.http.get<Product[]>(
       `${environment.api}/products`
     );
   }
 
   getPaginatedProducts(page: number, limit: number) {
-    return this.http.get<{results: Product[]}>(
+    return this.http.get<Product[]>(
       `${environment.api}/products/paginated?page=${page}&limit=${limit}`
     );
   }
@@ -47,7 +47,7 @@ export class DbGetDataService {
   }
 
   getMessages() {
-    return this.http.get<{messages: Message []}>(`${environment.api}/contact`);
+    return this.http.get<Message[]>(`${environment.api}/contact`);
   }
   
   getOrders() {
@@ -72,12 +72,12 @@ export class DbGetDataService {
   getUsers() {
     const usersArray = [];
     return this.http
-      .get<{ message: string; users: User[] }>(
+      .get<User[]>(
         'http://localhost:3000/api/users'
       )
       .pipe(
         map((responseData) => {
-          for (const user of responseData.users) {
+          for (const user of responseData) {
             usersArray.push({ user });
           }
           return usersArray;
@@ -86,7 +86,7 @@ export class DbGetDataService {
   }
 
   getCoupon(code) {
-    return this.http.get<{coupon: Coupon[]}>(`http://localhost:3000/api/coupons/${code}`);
+    return this.http.get<Coupon>(`http://localhost:3000/api/coupons/${code}`);
   }
 }
 

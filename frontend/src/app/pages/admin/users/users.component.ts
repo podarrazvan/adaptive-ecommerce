@@ -12,7 +12,7 @@ export class UsersComponent implements OnInit {
   constructor(private dbGetDataService: DbGetDataService) { }
 
   ngOnInit(): void {
-    this.dbGetDataService.getUsers().subscribe(users => this.users = users);
+    this.dbGetDataService.getUsers().subscribe(response => this.users = response);
   }
 
 }

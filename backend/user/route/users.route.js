@@ -12,9 +12,7 @@ const router = express.Router();
 
 router.get("", (req, res, next) => {
   User.find().then((documents) => {
-    res.status(200).json({
-      users: documents,
-    });
+    res.status(200).json(documents);
   });
 });
 

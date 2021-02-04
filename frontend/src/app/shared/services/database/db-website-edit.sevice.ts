@@ -36,17 +36,7 @@ export class DbWebsiteEditService {
   }
 
   getCoupons() {
-    let couponsArray = [];
-    return this.http
-      .get<{ coupon: Coupon[] }>(`${environment.api}/coupons`)
-      .pipe(
-        map((responseData) => {
-          for (const coupon of responseData.coupon) {
-            couponsArray.push({ coupon });
-          }
-          return couponsArray;
-        })
-      );
+    return this.http.get<Coupon[]>(`${environment.api}/coupons`);      
   }
 
   editPages(content: string, page: string) {

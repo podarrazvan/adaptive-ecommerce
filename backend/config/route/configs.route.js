@@ -47,7 +47,7 @@ router.post("", (req, res, next) => {
 
 router.get("", (req, res, next) => {
   collection.find().then((documents) => {
-    res.status(200).json(documents);
+    res.status(200).json(documents[0]);
   });
 });
 

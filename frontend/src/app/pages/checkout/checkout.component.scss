@@ -1,4 +1,5 @@
-@import "../../shared/colors.scss";
+@import "../../shared/styles/colors.scss";
+@import "../../shared/styles/border-radius.scss";
 
 .checkout {
     display: flex;
@@ -11,7 +12,7 @@
     min-height: 400px;
     width: 100%;
     border: 2px solid $border-card;
-    border-radius: 10px;
+    border-radius: $small-border-radius;
     padding: 50px;
 }
 
@@ -23,7 +24,7 @@
     float: right;
     height: fit-content;
     width: 37%;
-    background: #f8f8f8;
+    background: $gray-90;
     .top {
         width: fit-content;
         padding:0px 20px;
@@ -41,14 +42,14 @@
     display: flex;
     place-content: center;
     align-items: center;
-    border: 2px solid #333333;
+    border: 2px solid $gray-10;
     padding-top: 10px;
     line-height: 50px;
     width: 182px;
     font-weight: 800;
-    border-radius: 999px;
+    border-radius: $huge-border-radius;
     font-size: 18px;
-    background-color: white;
+    background-color: $non-color-2;
 }
 
 .bottom {
@@ -63,7 +64,7 @@
     border: 1px solid $border-card;
     padding-left: 40px;
     padding-top: 40px;
-    border-radius: 5px;
+    border-radius: $very-small-border-radius;
     resize: none;
     box-shadow: none;
     height: auto;

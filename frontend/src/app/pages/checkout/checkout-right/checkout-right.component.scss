@@ -1,13 +1,14 @@
-@import "../../../shared/colors.scss";
+@import "../../../shared/styles/colors.scss";
+@import "../../../shared/styles/border-radius.scss";
 
 .right {
   min-height: 400px;
   border: 2px solid $border-card;
-  border-radius: 10px;
+  border-radius: $small-border-radius;
 }
 
 .right {
-  background: #f8f8f8;
+  background: $gray-90;
   .top {
     width: fit-content;
     padding: 0px 20px;
@@ -25,14 +26,14 @@
   display: flex;
   place-content: center;
   align-items: center;
-  border: 2px solid #333333;
+  border: 2px solid $gray-10;
   padding-top: 10px;
   line-height: 50px;
   width: 116px;
   font-weight: 800;
-  border-radius: 999px;
+  border-radius: $huge-border-radius;
   font-size: 18px;
-  background-color: white;
+  background-color: $non-color-1;
 }
 .shipping,
 .subtotal,

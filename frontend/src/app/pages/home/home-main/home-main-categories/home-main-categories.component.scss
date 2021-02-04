@@ -1,5 +1,7 @@
+@import "../../../../shared/styles/border-radius.scss";
+
 .list-group {
-    border-radius: 10px;
+    border-radius: $small-border-radius;
     width: 250px;
     margin-right: 10px;
 }

@@ -1,13 +1,15 @@
+@import "../../styles/colors.scss";
+@import "../../styles/border-radius.scss";
 .product {
     position: relative;
     text-align: center;
     margin: 5px;
     height: 220px;
     width: 130px;
-    border-radius: 10px;
+    border-radius: $small-border-radius;
     padding: 10px;
-    color: black;
-    background-color: white;
+    color: $non-color-1;
+    background-color: $non-color-2;
 }
 .img img {
     max-width: 80px;

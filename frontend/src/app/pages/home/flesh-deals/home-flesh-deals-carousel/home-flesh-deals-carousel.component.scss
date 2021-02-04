@@ -1,3 +1,6 @@
+@import "../../../../shared/styles/colors.scss";
+@import "../../../../shared/styles/border-radius.scss";
+
 .carousel {
     display: flex;
 }
@@ -5,9 +8,9 @@
 .product {
     margin: 30px;
     margin-top: 200px;
-    border: 2px solid #eaeaea;
+    border: 2px solid $border;
     padding: 0 32px 43px 32px;
-    border-radius: 10px;
+    border-radius: $small-border-radius;
     max-width: 320px;
 }
 
@@ -37,12 +40,12 @@
     top: -40px;
     left: -40px;
     border-radius: 50%;
-    background: #ff5050;
+    background: $main-red;
     padding-left: 18px;
     z-index: 2;
     p {
         font-size: 12px;
-        color: #fff;
+        color: $non-color-2;
         font-weight: 800;
     }
 }
@@ -50,14 +53,14 @@
 .product-price {
     width: 238px;
     margin: 20px auto;
-    border-radius: 999px;
-    background: #f5f5f5;
+    border-radius: $huge-border-radius;
+    background: $gray-80;
     text-align: center;
     height: 58px;
     line-height: 58px;
     font-weight: 300;
     font-size: 23px;
-    color: #666;
+    color: $gray-20;
     .new {
         font-weight: 300;
         font-size: 23px;
@@ -66,7 +69,7 @@
         text-decoration: line-through;
         font-size: 16px;
         margin-left: 2px;
-        color: #ff2929;
+        color: $main-red;
     }
 }
 
@@ -85,7 +88,7 @@
 }
 
 .deal-stock {
-    color: #999999;
+    color: $gray-30;
 }
 
 .stock-available {
@@ -97,9 +100,9 @@
 }
 
 .progress-bar {
-    border-radius: 9px;
-    background: #54f0ff;
-    background-image: linear-gradient(122deg, #c26af5, #54f0ff);
+    border-radius: $small-border-radius;
+    background: $main-color-20;
+    background-image: linear-gradient(122deg, $main-color-10, $main-color-20);
 }
 
 .deal-end {

@@ -1,7 +1,9 @@
+@import "../../../../shared/styles/border-radius.scss";
+
 .content img {
     position: relative;
     top:-2px;
     max-height: 500px;
     max-width: 600px;
-    border-radius: 10px;
+    border-radius: $small-border-radius;
 }

@@ -11,7 +11,7 @@ export class Interceptor implements HttpInterceptor {
     request;
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        // OK but not working!
+        //! OK but not working!
         // this.sharedDataService.userDetails.subscribe(data => {
         //     this.token = data.token
         //     this.request = req.clone({
@@ -19,7 +19,7 @@ export class Interceptor implements HttpInterceptor {
         //     })
         // });
 
-        // !Ok but working!
+        //! NOT Ok but working!
         const user = JSON.parse(localStorage.getItem('userData'));
         try {
             this.token = user._token;

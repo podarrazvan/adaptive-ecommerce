@@ -37,8 +37,8 @@ export class SearchComponent implements OnInit {
 
   getAllProducts() {
     let products = [];
-    this.dbGetDataService.getProducts().subscribe((responseData) => {
-      for (let product of responseData.products) {
+    this.dbGetDataService.getProducts().subscribe((response) => {
+      for (let product of response) {
         products.push(product);
       }
       this.filtreResult(products);
@@ -49,8 +49,8 @@ export class SearchComponent implements OnInit {
     let products = [];
     this.dbGetDataService
       .getProductsByCategory(cat)
-      .subscribe((responseData) => {
-        for (let product of responseData.products) {
+      .subscribe((response) => {
+        for (let product of response) {
           products.push(product);
         }
         this.filtreResult(products);

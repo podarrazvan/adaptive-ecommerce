@@ -32,7 +32,7 @@ export class SignupFormComponent{
     authObs = this.authService.signup(form.value);
 
     authObs.subscribe(
-      resData => {
+      response => {
         this.isLoading = false;
         this.router.navigate(['../']);
       },

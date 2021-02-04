@@ -48,7 +48,7 @@ export class CategoriesComponent implements OnInit {
     this.dbGetDataService
       .getProductsByCategory(category)
       .subscribe((response) => {
-        for (let product of response.products) {
+        for (let product of response) {
           this.products.push(product);
         }
         this.isLoading = false;

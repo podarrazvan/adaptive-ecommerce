@@ -50,13 +50,13 @@ export class ProductsComponent implements OnInit {
 
 
   getProducts(page, limit) {
-    this.dbGetDataService.getPaginatedProducts(page,limit).subscribe(responseData => this.products = responseData.results);
+    this.dbGetDataService.getPaginatedProducts(page,limit).subscribe(response => this.products = response);
   }
 
   onDelete(id, index, img) {
     this.deleteAlert = true;
-    this.deleteAlertService.deleteProduct.subscribe((data) => {
-      switch (data) {
+    this.deleteAlertService.deleteProduct.subscribe((response) => {
+      switch (response) {
         case true:
           this.productToDeleteIndex = index;
           this.productToDelete = { id: id, img: img };

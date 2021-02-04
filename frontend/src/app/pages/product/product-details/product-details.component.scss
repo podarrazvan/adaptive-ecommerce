@@ -1,3 +1,6 @@
+@import "../../../shared/styles/colors.scss";
+@import "../../../shared/styles/border-radius.scss";
+
 .product-details {
   flex-direction: column;
   display: flex;
@@ -6,7 +9,7 @@
 }
 
 .category p {
-  color: #999;
+  color: $gray-30;
   font-size: 12px;
   text-transform: capitalize;
   margin-bottom: 8px;
@@ -14,7 +17,7 @@
 
 .availability {
   p {
-    color: #999999;
+    color: $gray-30;
   }
 
   p span {
@@ -39,7 +42,7 @@
   }
   span {
     font-size: 14px;
-    color: #999999;
+    color: $gray-30;
   }
 }
 
@@ -59,13 +62,13 @@
   width: 210px;
   height: 47px;
   span {
-    color: #fff;
+    color: $non-color-2;
     font-weight: 800;
   }
-  background: #54f0ff;
-  background-image: linear-gradient(122deg, #54f0ff, #c26af5);
+  background: $main-color-20;
+  background-image: linear-gradient(122deg, $main-color-20, $main-color-10);
   border: none;
-  border-radius: 999px;
+  border-radius: $huge-border-radius;
   padding-left: 5px;
   padding-right: 19px;
   input {

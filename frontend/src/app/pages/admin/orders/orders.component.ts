@@ -62,8 +62,8 @@ export class OrdersComponent implements OnInit {
 
   getOrders() {
     this.orders = [];
-    this.dbGetDataService.getOrders().subscribe((orders) => {
-      for (let order of orders) {
+    this.dbGetDataService.getOrders().subscribe((response) => {
+      for (let order of response) {
         if (this.mobile) {
           this.mobileOrder = {};
           let product: {
@@ -79,12 +79,11 @@ export class OrdersComponent implements OnInit {
           this.mobileOrder.date = order.date;
           this.mobileOrder.total = order.total;
           this.mobileOrder.products = [{}];
-          this.mobileOrder.products.splice(0, 1);
           for (let prod of order.cart) {
             this.dbGetDataService
               .getProduct(prod.product)
-              .subscribe((mobOrder) => {
-                product.product = mobOrder.product;
+              .subscribe((response) => {
+                product.product = response;
                 product.quantity = prod.quantity;
                 this.mobileOrder.products.push(product);
               });
@@ -125,8 +124,8 @@ export class OrdersComponent implements OnInit {
     const order = this.mobile
     ? this.mobileOrders[index].key
     : this.orders[index].key;
-    this.deleteAlertService.deleteMessage.subscribe((data) => {
-      switch (data) {
+    this.deleteAlertService.deleteMessage.subscribe((response) => {
+      switch (response) {
         case true:
           this.dbDeleteService.deleteOrder(order).subscribe(() => {
             this.mobile

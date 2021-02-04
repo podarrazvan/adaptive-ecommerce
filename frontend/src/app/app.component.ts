@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { AuthService } from './auth/auth.service';
 import { SharedDataService } from './shared/services/shared-data.service';
 
@@ -12,10 +13,18 @@ export class AppComponent implements OnInit {
 
   constructor(
     private sharedData: SharedDataService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router,
   ) {}
 
   async ngOnInit() {
+    this.router.events.subscribe((evt) => {
+      if(!(evt instanceof NavigationEnd)) {
+        return;
+      } 
+      window.scrollTo(0,0);
+    });
+    
     if (JSON.parse(localStorage.getItem('userData')) != null) {
       this.sharedData.setUserDetails(
         JSON.parse(localStorage.getItem('userData'))

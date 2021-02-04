@@ -16,9 +16,9 @@ export class DbStatisticsService {
       date.getFullYear(),
       date.getMonth(),
       date.getDate()
-    ).subscribe((view) => {
+    ).subscribe((response) => {
       try {
-        this.addWebsiteViews(view.views);
+        this.addWebsiteViews(response.views);
       } catch {
         this.addWebsiteViews(0);
       }

@@ -1,4 +1,5 @@
-@import "../../shared/colors.scss";
+@import "../../shared/styles/colors.scss";
+@import "../../shared/styles/border-radius.scss";
 
 .profile {
     min-height: 70vh;
@@ -11,7 +12,7 @@
     align-items: center;
     width: 200px;
     border: 1px solid $border-card;
-    border-radius: 10px;
+    border-radius: $small-border-radius;
     padding: 20px;
     input {
         margin: 10px;

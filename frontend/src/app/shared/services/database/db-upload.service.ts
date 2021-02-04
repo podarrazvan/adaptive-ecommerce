@@ -73,11 +73,10 @@ export class DbUploadService {
       date: date,
       seen: false,
     };
-    this.http
+    return this.http
       .post(`${environment.api}/contact`, messageToAdd, {
         observe: 'response',
-      })
-      .subscribe();
+      });     
   }
 
   addOrder(order: Order) {

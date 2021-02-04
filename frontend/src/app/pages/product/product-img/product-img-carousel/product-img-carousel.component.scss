@@ -1,3 +1,6 @@
+@import "../../../../shared/styles/colors.scss";
+@import "../../../../shared/styles/border-radius.scss";
+
 .carousel {
     flex-direction: column;
     display: flex;
@@ -6,8 +9,8 @@
 }
 
 .secondary-img {
-    border: 1px solid #eaeaea;
-    border-radius: 10px;
+    border: 1px solid $border;
+    border-radius: $small-border-radius;
     padding: 20px;
     margin: 20px;
     img {

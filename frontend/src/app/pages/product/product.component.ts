@@ -26,11 +26,12 @@ export class ProductComponent implements OnInit {
 
   ngOnInit(): void {
     const key = this.route.snapshot.params['key'];
-    this.dbGetDataService.getProduct(key).subscribe((productData) => {
-      this.product = productData.product[0];
+    this.dbGetDataService.getProduct(key).subscribe((response) => {
+      console.log(response);
+      this.product = response;
       this.loading = false;
-      this.sharedDataService.userDetails.subscribe((data) => {
-        this.user = data;
+      this.sharedDataService.userDetails.subscribe((response) => {
+        this.user = response;
         if (this.user.history.indexOf(key) != -1) {
         } else {
           this.user.history.push(key);

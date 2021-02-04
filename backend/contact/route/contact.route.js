@@ -18,9 +18,7 @@ router.post("", (req, res, next) => {
 
 router.get("", (req, res, next) => {
   Message.find().then((messages) => {
-    res.status(200).json({
-      messages: messages,
-    });
+    res.status(200).json(messages);
   });
 });
 

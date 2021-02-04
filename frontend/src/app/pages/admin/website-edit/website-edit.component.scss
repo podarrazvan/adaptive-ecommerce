@@ -1,6 +1,7 @@
+@import "../../../shared/styles/border-radius.scss";
 .website-edit-box {
   width: 800px;
-  border-radius: 10px;
+  border-radius: $small-border-radius;
   box-shadow: 0 7px 20px 0 rgba(36, 41, 66, 0.15);
   padding: 50px;
 }

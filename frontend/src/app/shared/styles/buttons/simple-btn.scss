@@ -1,0 +1,11 @@
+@import "../colors.scss";
+@import "../border-radius.scss";
+
+.simple-btn {
+    font-weight: bold;
+    color: $gray-20;
+    background: $non-color-2;
+    border-radius: $huge-border-radius;
+    border: 1px solid $gray-80;
+    border: none;
+}

@@ -33,8 +33,8 @@ export class MessagesComponent implements OnInit {
   ngOnInit(): void {
     this.mobile = this.sharedDataService.mobile;
     this.emails = [];
-    this.dbGetDataService.getMessages().subscribe((emails) => {
-      for (let email of emails.messages) {
+    this.dbGetDataService.getMessages().subscribe((response) => {
+      for (let email of response) {
         this.emails.push(email);
       }
     });
@@ -54,8 +54,8 @@ export class MessagesComponent implements OnInit {
   onDelete(i) {
     this.deleteAlert = true;
     const index = i;
-    this.deleteAlertService.deleteMessage.subscribe((data) => {
-      switch (data) {
+    this.deleteAlertService.deleteMessage.subscribe((response) => {
+      switch (response) {
         case true:
           this.dbDeleteService
             .deleteMessage(this.emails[index]._id)
