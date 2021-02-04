@@ -1,18 +1,9 @@
-@import "../../../../shared/styles/border-radius.scss";
-@import "../../../../shared/styles/colors.scss";
-
 .alert-box {
-  position: fixed;
   top: 10vh;
   bottom: 20vh;
   height: fit-content;
   max-height: 80vh;
   margin-left: -30vw;
-  padding: 16px;
-  z-index: 100;
-  border-radius: $small-border-radius;
-  background: $non-color-2;
-  box-shadow: 0 2px 8px rbga(0, 0, 0, 0.26);
 }
 
 .main-btn {

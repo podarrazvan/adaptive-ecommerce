@@ -1,18 +1,18 @@
 @import "../../shared/styles/colors.scss";
 @import "../../shared/styles/border-radius.scss";
 
-.wishlit{
-    position: relative;
-    width: 100%;
-    margin-top: 100px;
-    border: 1px solid $border;
-    border-radius: $small-border-radius;
-    padding:40px 20px;
+.wishlit {
+  position: relative;
+  width: 100%;
+  margin-top: 100px;
+  border: 1px solid $gray-80;
+  border-radius: $small-border-radius;
+  padding: 40px 20px;
 }
 
 .card-top {
-    position: absolute;
-    width: 140px;
-    margin: auto;
-    margin-top: 15px;
+  position: absolute;
+  width: 140px;
+  margin: auto;
+  margin-top: 15px;
 }

@@ -11,7 +11,7 @@
 .left-container, .right-container {
     min-height: 400px;
     width: 100%;
-    border: 2px solid $border-card;
+    border: 2px solid $gray-80;
     border-radius: $small-border-radius;
     padding: 50px;
 }
@@ -61,7 +61,7 @@
 }
 
 .form-note {
-    border: 1px solid $border-card;
+    border: 1px solid $gray-80;
     padding-left: 40px;
     padding-top: 40px;
     border-radius: $very-small-border-radius;

@@ -34,7 +34,7 @@
 }
 
 .category p {
-  color: #999;
+  color: $gray-30;
   font-size: 12px;
   text-transform: capitalize;
   margin-bottom: 8px;
@@ -48,7 +48,7 @@
 }
 
 .price h2 {
-  color: #666;
+  color: $gray-20;
   font-size: 18px;
 }
 
@@ -76,7 +76,7 @@
   width: 100%;
   text-align: center;
   visibility: hidden;
-  background-color: white;
+  background-color: $non-color-2;
 }
 
 .btn-cart {

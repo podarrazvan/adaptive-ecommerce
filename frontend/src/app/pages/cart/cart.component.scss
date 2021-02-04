@@ -2,88 +2,89 @@
 @import "../../shared/styles/border-radius.scss";
 
 .cart {
-    display: flex;
-    margin-top: 100px;
-    width: 100%;
-    justify-content: space-between;
+  display: flex;
+  margin-top: 100px;
+  width: 100%;
+  justify-content: space-between;
 }
 
-.left, .right {
-    min-height: 400px;
-    border: 2px solid $border-card;
-    border-radius: $small-border-radius;
+.left,
+.right {
+  min-height: 400px;
+  border: 2px solid $gray-80;
+  border-radius: $small-border-radius;
 }
 
 .left {
-    width: 72%;
+  width: 72%;
 }
 
 .right {
-    float: right;
-    width: 27%;
-    background: $gray-90;
-    .top {
-        width: fit-content;
-        padding:0px 20px;
-        padding-top: 10px;
-    }
+  float: right;
+  width: 27%;
+  background: $gray-90;
+  .top {
+    width: fit-content;
+    padding: 0px 20px;
+    padding-top: 10px;
+  }
 }
 
 .card-top {
-    padding-top: 10px;
-    width: 160px;
+  padding-top: 10px;
+  width: 160px;
 }
 
 .shipping,
 .subtotal,
 .total-top {
-    padding: 20px;
-    display: flex;  
-    justify-content: space-between;   
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
 }
 .subtotal,
 .shipping,
 .total {
-    p {
-        font-size: 16px;
-        font-weight: 800;
-    }    
+  p {
+    font-size: 16px;
+    font-weight: 800;
+  }
 }
 
 .shipping-options {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .total {
-    width: 100%;
-    .gradient-btn{
-        display:block;
-        width: fit-content;
-        margin: auto;
-    }
+  width: 100%;
+  .gradient-btn {
+    display: block;
+    width: fit-content;
+    margin: auto;
+  }
 }
 
 .paypal-option {
-    margin-top: 50px;
-    text-align: center;
-    p {
-        position: relative;
-        top: -27px;
-        display: inline;
-        left: 0; 
-        right: 0; 
-        margin-left: auto; 
-        margin-right: auto;
-        border: 1px solid $border;
-        border-radius: 50%;
-        padding: 10px;
-        background-color: white;
-    }
+  margin-top: 50px;
+  text-align: center;
+  p {
+    position: relative;
+    top: -27px;
+    display: inline;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid $gray-80;
+    border-radius: 50%;
+    padding: 10px;
+    background-color: $non-color-2;
+  }
 }
 
 .bottom {
-    position: absolute;
-    bottom: 0;
-    width: 41%;
+  position: absolute;
+  bottom: 0;
+  width: 41%;
 }

@@ -1,4 +1,4 @@
-@import "../../styles/colors.scss";
+@import "../../shared/styles/colors.scss";
 
 .search {
     position: relative;
@@ -6,7 +6,7 @@
 
     height: 62px;
     border-radius: 31px ;
-    border: 2px solid $border;
+    border: 2px solid $gray-80;
     padding-left: 34px;
 }
 
@@ -22,7 +22,7 @@ input:focus{
 .search-actions {
    padding-top: 4px;
    padding-right: 1px;
-   border-left: 2px solid $border;
+   border-left: 2px solid $gray-80;
 }
 
 .toggle-btn,

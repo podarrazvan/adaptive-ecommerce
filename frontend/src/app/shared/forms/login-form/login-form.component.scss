@@ -2,32 +2,31 @@
 @import "../../styles/border-radius.scss";
 
 .password-reset {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .login {
-    border: 1px solid $border-card;
-    border-radius: $small-border-radius;
-    width: 100%;
-    padding: 20px;
-
+  border: 1px solid $gray-80;
+  border-radius: $small-border-radius;
+  width: 100%;
+  padding: 20px;
 }
 
 .card-top {
-    width: 100px;
-    margin: auto;
-    top: -35px;
+  width: 100px;
+  margin: auto;
+  top: -35px;
 }
 
 .cardTop {
-    width: 150px;
+  width: 150px;
 }
 
 .login-btn {
-   display: flex;
-   align-items: center;
-   padding-right: 15px;
-    button {
-        margin: auto;
-    }
+  display: flex;
+  align-items: center;
+  padding-right: 15px;
+  button {
+    margin: auto;
+  }
 }

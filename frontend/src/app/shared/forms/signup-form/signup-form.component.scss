@@ -2,21 +2,21 @@
 @import "../../styles/border-radius.scss";
 
 .sign-up {
-    border: 1px solid $border-card;
-    border-radius: $small-border-radius;
-    width: 100%;
-    padding: 20px;
+  border: 1px solid $gray-80;
+  border-radius: $small-border-radius;
+  width: 100%;
+  padding: 20px;
 }
 
 .card-top {
-    top: -35px;
+  top: -35px;
 }
 
 .signup-btn {
-    display: flex;
-    align-items: center;
-    padding-right: 15px;
-     button {
-         margin: auto;
-     }
+  display: flex;
+  align-items: center;
+  padding-right: 15px;
+  button {
+    margin: auto;
+  }
 }

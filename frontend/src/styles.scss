@@ -62,9 +62,18 @@ ul {
 }
 
 .alert {
-    place-content: center;
-    align-items: center;
-    margin: auto;
+  place-content: center;
+  align-items: center;
+  margin: auto;
+}
+
+.alert-box {
+  position: fixed;
+  padding: 16px;
+  z-index: 100;
+  border-radius: $small-border-radius;
+  background: $non-color-2;
+  box-shadow: 0 2px 8px rbga(0, 0, 0, 0.26);
 }
 
 .card-top {
@@ -97,13 +106,13 @@ ul {
 }
 
 input {
-  border: 1px solid $border;
+  border: 1px solid $gray-80;
   border-radius: $huge-border-radius;
   padding: 10px 20px;
 }
 
 textarea {
-  border: 1px solid $border;
+  border: 1px solid $gray-80;
   padding-left: 33px;
   padding-top: 24px;
   border-radius: 22px;

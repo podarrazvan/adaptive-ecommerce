@@ -23,7 +23,7 @@
     width: 79px;
     height: 79px;;
     border-radius: $small-border-radius;
-    border: 1px solid $border-card;
+    border: 1px solid $gray-80;
     img {
         max-width: 80%;
         max-height: 80%;
@@ -51,7 +51,7 @@
 }
 
 .status {
-    border: 2px solid $border-card;
+    border: 2px solid $gray-80;
     border-radius: $huge-border-radius;
     padding: 10px 20px 0px;
 }

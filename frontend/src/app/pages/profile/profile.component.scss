@@ -2,28 +2,28 @@
 @import "../../shared/styles/border-radius.scss";
 
 .profile {
-    min-height: 70vh;
-    padding: 100px;
+  min-height: 70vh;
+  padding: 100px;
 }
 
 .user {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 200px;
-    border: 1px solid $border-card;
-    border-radius: $small-border-radius;
-    padding: 20px;
-    input {
-        margin: 10px;
-    }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 200px;
+  border: 1px solid $gray-80;
+  border-radius: $small-border-radius;
+  padding: 20px;
+  input {
+    margin: 10px;
+  }
 }
 
 .card-top {
-    top: -46px;
-    width: 180px;
+  top: -46px;
+  width: 180px;
 }
 
 .black-btn {
-    padding: 10px 20px;
+  padding: 10px 20px;
 }

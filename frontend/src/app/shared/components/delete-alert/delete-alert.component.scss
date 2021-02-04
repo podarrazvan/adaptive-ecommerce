@@ -1,14 +1,6 @@
-@import "../../styles/border-radius.scss";
-@import "../../styles/colors.scss";
 .alert-box {
-  position: fixed;
   top: 30vh;
   width: 20vw;
-  padding: 16px;
-  z-index: 100;
-  border-radius: $small-border-radius;
-  background: $non-color-2;
-  box-shadow: 0 2px 8px rbga(0, 0, 0, 0.26);
 }
 
 .alert-box-actions {

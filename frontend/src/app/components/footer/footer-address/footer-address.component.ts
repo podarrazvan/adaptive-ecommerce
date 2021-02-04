@@ -1,4 +1,4 @@
-import { SharedDataService } from './../../../services/shared-data.service';
+import { SharedDataService } from '../../../shared/services/shared-data.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({

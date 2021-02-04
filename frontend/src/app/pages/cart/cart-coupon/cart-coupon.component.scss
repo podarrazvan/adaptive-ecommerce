@@ -1,27 +1,27 @@
 @import "../../../shared/styles/colors.scss";
 
 .coupon {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
 }
 
 .coupon-input {
-    width: fit-content;
-    border: 1px solid $border;
-    border-radius: 50px;
-    padding-left: 30px;
-    input {
-        margin: 0px 20px;
-        border: none;
-        outline: none;
-    }
+  width: fit-content;
+  border: 1px solid $gray-80;
+  border-radius: 50px;
+  padding-left: 30px;
+  input {
+    margin: 0px 20px;
+    border: none;
+    outline: none;
+  }
 }
 
 .black-btn {
-    border-radius:0px 50px 50px 0px;
+  border-radius: 0px 50px 50px 0px;
 }
 
 .gray-btn {
-    float: right;
+  float: right;
 }
