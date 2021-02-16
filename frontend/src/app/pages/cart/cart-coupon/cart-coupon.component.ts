@@ -1,6 +1,5 @@
-
 import { Component, EventEmitter, Output } from '@angular/core';
-import { DbGetDataService } from 'src/app/shared/services/database/db-get-data.service';
+import { DiscountService } from 'src/app/shared/services/database/discount.service';
 
 @Component({
   selector: 'app-cart-coupon',
@@ -11,10 +10,10 @@ export class CartCouponComponent {
 
   @Output() discount = new EventEmitter<number>();
 
-  constructor(private dbGetDataService: DbGetDataService) { }
+  constructor(private discountService: DiscountService) { }
 
   addCoupon(code) {
-    this.dbGetDataService.getCoupon(code.value).subscribe(response =>  {
+    this.discountService.getCoupon(code.value).subscribe(response =>  {
       this.discount.emit(response.discount);
     });
   }

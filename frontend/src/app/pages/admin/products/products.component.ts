@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { DbGetDataService } from 'src/app/shared/services/database/db-get-data.service';
+import { ImagesService } from 'src/app/shared/services/database/images.service';
 import { DeleteAlertService } from '../../../shared/components/delete-alert/delete-alert.service';
 import { Product } from '../../../shared/interfaces/product.interface';
-import { DbDeleteService } from '../../../shared/services/database/db-delete.service';
 import { SharedDataService } from '../../../shared/services/shared-data.service';
+import { ProductsService } from './products.service';
 
 @Component({
   selector: 'app-products',
@@ -19,11 +19,11 @@ export class ProductsComponent implements OnInit {
   idOfProductToAddOnHomepage: string;
 
   constructor(
-    private dbGetDataService: DbGetDataService,
     private sharedDataService: SharedDataService,
     private router: Router,
     private deleteAlertService: DeleteAlertService,
-    private dbDeleteService: DbDeleteService
+    private productsService: ProductsService,
+    private imagesService: ImagesService,
   ) {}
 
   mobile: boolean;
@@ -50,7 +50,7 @@ export class ProductsComponent implements OnInit {
 
 
   getProducts(page, limit) {
-    this.dbGetDataService.getPaginatedProducts(page,limit).subscribe(response => this.products = response);
+    this.productsService.getPaginatedProducts(page,limit).subscribe(response => this.products = response);
   }
 
   onDelete(id, index, img) {
@@ -85,11 +85,11 @@ export class ProductsComponent implements OnInit {
   }
 
   onProductDeleted() {
-    this.dbDeleteService
+    this.productsService
       .deleteProduct(this.productToDelete.id)
       .subscribe(() => {
         for (let img of this.productToDelete.img) {
-          this.dbDeleteService.deletePhoto(img);
+          this.imagesService.deletePhoto(img);
         }
       });
     this.products.splice(this.productToDeleteIndex, 1);

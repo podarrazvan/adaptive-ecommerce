@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { DbGetDataService } from 'src/app/shared/services/database/db-get-data.service';
+import { DiscountService } from 'src/app/shared/services/database/discount.service';
 import { Product } from '../../../shared/interfaces/product.interface';
+import { ProductsService } from '../../admin/products/products.service';
 
 @Component({
   selector: 'app-flesh-deals',
@@ -9,14 +10,15 @@ import { Product } from '../../../shared/interfaces/product.interface';
 })
 export class FleshDealsComponent implements OnInit {
 
-  constructor(private dbGetDataService: DbGetDataService) { }
+  constructor(private discountService: DiscountService,
+              private productsService: ProductsService) { }
 
   products:Product[] = [];
 
   productsFound = false;s
 
   ngOnInit(): void {
-    this.dbGetDataService.getPromotions().subscribe(response => {
+    this.discountService.getPromotions().subscribe(response => {
       for(let promotion of response) {
         const promo = {
           price: promotion.price,
@@ -28,7 +30,7 @@ export class FleshDealsComponent implements OnInit {
   }
 
   getProducts(id,discount) {
-    this.dbGetDataService.getProduct(id).subscribe(response => {
+    this.productsService.getProduct(id).subscribe(response => {
       const product = Object.assign(response, {discount: discount});
       this.products.push(product);
       if(this.products.length > 3) {

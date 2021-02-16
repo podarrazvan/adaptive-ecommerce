@@ -5,8 +5,8 @@ interface Views {
   views: number;
 }
 
-@Injectable()
-export class DbStatisticsService {
+@Injectable({providedIn: 'root'})
+export class StatisticsService {
   constructor(private http: HttpClient) {}
 
   websiteViews() {

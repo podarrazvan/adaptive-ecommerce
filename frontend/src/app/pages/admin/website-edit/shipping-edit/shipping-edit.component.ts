@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ConfigsService } from 'src/app/shared/services/database/configs.sevice';
 import { Shipping } from '../../../../shared/interfaces/shipping.interface';
-import { DbWebsiteEditService } from '../../../../shared/services/database/db-website-edit.sevice';
 
 @Component({
   selector: 'app-shipping-edit',
@@ -13,7 +13,7 @@ export class ShippingEditComponent {
 
   shippingHide = true;
 
-  constructor(private dbWebsiteEditService: DbWebsiteEditService) { }
+  constructor(private configsService: ConfigsService) { }
 
   editShippingMode: number;
 
@@ -24,7 +24,7 @@ export class ShippingEditComponent {
 
   addNewValue(form) {
     this.shippings.push(form.value);
-    this.dbWebsiteEditService.updateWebsite('websiteShipping',form.value);
+    this.configsService.updateWebsite('websiteShipping',form.value);
     this.newShippings.emit(this.shippings);
   }
 }

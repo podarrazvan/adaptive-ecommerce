@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ImagesService } from 'src/app/shared/services/database/images.service';
 import { WebsiteDetails } from '../../../../shared/interfaces/website-details';
-import { DbUploadService } from '../../../../shared/services/database/db-upload.service';
 
 @Component({
   selector: 'app-footer-edit',
@@ -14,7 +14,7 @@ export class FooterEditComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private dbUploadService: DbUploadService
+    private imagesService: ImagesService,
   ) {}
 
   footerEditForm: FormGroup;
@@ -62,19 +62,19 @@ export class FooterEditComponent implements OnInit {
   }
 
   facebookLogo(event: any) {
-    this.dbUploadService
+    this.imagesService
       .uploadImg(event)
       .subscribe((response) => (this.facebookLogoPath = response.url));
   }
 
   twitterLogo(event: any) {
-    this.dbUploadService
+    this.imagesService
       .uploadImg(event)
       .subscribe((response) => (this.twitterLogPath = response.url));
   }
 
   instagramLogo(event: any) {
-    this.dbUploadService
+    this.imagesService
       .uploadImg(event)
       .subscribe((response) => (this.instagramLogoPath = response.url));
   }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ConfigsService } from 'src/app/shared/services/database/configs.sevice';
 import { WebsiteDetails } from '../../../shared/interfaces/website-details';
-import { DbWebsiteEditService } from '../../../shared/services/database/db-website-edit.sevice';
 import { SharedDataService } from '../../../shared/services/shared-data.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { SharedDataService } from '../../../shared/services/shared-data.service'
   styleUrls: ['./website-edit.component.scss'],
 })
 export class WebsiteEditComponent implements OnInit {
-  constructor(private dbWebsiteEditService: DbWebsiteEditService,
+  constructor(private configsService: ConfigsService,
               private sharedDataService: SharedDataService) {}
 
   editName = false;
@@ -26,7 +26,7 @@ export class WebsiteEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.sharedDataService.websiteDetails.subscribe(response => this.websiteDetails = response);
-    this.dbWebsiteEditService.getCoupons().subscribe(response=> {
+    this.configsService.getCoupons().subscribe(response=> {
       for(let coupon of response) {
         this.coupons.push(coupon.code);
       }
@@ -62,7 +62,7 @@ export class WebsiteEditComponent implements OnInit {
 
   setName(name) {
     this.websiteDetails.name = name.value;
-    this.dbWebsiteEditService.updateWebsite('websiteName',name.value);
+    this.configsService.updateWebsite('websiteName',name.value);
     this.editName = false;
   }
 
@@ -79,7 +79,7 @@ export class WebsiteEditComponent implements OnInit {
   }
 
   saveInfo() {
-    // this.dbWebsiteEditService.websiteDetails(this.websiteDetails);
+    // this.configsService.websiteDetails(this.websiteDetails);
   }
 
 }

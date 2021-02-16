@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DbUploadService } from '../../../../shared/services/database/db-upload.service';
+import { DiscountService } from 'src/app/shared/services/database/discount.service';
 
 @Component({
   selector: 'app-discount-modal',
@@ -13,7 +13,7 @@ export class DiscountModalComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private dbUploadService: DbUploadService
+    private discountService: DiscountService,
   ) {
     this.buildFormGroup();
   }
@@ -30,7 +30,7 @@ export class DiscountModalComponent {
       id: this.id,
       expirationDate: expDate,
     });
-    this.dbUploadService.createDiscount(this.discountForm.value);
+    this.discountService.createDiscount(this.discountForm.value);
     this.close.emit();
   }
   private buildFormGroup() {

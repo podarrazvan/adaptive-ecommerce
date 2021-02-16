@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { DbGetDataService } from 'src/app/shared/services/database/db-get-data.service';
+import { StatisticsService } from 'src/app/shared/services/database/statistics.service';
 import { Product } from '../../../shared/interfaces/product.interface';
-import { DbStatisticsService } from '../../../shared/services/database/db-statistics.service';
+import { ProductsService } from '../products/products.service';
 
 @Component({
   selector: 'app-statistics',
@@ -37,8 +37,8 @@ export class StatisticsComponent {
   category;
 
   constructor(
-    private dbStatisticsService: DbStatisticsService,
-    private dbGetDataService: DbGetDataService,
+    private productsService: ProductsService,
+    private statisticsService: StatisticsService,
     private router: Router
   ) {}
 
@@ -49,7 +49,7 @@ export class StatisticsComponent {
     const startYear = +date.getFullYear();
     let startMonth = +date.getMonth();
     let startDay = +date.getDate();
-    this.dbStatisticsService.getAllWebsiteViews().subscribe((response) => {
+    this.statisticsService.getAllWebsiteViews().subscribe((response) => {
       for (let year = startYear; year > 2019; year--) {
         for (let month = startMonth; month > 0; month--) {
           for (let day = startDay; day > 0; day--) {
@@ -103,7 +103,7 @@ export class StatisticsComponent {
   getProducts(cat: string) {
     this.products = [{}];
     this.products.splice(0, 1);
-    this.dbGetDataService
+    this.productsService
       .getProductsByCategory(cat)
       .subscribe((products) => {
         // for (let product of products) {

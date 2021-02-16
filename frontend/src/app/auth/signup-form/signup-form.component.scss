@@ -1,11 +1,7 @@
-@import "../../styles/colors.scss";
-@import "../../styles/border-radius.scss";
+@import "../../shared/styles/colors.scss";
+@import "../../shared/styles/border-radius.scss";
 
-.password-reset {
-  cursor: pointer;
-}
-
-.login {
+.sign-up {
   border: 1px solid $gray-80;
   border-radius: $small-border-radius;
   width: 100%;
@@ -13,16 +9,10 @@
 }
 
 .card-top {
-  width: 100px;
-  margin: auto;
   top: -35px;
 }
 
-.cardTop {
-  width: 150px;
-}
-
-.login-btn {
+.signup-btn {
   display: flex;
   align-items: center;
   padding-right: 15px;

@@ -13,11 +13,17 @@ import { AdminModule } from './pages/admin/admin.module';
 import { CheckoutModule } from './pages/checkout/checkout.module';
 import { ProfileModule } from './pages/profile/profile.module';
 import { Interceptor } from './shared/interceptor';
+import { DiscountService } from 'src/app/shared/services/database/discount.service';
+import { ProductsService } from './pages/admin/products/products.service';
+import { MessagesService } from './pages/admin/messages/messages.service';
+import { StatisticsService } from './shared/services/database/statistics.service';
+import { ConfigsService } from './shared/services/database/configs.sevice';
+import { UsersService } from './pages/admin/users/user.service';
+import { OrdersService } from './pages/admin/orders/orders.service';
+import { ImagesService } from './shared/services/database/images.service';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     SharedRoutingModule,
@@ -30,10 +36,22 @@ import { Interceptor } from './shared/interceptor';
     ReactiveFormsModule,
     CheckoutModule,
     ProfileModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: Interceptor,multi:true}],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true },
+    DiscountService,
+    ProductsService,
+    MessagesService,
+    MessagesService,
+    DiscountService,
+    StatisticsService,
+    ConfigsService,
+    UsersService,
+    OrdersService,
+    ImagesService
+  ],
   bootstrap: [AppComponent],
-  exports: []
+  exports: [],
 })
-export class AppModule { }
+export class AppModule {}

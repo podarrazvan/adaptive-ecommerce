@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ImagesService } from 'src/app/shared/services/database/images.service';
 import { TinyMCEComponent } from '../../../shared/components/tinymce/tinymce.component';
 import { Brand } from '../../../shared/interfaces/brand.interface';
-import { DbDeleteService } from '../../../shared/services/database/db-delete.service';
-import { DbUploadService } from '../../../shared/services/database/db-upload.service';
 import { SharedDataService } from '../../../shared/services/shared-data.service';
+import { ProductsService } from '../products/products.service';
 
 @Component({
   selector: 'app-add-product',
@@ -14,9 +14,9 @@ import { SharedDataService } from '../../../shared/services/shared-data.service'
 export class AddProductComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
-    private dbUploadService: DbUploadService,
-    private dbDeleteService: DbDeleteService,
-    private sharedDataService: SharedDataService
+    private sharedDataService: SharedDataService,
+    private productsService: ProductsService,
+    private imagesService: ImagesService
   ) {}
   public tinyMCE: TinyMCEComponent;
 
@@ -60,7 +60,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
         //   .updateProduct(this.productForm.value, this.sharedDataService.product.key)
         //   .subscribe((response) => console.log(response));
       } else {
-        this.dbUploadService.createAndStoreProduct(this.productForm.value);
+        this.productsService.createAndStoreProduct(this.productForm.value);
       }
       this.notComplete = false;
       this.tags = [];
@@ -73,13 +73,13 @@ export class AddProductComponent implements OnInit, OnDestroy {
 
   upload(img: any) {
     const image = (img.target as HTMLInputElement).files[0];
-    this.dbUploadService.uploadImg(image).subscribe((responseData) => {
+    this.imagesService.uploadImg(image).subscribe((responseData) => {
       this.images.push(responseData.url);
     });
   }
 
   deletePhoto(img, i) {
-    this.dbDeleteService.deletePhoto(img);
+    this.imagesService.deletePhoto(img);
     this.images.splice(i, 1);
   }
 
@@ -102,7 +102,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
     this.sharedDataService.productEdit = false;
     if (this.notComplete && !this.onEditMode) {
       for (let img of this.images) {
-        this.dbDeleteService.deletePhoto(img);
+        this.imagesService.deletePhoto(img);
       }
     }
   }

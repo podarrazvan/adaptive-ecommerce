@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DbGetDataService } from 'src/app/shared/services/database/db-get-data.service';
+import { UsersService } from './user.service';
 
 @Component({
   selector: 'app-users',
@@ -9,10 +9,10 @@ import { DbGetDataService } from 'src/app/shared/services/database/db-get-data.s
 export class UsersComponent implements OnInit {
   users;
 
-  constructor(private dbGetDataService: DbGetDataService) { }
+  constructor(private userService: UsersService) { }
 
   ngOnInit(): void {
-    this.dbGetDataService.getUsers().subscribe(response => this.users = response);
+    this.userService.getUsers().subscribe(response => this.users = response);
   }
 
 }

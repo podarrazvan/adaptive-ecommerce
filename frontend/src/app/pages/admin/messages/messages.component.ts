@@ -1,10 +1,8 @@
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 import { Component, OnInit } from '@angular/core';
-import { DbGetDataService } from 'src/app/shared/services/database/db-get-data.service';
 import { DeleteAlertService } from '../../../shared/components/delete-alert/delete-alert.service';
-import { DbDeleteService } from '../../../shared/services/database/db-delete.service';
-import { DbUploadService } from '../../../shared/services/database/db-upload.service';
 import { SharedDataService } from '../../../shared/services/shared-data.service';
+import { MessagesService } from './messages.service';
 
 @Component({
   selector: 'app-messages',
@@ -13,10 +11,8 @@ import { SharedDataService } from '../../../shared/services/shared-data.service'
 })
 export class MessagesComponent implements OnInit {
   constructor(
-    private dbGetDataService: DbGetDataService,
+    private messagesService: MessagesService,
     private sharedDataService: SharedDataService,
-    private dbUploadService: DbUploadService,
-    private dbDeleteService: DbDeleteService,
     private deleteAlertService: DeleteAlertService
   ) {}
 
@@ -33,7 +29,7 @@ export class MessagesComponent implements OnInit {
   ngOnInit(): void {
     this.mobile = this.sharedDataService.mobile;
     this.emails = [];
-    this.dbGetDataService.getMessages().subscribe((response) => {
+    this.messagesService.getMessages().subscribe((response) => {
       for (let email of response) {
         this.emails.push(email);
       }
@@ -45,7 +41,7 @@ export class MessagesComponent implements OnInit {
     this.messageToShow = this.emails[index];
     this.showMessage = true;
     if (!this.emails[index].seen) {
-      this.dbUploadService.updateMessage(this.emails[index]);
+      this.messagesService.updateMessage(this.emails[index]);
       this.emails[index].seen = true;
       this.sharedDataService.unreadMessages--;
     }
@@ -57,7 +53,7 @@ export class MessagesComponent implements OnInit {
     this.deleteAlertService.deleteMessage.subscribe((response) => {
       switch (response) {
         case true:
-          this.dbDeleteService
+          this.messagesService
             .deleteMessage(this.emails[index]._id)
             .subscribe();
           this.emails.splice(index, 1);

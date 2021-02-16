@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { DbWebsiteEditService } from '../../../../shared/services/database/db-website-edit.sevice';
+import { ConfigsService } from 'src/app/shared/services/database/configs.sevice';
 
 @Component({
   selector: 'app-page-edit',
@@ -11,14 +11,14 @@ export class PageEditComponent {
   @Input() pageName: string;
   @Input() content: string;
 
-  constructor(private dbWebsiteEditService: DbWebsiteEditService ) {}
+  constructor(private configsService: ConfigsService ) {}
 
   onClose() {
     this.close.emit();
   }
 
   onSave(aboutUs) {
-    this.dbWebsiteEditService.editPages(aboutUs.value,this.pageName);
+    this.configsService.editPages(aboutUs.value,this.pageName);
     this.close.emit();
   }
 

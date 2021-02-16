@@ -1,4 +1,4 @@
-import { environment } from './../../../../environments/environment';
+import { environment } from '../../../../environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { WebsiteDetails } from '../../interfaces/website-details';
@@ -7,7 +7,7 @@ import { Coupon } from '../../interfaces/coupon.interface';
 import { map } from 'rxjs/operators';
 
 @Injectable()
-export class DbWebsiteEditService {
+export class ConfigsService {
   constructor(
     private http: HttpClient,
     private sharedDataService: SharedDataService
@@ -53,11 +53,5 @@ export class DbWebsiteEditService {
     );
   }
 
-  addCoupon(coupon: Coupon) {
-    const couponToAdd: Coupon = {
-      code: coupon.code,
-      discount: coupon.discount,
-    };
-    this.http.post(`${environment.api}/coupons`, couponToAdd).subscribe();
-  }
+  
 }
