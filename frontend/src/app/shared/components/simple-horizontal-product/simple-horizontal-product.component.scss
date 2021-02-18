@@ -1,41 +1,41 @@
-@import "../../styles/colors.scss";
-@import "../../styles/border-radius.scss";
+@import "/src/app/shared/styles/border-radius";
+@import "/src/app/shared/styles/colors";
 
 .product {
-    display: flex;
-    height: 170px;
-    transition: all 0.3s ease 0s;
+  display: flex;
+  height: 170px;
+  transition: all 0.3s ease 0s;
 }
 
 img {
-    padding: 2px;
-    max-height: 90px;
-    max-width: 90px;
-    border: 1px solid $gray-80;
-    border-radius: $very-small-border-radius;
+  padding: 2px;
+  max-height: 90px;
+  max-width: 90px;
+  border: 1px solid $gray-80;
+  border-radius: $very-small-border-radius;
 }
 
 .product:hover {
-    img {
-        border-image: linear-gradient(to right, $main-color-10, $main-color-20);
-        border-image-slice: 1;
-    }
+  img {
+    border-image: linear-gradient(to right, $main-color-10, $main-color-20);
+    border-image-slice: 1;
+  }
 }
 
 .right {
-    margin-left: 30px;
-    a {
-        cursor: pointer;
-        font-weight: 800;
-        font-size: 14px;
-    }
+  margin-left: 30px;
+  a {
+    cursor: pointer;
+    font-weight: 800;
+    font-size: 14px;
+  }
 
-    a:hover {
-        color:$gray-40
-    }
+  a:hover {
+    color: $gray-40;
+  }
 
-    p {
-        margin-top: 20px;
-        color: $gray-20;
-    }
+  p {
+    margin-top: 20px;
+    color: $gray-20;
+  }
 }

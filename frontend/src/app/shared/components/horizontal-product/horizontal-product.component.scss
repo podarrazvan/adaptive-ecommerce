@@ -1,72 +1,72 @@
-@import "../../styles/colors.scss";
-@import "../../styles/border-radius.scss";
+@import "/src/app/shared/styles/border-radius";
+@import "/src/app/shared/styles/colors";
 
 .product {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    height: 100%;
-    border-radius: $small-border-radius;
-    padding: 40px;
-    padding-top: 50px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  border-radius: $small-border-radius;
+  padding: 40px;
+  padding-top: 50px;
 }
 
 .product-info {
-    margin-right: 10px;
-    padding:20px;
+  margin-right: 10px;
+  padding: 20px;
 }
 
 .title h1 {
-    font-size: 22px;
-    line-height: 26px;
-    font-weight: 500;
-    margin-bottom: 13px;
+  font-size: 22px;
+  line-height: 26px;
+  font-weight: 500;
+  margin-bottom: 13px;
 }
 
 .price {
-    font-size: 16px;
-    font-weight: 500;
-    color: $gray-30;
-    margin-bottom: 20px;
-    span {
-        color: $main-red;
-        font-size: 30px;
-    }
+  font-size: 16px;
+  font-weight: 500;
+  color: $gray-30;
+  margin-bottom: 20px;
+  span {
+    color: $main-red;
+    font-size: 30px;
+  }
 }
 
-.link h3{
-    color: $main-red;
-    font-weight: 500;
-    span mat-icon{
-        position: relative;
-        color: $main-red!important;
-        top: 5px;
-    }
+.link h3 {
+  color: $main-red;
+  font-weight: 500;
+  span mat-icon {
+    position: relative;
+    color: $main-red !important;
+    top: 5px;
+  }
 }
 
 .product-img {
-    img {
-        width:200px;
-    }
+  img {
+    width: 200px;
+  }
 }
 
 .small {
-    padding: 0px 10px;
-    .product-img {
-        img {
-            width:150px;
-            margin-top: 20px;
-        }
+  padding: 0px 10px;
+  .product-img {
+    img {
+      width: 150px;
+      margin-top: 20px;
     }
-    .product-info {
-        margin-right: 0px;
-        padding:10px;
-    }
+  }
+  .product-info {
+    margin-right: 0px;
+    padding: 10px;
+  }
 }
 
 .product-img:hover {
-    img {
-      transform: scale(1.25);
-      transition: all 1s linear;
-    }
+  img {
+    transform: scale(1.25);
+    transition: all 1s linear;
   }
+}

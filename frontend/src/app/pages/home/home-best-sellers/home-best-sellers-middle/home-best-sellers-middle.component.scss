@@ -1,42 +1,42 @@
-@import "../../../../shared/styles/colors.scss";
-@import "../../../../shared/styles/border-radius.scss";
+@import "/src/app/shared/styles/border-radius";
+@import "/src/app/shared/styles/colors";
 
 .content {
-    display: flex;
-    margin-top: 20px;
-    height: 100vh;
-    width: 100%;
+  display: flex;
+  margin-top: 20px;
+  height: 100vh;
+  width: 100%;
 }
 
 .left,
 .right {
-    height: 100%;
-    width: 50%;
+  height: 100%;
+  width: 50%;
 }
 
 .left {
-    margin-right: 10px;
+  margin-right: 10px;
 }
 .right {
-    margin-left: 10px;
+  margin-left: 10px;
 }
 
-.top{
-    width: 100%;
-    height: 50%;
-    margin-bottom: 20px;
+.top {
+  width: 100%;
+  height: 50%;
+  margin-bottom: 20px;
 }
 
 .bottom {
-    display: flex;
-    height: 48%; //Must be 100%!
+  display: flex;
+  height: 48%; //Must be 100%!
 }
 
 .left,
 .bottom .left,
 .bottom .right,
 .top {
-    border: 2px solid $gray-80;
-    border-radius: $small-border-radius;
-    padding: 30px;
+  border: 2px solid $gray-80;
+  border-radius: $small-border-radius;
+  padding: 30px;
 }

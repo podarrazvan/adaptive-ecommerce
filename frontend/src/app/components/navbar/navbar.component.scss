@@ -1,4 +1,4 @@
-@import "../../shared/styles/colors.scss";
+@import "/src/app/shared/styles/colors";
 
 .navbar {
   height: 60px;
@@ -16,7 +16,7 @@ li {
 
 .nav-text {
   position: relative;
-  bottom: 7px ;
+  bottom: 7px;
 }
 
 mat-icon {

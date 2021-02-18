@@ -1,17 +1,17 @@
-@import "../colors.scss";
-@import "../border-radius.scss";
+@import "/src/app/shared/styles/border-radius";
+@import "/src/app/shared/styles/colors";
 
 .gray-btn {
-    border: none;
-    border-radius: 50px;
-    color: $gray-20;
-    background: $gray-80;
-    border-radius: $huge-border-radius;
-    padding: 20px 50px;
-    transition: all 0.3s ease 0s;
+  border: none;
+  border-radius: 50px;
+  color: $gray-20;
+  background: $gray-80;
+  border-radius: $huge-border-radius;
+  padding: 20px 50px;
+  transition: all 0.3s ease 0s;
 }
 
 .gray-btn:hover {
-    background: $gray-10;
-    color: $non-color-2;
+  background: $gray-10;
+  color: $non-color-2;
 }

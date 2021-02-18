@@ -1,5 +1,5 @@
-@import "../../shared/styles/colors.scss";
-@import "../../shared/styles/border-radius.scss";
+@import "/src/app/shared/styles/border-radius";
+@import "/src/app/shared/styles/colors";
 
 .sign-up {
   border: 1px solid $gray-80;

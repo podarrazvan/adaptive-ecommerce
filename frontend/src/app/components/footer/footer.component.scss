@@ -1,14 +1,14 @@
-@import "../../shared/styles/colors.scss";
+@import "/src/app/shared/styles/colors";
 
 .footer {
-    width: 100%;
-    padding-top: 20px;
-    background-color: $gray-90;
+  width: 100%;
+  padding-top: 20px;
+  background-color: $gray-90;
 }
 
 .content {
-    display: flex;
-    justify-content: space-between;
-    width: 75%;
-    margin: auto;
+  display: flex;
+  justify-content: space-between;
+  width: 75%;
+  margin: auto;
 }

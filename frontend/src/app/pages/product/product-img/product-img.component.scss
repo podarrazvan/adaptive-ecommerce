@@ -1,26 +1,25 @@
-@import "../../../shared/styles/colors.scss";
-@import "../../../shared/styles/border-radius.scss";
+@import "/src/app/shared/styles/border-radius";
+@import "/src/app/shared/styles/colors";
 
 .images {
-    display: flex;
+  display: flex;
 }
 
-.main-img  {
-    img {
-        width: 320px;
-    }
+.main-img {
+  img {
+    width: 320px;
+  }
 }
 
 .secondary-images {
-    margin-right: 20px;
+  margin-right: 20px;
 }
 
-
 .main-img {
-    display: flex;
-    place-content: center;
-    align-items: center;
-    border: 1px solid $gray-80;
-    border-radius: $small-border-radius;
-    padding: 0px 40px;
+  display: flex;
+  place-content: center;
+  align-items: center;
+  border: 1px solid $gray-80;
+  border-radius: $small-border-radius;
+  padding: 0px 40px;
 }

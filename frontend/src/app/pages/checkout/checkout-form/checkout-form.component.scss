@@ -1,32 +1,32 @@
-@import "../../../shared/styles/colors.scss";
-@import "../../../shared/styles/border-radius.scss";
+@import "/src/app/shared/styles/border-radius";
+@import "/src/app/shared/styles/colors";
 
 .form-group {
-    display: flex;
-    flex-direction: column;
-    label {
-        padding: 12px 24px;
-        font-size: 14px;
-        line-height: 1.42857;
-        color: $gray-20;
-        span {
-            margin-left: 5px;
-            color: red;
-        }
+  display: flex;
+  flex-direction: column;
+  label {
+    padding: 12px 24px;
+    font-size: 14px;
+    line-height: 1.42857;
+    color: $gray-20;
+    span {
+      margin-left: 5px;
+      color: red;
     }
+  }
 }
 
 .form-input {
-    height: 54px;
-    border-radius: $huge-border-radius;
-    border: 1px solid #e1e1e1;
-    padding-left: 33px;
-    margin-bottom: 15px;
+  height: 54px;
+  border-radius: $huge-border-radius;
+  border: 1px solid #e1e1e1;
+  padding-left: 33px;
+  margin-bottom: 15px;
 }
 
 .create-account {
-    label {
-        color: $gray-20;
-        margin-left: 10px;
-    }
+  label {
+    color: $gray-20;
+    margin-left: 10px;
+  }
 }
