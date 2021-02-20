@@ -51,6 +51,9 @@ export class AuthService {
 
   autoLogin() {
     const userData: AutoLogout = JSON.parse(localStorage.getItem('userData'));
+    if (!userData) {
+      return;
+    }
     const {
       email,
       password,
@@ -61,9 +64,6 @@ export class AuthService {
       _token,
       _tokenExpirationDate,
     } = userData;
-    if (!userData) {
-      return;
-    }
 
     const loadedUser = new User(
       email,
