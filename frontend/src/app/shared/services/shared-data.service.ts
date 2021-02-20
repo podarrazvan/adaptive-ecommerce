@@ -27,7 +27,6 @@ export class SharedDataService implements OnDestroy {
   mobile: boolean;
 
   setWebsiteDetails(details: WebsiteDetails) {
-    console.log(details);
     this.websiteDetails.next(details);
     this.websiteDocId = details._id;
   }

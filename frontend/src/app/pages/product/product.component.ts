@@ -25,7 +25,6 @@ export class ProductComponent implements OnInit {
   ngOnInit(): void {
     const key = this.route.snapshot.params['key'];
     this.productsService.getProduct(key).subscribe((response) => {
-      console.log(response);
       this.product = response;
       this.loading = false;
       this.sharedDataService.userDetails.subscribe((response) => {
