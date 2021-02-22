@@ -4,6 +4,7 @@ import { ImagesService } from 'src/app/shared/services/database/images.service';
 import { TinyMCEComponent } from '../../../shared/components/tinymce/tinymce.component';
 import { Brand } from '../../../shared/interfaces/brand.interface';
 import { SharedDataService } from '../../../shared/services/shared-data.service';
+import { AdminService } from '../admin.service';
 import { ProductsService } from '../products/products.service';
 
 @Component({
@@ -12,17 +13,10 @@ import { ProductsService } from '../products/products.service';
   styleUrls: ['./add-product.component.scss'],
 })
 export class AddProductComponent implements OnInit, OnDestroy {
-  constructor(
-    private fb: FormBuilder,
-    private sharedDataService: SharedDataService,
-    private productsService: ProductsService,
-    private imagesService: ImagesService
-  ) {}
+  
   public tinyMCE: TinyMCEComponent;
 
   loading = true;
-
-  productForm: FormGroup;
   autoMode = false;
 
   addDiscount = false;
@@ -40,8 +34,16 @@ export class AddProductComponent implements OnInit, OnDestroy {
 
   onEditMode: boolean;
 
+  constructor(
+    private fb: FormBuilder,
+    private sharedDataService: SharedDataService,
+    private productsService: ProductsService,
+    private imagesService: ImagesService,
+    private adminService: AdminService
+  ) {}
+
   ngOnInit(): void {
-    this.buildFormGroup();
+    // this.buildFormGroup();
     this.sharedDataService.websiteDetails.subscribe((response) => {
       this.loading = false;
       this.categories = response.categories;
@@ -109,40 +111,33 @@ export class AddProductComponent implements OnInit, OnDestroy {
 
   private buildFormGroup() {
     this.onEditMode = this.sharedDataService.productEdit;
-    if (this.onEditMode) {
-      this.productForm = this.fb.group({
-        title: [this.sharedDataService.product.title, Validators.required],
-        category: [
-          this.sharedDataService.product.category,
-          Validators.required,
-        ],
-        brand: [this.sharedDataService.product.brand, Validators.required],
-        price: [this.sharedDataService.product.price, Validators.required],
-        images: '',
-        description: [this.sharedDataService.product.description],
-        tags: [''],
-        quantity: [
-          this.sharedDataService.product.quantity,
-          Validators.required,
-        ],
-        minPrice: [''],
-        salesWeekTarget: [''],
-      });
-      this.tags = this.sharedDataService.product.tags;
-      this.images = this.sharedDataService.product.images;
-    } else {
-      this.productForm = this.fb.group({
-        title: ['', Validators.required],
-        category: ['', Validators.required],
-        brand: ['', Validators.required],
-        price: ['', Validators.required],
-        images: '',
-        description: [''],
-        tags: [''],
-        quantity: ['', Validators.required],
-        minPrice: [''],
-        salesWeekTarget: [''],
-      });
-    }
+    // if (this.onEditMode) {
+    //   this.productForm = this.fb.group({
+    //     title: [this.sharedDataService.product.title, Validators.required],
+    //     category: [
+    //       this.sharedDataService.product.category,
+    //       Validators.required,
+    //     ],
+    //     brand: [this.sharedDataService.product.brand, Validators.required],
+    //     price: [this.sharedDataService.product.price, Validators.required],
+    //     images: '',
+    //     description: [this.sharedDataService.product.description],
+    //     tags: [''],
+    //     quantity: [
+    //       this.sharedDataService.product.quantity,
+    //       Validators.required,
+    //     ],
+    //     minPrice: [''],
+    //     salesWeekTarget: [''],
+    //   });
+    //   this.tags = this.sharedDataService.product.tags;
+    //   this.images = this.sharedDataService.product.images;
+    // } else {
+    //   this.productForm = this.adminService.adminFormGroup.get('product');
+    // }
+  }
+  get productForm() {
+    console.log(this.adminService.adminFormGroup.get('product').value);
+    return this.adminService.adminFormGroup.get('product').value;
   }
 }

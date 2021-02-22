@@ -1,6 +1,8 @@
 import { SharedDataService } from './../../shared/services/shared-data.service';
 import { Component, DoCheck, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AdminService } from './admin.service';
+import { buildAdminFormGroup } from './admin.form-builder';
 
 @Component({
   selector: 'app-admin',
@@ -9,7 +11,10 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AdminComponent implements DoCheck, OnInit, OnDestroy {
   constructor(private activeRouter: ActivatedRoute,
-              private sharedDataService: SharedDataService) {}
+              private sharedDataService: SharedDataService,
+              private adminService: AdminService) {
+                this.adminService.adminFormGroup = buildAdminFormGroup(); 
+              }
 
   mobile: boolean;
 
