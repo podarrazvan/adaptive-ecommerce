@@ -1,6 +1,6 @@
 import { Component, DoCheck, OnInit } from '@angular/core';
-import { DbGetDataService } from 'src/app/shared/services/database/db-get-data.service';
 import { SharedDataService } from '../../../shared/services/shared-data.service';
+import { MessagesService } from '../messages/messages.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -8,17 +8,16 @@ import { SharedDataService } from '../../../shared/services/shared-data.service'
   styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent implements OnInit, DoCheck {
+  unread: number;
+  hide = false;
+  
   constructor(
-    private dbGetDataService: DbGetDataService,
+    private messagesService: MessagesService,
     private sharedDataService: SharedDataService
   ) {}
 
-  unread: number;
-
-  hide = false;
-
   ngOnInit(): void {
-    this.dbGetDataService.getMessages().subscribe((response) => {
+    this.messagesService.getMessages().subscribe((response) => {
       this.sharedDataService.unreadMessages = 0;
       for (let email of response) {
         if (!email.seen) {

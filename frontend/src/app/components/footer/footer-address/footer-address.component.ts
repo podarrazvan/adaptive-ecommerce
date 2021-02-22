@@ -11,7 +11,6 @@ export class FooterAddressComponent implements OnInit {
 
   constructor(private sharedDataService: SharedDataService) {
     this.sharedDataService.websiteDetails.subscribe((response) => {
-      console.log(response);
       try {
         const { adress, phone, email } = response.footer;
         this.footer = { adress, phone, email };

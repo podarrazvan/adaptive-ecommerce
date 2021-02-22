@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DbGetDataService } from 'src/app/shared/services/database/db-get-data.service';
+import { ProductsService } from '../admin/products/products.service';
 
 @Component({
   selector: 'app-search',
@@ -10,7 +10,7 @@ import { DbGetDataService } from 'src/app/shared/services/database/db-get-data.s
 export class SearchComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
-    private dbGetDataService: DbGetDataService
+    private productsService: ProductsService,
   ) {}
 
   urlData: { search: string[]; category: string };
@@ -37,7 +37,7 @@ export class SearchComponent implements OnInit {
 
   getAllProducts() {
     let products = [];
-    this.dbGetDataService.getProducts().subscribe((response) => {
+    this.productsService.getProducts().subscribe((response) => {
       for (let product of response) {
         products.push(product);
       }
@@ -47,7 +47,7 @@ export class SearchComponent implements OnInit {
 
   getProductsByCategory(cat: string) {
     let products = [];
-    this.dbGetDataService
+    this.productsService
       .getProductsByCategory(cat)
       .subscribe((response) => {
         for (let product of response) {

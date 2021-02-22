@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
-import { DbGetDataService } from 'src/app/shared/services/database/db-get-data.service';
 import { User } from '../../shared/interfaces/user.interface';
-import { DbUploadService } from '../../shared/services/database/db-upload.service';
 import { SharedDataService } from '../../shared/services/shared-data.service';
+import { ProductsService } from '../admin/products/products.service';
 
 @Component({
   selector: 'app-product',
@@ -17,8 +16,7 @@ export class ProductComponent implements OnInit {
   user: User;
 
   constructor(
-    private dbGetDataService: DbGetDataService,
-    private dbUploadService: DbUploadService,
+    private productsService: ProductsService,
     private route: ActivatedRoute,
     public sanitizer: DomSanitizer,
     private sharedDataService: SharedDataService
@@ -26,8 +24,7 @@ export class ProductComponent implements OnInit {
 
   ngOnInit(): void {
     const key = this.route.snapshot.params['key'];
-    this.dbGetDataService.getProduct(key).subscribe((response) => {
-      console.log(response);
+    this.productsService.getProduct(key).subscribe((response) => {
       this.product = response;
       this.loading = false;
       this.sharedDataService.userDetails.subscribe((response) => {
@@ -36,7 +33,7 @@ export class ProductComponent implements OnInit {
         } else {
           this.user.history.push(key);
           this.sharedDataService.updateUserDetails(this.user);
-          this.dbUploadService.updateProduct(this.product);
+          this.productsService.updateProduct(this.product);
         }
       });
     });

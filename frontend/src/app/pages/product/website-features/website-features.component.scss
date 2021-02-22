@@ -1,5 +1,5 @@
-@import "../../../shared/styles/colors.scss";
-@import "../../../shared/styles/border-radius.scss";
+@import "/src/app/shared/styles/border-radius";
+@import "/src/app/shared/styles/colors";
 
 .features {
   border: 2px solid $gray-80;
@@ -12,16 +12,16 @@
 }
 
 .contact {
-    margin-top: 20px;
-    border: 5px solid $main-color-20;
-    border-radius: 30px;
-    padding: 15px;
+  margin-top: 20px;
+  border: 5px solid $main-color-20;
+  border-radius: 30px;
+  padding: 15px;
 }
 
 .feature {
   display: flex;
   padding: 20px;
-  
+
   h3 {
     font-size: 14px;
     margin-bottom: 7px;
@@ -37,10 +37,11 @@
     line-height: 18px;
   }
 
-  .left, .right {
+  .left,
+  .right {
     margin: 10px;
   }
-  
+
   .left {
     margin-top: 20px;
   }

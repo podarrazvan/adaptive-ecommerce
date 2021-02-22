@@ -1,10 +1,9 @@
-import { AuthResponseData } from './../../../auth/entities';
-import { AuthService } from './../../../auth/auth.service';
-import { Component, OnInit } from '@angular/core';
+import { AuthResponseData } from '../entities';
+import { AuthService } from '../auth.service';
+import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-// export const Firebase = !firebase.apps.length ? firebase.initializeApp(firebaseConfig) : firebase.app()
 
 @Component({
   selector: 'app-login-form',
@@ -40,13 +39,12 @@ export class LoginFormComponent {
       (response) => {
         this.isLoading = false;
         this.router.navigate(['../']);
+        form.reset();
       },
       (errorMessage) => {
         this.error = errorMessage;
         this.isLoading = false;
       }
     );
-
-    form.reset();
   }
 }

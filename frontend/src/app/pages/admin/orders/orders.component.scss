@@ -1,5 +1,5 @@
-@import "../../../shared/styles/colors.scss";
-@import "../../../shared/styles/border-radius.scss";
+@import "/src/app/shared/styles/border-radius";
+@import "/src/app/shared/styles/colors";
 
 .orders {
   margin-bottom: 150px;
@@ -12,62 +12,62 @@
 }
 
 .order-card {
-    margin-top: 10px;
-    width: 700px !important;
-    border: 1px solid $gray-30;
-    border-radius: $very-small-border-radius;
-    padding: 10px 30px 10px 10px;
-  }
-  
-  .card-top {
-    display: inline-block;
-    width: 100%;
-  }
-  
-  .card-top h5 {
-    display: inline-block;
-  }
-  
-  .order-status {
-    float: right;
-  }
+  margin-top: 10px;
+  width: 700px !important;
+  border: 1px solid $gray-30;
+  border-radius: $very-small-border-radius;
+  padding: 10px 30px 10px 10px;
+}
 
-  .shipping {
-    display: flex;
-  }
+.card-top {
+  display: inline-block;
+  width: 100%;
+}
 
-  .actions {
-    display: flex;
-    button {
-      margin: 5px;
-    }
-  }
-  
-  .delete-btn {
-    float: right;
-    margin-top: -20px;
-  }
+.card-top h5 {
+  display: inline-block;
+}
 
-  @media (max-width: 750px) {
-    .order-card {
-      width: 500px !important;
-    }
+.order-status {
+  float: right;
+}
+
+.shipping {
+  display: flex;
+}
+
+.actions {
+  display: flex;
+  button {
+    margin: 5px;
   }
-  
-  @media (max-width: 550px) {
-    .order-card {
-      width: 300px !important;
-    }
+}
+
+.delete-btn {
+  float: right;
+  margin-top: -20px;
+}
+
+@media (max-width: 750px) {
+  .order-card {
+    width: 500px !important;
   }
-  
-  @media (max-width: 323px) {
-    .order-card {
-      width: 250px !important;
-    }
+}
+
+@media (max-width: 550px) {
+  .order-card {
+    width: 300px !important;
   }
-  
-  @media (max-width: 260px) {
-    .order-card {
-      width: 200px !important;
-    }
+}
+
+@media (max-width: 323px) {
+  .order-card {
+    width: 250px !important;
   }
+}
+
+@media (max-width: 260px) {
+  .order-card {
+    width: 200px !important;
+  }
+}

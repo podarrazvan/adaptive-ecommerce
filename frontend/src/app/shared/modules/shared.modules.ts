@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
-import {MatSelectModule} from '@angular/material/select';
 import {MatMenuModule} from '@angular/material/menu';
 
 import { DeleteAlertService } from '../components/delete-alert/delete-alert.service';
@@ -20,14 +19,12 @@ import { TopActionsComponent } from '../../components/website-top/top-actions/to
 import { TopBarComponent } from '../../components/website-top/top-bar.component/top-bar.component';
 import { TopMostSearchedComponent } from '../../components/website-top/top-most-searched/top-most-searched.component';
 import { WebsiteTopComponent } from '../../components/website-top/website-top.component';
-import { LoginFormComponent } from '../forms/login-form/login-form.component';
-import { SignupFormComponent } from '../forms/signup-form/signup-form.component';
+import { LoginFormComponent } from '../../auth/login-form/login-form.component';
+import { SignupFormComponent } from '../../auth/signup-form/signup-form.component';
 import { ShortenPipe } from '../pipes/shorten.pipe';
 
-import { DbDeleteService } from '../services/database/db-delete.service';
-import { DbStatisticsService } from '../services/database/db-statistics.service';
-import { DbUploadService } from '../services/database/db-upload.service';
-import { DbWebsiteEditService } from '../services/database/db-website-edit.sevice';
+import { StatisticsService } from '../services/database/statistics.service';
+import { ConfigsService } from '../services/database/configs.sevice';
 import { SharedDataService } from '../services/shared-data.service';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { BottomProductsComponent } from '../components/bottom-products/bottom-products.component';
@@ -40,7 +37,6 @@ import { NewPricePipe } from '../pipes/new-price.pipe';
 import { PercentagePipe } from '../pipes/percentage.pipe';
 import { CountdownModule } from 'ngx-countdown';
 import { CountdownComponent } from '../components/countdown/countdown.component';
-import { DbGetDataService } from '../services/database/db-get-data.service';
 
 
 const COMPONENTS = [
@@ -82,11 +78,10 @@ const COMPONENTS = [
       ReactiveFormsModule,
       CommonModule,
       EditorModule,
-      MatSelectModule, // not used
       MatMenuModule,
       CountdownModule
     ],
-    providers: [DbUploadService,DbGetDataService,DbWebsiteEditService,DbDeleteService,SharedDataService, DeleteAlertService,DbStatisticsService],
+    providers: [ConfigsService,SharedDataService, DeleteAlertService,StatisticsService],
     exports: [...COMPONENTS,]
   })
   export class SharedModule { }

@@ -1,5 +1,5 @@
 <div class="content">
-  <form *ngIf="!loading" [formGroup]="productForm" (ngSubmit)="onSubmit()">
+  <div *ngIf="!loading" [formGroup]="productForm" (ngSubmit)="onSubmit()">
     <div class="form-row">
       <label for="inputTitle"><b>Title</b></label>
       <input
@@ -215,7 +215,7 @@
     >
       {{ onEditMode ? "Edit" : "Add product" }}
     </button>
-  </form>
+  </div>
 </div>
 
   <!-- [disabled]="!productForm.valid" -->

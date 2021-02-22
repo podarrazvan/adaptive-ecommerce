@@ -1,12 +1,12 @@
-@import "../../../../shared/styles/border-radius.scss";
+@import "/src/app/shared/styles/border-radius";
 
 .carousel {
-    display: flex;
+  display: flex;
 }
 
 .product {
-    margin: 30px;
-    padding: 0 32px 43px 32px;
-    border-radius: $small-border-radius;
-    max-width: 320px;
+  margin: 30px;
+  padding: 0 32px 43px 32px;
+  border-radius: $small-border-radius;
+  max-width: 320px;
 }

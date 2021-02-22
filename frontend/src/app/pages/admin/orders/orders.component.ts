@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { DbGetDataService } from 'src/app/shared/services/database/db-get-data.service';
 import { DeleteAlertService } from '../../../shared/components/delete-alert/delete-alert.service';
 import { Order } from '../../../shared/interfaces/order.interface';
 import { Product } from '../../../shared/interfaces/product.interface';
-import { DbDeleteService } from '../../../shared/services/database/db-delete.service';
-import { DbUploadService } from '../../../shared/services/database/db-upload.service';
 import { SharedDataService } from '../../../shared/services/shared-data.service';
+import { ProductsService } from '../products/products.service';
+import { OrdersService } from './orders.service';
 
 
 @Component({
@@ -15,11 +14,10 @@ import { SharedDataService } from '../../../shared/services/shared-data.service'
 })
 export class OrdersComponent implements OnInit {
   constructor(
-    private dbGetDataService: DbGetDataService,
-    private dbDeleteService: DbDeleteService,
     private deleteAlertService: DeleteAlertService,
     private sharedDataService: SharedDataService,
-    private dbUploadService: DbUploadService
+    private ordersService: OrdersService,
+    private productsService: ProductsService,
   ) {}
 
   loading = true;
@@ -62,7 +60,7 @@ export class OrdersComponent implements OnInit {
 
   getOrders() {
     this.orders = [];
-    this.dbGetDataService.getOrders().subscribe((response) => {
+    this.ordersService.getOrders().subscribe((response) => {
       for (let order of response) {
         if (this.mobile) {
           this.mobileOrder = {};
@@ -80,7 +78,7 @@ export class OrdersComponent implements OnInit {
           this.mobileOrder.total = order.total;
           this.mobileOrder.products = [{}];
           for (let prod of order.cart) {
-            this.dbGetDataService
+            this.productsService
               .getProduct(prod.product)
               .subscribe((response) => {
                 product.product = response;
@@ -113,7 +111,7 @@ export class OrdersComponent implements OnInit {
   }
 
   updateOrder(status: string, order) {
-    this.dbUploadService.updateOrder(order, status, order.key).subscribe();
+    this.ordersService.updateOrder(order, status, order.key).subscribe();
     if (status === 'canceled') {
       alert("Please don't forget to refund the money!");
     }
@@ -127,7 +125,7 @@ export class OrdersComponent implements OnInit {
     this.deleteAlertService.deleteMessage.subscribe((response) => {
       switch (response) {
         case true:
-          this.dbDeleteService.deleteOrder(order).subscribe(() => {
+          this.ordersService.deleteOrder(order).subscribe(() => {
             this.mobile
               ? this.mobileOrders.splice(index, 1)
               : this.orders.splice(index, 1);

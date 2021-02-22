@@ -1,10 +1,10 @@
-@import "../../../shared/styles/colors.scss";
+@import "/src/app/shared/styles/colors";
 
 .info {
-    display: flex;
-    padding: 10px;
+  display: flex;
+  padding: 10px;
 }
 
 mat-icon {
-    color: $gray-20;
+  color: $gray-20;
 }

@@ -1,71 +1,72 @@
-@import "../../shared/styles/colors.scss";
-@import "../../shared/styles/border-radius.scss";
+@import "/src/app/shared/styles/border-radius";
+@import "/src/app/shared/styles/colors";
 
 .checkout {
-    display: flex;
-    margin-top: 100px;
-    width: 100%;
-    justify-content: space-between;
+  display: flex;
+  margin-top: 100px;
+  width: 100%;
+  justify-content: space-between;
 }
 
-.left-container, .right-container {
-    min-height: 400px;
-    width: 100%;
-    border: 2px solid $gray-80;
-    border-radius: $small-border-radius;
-    padding: 50px;
+.left-container,
+.right-container {
+  min-height: 400px;
+  width: 100%;
+  border: 2px solid $gray-80;
+  border-radius: $small-border-radius;
+  padding: 50px;
 }
 
 .left {
-    width: 60%;
+  width: 60%;
 }
 
 .right {
-    float: right;
-    height: fit-content;
-    width: 37%;
-    background: $gray-90;
-    .top {
-        width: fit-content;
-        padding:0px 20px;
-        padding-top: 10px;
-    }
+  float: right;
+  height: fit-content;
+  width: 37%;
+  background: $gray-90;
+  .top {
+    width: fit-content;
+    padding: 0px 20px;
+    padding-top: 10px;
+  }
 }
 
 .top {
-    position: relative;
-    top: -80px; 
-    left: 0; 
-    right: 0; 
-    margin-left: auto; 
-    margin-right: auto;
-    display: flex;
-    place-content: center;
-    align-items: center;
-    border: 2px solid $gray-10;
-    padding-top: 10px;
-    line-height: 50px;
-    width: 182px;
-    font-weight: 800;
-    border-radius: $huge-border-radius;
-    font-size: 18px;
-    background-color: $non-color-2;
+  position: relative;
+  top: -80px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  place-content: center;
+  align-items: center;
+  border: 2px solid $gray-10;
+  padding-top: 10px;
+  line-height: 50px;
+  width: 182px;
+  font-weight: 800;
+  border-radius: $huge-border-radius;
+  font-size: 18px;
+  background-color: $non-color-2;
 }
 
 .bottom {
-    margin-top: 50px;
-    p {
-        color: $gray-20;
-        padding: 12px 24px;
-    }
+  margin-top: 50px;
+  p {
+    color: $gray-20;
+    padding: 12px 24px;
+  }
 }
 
 .form-note {
-    border: 1px solid $gray-80;
-    padding-left: 40px;
-    padding-top: 40px;
-    border-radius: $very-small-border-radius;
-    resize: none;
-    box-shadow: none;
-    height: auto;
+  border: 1px solid $gray-80;
+  padding-left: 40px;
+  padding-top: 40px;
+  border-radius: $very-small-border-radius;
+  resize: none;
+  box-shadow: none;
+  height: auto;
 }

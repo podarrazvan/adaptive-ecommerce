@@ -1,13 +1,13 @@
-@import "../../../shared/styles/colors.scss";
+@import "/src/app/shared/styles/colors";
 
 .categories {
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
-    a {
-        padding: 8px;
-    }
-    a:hover {
-        color: $main-red;
-    }
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  a {
+    padding: 8px;
+  }
+  a:hover {
+    color: $main-red;
+  }
 }

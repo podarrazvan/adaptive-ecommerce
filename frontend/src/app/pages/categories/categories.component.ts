@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DbGetDataService } from 'src/app/shared/services/database/db-get-data.service';
+import { ProductsService } from '../admin/products/products.service';
 
 @Component({
   selector: 'app-categories',
@@ -8,7 +8,7 @@ import { DbGetDataService } from 'src/app/shared/services/database/db-get-data.s
 })
 export class CategoriesComponent implements OnInit {
   constructor(
-    private dbGetDataService: DbGetDataService
+    private productsService: ProductsService
   ) {}
 
   urlData: { category: string };
@@ -45,7 +45,7 @@ export class CategoriesComponent implements OnInit {
 
   getProducts(category: string) {
     this.products = [];
-    this.dbGetDataService
+    this.productsService
       .getProductsByCategory(category)
       .subscribe((response) => {
         for (let product of response) {

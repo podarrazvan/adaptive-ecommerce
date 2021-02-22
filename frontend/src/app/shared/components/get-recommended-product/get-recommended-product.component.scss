@@ -1,32 +1,33 @@
-@import "../../styles/colors.scss";
-@import "../../styles/border-radius.scss";
+@import "/src/app/shared/styles/border-radius";
+@import "/src/app/shared/styles/colors";
+
 .product {
-    position: relative;
-    text-align: center;
-    margin: 5px;
-    height: 220px;
-    width: 130px;
-    border-radius: $small-border-radius;
-    padding: 10px;
-    color: $non-color-1;
-    background-color: $non-color-2;
+  position: relative;
+  text-align: center;
+  margin: 5px;
+  height: 220px;
+  width: 130px;
+  border-radius: $small-border-radius;
+  padding: 10px;
+  color: $non-color-1;
+  background-color: $non-color-2;
 }
 .img img {
-    max-width: 80px;
-    max-height: 100px;
+  max-width: 80px;
+  max-height: 100px;
 }
 
 .product-info {
-    position: absolute;
-    bottom: 0px;
+  position: absolute;
+  bottom: 0px;
 }
 
 mat-icon {
-    color: rgb(235, 235, 0);
-    background-color: transparent;
+  color: rgb(235, 235, 0);
+  background-color: transparent;
 }
 
 .product-rating {
-    position: relative;
-    bottom: 6px;
+  position: relative;
+  bottom: 6px;
 }

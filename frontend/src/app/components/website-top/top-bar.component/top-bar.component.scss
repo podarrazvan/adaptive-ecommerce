@@ -1,12 +1,12 @@
-@import "../../../shared/styles/colors.scss";
+@import "/src/app/shared/styles/colors";
 
 .bar {
-    display: flex;
-    width: 100%;
+  display: flex;
+  width: 100%;
 }
 
 .links {
-    width: 60%;
+  width: 60%;
 }
 
 ul {

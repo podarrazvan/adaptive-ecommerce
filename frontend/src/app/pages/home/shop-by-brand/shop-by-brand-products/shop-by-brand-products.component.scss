@@ -1,21 +1,21 @@
-@import "../../../../shared/styles/colors.scss";
-@import "../../../../shared/styles/border-radius.scss";
+@import "/src/app/shared/styles/border-radius";
+@import "/src/app/shared/styles/colors";
 
 .products-card,
 .product {
-    margin: 10px;
-    border-radius: $small-border-radius;
+  margin: 10px;
+  border-radius: $small-border-radius;
 }
 
 .products-card {
-    position: relative;
-    top: -11px;
-    display: grid;
-    grid-template-columns: repeat(2, auto);
-    width: calc( 100% - 10px);
-    height: 100%;
-    margin-left: 10px;
-    border: 2px solid $gray-80;
-    border-radius: $small-border-radius;
-    padding: 30px 11px;
+  position: relative;
+  top: -11px;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  width: calc(100% - 10px);
+  height: 100%;
+  margin-left: 10px;
+  border: 2px solid $gray-80;
+  border-radius: $small-border-radius;
+  padding: 30px 11px;
 }

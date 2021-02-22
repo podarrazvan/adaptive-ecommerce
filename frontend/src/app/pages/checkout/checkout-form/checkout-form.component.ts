@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { DbUploadService } from '../../../shared/services/database/db-upload.service';
 import { SharedDataService } from '../../../shared/services/shared-data.service';
+import { OrdersService } from '../../admin/orders/orders.service';
 
 @Component({
   selector: 'app-checkout-form',
@@ -13,7 +13,7 @@ export class CheckoutFormComponent {
   constructor(
     private sharedDataService: SharedDataService,
     private fb: FormBuilder,
-    private dbUploadService: DbUploadService,
+    private ordersService: OrdersService,
     private router: Router
   ) {
     this.buildFormGroup();
@@ -27,7 +27,7 @@ export class CheckoutFormComponent {
       cart: JSON.parse(localStorage.getItem('cart')),
       total: this.sharedDataService.totalCart.toString(),
     };
-    this.dbUploadService.addOrder(order);
+    this.ordersService.addOrder(order);
     localStorage.removeItem('cart');
     this.checkoutForm.reset();
     this.sharedDataService.updateCart(true);

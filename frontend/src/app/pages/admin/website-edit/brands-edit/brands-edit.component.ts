@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ConfigsService } from 'src/app/shared/services/database/configs.sevice';
+import { ImagesService } from 'src/app/shared/services/database/images.service';
 import { Brand } from '../../../../shared/interfaces/brand.interface';
-import { DbUploadService } from '../../../../shared/services/database/db-upload.service';
-import { DbWebsiteEditService } from '../../../../shared/services/database/db-website-edit.sevice';
 
 @Component({
   selector: 'app-brands-edit',
@@ -13,8 +13,8 @@ export class BrandsEditComponent implements OnInit {
   @Input() brands: Brand[];
   @Output() finalBrands = new EventEmitter<Brand[]>();
 
-  constructor(private dbUploadService: DbUploadService,
-              private dbWebsiteEditService: DbWebsiteEditService) { }
+  constructor(private configsService: ConfigsService,
+              private imagesService: ImagesService) { }
 
   brandsHide = true;
   editBrandMode: number;
@@ -32,7 +32,7 @@ export class BrandsEditComponent implements OnInit {
       name: brandName.value
     }
     this.newBrands.push(brand);
-    this.dbWebsiteEditService.updateWebsite('websiteBrands',brand);
+    this.configsService.updateWebsite('websiteBrands',brand);
     this.finalBrands.emit(this.newBrands);
   }
 
@@ -47,7 +47,7 @@ export class BrandsEditComponent implements OnInit {
 
   brandLogo(img: Event) {
     const image = (img.target as HTMLInputElement).files[0];
-    this.dbUploadService.uploadImg(image).subscribe((response) =>{
+    this.imagesService.uploadImg(image).subscribe((response) =>{
       this.brandLogoPath = response.url;
       this.valid = true;
     });

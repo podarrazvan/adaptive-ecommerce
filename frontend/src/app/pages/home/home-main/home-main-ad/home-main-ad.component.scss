@@ -1,9 +1,9 @@
-@import "../../../../shared/styles/border-radius.scss";
+@import "/src/app/shared/styles/border-radius";
 
 .content img {
-    position: relative;
-    top:-2px;
-    max-height: 500px;
-    max-width: 600px;
-    border-radius: $small-border-radius;
+  position: relative;
+  top: -2px;
+  max-height: 500px;
+  max-width: 600px;
+  border-radius: $small-border-radius;
 }

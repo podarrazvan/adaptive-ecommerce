@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DbUploadService } from '../../shared/services/database/db-upload.service';
+import { MessagesService } from '../admin/messages/messages.service';
 
 @Component({
   selector: 'app-contact',
@@ -12,13 +12,13 @@ export class ContactComponent {
 
   constructor(
     private fb: FormBuilder,
-    private dbUploadService: DbUploadService
+    private messagesService: MessagesService,
   ) {
     this.buildFormGroup();
   }
 
   onSubmit() {
-    this.dbUploadService.addMessage(this.contactForm.value).subscribe(()=> {
+    this.messagesService.addMessage(this.contactForm.value).subscribe(()=> {
       this.contactForm.reset();
       alert('Message sent!');
     });

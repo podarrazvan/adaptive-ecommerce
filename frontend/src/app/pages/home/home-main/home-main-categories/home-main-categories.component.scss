@@ -1,15 +1,15 @@
-@import "../../../../shared/styles/border-radius.scss";
+@import "/src/app/shared/styles/border-radius";
 
 .list-group {
-    border-radius: $small-border-radius;
-    width: 250px;
-    margin-right: 10px;
+  border-radius: $small-border-radius;
+  width: 250px;
+  margin-right: 10px;
 }
 
 li {
-    width: 100%;
+  width: 100%;
 }
 
 mat-icon {
-    float: right;
+  float: right;
 }

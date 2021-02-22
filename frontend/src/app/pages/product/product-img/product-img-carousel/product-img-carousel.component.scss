@@ -1,19 +1,19 @@
-@import "../../../../shared/styles/colors.scss";
-@import "../../../../shared/styles/border-radius.scss";
+@import "/src/app/shared/styles/border-radius";
+@import "/src/app/shared/styles/colors";
 
 .carousel {
-    flex-direction: column;
-    display: flex;
-    place-content: center;
-    align-items: center;
+  flex-direction: column;
+  display: flex;
+  place-content: center;
+  align-items: center;
 }
 
 .secondary-img {
-    border: 1px solid $gray-80;
-    border-radius: $small-border-radius;
-    padding: 20px;
-    margin: 20px;
-    img {
-        width: 120px;
-    }
+  border: 1px solid $gray-80;
+  border-radius: $small-border-radius;
+  padding: 20px;
+  margin: 20px;
+  img {
+    width: 120px;
+  }
 }
