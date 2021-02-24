@@ -38,12 +38,12 @@
 <div *ngIf="showProducts && !loading" class="products">
   <div *ngFor="let product of products">
     <div
-      (click)="openProduct(product.product.category, product.product.key)"
+      (click)="openProduct(product.product.category, product.product._id)"
       class="product"
     >
       <img
         class="prod-img"
-        [src]="product.product.img[0]"
+        [src]="product.product.images[0]"
         [alt]="product.product.title"
       />
       <div class="product-info">

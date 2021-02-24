@@ -6,4 +6,5 @@ import { Injectable } from '@angular/core';
 })
 export class AdminService {
   adminFormGroup: FormGroup = null;
+  productFormGroup: FormGroup = null;
 }

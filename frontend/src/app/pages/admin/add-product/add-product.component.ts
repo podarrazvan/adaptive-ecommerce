@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { ImagesService } from 'src/app/shared/services/database/images.service';
 import { TinyMCEComponent } from '../../../shared/components/tinymce/tinymce.component';
 import { Brand } from '../../../shared/interfaces/brand.interface';
@@ -41,22 +41,25 @@ export class AddProductComponent implements OnInit, OnDestroy {
     private imagesService: ImagesService,
     private adminService: AdminService
   ) {}
+  
+  get productForm() {
+    return this.adminService.productFormGroup.get('product');
+  }
 
   ngOnInit(): void {
     // this.buildFormGroup();
-    this.sharedDataService.websiteDetails.subscribe((response) => {
-      this.loading = false;
-      this.categories = response.categories;
-      this.brands = response.brands;
-    });
+    const response = this.sharedDataService.getWebsiteConfigs();
+    console.log(response);
+    this.categories = response.categories;
+    this.brands = response.brands;
   }
 
   onSubmit() {
     if (this.images != undefined) {
-      this.productForm.patchValue({
-        images: this.images,
-        tags: this.tags,
-      });
+      // this.productForm.patchValue({
+      //   images: this.images,
+      //   tags: this.tags,
+      // });
       if (this.sharedDataService.productEdit) {
         // this.dbUploadService
         //   .updateProduct(this.productForm.value, this.sharedDataService.product.key)
@@ -136,8 +139,5 @@ export class AddProductComponent implements OnInit, OnDestroy {
     //   this.productForm = this.adminService.adminFormGroup.get('product');
     // }
   }
-  get productForm() {
-    console.log(this.adminService.adminFormGroup.get('product').value);
-    return this.adminService.adminFormGroup.get('product').value;
-  }
+
 }

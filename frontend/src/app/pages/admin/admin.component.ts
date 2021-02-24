@@ -3,6 +3,7 @@ import { Component, DoCheck, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AdminService } from './admin.service';
 import { buildAdminFormGroup } from './admin.form-builder';
+import { buildProductFormGroup } from './admin-form.helpers';
 
 @Component({
   selector: 'app-admin',
@@ -14,6 +15,7 @@ export class AdminComponent implements DoCheck, OnInit, OnDestroy {
               private sharedDataService: SharedDataService,
               private adminService: AdminService) {
                 this.adminService.adminFormGroup = buildAdminFormGroup(); 
+                this.adminService.productFormGroup = buildProductFormGroup(); 
               }
 
   mobile: boolean;

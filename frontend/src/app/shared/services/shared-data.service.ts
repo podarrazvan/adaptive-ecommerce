@@ -6,16 +6,42 @@ import { WebsiteDetails } from '../interfaces/website-details';
 
 @Injectable()
 export class SharedDataService implements OnDestroy {
-
-  brand$ = new BehaviorSubject<{name:string, img: string}>({name:"",img:""});
+  brand$ = new BehaviorSubject<{ name: string; img: string }>({
+    name: '',
+    img: '',
+  });
   emptyCart$ = new BehaviorSubject<boolean>(true);
   isAuthenticated$ = new BehaviorSubject<boolean>(false);
 
   cast = this.emptyCart$.asObservable();
   // cast = this.isAuthenticated.asObservable();
 
-  // TODO: SORIN - make it private
-  websiteDetails = new BehaviorSubject<WebsiteDetails>(null);
+  websiteData = {
+    name: 'name',
+    categories: [],
+    brands: [],
+    shipping: [],
+    footer: {
+      adress: 'adress',
+      phone: 'phone',
+      email: 'email',
+      program: 'program',
+    },
+    facebookImage: 'empty',
+    facebookUrl: 'facebook url',
+    twitterImage: 'empty',
+    twitterUrl: 'twitter url',
+    youtubeImage: 'empty',
+    youtubeUrl: 'youtube url',
+    instagramImage: 'empty',
+    instagramUrl: 'instagram url',
+    termsOfUse: '',
+    aboutUs: '',
+  };
+
+  private websiteDetails = new BehaviorSubject<WebsiteDetails>(
+    this.websiteData
+  );
   websiteDocId: string;
 
   userDetails = new BehaviorSubject<User>(null);
@@ -32,6 +58,7 @@ export class SharedDataService implements OnDestroy {
   }
 
   getWebsiteConfigs() {
+    console.log(this.websiteDetails.value);
     return this.websiteDetails.value;
   }
 
@@ -40,7 +67,7 @@ export class SharedDataService implements OnDestroy {
   }
 
   updateUserDetails(details: User) {
-    localStorage.setItem('userData',JSON.stringify(details));
+    localStorage.setItem('userData', JSON.stringify(details));
     this.userDetails.next(details);
   }
 
@@ -62,5 +89,4 @@ export class SharedDataService implements OnDestroy {
   updateBrand(newBrand) {
     this.brand$.next(newBrand);
   }
-
 }

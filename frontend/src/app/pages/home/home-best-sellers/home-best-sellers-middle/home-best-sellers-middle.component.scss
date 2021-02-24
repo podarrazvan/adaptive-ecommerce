@@ -8,9 +8,12 @@
   width: 100%;
 }
 
+.big-product {
+  height: calc(100% + 33px);
+}
+
 .left,
 .right {
-  height: 100%;
   width: 50%;
 }
 
@@ -24,19 +27,10 @@
 .top {
   width: 100%;
   height: 50%;
-  margin-bottom: 20px;
 }
 
 .bottom {
   display: flex;
-  height: 48%; //Must be 100%!
-}
-
-.left,
-.bottom .left,
-.bottom .right,
-.top {
-  border: 2px solid $gray-80;
-  border-radius: $small-border-radius;
-  padding: 30px;
+  width: 100%;
+  height: 50%;
 }
