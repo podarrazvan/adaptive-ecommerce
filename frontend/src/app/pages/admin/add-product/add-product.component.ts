@@ -16,7 +16,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
   
   public tinyMCE: TinyMCEComponent;
 
-  loading = true;
+  loading = true; //TODO
   autoMode = false;
 
   addDiscount = false;

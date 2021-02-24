@@ -8,7 +8,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SharedModule } from './shared/modules/shared.modules';
 import { PagesModule } from './pages/pages-module';
 import { AuthModule } from './auth/auth.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminModule } from './pages/admin/admin.module';
 import { CheckoutModule } from './pages/checkout/checkout.module';
 import { ProfileModule } from './pages/profile/profile.module';
@@ -32,8 +31,6 @@ import { ImagesService } from './shared/services/database/images.service';
     SharedModule,
     AuthModule,
     AdminModule,
-    FormsModule,
-    ReactiveFormsModule,
     CheckoutModule,
     ProfileModule,
     BrowserAnimationsModule,

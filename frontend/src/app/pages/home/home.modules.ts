@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { HomeFleshDealsCarouselComponent } from './flesh-deals/home-flesh-deals-carousel/home-flesh-deals-carousel.component';
 import { HomeBestSellersBottomComponent } from './home-best-sellers/home-best-sellers-bottom/home-best-sellers-bottom.component';
@@ -50,7 +49,6 @@ const COMPONENTS = [
     imports: [
         SharedModule,
         CommonModule,
-        MatIconModule,
         RouterModule,
     ],
     exports: [...COMPONENTS,]

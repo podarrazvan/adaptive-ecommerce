@@ -7,6 +7,12 @@
   border: 2px solid $gray-80;
   border-radius: $small-border-radius;
   padding: 30px;
+  &:hover {
+    border: none;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    box-shadow: 0 7px 20px 0 rgba(36, 41, 66, 0.15);
+  }
 }
 
 .cut {
@@ -70,7 +76,7 @@
   bottom: 5%;
 }
 
-.product-button-group {
+.product-buttons {
   top: -5px;
   width: 100%;
   padding: 3px;
@@ -83,14 +89,7 @@
   background-color: $non-color-2;
 }
 
-.product:hover {
-  border: none;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-  box-shadow: 0 7px 20px 0 rgba(36, 41, 66, 0.15);
-}
-
-.product:hover + .product-button-group, .product-button-group:hover{
+.product:hover + .product-buttons, .product-buttons:hover{
   opacity: 1;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
@@ -100,14 +99,14 @@
   border-bottom-right-radius: $small-border-radius;
 }
 
-.btn-cart {
+.cart {
   float: left;
 }
 
-.btn-heart {
+.heart {
   margin: auto;
 }
 
-.btn-compare {
+.compare {
   float: right;
 }

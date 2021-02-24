@@ -1,10 +1,7 @@
 import { DeleteAlertComponent } from './../../shared/components/delete-alert/delete-alert.component';
 import { SharedModule } from './../../shared/modules/shared.modules';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
-import { EditorModule } from '@tinymce/tinymce-angular';
 import { MatInputModule } from '@angular/material/input';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -28,7 +25,6 @@ import { CategoriesEditComponent } from './website-edit/categories-edit/categori
 import { BrandsEditComponent } from './website-edit/brands-edit/brands-edit.component';
 import { CouponsEditComponent } from './website-edit/coupons-edit/coupons-edit.component';
 import { ShippingEditComponent } from './website-edit/shipping-edit/shipping-edit.component';
-import { CommonModule } from '@angular/common';
 import { DiscountModalComponent } from './products/discount-modal/discount-modal.component';
 import { PageEditComponent } from './website-edit/page-edit/page-edit.component';
 
@@ -60,12 +56,7 @@ const COMPONENTS = [
 @NgModule({
   declarations: [...COMPONENTS, AdminComponent, CategoriesEditComponent],
   imports: [
-    CommonModule,
-    MatIconModule,
     SharedModule,
-    //FormsModule,
-    ReactiveFormsModule,
-    //EditorModule,
     MatFormFieldModule,
     MatCheckboxModule,
     MatInputModule,
