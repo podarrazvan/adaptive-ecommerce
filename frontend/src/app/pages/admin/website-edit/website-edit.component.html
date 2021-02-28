@@ -1,9 +1,9 @@
-<ng-container *ngIf="websiteDetails">
+<ng-container *ngIf="configs">
   <div class="website-edit-box">
     <div *ngIf="showEditTermsOfUse">
       <app-page-edit
         (close)="closeTermsOfUseEdit()"
-        [content]="this.websiteDetails.termsOfUse"
+        [content]="this.configs.termsOfUse"
         pageName="terms-of-use"
       ></app-page-edit>
     </div>
@@ -11,7 +11,7 @@
     <div *ngIf="showEditAboutUs">
       <app-page-edit
         (close)="closeEditAboutUs()"
-        [content]="this.websiteDetails.aboutUs"
+        [content]="this.configs.aboutUs"
         pageName="about-us"
       ></app-page-edit>
     </div>
@@ -19,58 +19,23 @@
     <div *ngIf="showEditFooter">
       <app-footer-edit
         (close)="footerEdit($event)"
-        [websiteDetails]="websiteDetails"
       ></app-footer-edit>
     </div>
-
     <h1>Settings</h1>
     <hr />
-    <div class="edit-option">
-      <h2 class="left">Website Name</h2>
-      <div class="name" *ngIf="editName">
-        <input
-          #websiteName
-          type="text"
-          class="form-control inputName center"
-          placeholder="Website's name"
-          [value]="websiteDetails.name"
-        />
-        <button
-          class="right"
-          (click)="setName(websiteName)"
-          type="button"
-          class="white-btn"
-        >
-          Set name
-        </button>
-      </div>
-      <h2 class="center website-name" *ngIf="!editName">
-        {{ websiteDetails.name }}
-      </h2>
-      <button
-        *ngIf="!editName"
-        (click)="editName = true"
-        class="main-btn website-name-btn"
-      >
-        Edit
-      </button>
-    </div>
+    <app-name-edit></app-name-edit>
     <hr />
-
     <div class="edit-option">
       <h2 class="left">Categories</h2>
       <div class="center">
         <div
-          *ngFor="let category of websiteDetails.categories; let i = index"
+          *ngFor="let category of configs.categories; let i = index"
           class="simple-btn"
         >
-          {{ category }}
+          {{ category.name }}
         </div>
       </div>
-      <app-categories-edit
-        (finalCategories)="(websiteDetails.categories)"
-        [categories]="websiteDetails.categories"
-      ></app-categories-edit>
+      <app-categories-edit></app-categories-edit>
     </div>
     <hr />
 
@@ -78,7 +43,7 @@
       <h2 class="left">Brands</h2>
       <div class="center">
         <div
-          *ngFor="let brand of websiteDetails.brands; let i = index"
+          *ngFor="let brand of configs.brands; let i = index"
           class="simple-btn"
         >
           {{ brand.name }}
@@ -86,8 +51,6 @@
       </div>
       <app-brands-edit
         class="right"
-        (finalBrands)="(websiteDetails.brands)"
-        [brands]="websiteDetails.brands"
       ></app-brands-edit>
     </div>
     <hr />
@@ -107,13 +70,13 @@
       <h2 class="left">Shipping</h2>
       <div
         class="simple-btn"
-        *ngFor="let shipping of websiteDetails.shipping; let i = index"
+        *ngFor="let shipping of configs.shipping; let i = index"
       >
         {{ shipping.name }}
       </div>
       <app-shipping-edit
-        [shippings]="websiteDetails.shipping"
-        (newShippings)="(websiteDetails.shipping)"
+        [shippings]="configs.shipping"
+        (newShippings)="(configs.shipping)"
       ></app-shipping-edit>
     </div>
     <hr />

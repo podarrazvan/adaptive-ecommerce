@@ -14,66 +14,67 @@ Edit
           X
         </button>
       </div>
-      <div class="form-row align-items-center">
-        <div class="col-auto">
-          <label for="tagInput"><b>Add a new category</b></label>
-          <input
-            type="text"
-            class="form-control"
-            id="tagInput"
-            placeholder="Category"
-            #category
-            required
-          />
-        </div>
-        <div class="col-auto">
-          <!--To do: fix newCategory.valid-->
-          <button
-            type="button"
-            (click)="addNewValue(category)"
-            class="main-btn"
-          >
-            Add
-          </button>
-        </div>
-      </div>
-      <ul class="list-group">
-        <div *ngFor="let category of categories; let i = index">
-          <!--To do: implement active-->
-          <li class="list-group-item">
-            <h1 *ngIf="editCategoryMode != i">{{ category }}</h1>
 
+      <form [formGroup]="categoriesFormGroup">
+        <div class="form-row align-items-center">
+          <div class="col-auto">
+            <label for="categoryInput"><b>Add a new category</b></label>
             <input
-              [hidden]="editCategoryMode != i"
-              type="text"
               class="form-control"
-              [value]="category"
-              #editedCategory
+              id="categoryInput"
+              placeholder="Category"
+              formControlName="name"
             />
-            <hr />
-            <div class="buttons-website-edit">
-              <button (click)="delete(i, category)" class="empty-btn">
-                <mat-icon>delete</mat-icon>
-              </button>
-
-              <button
-                *ngIf="editCategoryMode != i"
-                (click)="editCategoryMode = i"
-                class="empty-btn"
-              >
-                <mat-icon>create</mat-icon>
-              </button>
-              <button
-                *ngIf="editCategoryMode == i"
-                (click)="edit(editedCategory, category)"
-                class="btn btn-primary"
-              >
-                Done
-              </button>
-            </div>
-          </li>
+          </div>
+          <div class="col-auto">
+            <!--To do: fix newCategory.valid-->
+            <button
+              type="button"
+              (click)="addNewValue()"
+              class="main-btn"
+            >
+              Add
+            </button>
+          </div>
         </div>
-      </ul>
+        <ul class="list-group">
+          <div *ngFor="let category of categoriesForm.value; let i = index">
+            <!--To do: implement active-->
+            <li class="list-group-item">
+              <h1 *ngIf="editCategoryMode != i">{{ category.name }}</h1>
+  
+              <input
+                [hidden]="editCategoryMode != i"
+                type="text"
+                class="form-control"
+                [value]="category"
+                #editedCategory
+              />
+              <hr />
+              <div class="buttons-website-edit">
+                <button (click)="delete(i, category)" class="empty-btn">
+                  <mat-icon>delete</mat-icon>
+                </button>
+  
+                <button
+                  *ngIf="editCategoryMode != i"
+                  (click)="editCategoryMode = i"
+                  class="empty-btn"
+                >
+                  <mat-icon>create</mat-icon>
+                </button>
+                <button
+                  *ngIf="editCategoryMode == i"
+                  (click)="edit(editedCategory, category)"
+                  class="btn btn-primary"
+                >
+                  Done
+                </button>
+              </div>
+            </li>
+          </div>
+        </ul>
+      </form>
     </div>
   </div>
 </div>

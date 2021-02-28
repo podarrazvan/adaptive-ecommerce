@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { Categories } from 'src/app/shared/interfaces/categories.interface';
 import { ImagesService } from 'src/app/shared/services/database/images.service';
 import { TinyMCEComponent } from '../../../shared/components/tinymce/tinymce.component';
 import { Brand } from '../../../shared/interfaces/brand.interface';
@@ -13,7 +13,6 @@ import { ProductsService } from '../products/products.service';
   styleUrls: ['./add-product.component.scss'],
 })
 export class AddProductComponent implements OnInit, OnDestroy {
-  
   public tinyMCE: TinyMCEComponent;
 
   loading = true; //TODO
@@ -27,7 +26,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
   images: string[] = [];
 
   products = [];
-  categories: string[];
+  categories: Categories[];
   brands: Brand[];
 
   notComplete = true;
@@ -35,13 +34,12 @@ export class AddProductComponent implements OnInit, OnDestroy {
   onEditMode: boolean;
 
   constructor(
-    private fb: FormBuilder,
     private sharedDataService: SharedDataService,
     private productsService: ProductsService,
     private imagesService: ImagesService,
     private adminService: AdminService
   ) {}
-  
+
   get productForm() {
     return this.adminService.productFormGroup.get('product');
   }
@@ -49,21 +47,21 @@ export class AddProductComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // this.buildFormGroup();
     const response = this.sharedDataService.getWebsiteConfigs();
-    console.log(response);
     this.categories = response.categories;
     this.brands = response.brands;
   }
 
   onSubmit() {
     if (this.images != undefined) {
-      // this.productForm.patchValue({
-      //   images: this.images,
-      //   tags: this.tags,
-      // });
+      this.productForm.patchValue({
+        images: this.images,
+        tags: this.tags,
+      });
       if (this.sharedDataService.productEdit) {
-        // this.dbUploadService
-        //   .updateProduct(this.productForm.value, this.sharedDataService.product.key)
-        //   .subscribe((response) => console.log(response));
+        this.productsService.editProduct(
+          this.productForm.value,
+          this.sharedDataService.product._id
+        );
       } else {
         this.productsService.createAndStoreProduct(this.productForm.value);
       }
@@ -111,33 +109,4 @@ export class AddProductComponent implements OnInit, OnDestroy {
       }
     }
   }
-
-  private buildFormGroup() {
-    this.onEditMode = this.sharedDataService.productEdit;
-    // if (this.onEditMode) {
-    //   this.productForm = this.fb.group({
-    //     title: [this.sharedDataService.product.title, Validators.required],
-    //     category: [
-    //       this.sharedDataService.product.category,
-    //       Validators.required,
-    //     ],
-    //     brand: [this.sharedDataService.product.brand, Validators.required],
-    //     price: [this.sharedDataService.product.price, Validators.required],
-    //     images: '',
-    //     description: [this.sharedDataService.product.description],
-    //     tags: [''],
-    //     quantity: [
-    //       this.sharedDataService.product.quantity,
-    //       Validators.required,
-    //     ],
-    //     minPrice: [''],
-    //     salesWeekTarget: [''],
-    //   });
-    //   this.tags = this.sharedDataService.product.tags;
-    //   this.images = this.sharedDataService.product.images;
-    // } else {
-    //   this.productForm = this.adminService.adminFormGroup.get('product');
-    // }
-  }
-
 }

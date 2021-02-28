@@ -17,8 +17,8 @@ export class PageEditComponent {
     this.close.emit();
   }
 
-  onSave(aboutUs) {
-    this.configsService.editPages(aboutUs.value,this.pageName);
+  onSave(content) {
+    this.configsService.editPages(content.value,this.pageName);
     this.close.emit();
   }
 

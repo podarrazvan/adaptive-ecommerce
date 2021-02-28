@@ -2,7 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Product } from '../interfaces/product.interface';
 import { User } from '../interfaces/user.interface';
-import { WebsiteDetails } from '../interfaces/website-details';
+import { Configs } from '../interfaces/website-details';
 
 @Injectable()
 export class SharedDataService implements OnDestroy {
@@ -14,35 +14,43 @@ export class SharedDataService implements OnDestroy {
   isAuthenticated$ = new BehaviorSubject<boolean>(false);
 
   cast = this.emptyCart$.asObservable();
-  // cast = this.isAuthenticated.asObservable();
 
   websiteData = {
+    //! Delete this!
+    _id: '6039cc381b8e9dba840b9302',
+    //!
     name: 'name',
-    categories: [],
-    brands: [],
+    categories: [{name:'Phones'}],
+    coupons:[],
+    brands: [
+      {
+        image: 'http://localhost:3000/images/1451925798-1611925797622.png',
+        name: 'Apple',
+      },
+    ],
     shipping: [],
     footer: {
       adress: 'adress',
       phone: 'phone',
       email: 'email',
       program: 'program',
+      facebookImage: 'empty',
+      facebookUrl: 'facebook url',
+      twitterImage: 'empty',
+      twitterUrl: 'twitter url',
+      youtubeImage: 'empty',
+      youtubeUrl: 'youtube url',
+      instagramImage: 'empty',
+      instagramUrl: 'instagram url',
     },
-    facebookImage: 'empty',
-    facebookUrl: 'facebook url',
-    twitterImage: 'empty',
-    twitterUrl: 'twitter url',
-    youtubeImage: 'empty',
-    youtubeUrl: 'youtube url',
-    instagramImage: 'empty',
-    instagramUrl: 'instagram url',
+    
     termsOfUse: '',
     aboutUs: '',
   };
 
-  private websiteDetails = new BehaviorSubject<WebsiteDetails>(
+  private configs = new BehaviorSubject<Configs>(
     this.websiteData
   );
-  websiteDocId: string;
 
   userDetails = new BehaviorSubject<User>(null);
 
@@ -52,14 +60,12 @@ export class SharedDataService implements OnDestroy {
   totalCart: number;
   mobile: boolean;
 
-  setWebsiteDetails(details: WebsiteDetails) {
-    this.websiteDetails.next(details);
-    this.websiteDocId = details._id;
+  setconfigs(details: Configs) {
+    this.configs.next(details);
   }
 
   getWebsiteConfigs() {
-    console.log(this.websiteDetails.value);
-    return this.websiteDetails.value;
+    return this.configs.value;
   }
 
   setUserDetails(details: User) {

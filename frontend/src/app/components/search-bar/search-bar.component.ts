@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Categories } from 'src/app/shared/interfaces/categories.interface';
 import { SharedDataService } from '../../shared/services/shared-data.service';
 
 @Component({
@@ -9,6 +10,12 @@ import { SharedDataService } from '../../shared/services/shared-data.service';
   styleUrls: ['./search-bar.component.scss'],
 })
 export class SearchBarComponent {
+  searchBar: FormGroup;
+
+  categories: Categories[] = [];
+
+  selectedCategory: Categories;
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -17,12 +24,6 @@ export class SearchBarComponent {
     this.categories = this.sharedDataService.getWebsiteConfigs().categories;
     this.buildFormGroup();
   }
-
-  searchBar: FormGroup;
-
-  categories: string[] = [];
-
-  selectedCategory: string;
 
   onSearch() {
     const search = this.searchBar.value.search;

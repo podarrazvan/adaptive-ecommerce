@@ -1,40 +1,54 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component } from '@angular/core';
+import { FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import { ConfigsService } from 'src/app/shared/services/database/configs.sevice';
+import { AdminService } from '../../admin.service';
 
 @Component({
   selector: 'app-categories-edit',
   templateUrl: './categories-edit.component.html',
   styleUrls: ['./categories-edit.component.scss']
 })
-export class CategoriesEditComponent implements OnInit {
+export class CategoriesEditComponent {
+  categoriesFormGroup: FormGroup;
 
-  @Input() categories: string[] = [];
-  @Output() finalCategories = new EventEmitter<string[]>();
-
-  constructor(private configsService: ConfigsService) { }
+  constructor(
+    private fb: FormBuilder,
+    private configsService: ConfigsService,
+    private adminService: AdminService
+  ) { this.buildFormGroup(fb)}
 
   categoriesHide = true;
   editCategoryMode: number;
-  category;
-  newCategories: string[];
 
-  ngOnInit(): void {
-    this.newCategories = this.categories;
+  get categoriesForm() {
+    return this.adminService.adminFormGroup.get('configs.categories') as FormArray;
   }
 
-  addNewValue(category) {
-    this.newCategories.push(category.value);
-    this.finalCategories.emit(this.newCategories);
-    this.configsService.updateWebsite('websiteCategories',this.newCategories);
+  get categoryName() {
+    return this.categoriesFormGroup.get('name').value;
+  }
+
+  addNewValue() {
+    this.categoriesForm.push(this.createCategory());
+    this.configsService.updateWebsite('websiteCategories', this.categoriesForm.value);
   }
 
   delete(index) {
-    this.newCategories.splice(index, 1);
-    this.finalCategories.emit(this.newCategories);
+    this.categoriesForm.value.splice(index, 1);
+    this.configsService.updateWebsite('websiteCategories', this.categoriesForm.value);
   }
 
-  edit(index) {
+  edit(index) {}
 
+  public createCategory(): FormGroup {
+    const name = this.categoryName;
+    return this.fb.group({name});
+  }
+
+   private buildFormGroup(fb) {
+    this.categoriesFormGroup = fb.group({
+      name: fb.control(null),
+    });
   }
 
 }

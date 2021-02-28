@@ -4,7 +4,7 @@
 <div *ngIf="!brandsHide">
   <div class="backdrop"></div>
   <div class="alert">
-    <div class="alert-box">
+    <div [formGroup]="formGroup" class="alert-box">
       <div class="cancel-btn">
         <button (click)="brandsHide = true" class="btn btn-danger">
           X
@@ -14,12 +14,11 @@
         <div class="col-auto">
           <label for="tagInput"><b>Add a new brand</b></label>
           <input
-            type="text"
+            formControlName="name"
             class="form-control"
             id="tagInput"
             placeholder="Brand"
-            #brand
-            required
+            
           />
           <input
             class="custom-input-file"
@@ -31,9 +30,8 @@
         <div class="col-auto">
           <!--To do: fix newCategory.valid-->
           <button
-            [disabled]="!valid"
             type="button"
-            (click)="addNewValue(brand)"
+            (click)="addNewValue()"
             class="main-btn"
           >
             Add
@@ -41,7 +39,7 @@
         </div>
       </div>
       <ul class="list-group">
-        <div *ngFor="let brand of brands; let i = index">
+        <div *ngFor="let brand of brandsForm.value; let i = index">
           <!--To do: implement active-->
           <li class="list-group-item">
             <div *ngIf="editBrandMode != i">

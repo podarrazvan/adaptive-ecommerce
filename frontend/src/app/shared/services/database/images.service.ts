@@ -11,7 +11,7 @@ export class ImagesService {
     const imgName = Math.round(date / 1000 - 160000000).toString();
     img.append('image', image, imgName);
     return this.http.post<{ url: string }>(
-      '',
+      `${environment.api}/images`,
       img
     );
   }

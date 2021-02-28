@@ -27,6 +27,7 @@ import { CouponsEditComponent } from './website-edit/coupons-edit/coupons-edit.c
 import { ShippingEditComponent } from './website-edit/shipping-edit/shipping-edit.component';
 import { DiscountModalComponent } from './products/discount-modal/discount-modal.component';
 import { PageEditComponent } from './website-edit/page-edit/page-edit.component';
+import { NameEditComponent } from './website-edit/name-edit/name-edit.component';
 
 const COMPONENTS = [
   AddProductComponent,
@@ -50,7 +51,8 @@ const COMPONENTS = [
   CouponsEditComponent,
   ShippingEditComponent,
   DiscountModalComponent,
-  PageEditComponent
+  PageEditComponent,
+  NameEditComponent
 ];
 
 @NgModule({
