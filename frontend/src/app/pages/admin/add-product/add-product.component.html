@@ -1,5 +1,5 @@
 <div class="content">
-  <div [formGroup]="productForm" >
+  <div [formGroup]="productForm">
     <div class="form-row">
       <label for="inputTitle"><b>Title</b></label>
       <input
@@ -50,8 +50,7 @@
       <span
         class="help-blok"
         *ngIf="
-          !productForm.get('brand').valid &&
-          productForm.get('brand').touched
+          !productForm.get('brand').valid && productForm.get('brand').touched
         "
         style="color: red"
         >Please select a brand!</span
@@ -83,7 +82,7 @@
           >Please select a price!</span
         >
       </div>
-      <div class="col">
+      <div class="col imgInput">
         <label for="imgInput"><b>Add images</b></label>
         <input
           type="file"
@@ -96,7 +95,7 @@
     </div>
     <div class="prev-images">
       <div class="image" *ngFor="let img of images; let i = index">
-        <div>
+        <div class="button">
           <button
             type="button"
             (click)="deletePhoto(img, i)"
@@ -104,8 +103,8 @@
           >
             X
           </button>
-          <img [src]="img" />
         </div>
+        <img [src]="img" />
       </div>
     </div>
     <br />
@@ -114,7 +113,10 @@
       <div class="col">
         <label for="inputDescription"><b>Description</b></label>
         <!-- <app-description-styles></app-description-styles> -->
-        <text-editor (contentChanged)="ckeditorContentChanged($event)" #tinyMce></text-editor>
+        <text-editor
+          (contentChanged)="ckeditorContentChanged($event)"
+          #tinyMce
+        ></text-editor>
         <span
           class="help-blok"
           *ngIf="
@@ -209,13 +211,10 @@
     </div>
     <!-- <app-add-discount *ngIf="addDiscount"></app-add-discount> -->
     <hr />
-    <button
-    class="btn btn-danger"
-    (click)="onSubmit()"
-    >
+    <button class="btn btn-danger" (click)="onSubmit()">
       {{ onEditMode ? "Edit" : "Add product" }}
     </button>
   </div>
 </div>
 
-  <!-- [disabled]="!productForm.valid" -->
+<!-- [disabled]="!productForm.valid" -->
