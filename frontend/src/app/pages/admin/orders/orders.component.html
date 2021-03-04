@@ -8,7 +8,7 @@
   (updated)="orderUpdated()"
 ></app-order>
 <div *ngIf="deleteAlert">
-  <!-- <app-delete-alert itemToDelete="message"></app-delete-alert> -->
+  <app-delete-alert itemToDelete="message"></app-delete-alert>
 </div>
 <div class="container"*ngIf="orders.length == 0 && mobileOrders.length == 0" >
   <h1>No orders yet...</h1>

@@ -58,7 +58,6 @@ export class OrdersComponent {
     this.deleteAlert = true;
     const order = this.orders[index]._id;
     this.deleteAlertService.deleteMessage.subscribe((response) => {
-      response = true //TODO add delete alert and delete this!
       switch (response) {
         case true:
           this.ordersService.deleteOrder(order).subscribe(() => {
@@ -66,9 +65,9 @@ export class OrdersComponent {
           });
           this.deleteAlert = false;
           break;
-        // case false:
-        //   this.deleteAlert = false;
-        //   break;
+        case false:
+          this.deleteAlert = false;
+          break;
       }
     });
   }
