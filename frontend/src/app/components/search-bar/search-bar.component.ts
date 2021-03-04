@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Categories } from 'src/app/shared/interfaces/categories.interface';
 import { SharedDataService } from '../../shared/services/shared-data.service';
 
 @Component({
@@ -8,28 +9,20 @@ import { SharedDataService } from '../../shared/services/shared-data.service';
   templateUrl: './search-bar.component.html',
   styleUrls: ['./search-bar.component.scss'],
 })
-export class SearchBarComponent implements OnInit {
+export class SearchBarComponent {
+  searchBar: FormGroup;
+
+  categories: Categories[] = [];
+
+  selectedCategory: Categories;
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private sharedDataService: SharedDataService
-  ) {}
-
-  searchBar: FormGroup;
-
-  categories: string[] = [];
-
-  selectedCategory: string;
-
-  ngOnInit(): void {
-    this.sharedDataService.websiteDetails.subscribe((response) => {
-      try {
-        this.categories = response.categories;
-      } catch {
-        ///
-      }
-      this.buildFormGroup();
-    });
+  ) {
+    this.categories = this.sharedDataService.getWebsiteConfigs().categories;
+    this.buildFormGroup();
   }
 
   onSearch() {
@@ -47,7 +40,7 @@ export class SearchBarComponent implements OnInit {
     });
     this.selectedCategory = category;
   }
-  
+
   private buildFormGroup() {
     this.searchBar = this.fb.group({
       search: ['', Validators.required],

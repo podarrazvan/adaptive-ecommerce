@@ -10,31 +10,31 @@
         <div class="customer-left">
           <h3>
             <b>Customer:</b>
-            <h4>{{ order.adress.name }}</h4>
+            <h4>{{ order.name }}</h4>
           </h3>
           <br />
           <h3>
             <b>Email:</b>
-            <h4>{{ order.adress.email }}</h4>
+            <h4>{{ order.email }}</h4>
           </h3>
         </div>
         <div class="vl"></div>
         <div class="adress">
           <h3>
             <b>Adress:</b>
-            <h4>{{ order.adress.adress }}</h4>
+            <h4>{{ order.adress }}</h4>
           </h3>
           <h3>
             <b>City:</b>
-            <h4>{{ order.adress.city }}</h4>
+            <h4>{{ order.city }}</h4>
           </h3>
           <h3>
             <b>State:</b>
-            <h4>{{ order.adress.state }}</h4>
+            <h4>{{ order.state }}</h4>
           </h3>
           <h3>
             <b>Zip code:</b>
-            <h4>{{ order.adress.zipCode }}</h4>
+            <h4>{{ order.zipCode }}</h4>
           </h3>
         </div>
       </div>
@@ -44,7 +44,7 @@
         <div class="product" *ngFor="let product of products">
           <button
             class="empty-btn"
-            (click)="openProduct(product.category, product.id)"
+            (click)="openProduct(product.id)"
           >
             <h3>
               <b

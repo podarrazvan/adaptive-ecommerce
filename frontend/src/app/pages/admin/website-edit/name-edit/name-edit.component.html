@@ -1,0 +1,25 @@
+<div class="edit-option">
+  <h2 class="left">Website Name</h2>
+  <ng-container *ngIf="editName">
+    <div [formGroup]="formName" class="name">
+      <input
+        formControlName="name"
+        class="form-control inputName center"
+        placeholder="Website's name"
+      />
+    </div>
+    <button class="right" (click)="setName()" type="button" class="white-btn">
+      Set name
+    </button>
+  </ng-container>
+  <h2 class="center website-name" *ngIf="!editName">
+    {{ name }}
+  </h2>
+  <button
+    *ngIf="!editName"
+    (click)="editName = true"
+    class="main-btn website-name-btn"
+  >
+    Edit
+  </button>
+</div>

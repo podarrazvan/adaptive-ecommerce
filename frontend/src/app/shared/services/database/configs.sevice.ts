@@ -1,36 +1,37 @@
 import { environment } from '../../../../environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { WebsiteDetails } from '../../interfaces/website-details';
+import { Configs } from '../../interfaces/website-details';
 import { SharedDataService } from '../shared-data.service';
 import { Coupon } from '../../interfaces/coupon.interface';
-import { map } from 'rxjs/operators';
 
 @Injectable()
 export class ConfigsService {
+  categories: string[];
+  category;
+  
   constructor(
     private http: HttpClient,
     private sharedDataService: SharedDataService
   ) {}
-  categories: string[];
-  category;
 
-  createWebsiteDetails(details: WebsiteDetails) {
+  createconfigs() {
+    const configs = this.sharedDataService.getWebsiteConfigs();
     this.http
-      .post(`${environment.api}/website`, details)
+      .post(`${environment.api}/website`, configs)
       .subscribe(() => location.reload());
   }
 
   updateWebsite(sectionName: string, value) {
     const data = { data: value };
-    const id = this.sharedDataService.websiteDocId;
+    const id = this.sharedDataService.getWebsiteConfigs()._id;
     this.http
       .put(`${environment.api}/website/${id}/${sectionName}`, data)
       .subscribe();
   }
 
-  getWebsiteDetails() {
-    return this.http.get<WebsiteDetails>(
+  getconfigs() {
+    return this.http.get<Configs>(
       `${environment.api}/website`
     );
   }
@@ -40,7 +41,7 @@ export class ConfigsService {
   }
 
   editPages(content: string, page: string) {
-    const id = this.sharedDataService.websiteDocId;
+    const id = this.sharedDataService.getWebsiteConfigs()._id;
     const pageContent = { content };
     this.http
       .put(`${environment.api}/pages/${page}/${id}`, pageContent)

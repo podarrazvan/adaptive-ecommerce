@@ -7,13 +7,12 @@ const mongoose = require("mongoose");
 const userRoutes = require("./user/route/users.route");
 const productRoutes = require("./product/route/products.route");
 const imagesRoutes = require("./shared/routes/upload-image.route");
-const websiteDetailsRoutes = require("./config/route/configs.route");
+const configsRoutes = require("./config/route/configs.route");
 const pagesRoutes = require("./shared/routes/pages.route");
 const coponsRoutes = require("./coupon/route/coupons.route");
 const contactRoutes = require("./contact/route/contact.route");
 const discountRoutes = require("./discount/route/discounts.route");
-
-//  console.log(process.env.DB_URL);
+const orderRoutes = require("./order/route/order.route");
 
 const app = express();
 
@@ -43,7 +42,7 @@ mongoose
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use("/images", express.static(path.join("backend/shared/images")));
+app.use("/shared/images", express.static(path.join("shared/images")));
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -61,8 +60,9 @@ app.use((req, res, next) => {
 app.use("/api/users", userRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/images", imagesRoutes);
-app.use("/api/website", websiteDetailsRoutes);
+app.use("/api/website", configsRoutes);
 app.use("/api/pages", pagesRoutes);
 app.use("/api/coupons", coponsRoutes);
 app.use("/api/contact", contactRoutes);
 app.use("/api/discount", discountRoutes);
+app.use("/api/order", orderRoutes);

@@ -67,21 +67,24 @@ const COMPONENTS = [
     CountdownComponent,
 ]
 
+const MODULES = [
+  MatIconModule,
+  RouterModule,
+  FormsModule,
+  ReactiveFormsModule,
+  CommonModule,
+  EditorModule,
+  MatMenuModule,
+  CountdownModule
+]
 @NgModule({
     declarations: [
       ...COMPONENTS
     ],
     imports: [
-      MatIconModule,
-      RouterModule,
-      FormsModule,
-      ReactiveFormsModule,
-      CommonModule,
-      EditorModule,
-      MatMenuModule,
-      CountdownModule
+     ...MODULES
     ],
     providers: [ConfigsService,SharedDataService, DeleteAlertService,StatisticsService],
-    exports: [...COMPONENTS,]
+    exports: [...COMPONENTS,...MODULES]
   })
   export class SharedModule { }

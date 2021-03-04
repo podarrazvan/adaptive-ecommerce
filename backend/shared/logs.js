@@ -89,6 +89,17 @@ module.exports = {
     FAILED: "Product failed to update", 
     DELETED: "Product deleted",
     DELETE_FAILED: 'Product delete failed'
+  },
+  PERMISSIONS: {
+    ACCEPTED: "Permission accepted!",
+    DENIED: "Permission denied!"
+  },
+  ORDER: {
+    CREATED: "Order created!",
+    UPDATE: "Order updated successfully",
+    FAILED: "Order failed",
+    DELETED: "Order deleted!",
+    FAILED_DELETE: "Order failed to delete!"
   }
 };
 

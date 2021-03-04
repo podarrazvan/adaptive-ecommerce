@@ -9,46 +9,28 @@ export class OrdersService {
 
   constructor(private http: HttpClient) {}
 
-  //TODO
   addOrder(order: Order) {
-    const date = new Date();
-    const orderToAdd = {
-      cart: order.cart,
-      adress: order.adress,
-      total: order.total,
-      status: 'new',
-      date: date,
-    };
     this.http
-      .post(``, orderToAdd, {
+      .post(`${environment.api}/order`, order, {
         observe: 'response',
       })
       .subscribe();
   }
 
-  updateOrder(order: Order, status: string, id: string) {
+  updateOrder(id: string, status: string,) {
     const user = JSON.parse(localStorage.getItem('userData'));
-    const orderToUpdate = {
-      cart: order.cart,
-      adress: order.adress,
-      total: order.total,
-      status: status,
-      date: order.date,
-    };
-    return this.http.put(``, orderToUpdate, {
+    return this.http.put(`${environment.api}/order/update/${id}/${status}`, {
       observe: 'response',
     });
   }
 
   getOrders() {
     const user = JSON.parse(localStorage.getItem('userData'));
-    const ordersArray = [];
-    return this.http.get<Order[]>(``);
+    return this.http.get<Order[]>(`${environment.api}/order`);
   }
 
-  deleteOrder(key: string) {
+  deleteOrder(id: string) {
     const user = JSON.parse(localStorage.getItem('userData'));
-    return this.http.delete(``);
+    return this.http.delete(`${environment.api}/order/delete/${id}`);
   }
-  ///
 }

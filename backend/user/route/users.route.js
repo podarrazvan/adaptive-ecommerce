@@ -115,13 +115,31 @@ router.put("/update", checkAuth, (req, res, next) => {
     history,
   });
   User.updateOne({ _id: req.body.id }, user).then(
-      (result) => {
-        res.status(200).json({ message: LOGS.USER.UPDATED });
-      },
-      (err) => {
-        res.status(401).json({ message: LOGS.USER.DELETED });
-      }
-    );
+    (result) => {
+      res.status(200).json({ message: LOGS.USER.UPDATED });
+    },
+    (err) => {
+      res.status(401).json({ message: LOGS.USER.DELETED }); //! DELETED?!
+    }
+  );
+});
+
+router.put("/history", (req, res, next) => {
+  const recivedHistoryLength = Object.values(req.body.history);
+  const history = req.body.history;
+  User.findOne({ email: req.body.email }).then((user) => {
+    const oldHistoryLength = Object.values(user.history);
+    if (recivedHistoryLength.length === oldHistoryLength.length + 1) {
+      console.log(history);
+     User.findByIdAndUpdate({
+     _id: req.body._id,
+     },
+     {
+      $set:{history} 
+     }
+     )
+    }
+  });
 });
 
 module.exports = router;

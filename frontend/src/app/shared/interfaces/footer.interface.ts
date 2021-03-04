@@ -2,10 +2,10 @@ export interface Footer {
     adress: string; 
     phone: string;
     email: string;
-    facebookLink: string;
-    twitterLink: string;
-    instagramLink: string;
-    facebookLogo: string;
-    twitterLogo: string;
-    instagramLogo: string
+    facebookUrl: string;
+    twitterUrl: string;
+    instagramUrl: string;
+    facebookImage: string;
+    twitterImage: string;
+    instagramImage: string
 }

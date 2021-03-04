@@ -1,26 +1,27 @@
 import { Brand } from './brand.interface';
+import { Categories } from './categories.interface';
 import { Shipping } from './shipping.interface';
 
-export interface WebsiteDetails {
+export interface Configs {
   _id?: string;
   name: string;
-  categories: string[];
-  shipping:Shipping[];
+  categories: Categories[];
+  shipping: Shipping[];
   brands: Brand[];
   footer: {
-    adress: string;
+    adress: string; 
     phone: string;
     email: string;
-    program: string;
-  }
-  facebookImage: string;
-  facebookUrl: string;
-  twitterImage: string;
-  twitterUrl: string;
-  youtubeImage: string;
-  youtubeUrl: string;
-  instagramImage: string;
-  instagramUrl: string;
+    facebookImage: string;
+    facebookUrl: string;
+    twitterImage: string;
+    twitterUrl: string;
+    youtubeImage: string;
+    youtubeUrl: string;
+    instagramImage: string;
+    instagramUrl: string;
+  };
+  
   aboutUs: string;
   termsOfUse: string;
 }

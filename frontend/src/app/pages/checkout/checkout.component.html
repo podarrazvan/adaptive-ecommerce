@@ -11,15 +11,16 @@
         <h1>Shipping Details</h1>
       </div>
       <p>Order Notes</p>
-      <div class="extra-info">
+      <form [formGroup]="orderNotesForm" class="extra-info">
         <textarea
-          name="message"
+          name="orderNotes"
           rows="8"
           id="message"
           class="form-control form-note"
           placeholder="Notes about your order, e.g. special notes for delivery."
+          formControlName="orderNotes"
         ></textarea>
-      </div>
+      </form>
     </div>
   </div>
   <div class="right">

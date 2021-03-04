@@ -16,21 +16,31 @@ form {
   display: flex;
 }
 
-img,
-.image {
-  height: 108px;
-  width: 192px;
+.imgInput {
+  align-items: center;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
 }
 
 .prev-images {
   display: block;
   max-width: 600px;
   position: relative;
+  .image {
+    border-radius: $very-small-border-radius;
+    padding: 5px 5px 22px 5px;
+    box-shadow: 0 7px 20px 0 rgba(36, 41, 66, 0.15);
+    img {
+      max-height: 108px;
+      max-width: 192px;
+    }
+  }
 }
 
 .delete-btn {
   position: relative;
-  top: 25px;
+  margin: 5px;
   right: 5px;
   float: right;
   border: none;

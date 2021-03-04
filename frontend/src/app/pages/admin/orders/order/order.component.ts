@@ -22,11 +22,11 @@ export class OrderComponent implements OnInit {
 
   loading = true;
 
-  products: [{quantity?:number, name?: string, total?: number, category?: string, id?: string}] = [{}]
+  products: [{quantity?:number, name?: string, total?: number, id?: string}] = [{}] //TODO use interface
 
   ngOnInit(): void {
     this.products.splice(0,1);
-    for(let product of this.order.cart) {
+    for(let product of this.order.products) {
       this.productsService.getProduct( product.product).subscribe(response => {
         const prod = response;
         const total = prod.price * product.quantity;
@@ -34,7 +34,6 @@ export class OrderComponent implements OnInit {
           quantity: product.quantity,
           name: prod.title,
           total: total,
-          category: product.category,
           id: product.product
         });
       });
@@ -42,17 +41,13 @@ export class OrderComponent implements OnInit {
     this.loading = false;
   }
 
-  openProduct(category, id) {
-    this.router.navigate(['/product',category, id]);
-  }
-
-  exit() {
-
+  openProduct(id) {
+    this.router.navigate(['/product',id]);
   }
 
   updateOrder(status: string) {
     if(status != ''){
-      this.ordersService.updateOrder(this.order, status, this.order.key).subscribe(()=> this.updated.emit());
+      this.ordersService.updateOrder(this.order._id,status).subscribe(()=> this.updated.emit());
 
     } else {
       this.close.emit();

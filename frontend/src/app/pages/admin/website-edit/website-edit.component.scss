@@ -11,20 +11,6 @@
   margin-bottom: 50px;
 }
 
-.name {
-  display: flex;
-}
-
-.website-name {
-  margin-right: 30px;
-}
-
-.inputName {
-  max-width: 50%;
-  margin-right: 10px;
-  margin-left: -10px;
-}
-
 .edit-option {
   display: flex;
   justify-content: space-between;
@@ -40,14 +26,9 @@
   .center {
     display: flex;
     margin-top: 10px;
-    margin-left: -50px;
     .simple-btn {
       margin-left: 5px;
       margin-right: 5px;
     }
   }
-}
-.main-btn {
-  width: 100px;
-  height: 20px;
 }

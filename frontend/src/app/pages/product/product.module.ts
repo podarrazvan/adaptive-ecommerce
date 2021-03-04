@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../../shared/modules/shared.modules';
 import { ProductDetailsComponent } from './product-details/product-details.component';
@@ -20,7 +19,6 @@ import { WebsiteFeaturesComponent } from './website-features/website-features.co
   imports: [
     CommonModule,
     SharedModule,
-    MatIconModule,
     RouterModule.forChild([{ path: 'product/:key', component: ProductComponent }]),
   ],
   exports: [RouterModule],

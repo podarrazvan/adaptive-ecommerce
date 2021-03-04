@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Product } from 'src/app/shared/interfaces/product.interface';
 
 @Component({
   selector: 'app-home-best-sellers-middle',
@@ -7,7 +8,7 @@ import { Component } from '@angular/core';
 })
 export class HomeBestSellersMiddleComponent {
 
-  product = {img:['https://static3.evomag.ro/img?file=products%2F3800%2F3800870%2F1602653498Apple+iPhone+12+Pro+Max+128GB+-+Blue.JPG&width=600&extend=white'],
+  product = {images:['https://storage.googleapis.com/flip-global/device-images/apple_iphone-x_space-grey_sell.jpg'],
             category: 'phones', title: "iPhone 12 Pro Max",price:999}
 
   products = [this.product, this.product, this.product, this.product];

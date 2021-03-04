@@ -3,7 +3,7 @@
   <div class="alert-box">
       <div>
       <button (click)="onClose()" class="btn btn-danger">X</button>
-      <form [formGroup]="footerEditForm" (ngSubmit)="onSubmit()">
+      <form [formGroup]="footerForm">
         <div class="row">
           <div class="col">
             <input
@@ -35,7 +35,7 @@
         <div class="row">
           <div class="col">
             <input
-              formControlName="facebookLink"
+              formControlName="facebookUrl"
               type="text"
               class="form-control"
               placeholder="Facebook link"
@@ -49,7 +49,7 @@
           </div>
           <div class="col">
             <input
-              formControlName="instagramLink"
+              formControlName="instagramUrl"
               type="text"
               class="form-control"
               placeholder="Instagram link"
@@ -63,7 +63,7 @@
           </div>
           <div class="col">
             <input
-              formControlName="twitterLink"
+              formControlName="twitterUrl"
               type="text"
               class="form-control"
               placeholder="Twitter link"
@@ -76,7 +76,7 @@
             />
           </div>
         </div>
-        <button [disabled]="!footerEditForm.valid" type="submit" class="btn btn-primary">Save</button>
+        <button [disabled]="!footerForm.valid" (click)="onSubmit()" class="btn btn-primary">Save</button>
       </form> 
     </div>
   </div>

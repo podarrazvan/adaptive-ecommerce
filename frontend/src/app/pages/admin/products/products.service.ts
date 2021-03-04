@@ -41,6 +41,12 @@ export class ProductsService {
       .subscribe();
   }
 
+  editProduct(product: Product, _id) {
+    this.http
+    .put(`${environment.api}/products/${_id}`, product)
+    .subscribe();
+  }
+
   
   getProductsByCategory(category: string) {
     return this.http.get<Product[]>(

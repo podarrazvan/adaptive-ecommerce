@@ -1,7 +1,6 @@
 import { WebConfigResolver } from './../shared/resolvers/web-config.resolver';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/modules/shared.modules';
 import { AboutUsComponent } from './additional-pages/about-us/about-us.component';
@@ -45,9 +44,6 @@ const COMPONENTS = [
       },
     ]),
     SharedModule,
-    FormsModule,
-    ReactiveFormsModule,
-    CommonModule,
     CartModule,
     HomeModules,
   ],

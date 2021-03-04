@@ -1,4 +1,4 @@
-<form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="checkoutForm">
     <div class="form-group">
       <label for="inputName"> Name <span>*</span></label>
       <input
@@ -38,11 +38,12 @@
         type="text"
         class="form-input"
         id="inputCity"
+        placeholder="New York"
       />
     </div>
     <div class="form-group">
       <label for="inputState">State <span>*</span></label>
-      <input formControlName="state" id="inputState" class="form-input" />
+      <input formControlName="state" id="inputState" class="form-input" placeholder="New York"/>
     </div>
     <div class="form-group">
       <label for="inputZip">Zip <span>*</span></label>
@@ -51,6 +52,7 @@
         type="text"
         class="form-input"
         id="inputZip"
+        placeholder="10499"
       />
     </div>
     <div class="create-account">

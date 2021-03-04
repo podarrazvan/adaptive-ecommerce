@@ -2,8 +2,8 @@
 
 .content img {
   position: relative;
-  top: -2px;
+  min-height: 400px;
   max-height: 500px;
-  max-width: 600px;
+  max-width: 590px;
   border-radius: $small-border-radius;
 }

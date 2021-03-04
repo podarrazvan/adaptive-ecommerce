@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ConfigsService } from 'src/app/shared/services/database/configs.sevice';
-import { WebsiteDetails } from '../../../shared/interfaces/website-details';
+import { Configs } from '../../../shared/interfaces/website-details';
 import { SharedDataService } from '../../../shared/services/shared-data.service';
 
 @Component({
@@ -9,39 +8,28 @@ import { SharedDataService } from '../../../shared/services/shared-data.service'
   styleUrls: ['./website-edit.component.scss'],
 })
 export class WebsiteEditComponent implements OnInit {
-  constructor(private configsService: ConfigsService,
-              private sharedDataService: SharedDataService) {}
-
-  editName = false;
+  constructor(private sharedDataService: SharedDataService) {}
 
   showEditTermsOfUse = false;
-
   showEditAboutUs = false;
-
   showEditFooter = false;
 
-  websiteDetails: WebsiteDetails;
+  configs: Configs;
 
   coupons: string[] = [];
 
   ngOnInit(): void {
-    this.sharedDataService.websiteDetails.subscribe(response => this.websiteDetails = response);
-    this.configsService.getCoupons().subscribe(response=> {
-      for(let coupon of response) {
-        this.coupons.push(coupon.code);
-      }
-    });
+    this.configs = this.sharedDataService.getWebsiteConfigs();
+    // this.sharedDataService.configs.subscribe(response => this.configs = response);
+    // this.configsService.getCoupons().subscribe(response=> {
+    //   for(let coupon of response) {
+    //     this.coupons.push(coupon.code);
+    //   }
+    // });
   }
 
   edit(newValue, id, type) {
 
-  }
-  deleteCategory(index) {
-    this.websiteDetails.categories.splice(index, 1);
-  }
-
-  deleteBrand(index) {
-    this.websiteDetails.brands.splice(index, 1);
   }
 
   editTermsOfUse() {
@@ -58,28 +46,22 @@ export class WebsiteEditComponent implements OnInit {
 
   closeEditAboutUs() {
     this.showEditAboutUs = false;
-  }
-
-  setName(name) {
-    this.websiteDetails.name = name.value;
-    this.configsService.updateWebsite('websiteName',name.value);
-    this.editName = false;
-  }
+  } 
 
   footerEdit(footer) {
     this.showEditFooter = false
-    this.websiteDetails.footer.adress = footer.adress;
-    this.websiteDetails.footer.email = footer.email;
-    this.websiteDetails.footer.phone = footer.phone;
-    this.websiteDetails.footer.program = footer.program;
-    this.websiteDetails.facebookImage = footer.facebookLogo;
-    this.websiteDetails.twitterImage = footer.twitterLogo;
-    this.websiteDetails.instagramImage = footer.instagramLogo;
-    // this.websiteDetails.youtube.image = footer.youtubeLogo;
+    this.configs.footer.adress = footer.adress;
+    this.configs.footer.email = footer.email;
+    this.configs.footer.phone = footer.phone;
+    //this.configs.footer.program = footer.program;
+    this.configs.footer.facebookImage = footer.facebookLogo;
+    this.configs.footer.twitterImage = footer.twitterLogo;
+    this.configs.footer.instagramImage = footer.instagramLogo;
+    // this.configs.youtube.image = footer.youtubeLogo;
   }
 
   saveInfo() {
-    // this.configsService.websiteDetails(this.websiteDetails);
+    // this.configsService.configs(this.configs);
   }
 
 }

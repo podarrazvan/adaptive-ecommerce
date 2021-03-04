@@ -1,15 +1,15 @@
 .products {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  width: 100%;
 }
 
 .left,
 .right {
-    position: relative;
-    
+  position: relative;
 }
 
 .right {
-    float: right;
+  float: right;
 }

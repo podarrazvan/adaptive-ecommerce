@@ -2,15 +2,17 @@
 @import "/src/app/shared/styles/colors";
 
 .custom-input-files::-webkit-file-upload-button {
-  visibility: hidden;
+  display: none;
 }
 
 .custom-input-files {
   border-radius: $small-border-radius;
-  padding: 5px 8px;
+  width: 130px;
+  padding: 5px 16px;
   cursor: pointer;
   font-weight: 700;
   font-size: 10pt;
+  text-align: center;
   background: linear-gradient(122deg, $main-color-10, $main-color-20);
   color: $non-color-2;
 }
