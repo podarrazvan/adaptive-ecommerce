@@ -93,6 +93,13 @@ module.exports = {
   PERMISSIONS: {
     ACCEPTED: "Permission accepted!",
     DENIED: "Permission denied!"
+  },
+  ORDER: {
+    CREATED: "Order created!",
+    UPDATE: "Order updated successfully",
+    FAILED: "Order failed",
+    DELETED: "Order deleted!",
+    FAILED_DELETE: "Order failed to delete!"
   }
 };
 

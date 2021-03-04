@@ -25,3 +25,21 @@
 .gray-btn {
   float: right;
 }
+
+
+@media (max-width: 1840px) {
+  .coupon-input {
+    width: 444px;
+    height: 52px;
+  }
+  .black-btn {
+    width: 112px;
+    height: 50px;
+    padding: 5px 10px
+  }
+  .gray-btn {
+    width: 112px;
+    height: 50px;
+    padding: 5px 10px
+  }
+}

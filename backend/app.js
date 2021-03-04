@@ -12,6 +12,7 @@ const pagesRoutes = require("./shared/routes/pages.route");
 const coponsRoutes = require("./coupon/route/coupons.route");
 const contactRoutes = require("./contact/route/contact.route");
 const discountRoutes = require("./discount/route/discounts.route");
+const orderRoutes = require("./order/route/order.route");
 
 const app = express();
 
@@ -64,3 +65,4 @@ app.use("/api/pages", pagesRoutes);
 app.use("/api/coupons", coponsRoutes);
 app.use("/api/contact", contactRoutes);
 app.use("/api/discount", discountRoutes);
+app.use("/api/order", orderRoutes);

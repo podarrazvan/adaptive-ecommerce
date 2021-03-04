@@ -1,12 +1,23 @@
-import { Product } from './product.interface';
-
 export interface Order {
-    products?: any;
-    cart: any;
+  _id: string;
+
+    name: string;
+    email: string;
     adress: any;
+    city: string;
+    state: string;
+    zipCode: string;
+
+ 
+    shipping: string;
+    payment: string;
     total: string;
     status?: string;
     date?: Date;
-    key?: string;
-    mobProducts?:Product[];
+ 
+  products: [{
+    product: string;
+    quantity: number;
+  }];
+  orderNotes: string;
 }
