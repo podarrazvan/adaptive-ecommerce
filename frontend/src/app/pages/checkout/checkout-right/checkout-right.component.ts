@@ -18,11 +18,9 @@ export class CheckoutRightComponent {
     private ordersService: OrdersService
   ) {
     this.products = JSON.parse(localStorage.getItem('cart'));
-    console.log(this.products);
     for(let product of this.products) {
       this.total += +product.quantity* product.price;
     }
-    console.log(this.total);
   }
 
   get checkoutForm() {

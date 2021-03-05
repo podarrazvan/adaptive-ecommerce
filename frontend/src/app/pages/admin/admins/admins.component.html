@@ -1,0 +1,26 @@
+<button class="white-btn" (click)="addAdmin = true"  *ngIf="!addAdmin">Add admin</button>
+<table class="table" *ngIf="!addAdmin">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Email</th>
+        <th scope="col">Username</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let admin of admins; let i = index">
+      <tr>
+          <td>{{i+1}}</td>
+        <td>{{ admin.email }}</td>
+        <td>{{ admin.username }}</td>
+        <td>
+          <button class="empty-btn" (click)="onDelete(i)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <ng-container  *ngIf="addAdmin">
+      <app-signup-form [addAdmin]="true"(adminCreated)="adminCreated($event)"></app-signup-form>
+  </ng-container>

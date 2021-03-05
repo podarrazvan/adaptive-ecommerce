@@ -20,9 +20,11 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  signup(newUser: NewUserDto) {
-    return this.http
-      .post<AuthResponseData>(`${environment.api}/users/signup`, {
+  signup(newUser: NewUserDto, addAdmin) {
+    if(addAdmin){
+      const user = JSON.parse(localStorage.getItem('userData'));
+      return this.http
+      .post<AuthResponseData>(`${environment.api}/users/admins/signup`, {
         ...newUser,
         returnSecureToken: true,
       })
@@ -32,6 +34,19 @@ export class AuthService {
           this.handleAuthentication(resData);
         })
       );
+    } else {
+      return this.http
+        .post<AuthResponseData>(`${environment.api}/users/signup`, {
+          ...newUser,
+          returnSecureToken: true,
+        })
+        .pipe(
+          catchError(this.handleError),
+          tap((resData) => {
+            this.handleAuthentication(resData);
+          })
+        );
+    }
   }
 
   login(email: string, password: string) {
@@ -108,7 +123,7 @@ export class AuthService {
       expirationDate
     );
     this.user.next(user);
-    this.autoLogout(+expiresIn * 100);
+    this.autoLogout(+expiresIn * 1000);
     localStorage.setItem('userData', JSON.stringify(user));
   }
 

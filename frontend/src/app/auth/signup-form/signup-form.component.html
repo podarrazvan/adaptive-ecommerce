@@ -1,6 +1,11 @@
 <div class="sign-up">
-  <h3 class="card-top"> Sign Up</h3>
-  <form class="auth-form" #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" *ngIf="!isLoading">
+  <h3 class="card-top">{{ addAdmin ? "Add admin" : "Sign Up" }}</h3>
+  <form
+    class="auth-form"
+    #authForm="ngForm"
+    (ngSubmit)="onSubmit(authForm)"
+    *ngIf="!isLoading"
+  >
     <div class="form-group">
       <label for="username">Username</label>
       <input
@@ -28,7 +33,9 @@
       />
     </div>
     <div class="form-group">
-      <label for="password">Password <span class="required-field"> *</span></label>
+      <label for="password"
+        >Password <span class="required-field"> *</span></label
+      >
       <input
         type="password"
         id="password"
@@ -41,7 +48,9 @@
       />
     </div>
     <div class="form-group">
-      <label for="password2">Verify Password <span class="required-field"> *</span></label>
+      <label for="password2"
+        >Verify Password <span class="required-field"> *</span></label
+      >
       <input
         type="password"
         id="password2"
@@ -54,13 +63,9 @@
       />
     </div>
     <div class="signup-btn">
-      <button
-        class="white-btn"
-        type="submit"
-        
-      >
-       Sign Up    </button>
-     
+      <button class="white-btn" type="submit">
+        {{ addAdmin ? "Add admin" : "Sign Up" }}
+      </button>
     </div>
   </form>
 </div>

@@ -12,24 +12,15 @@ export class UsersService {
   categories: string[];
   category;
 
- 
-  
-  getUsers() {
-    const usersArray = [];
-    return this.http
-      .get<User[]>(
-        ''
-      )
-      .pipe(
-        map((responseData) => {
-          for (const user of responseData) {
-            usersArray.push({ user });
-          }
-          return usersArray;
-        })
-      );
+  getAdmins() {
+    return this.http.get<User[]>(`${environment.api}/users/admins`);
   }
 
-  
-}
+  getUsers() {
+    return this.http.get<User[]>('');
+  }
 
+  deleteAdmin(username: string) {
+    return this.http.delete(`${environment.api}/users/admins/delete/${username}`);
+  }
+}

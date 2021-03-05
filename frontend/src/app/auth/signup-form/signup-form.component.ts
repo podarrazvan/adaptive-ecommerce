@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input,EventEmitter, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -8,34 +8,42 @@ import { AuthResponseData } from '../entities';
 @Component({
   selector: 'app-signup-form',
   templateUrl: './signup-form.component.html',
-  styleUrls: ['./signup-form.component.scss']
+  styleUrls: ['./signup-form.component.scss'],
 })
-export class SignupFormComponent{
-
+export class SignupFormComponent {
+  @Input() addAdmin: boolean;
+  @Output() adminCreated = new EventEmitter(null);
   isLoading = false;
   error: string = null;
 
   constructor(private authService: AuthService, private router: Router) {}
 
   onSubmit(form: NgForm) {
+    if (form.value.password === form.value.checkPassword) {
+      let authObs: Observable<AuthResponseData>;
 
-    let authObs: Observable<AuthResponseData>;
+      this.isLoading = true;
 
-    this.isLoading = true;
+      authObs = this.authService.signup(form.value, this.addAdmin);
 
-    authObs = this.authService.signup(form.value);
+      authObs.subscribe(
+        (response) => {
+          this.isLoading = false;
+          if(!this.addAdmin) {
+            this.router.navigate(['../']);
+          } else {
+            this.adminCreated.emit(response);
+          }
+        },
+        (errorMessage) => {
+          this.error = errorMessage;
+          this.isLoading = false;
+        }
+      );
 
-    authObs.subscribe(
-      response => {
-        this.isLoading = false;
-        this.router.navigate(['../']);
-      },
-      errorMessage => {
-        this.error = errorMessage;
-        this.isLoading = false;
-      }
-    );
-
-    form.reset();
+      form.reset();
+    } else {
+      alert("passwords don't match");
+    }
   }
 }

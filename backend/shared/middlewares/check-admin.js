@@ -15,7 +15,6 @@ module.exports = (req, res, next) => {
     };
     const email = req.userData.email;
     User.findOne({ email }).then((user) => {
-      console.log(user.isAdmin);
       if (!user.isAdmin) {
         return res.status(401).json({
           message: LOGS.PERMISSIONS.DENIED,
