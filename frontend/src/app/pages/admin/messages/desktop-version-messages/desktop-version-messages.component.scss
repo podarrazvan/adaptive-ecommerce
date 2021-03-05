@@ -1,13 +1,14 @@
 mat-icon {
-    margin-top: 2px;
-    color: black;
+  margin-top: 2px;
+  color: black;
 }
 
-td,th {
-    vertical-align: middle;
-    text-align: center;
-    // display: flex;
-    // align-items: center;
-    // justify-content: center;
-    // position: relative;
+td,
+th {
+  vertical-align: middle;
+  text-align: center;
+}
+
+.open-email {
+  cursor: pointer;
 }

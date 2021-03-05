@@ -28,6 +28,7 @@ import { ShippingEditComponent } from './website-edit/shipping-edit/shipping-edi
 import { DiscountModalComponent } from './products/discount-modal/discount-modal.component';
 import { PageEditComponent } from './website-edit/page-edit/page-edit.component';
 import { NameEditComponent } from './website-edit/name-edit/name-edit.component';
+import { AdminsComponent } from './admins/admins.component';
 
 const COMPONENTS = [
   AddProductComponent,
@@ -52,7 +53,8 @@ const COMPONENTS = [
   ShippingEditComponent,
   DiscountModalComponent,
   PageEditComponent,
-  NameEditComponent
+  NameEditComponent,
+  AdminsComponent
 ];
 
 @NgModule({
@@ -75,6 +77,7 @@ const COMPONENTS = [
           { path: 'products', component: ProductsComponent },
           { path: 'website-edit', component: WebsiteEditComponent },
           { path: 'users', component: UsersComponent },
+          { path: 'admins', component: AdminsComponent },
         ]
       },
     ]),

@@ -5,38 +5,11 @@
   <div *ngIf="deleteAlert">
     <app-delete-alert itemToDelete="message"></app-delete-alert>
   </div>
-  <!--Desktop version-->
- <app-desktop-version-messages *ngIf="!mobile"
+ <app-desktop-version-messages
   [emails]="emails"
   (open)="openEmail($event)"
   (delete)="onDelete($event)"
  ></app-desktop-version-messages>
 </div>
-<!--Mobile version-->
-<div class="emails" *ngFor="let email of emails; let i = index">
-  <div *ngIf="mobile">
-    <div class="email-card">
-      <div (click)="openEmail(i)">
-        <div class="card-top">
-          <h5>{{ email.date | date }}</h5>
-          <div class="email-status" *ngIf="!email.seen" style="color: red">
-            <mat-icon> email</mat-icon>
-          </div>
-          <div class="email-status" *ngIf="email.seen">
-            <mat-icon> mail_outline</mat-icon>
-          </div>
-        </div>
-        <h5>{{ email.firstName }} {{ email.lastName }}</h5>
-        <p class="card-text">
-          {{ email.message | shorten: 200 }}
-        </p>
-      </div>
-      <hr>
-      <br>
-      <button  class="empty-btn delete-btn" (click)="onDelete(i)">
-        <mat-icon>delete</mat-icon>
-      </button>
-    </div>
-  </div>
-</div>
+
 
