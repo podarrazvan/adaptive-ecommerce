@@ -2,7 +2,7 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-const LOGS = require("../../shared/logs")
+const LOGS = require("../../shared/logs");
 
 const checkAuth = require("../../shared/middlewares/check-auth");
 const checkAdmin = require("../../shared/middlewares/check-admin");
@@ -19,7 +19,14 @@ router.get("", (req, res, next) => {
 
 router.post("/signup", (req, res, next) => {
   let user;
-  const {username, email,password, favorites, categories, history} = req.body;
+  const {
+    username,
+    email,
+    password,
+    favorites,
+    categories,
+    history,
+  } = req.body;
   bcrypt.hash(password, 10).then((hash) => {
     if ("admin" === username) {
       user = new User({
@@ -55,7 +62,7 @@ router.post("/signup", (req, res, next) => {
 });
 
 router.post("/login", (req, res, next) => {
-  const {email, password} = req.body;
+  const { email, password } = req.body;
   let getUser;
   User.findOne({ email })
     .then((user) => {
@@ -131,34 +138,57 @@ router.put("/history", (req, res, next) => {
   User.findOne({ email: req.body.email }).then((user) => {
     const oldHistoryLength = Object.values(user.history);
     if (recivedHistoryLength.length === oldHistoryLength.length + 1) {
-     User.findByIdAndUpdate({
-     _id: req.body._id,
-     },
-     {
-      $set:{history} 
-     }
-     )
+      User.findByIdAndUpdate(
+        {
+          _id: req.body._id,
+        },
+        { history }
+      );
     }
   });
 });
 
+router.get("/check-code/:email/:recoveryPasswordCode", (req, res, next) => {
+  const { email, recoveryPasswordCode } = req.params;
+  User.findOne({ email, recoveryPasswordCode }).then((user) => {
+    res.status(200).json(user);
+  });
+});
+
+router.put("/update-password", (req, res, next) => {
+  const { email, password, recoveryPasswordCode } = req.body;
+  bcrypt.hash(password, 10).then((hash) => {
+    User.findOneAndUpdate(
+      { email, recoveryPasswordCode },
+      { password: hash, $unset: { recoveryPasswordCode: "" } }
+    ).then(
+      (result) => {
+        res.status(200).json({ message: LOGS.USER.UPDATE });
+      },
+      (err) => {
+        res.status(401).json({ message: LOGS.USER.FAILED });
+      }
+    );
+  });
+});
+
 router.get("/admins", (req, res, next) => {
-  User.find({isAdmin: true}).then((documents) => {
+  User.find({ isAdmin: true }).then((documents) => {
     res.status(200).json(documents);
   });
 });
 
-router.post("/admins/signup",checkAdmin, (req, res, next) => {
+router.post("/admins/signup", checkAdmin, (req, res, next) => {
   let user;
-  const {username, email,password} = req.body;
+  const { username, email, password } = req.body;
   bcrypt.hash(password, 10).then((hash) => {
-      user = new User({
-        username,
-        email,
-        password: hash,
-        isAdmin: true,
-      });
-    
+    user = new User({
+      username,
+      email,
+      password: hash,
+      isAdmin: true,
+    });
+
     user
       .save()
       .then((result) => {
@@ -172,9 +202,9 @@ router.post("/admins/signup",checkAdmin, (req, res, next) => {
   });
 });
 
-router.delete("/admins/delete/:username",checkAdmin, (req, res, next) => {
+router.delete("/admins/delete/:username", checkAdmin, (req, res, next) => {
   const username = req.params.username;
-  User.deleteOne({username}).then(
+  User.deleteOne({ username }).then(
     (result) => {
       res.status(200).json({ message: LOGS.USER.DELETED });
     },
