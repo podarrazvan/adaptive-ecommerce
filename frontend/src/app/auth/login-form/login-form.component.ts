@@ -4,6 +4,8 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { NodeMailerService } from 'src/app/shared/services/node-mailer.service';
+import { UsersService } from 'src/app/pages/admin/users/user.service';
 
 @Component({
   selector: 'app-login-form',
@@ -15,36 +17,81 @@ export class LoginFormComponent {
   error = false;
   auth;
   resetPasswordMode = false;
+  showResetPasswordCode = false;
+  showNewPassword = false;
+  email;
+  code;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private nodeMailerService: NodeMailerService,
+    private usersService: UsersService
+  ) {}
 
   onSubmit(form: NgForm) {
-    if (!form.valid) {
-      this.error = true;
-    }
-    const email = form.value.email;
+    // if (!form.valid && !this.resetPasswordMode) {
+    //   this.error = true;
+    // }
     const password = form.value.password;
-
-    if (this.resetPasswordMode) {
-      // TODO password reset
+    if (this.showNewPassword) {
+      const confirmPassword = form.value.confirmPassword;
+      if (password === confirmPassword) {
+        this.usersService
+          .updatePassword(this.email, this.code, password)
+          .subscribe((response) => {
+            alert('Password updated!');
+            this.router.navigate(['../']);
+          });
+      } else {
+        alert("Passwords don't match");
+      }
+    }
+    if (this.showResetPasswordCode) {
+      this.code = form.value.code;
+      this.usersService
+        .checkCode(this.email, this.code)
+        .subscribe((response) => {
+          if (response != null) {
+            this.showResetPasswordCode = false;
+            this.showNewPassword = true;
+          }
+        });
     }
 
-    let authObs: Observable<AuthResponseData>;
+    if (
+      this.resetPasswordMode &&
+      !this.showResetPasswordCode &&
+      !this.showNewPassword
+    ) {
+      this.email = form.value.email;
+      this.nodeMailerService.passwordReset(this.email).subscribe((response) => {
+        this.showResetPasswordCode = true;
+      });
+    }
+    if (
+      !this.resetPasswordMode &&
+      !this.showResetPasswordCode &&
+      !this.showNewPassword
+    ) {
+      this.email = form.value.email;
+      let authObs: Observable<AuthResponseData>;
 
-    this.isLoading = true;
+      this.isLoading = true;
 
-    authObs = this.authService.login(email, password);
+      authObs = this.authService.login(this.email, password);
 
-    authObs.subscribe(
-      (response) => {
-        this.isLoading = false;
-        this.router.navigate(['../']);
-        form.reset();
-      },
-      (errorMessage) => {
-        this.error = errorMessage;
-        this.isLoading = false;
-      }
-    );
+      authObs.subscribe(
+        (response) => {
+          this.isLoading = false;
+          this.router.navigate(['../']);
+          form.reset();
+        },
+        (errorMessage) => {
+          // this.error = errorMessage;
+          // this.isLoading = false;
+        }
+      );
+    }
   }
 }

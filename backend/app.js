@@ -13,6 +13,7 @@ const coponsRoutes = require("./coupon/route/coupons.route");
 const contactRoutes = require("./contact/route/contact.route");
 const discountRoutes = require("./discount/route/discounts.route");
 const orderRoutes = require("./order/route/order.route");
+const emailSender = require("./shared/email-sender");
 
 const app = express();
 
@@ -66,3 +67,4 @@ app.use("/api/coupons", coponsRoutes);
 app.use("/api/contact", contactRoutes);
 app.use("/api/discount", discountRoutes);
 app.use("/api/order", orderRoutes);
+app.use('/api/email-sender', emailSender);
