@@ -21,6 +21,7 @@ const orderSchema = mongoose.Schema({
     },
   ],
   orderNotes: { type: String },
+  orderNumber: {type: Number}
 });
 
 module.exports = mongoose.model("Order", orderSchema);

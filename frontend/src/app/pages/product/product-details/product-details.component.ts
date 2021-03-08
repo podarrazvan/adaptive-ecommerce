@@ -27,7 +27,8 @@ export class ProductDetailsComponent implements OnInit {
     const cartItem: CartItem = {
       id: this.product._id,
       quantity: quantity.value,
-      price: +this.product.price * +quantity.value
+      price: +this.product.price * +quantity.value,
+      name: this.product.title
     };
     cart.push(cartItem)
     localStorage.setItem('cart', JSON.stringify(cart));

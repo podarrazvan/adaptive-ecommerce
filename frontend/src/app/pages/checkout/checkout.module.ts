@@ -5,11 +5,13 @@ import { SharedModule } from 'src/app/shared/modules/shared.modules';
 import { CheckoutFormComponent } from './checkout-form/checkout-form.component';
 import { CheckoutRightComponent } from './checkout-right/checkout-right.component';
 import { CheckoutComponent } from './checkout.component';
+import { OrderStatusPageComponent } from './order-status-page/order-status-page.component';
 @NgModule({ 
     declarations: [
       CheckoutComponent,
       CheckoutFormComponent,
-      CheckoutRightComponent
+      CheckoutRightComponent,
+      OrderStatusPageComponent
   ],
     imports: [ 
       SharedModule,

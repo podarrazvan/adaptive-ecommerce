@@ -8,6 +8,8 @@ router.post("", (req, res, next) => {
   const { name, email, adress, city, state, zipCode } = req.body.billingDetails;
   const { shipping, payment, total, status, date } = req.body.orderDetails;
   const { orderNotes, products } = req.body;
+  const d = new Date().getTime();
+  const orderNumber = Math.round((d / 1000)-1615160000);
   order = new Order({
     name,
     email,
@@ -22,13 +24,14 @@ router.post("", (req, res, next) => {
     date,
     orderNotes,
     products,
+    orderNumber
   });
   order
     .save()
     .then((result) => {
       res.status(201).json({
         message: LOGS.ORDER.CREATED,
-        result: result,
+        order: result,
       });
     })
     .catch((err) => {
@@ -55,6 +58,14 @@ router.put("/update/:id/:status", (req, res, next) => {
 router.get("", (req, res, next) => {
   Order.find().then((orders) => {
     res.status(200).json(orders);
+  });
+});
+
+router.get("/:id", (req, res, next) => {
+  const _id = req.params.id;
+  Order.findOne({_id}).then((order) => {
+    console.log(order);
+    res.status(200).json(order);
   });
 });
 

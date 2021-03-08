@@ -10,7 +10,7 @@ export class ProductsService {
 
   createAndStoreProduct(product: Product) {
     const date = new Date().getTime();
-    const productNumber = Math.round(date / 1000);
+    const productNumber = Math.round((date / 1000)-1615160000);
     const productData: Product = {
       title: product.title,
       category: product.category,
@@ -73,7 +73,6 @@ export class ProductsService {
   }
 
   deleteProduct(id: string) {
-    // const user = JSON.parse(localStorage.getItem('userData'));
     return this.http.delete(
       `${environment.api}/products/${id}`
     );

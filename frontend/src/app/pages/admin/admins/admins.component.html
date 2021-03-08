@@ -1,4 +1,5 @@
 <button class="white-btn" (click)="addAdmin = true"  *ngIf="!addAdmin">Add admin</button>
+<app-delete-alert  itemToDelete="admin" *ngIf="deleteAdmin"></app-delete-alert>
 <table class="table" *ngIf="!addAdmin">
     <thead>
       <tr>

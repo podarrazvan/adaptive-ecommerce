@@ -43,7 +43,7 @@ router.post("", (req, res, next) => {
   product.save().then((createdProduct) => {
     res.status(201).json({
       message: LOGS.PRODUCT.CREATED,
-      post: {
+      product: {
         ...createdProduct,
         id: createdProduct._id,
       },

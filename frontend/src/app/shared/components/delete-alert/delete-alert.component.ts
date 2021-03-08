@@ -18,7 +18,9 @@ export class DeleteAlertComponent implements OnInit, OnDestroy {
   }
 
   actionBtn(action: boolean) {
-    switch (this.itemToDelete) {
+    switch (
+      this.itemToDelete
+    ) {
       case 'product':
         this.deleteAlertService.deleteAlertProduct(action);
         break;
@@ -26,12 +28,17 @@ export class DeleteAlertComponent implements OnInit, OnDestroy {
         this.deleteAlertService.deleteAlertMessage(action);
         break;
       case 'order':
-        this.deleteAlertService.deleteAlertMessage(action);
+        this.deleteAlertService.deleteAlertOrder(action);
+        break;
+      case 'admin':
+        this.deleteAlertService.deleteAlertAdmin(action);
         break;
     }
   }
   ngOnDestroy(): void {
     this.deleteAlertService.deleteAlertProduct(null);
     this.deleteAlertService.deleteAlertMessage(null);
+    this.deleteAlertService.deleteAlertOrder(null);
+    this.deleteAlertService.deleteAlertAdmin(null);
   }
 }

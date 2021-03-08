@@ -20,4 +20,5 @@ export interface Order {
     quantity: number;
   }];
   orderNotes: string;
+  orderNumber: number;
 }
