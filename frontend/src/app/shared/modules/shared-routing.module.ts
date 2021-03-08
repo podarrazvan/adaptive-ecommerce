@@ -11,6 +11,7 @@ import { ProfileComponent } from './../../pages/profile/profile.component';
 import { AuthGuard } from 'src/app/auth/auth.guard';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { OrderStatusPageComponent } from 'src/app/pages/checkout/order-status-page/order-status-page.component';
 
 const routes: Routes = [
   {
@@ -43,6 +44,8 @@ const routes: Routes = [
   },
   { path: 'checkout', component: CheckoutComponent },
   { path: 'category/:category', component: CategoriesComponent },
+
+  { path: 'order-status/:id', component: OrderStatusPageComponent },
   {
     path: 'contact',
     loadChildren: () =>

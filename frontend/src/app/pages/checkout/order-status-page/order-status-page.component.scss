@@ -1,0 +1,66 @@
+@import "/src/app/shared/styles/border-radius";
+@import "/src/app/shared/styles/colors";
+
+.content {
+  width: 100%; 
+  margin-top: 50px;
+}
+
+.order {
+  padding: 30px;
+}
+
+.order-status {
+  min-height: 400px;
+  width: 500px;
+  margin: auto;
+  border: 2px solid $gray-80;
+  border-radius: $small-border-radius;
+  .top {
+    width: fit-content;
+    padding: 0px 20px;
+    padding-top: 10px;
+    position: relative;
+    top: -31px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    place-content: center;
+    align-items: center;
+    border: 2px solid $gray-80;
+    padding-top: 10px;
+    line-height: 50px;
+    width: 320px;
+    font-weight: 800;
+    border-radius: $huge-border-radius;
+    font-size: 18px;
+    background-color: $non-color-2;
+  }
+}
+.customer {
+  margin-top: 20px;
+  display: flex;
+}
+
+.customer-left {
+  width: 40%;
+}
+
+.adress {
+  float: right;
+  width: 40%;
+}
+
+.vl {
+  border-left: 1px solid $gray-40;
+  height: 300px;
+  margin: auto;
+}
+
+div.products {
+  max-height: 80px;
+  overflow: auto;
+  padding-bottom: 50px;
+}

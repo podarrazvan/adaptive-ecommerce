@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { OrdersService } from '../../admin/orders/orders.service';
 import { CheckoutService } from '../checkout.service';
 
@@ -13,15 +14,19 @@ export class CheckoutRightComponent {
   subtotal = 0;
   products;
   shippingPrice;
-  shippingMethods = [{"name": "Free","price":0},{"name":"15$","price":15}];
+  shippingMethods = [
+    { name: 'Free', price: 0 },
+    { name: '15$', price: 15 },
+  ];
 
   constructor(
     private fb: FormBuilder,
     private checkoutService: CheckoutService,
-    private ordersService: OrdersService
+    private ordersService: OrdersService,
+    private router: Router
   ) {
     this.products = JSON.parse(localStorage.getItem('cart'));
-    for(let product of this.products) {
+    for (let product of this.products) {
       this.total += product.price;
     }
     this.subtotal = this.total;
@@ -31,7 +36,9 @@ export class CheckoutRightComponent {
     return this.checkoutService.orderFormGroup.get('order');
   }
   get orderDetailsForm() {
-    this.shippingPrice = this.checkoutService.orderFormGroup.get('order.orderDetails').value.shipping;
+    this.shippingPrice = this.checkoutService.orderFormGroup.get(
+      'order.orderDetails'
+    ).value.shipping;
     return this.checkoutService.orderFormGroup.get('order.orderDetails');
   }
 
@@ -47,10 +54,15 @@ export class CheckoutRightComponent {
       const quantity = prod.quantity;
       this.productsFrom.push(this.createProduct(product, quantity));
     }
-    this.orderDetailsForm.patchValue({total: this.total});
+    this.orderDetailsForm.patchValue({ total: this.total });
     const date = new Date();
     this.orderDetailsForm.patchValue({ date });
-    this.ordersService.addOrder(this.checkoutForm.value);
+    this.ordersService
+      .addOrder(this.checkoutForm.value)
+      .subscribe((response) => {
+        const id = response.body.order._id;
+        this.router.navigate(['../order-status', id]);
+      });
   }
 
   public createProduct(product, quantity): FormGroup {

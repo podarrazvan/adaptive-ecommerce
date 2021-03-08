@@ -10,11 +10,10 @@ export class OrdersService {
   constructor(private http: HttpClient) {}
 
   addOrder(order: Order) {
-    this.http
-      .post(`${environment.api}/order`, order, {
+    return this.http
+      .post<{message: string, order: Order}>(`${environment.api}/order`, order, {
         observe: 'response',
-      })
-      .subscribe();
+      });      
   }
 
   updateOrder(id: string, status: string,) {
@@ -27,6 +26,10 @@ export class OrdersService {
   getOrders() {
     const user = JSON.parse(localStorage.getItem('userData'));
     return this.http.get<Order[]>(`${environment.api}/order`);
+  }
+
+  getOrder(id) {
+    return this.http.get<Order>(`${environment.api}/order/${id}`);
   }
 
   deleteOrder(id: string) {
