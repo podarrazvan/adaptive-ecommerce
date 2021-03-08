@@ -6,6 +6,7 @@ export class DeleteAlertService {
     deleteProduct = new BehaviorSubject<boolean>(null);
     deleteMessage = new BehaviorSubject<boolean>(null);
     deleteOrder = new BehaviorSubject<boolean>(null);
+    deleteAdmin = new BehaviorSubject<boolean>(null);
 
     deleteAlertProduct(newStatus) {
         this.deleteProduct.next(newStatus);
@@ -17,6 +18,10 @@ export class DeleteAlertService {
 
     deleteAlertOrder(newStatus) {
         this.deleteOrder.next(newStatus);
+    }
+
+    deleteAlertAdmin(newStatus) {
+        this.deleteAdmin.next(newStatus);
     }
     
     
