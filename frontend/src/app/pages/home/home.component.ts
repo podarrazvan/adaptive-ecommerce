@@ -12,15 +12,8 @@ export class HomeComponent {
     route: ActivatedRoute,
     private sharedDataService: SharedDataService
   ) {
-    // !SORIN - STEP 3: inainte sa se incarce componenta asta, deja am datele
-    // acum le pun unde am nevoie si facem asta O SINGURA DATA, ca e un config
     route.data.subscribe((response) => {
-      this.sharedDataService.setconfigs(response.webConfig);
-
-      // !SORIN - DACA VREI SA ACCESEZI PROPRIETATILE
-      // console.log(
-      //   this.sharedDataService.getWebsiteConfigs()
-      // );
+      this.sharedDataService.setConfigs(response.webConfig);
     });
   }
 }

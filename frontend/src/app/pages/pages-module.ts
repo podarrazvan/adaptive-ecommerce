@@ -29,8 +29,6 @@ const COMPONENTS = [
   WishlistComponent,
 ];
 
-// !SORIN STEP - 2 : tre bagat la providers , si unde e ruta nevoiasa , cu resolve si i-am pus numele webConfig
-
 @NgModule({
   declarations: [...COMPONENTS],
   imports: [

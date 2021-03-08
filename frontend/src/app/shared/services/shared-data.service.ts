@@ -15,13 +15,17 @@ export class SharedDataService implements OnDestroy {
 
   cast = this.emptyCart$.asObservable();
 
-  websiteData = {
     //! Delete this!
+    //! Delete this!
+    //! Delete this!
+    //! Delete this!
+    //! Delete this!
+    //! Delete this!
+  websiteData = {
     _id: '6039cc381b8e9dba840b9302',
-    //!
     name: 'name',
-    categories: [{name:'Phones'}],
-    coupons:[],
+    categories: [{ name: 'Phones' }],
+    coupons: [],
     brands: [
       {
         image: 'http://localhost:3000/images/1451925798-1611925797622.png',
@@ -43,14 +47,12 @@ export class SharedDataService implements OnDestroy {
       instagramImage: 'empty',
       instagramUrl: 'instagram url',
     },
-    
+
     termsOfUse: '',
     aboutUs: '',
   };
 
-  private configs = new BehaviorSubject<Configs>(
-    this.websiteData
-  );
+  private configs = new BehaviorSubject<Configs>(null);
 
   userDetails = new BehaviorSubject<User>(null);
 
@@ -60,12 +62,13 @@ export class SharedDataService implements OnDestroy {
   totalCart: number;
   mobile: boolean;
 
-  setconfigs(details: Configs) {
+  setConfigs(details: Configs) {
     this.configs.next(details);
   }
 
   getWebsiteConfigs() {
-    return this.configs.value;
+    // ! Daca faci asta nu cred ca mai e reactive aplicatia
+    return this.configs.value || this.websiteData;
   }
 
   setUserDetails(details: User) {
