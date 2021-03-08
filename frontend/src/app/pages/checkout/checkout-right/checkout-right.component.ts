@@ -10,7 +10,10 @@ import { CheckoutService } from '../checkout.service';
 })
 export class CheckoutRightComponent {
   total = 0;
+  subtotal = 0;
   products;
+  shippingPrice;
+  shippingMethods = [{"name": "Free","price":0},{"name":"15$","price":15}];
 
   constructor(
     private fb: FormBuilder,
@@ -19,14 +22,16 @@ export class CheckoutRightComponent {
   ) {
     this.products = JSON.parse(localStorage.getItem('cart'));
     for(let product of this.products) {
-      this.total += +product.quantity* product.price;
+      this.total += product.price;
     }
+    this.subtotal = this.total;
   }
 
   get checkoutForm() {
     return this.checkoutService.orderFormGroup.get('order');
   }
   get orderDetailsForm() {
+    this.shippingPrice = this.checkoutService.orderFormGroup.get('order.orderDetails').value.shipping;
     return this.checkoutService.orderFormGroup.get('order.orderDetails');
   }
 

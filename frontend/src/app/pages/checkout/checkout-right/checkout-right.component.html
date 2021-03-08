@@ -7,39 +7,29 @@
       <p>Product(s)</p>
       <p>Total</p>
     </div>
-    <div class="bottom-cart">
-      <p>iPhone 12 Pro Max x 1</p>
-      <p>$ 999</p>
+    <div class="bottom-cart" *ngFor="let product of products">
+      <p>{{product.name}} x {{product.quantity}}</p>
+      <p>$ {{product.price}}</p>
     </div>
   </div>
   <hr />
   <div class="subtotal">
     <p>Subtotal</p>
-    <p class="subtotal-value">$999</p>
+    <p class="subtotal-value">$ {{subtotal}}</p>
   </div>
   <hr />
   <div class="shipping">
     <p>Shipping</p>
     <div class="shipping-options">
-      <div class="radio">
+      <div class="radio" *ngFor="let shipping of shippingMethods">
         <input
           type="radio"
-          id="option1"
+          id="option"
           name="shipping"
-          value="free"
+          [value]="shipping.price"
           formControlName="shipping"
         />
-        <label for="option1">Free</label>
-      </div>
-      <div>
-        <input
-          type="radio"
-          id="option2"
-          name="shipping"
-          value="5$"
-          formControlName="shipping"
-        />
-        <label for="option2">5$</label>
+        <label for="option">{{shipping.name}}</label>
       </div>
     </div>
   </div>
@@ -47,7 +37,7 @@
   <div class="total">
     <div class="total-top">
       <p>Total</p>
-      <h2>$ {{total}}</h2>
+      <h2>$ {{total+shippingPrice}}</h2>
     </div>
   </div>
   <hr />
