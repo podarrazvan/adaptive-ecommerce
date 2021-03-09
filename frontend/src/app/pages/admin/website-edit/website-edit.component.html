@@ -1,9 +1,9 @@
-<ng-container *ngIf="configs">
+<ng-container *ngIf="sharedDataService.layout$ | async as layout">
   <div class="website-edit-box">
     <div *ngIf="showEditTermsOfUse">
       <app-page-edit
         (close)="closeTermsOfUseEdit()"
-        [content]="this.configs.termsOfUse"
+        [content]="layout.termsOfUse"
         pageName="terms-of-use"
       ></app-page-edit>
     </div>
@@ -11,7 +11,7 @@
     <div *ngIf="showEditAboutUs">
       <app-page-edit
         (close)="closeEditAboutUs()"
-        [content]="this.configs.aboutUs"
+        [content]="layout.aboutUs"
         pageName="about-us"
       ></app-page-edit>
     </div>
@@ -29,7 +29,7 @@
       <h2 class="left">Categories</h2>
       <div class="center">
         <div
-          *ngFor="let category of configs.categories; let i = index"
+          *ngFor="let category of layout.categories; let i = index"
           class="simple-btn"
         >
           {{ category.name }}
@@ -43,7 +43,7 @@
       <h2 class="left">Brands</h2>
       <div class="center">
         <div
-          *ngFor="let brand of configs.brands; let i = index"
+          *ngFor="let brand of layout.brands; let i = index"
           class="simple-btn"
         >
           {{ brand.name }}
@@ -66,18 +66,21 @@
     <hr />
 
     <!--Shipping-->
-    <div class="edit-option">
+    <div *ngIf="(sharedDataService.layout$ | async).shipping as shippings" class="edit-option">
       <h2 class="left">Shipping</h2>
       <div
         class="simple-btn"
-        *ngFor="let shipping of configs.shipping; let i = index"
+        *ngFor="let shipping of shippings ; let i = index"
       >
         {{ shipping.name }}
       </div>
       <app-shipping-edit
-        [shippings]="configs.shipping"
-        (newShippings)="(configs.shipping)"
+        [shippings]="shippings"
       ></app-shipping-edit>
+
+      <!--  !! nu are niciologica -->
+      <!-- (newShippings)="(shipping)" -->
+
     </div>
     <hr />
 

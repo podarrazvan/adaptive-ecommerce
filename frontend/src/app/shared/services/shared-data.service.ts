@@ -1,74 +1,44 @@
+import { environment } from './../../../environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { Layout } from './../interfaces/website-details';
 import { Injectable, OnDestroy } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Product } from '../interfaces/product.interface';
 import { User } from '../interfaces/user.interface';
-import { Configs } from '../interfaces/website-details';
+
+interface Brand {
+  name: string;
+  img: string;
+}
 
 @Injectable()
 export class SharedDataService implements OnDestroy {
-  brand$ = new BehaviorSubject<{ name: string; img: string }>({
-    name: '',
-    img: '',
-  });
-  emptyCart$ = new BehaviorSubject<boolean>(true);
-  isAuthenticated$ = new BehaviorSubject<boolean>(false);
+  private brandSubject$ = new BehaviorSubject<Brand>(null);
+  public brand$ = this.brandSubject$.asObservable();
 
-  cast = this.emptyCart$.asObservable();
+  private emptyCartSubject$ = new BehaviorSubject<boolean>(true);
+  private emptyCart$ = this.emptyCartSubject$.asObservable();
 
-    //! Delete this!
-    //! Delete this!
-    //! Delete this!
-    //! Delete this!
-    //! Delete this!
-    //! Delete this!
-  websiteData = {
-    _id: '6039cc381b8e9dba840b9302',
-    name: 'name',
-    categories: [{ name: 'Phones' }],
-    coupons: [],
-    brands: [
-      {
-        image: 'http://localhost:3000/images/1451925798-1611925797622.png',
-        name: 'Apple',
-      },
-    ],
-    shipping: [],
-    footer: {
-      adress: 'adress',
-      phone: 'phone',
-      email: 'email',
-      program: 'program',
-      facebookImage: 'empty',
-      facebookUrl: 'facebook url',
-      twitterImage: 'empty',
-      twitterUrl: 'twitter url',
-      youtubeImage: 'empty',
-      youtubeUrl: 'youtube url',
-      instagramImage: 'empty',
-      instagramUrl: 'instagram url',
-    },
+  private layoutSubject$ = new BehaviorSubject<Layout>(null);
+  public layout$: Observable<Layout> = this.layoutSubject$.asObservable();
 
-    termsOfUse: '',
-    aboutUs: '',
-  };
+  userDetails = new BehaviorSubject<User>(null); // !! maybe UserDetails interface if is different than User
 
-  private configs = new BehaviorSubject<Configs>(null);
-
-  userDetails = new BehaviorSubject<User>(null);
-
+  // !! fa-le si pe astea cum e mai sus
   productEdit: boolean;
   product: Product;
   unreadMessages: number;
   totalCart: number;
   mobile: boolean;
 
-  setConfigs(details: Configs) {
-    this.configs.next(details);
+  constructor(private http: HttpClient) {}
+
+  getLayout() {
+    return this.http.get<Layout>(`${environment.api}/website`);
   }
 
-  getWebsiteConfigs() {
-    // ! Daca faci asta nu cred ca mai e reactive aplicatia
-    return this.configs.value || this.websiteData;
+  setLayout(layout: Layout) {
+    this.layoutSubject$.next(layout);
   }
 
   setUserDetails(details: User) {
@@ -87,15 +57,11 @@ export class SharedDataService implements OnDestroy {
     this.totalCart = null;
   }
 
-  updateCart(newStatus) {
-    this.emptyCart$.next(newStatus);
-  }
-
-  updateAuth(newStatus) {
-    this.isAuthenticated$.next(newStatus);
+  updateCart(newStatus: boolean) {
+    this.emptyCartSubject$.next(newStatus);
   }
 
   updateBrand(newBrand) {
-    this.brand$.next(newBrand);
+    this.brandSubject$.next(newBrand);
   }
 }

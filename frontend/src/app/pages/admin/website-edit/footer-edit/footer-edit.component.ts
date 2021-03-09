@@ -19,20 +19,17 @@ export class FooterEditComponent {
   twitterImagePath: string;
 
   loading = true;
-  footer: Footer;
 
   constructor(
     private imagesService: ImagesService,
     private adminService: AdminService,
-    private sharedDataService: SharedDataService,
+    public sharedDataService: SharedDataService,
     private configsService: ConfigsService
   ) {
-    const response = this.sharedDataService.getWebsiteConfigs();
-    this.footer = response.footer;
   }
 
   get footerForm() {
-    return this.adminService.adminFormGroup.get('configs.footer');
+    return this.adminService.adminFormGroup.get(['configs', 'footer']);
   }
 
   onClose() {

@@ -1,8 +1,6 @@
-import { WebConfigResolver } from './../shared/resolvers/web-config.resolver';
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { SharedModule } from '../shared/modules/shared.modules';
+import { SharedModule } from '../shared/modules/shared.module';
 import { AboutUsComponent } from './additional-pages/about-us/about-us.component';
 import { PageNotFoundComponent } from './additional-pages/page-not-found/page-not-found.component';
 import { TermsOfUseComponent } from './additional-pages/terms-of-use/terms-of-use.component';
@@ -36,16 +34,12 @@ const COMPONENTS = [
       {
         path: '',
         component: HomeComponent,
-        resolve: {
-          webConfig: WebConfigResolver,
-        },
       },
     ]),
     SharedModule,
     CartModule,
     HomeModules,
   ],
-  providers: [WebConfigResolver],
   exports: [RouterModule],
 })
 export class PagesModule {}

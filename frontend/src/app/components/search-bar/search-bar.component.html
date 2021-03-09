@@ -10,5 +10,5 @@
 
 <mat-menu #cat="matMenu">
   <button  mat-menu-item (click)="searchInCategories('all')">All categories</button>
-  <button  mat-menu-item *ngFor="let category of categories" (click)="searchInCategories(category)">{{category}}</button>
+  <button  mat-menu-item *ngFor="let category of (sharedDataService.layout$ | async).categories" (click)="searchInCategories(category)">{{ category }}</button>
 </mat-menu>

@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AuthComponent } from './auth.component';
 import { CommonModule } from '@angular/common';
-import { SharedModule } from '../shared/modules/shared.modules';
+import { SharedModule } from '../shared/modules/shared.module';
 
-@NgModule({ 
+@NgModule({
   declarations: [
     AuthComponent
 ],
-  imports: [ 
+  imports: [
     CommonModule,
     SharedModule,
     RouterModule.forChild([{ path: 'auth', component: AuthComponent }])

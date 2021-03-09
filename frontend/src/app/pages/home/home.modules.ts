@@ -19,7 +19,7 @@ import { ShopByBrandComponent } from './shop-by-brand/shop-by-brand.component';
 import { HomeYouMayLikeComponent } from './home-you-may-like/home-you-may-like.component';
 import { HomeYouMayLikeTopComponent } from './home-you-may-like/home-you-may-like-top/home-you-may-like-top.component';
 import { HomeYouMayLikeProductsComponent } from './home-you-may-like/home-you-may-like-products/home-you-may-like-products.component';
-import { SharedModule } from '../../shared/modules/shared.modules';
+import { SharedModule } from '../../shared/modules/shared.module';
 
 const COMPONENTS = [
   HomeMainCategoriesComponent,

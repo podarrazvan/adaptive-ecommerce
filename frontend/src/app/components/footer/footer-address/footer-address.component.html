@@ -1,4 +1,4 @@
-<div class="left" *ngIf="footer != null">
+<div class="left" *ngIf="(sharedDataService.layout$ | async).footer as footer">
   <div class="info">
     <mat-icon> location_on</mat-icon>
     <p>{{ footer.adress }}</p>

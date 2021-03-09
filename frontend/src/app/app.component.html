@@ -1,12 +1,12 @@
-<div class="page">
-    <app-navbar></app-navbar>
-    <div class="top">
-        <app-website-top></app-website-top>
-        <app-top-bar></app-top-bar>
-    </div>
-    <div class="content">
-        <router-outlet></router-outlet>
-        <app-bottom-products></app-bottom-products>
-    </div>
-    <app-footer></app-footer>
+<div *ngIf="sharedDataService.layout$ | async" class="page">
+  <app-navbar></app-navbar>
+  <div class="top">
+    <app-website-top></app-website-top>
+    <app-top-bar></app-top-bar>
+  </div>
+  <div class="content">
+    <router-outlet></router-outlet>
+    <app-bottom-products></app-bottom-products>
+  </div>
+  <app-footer></app-footer>
 </div>
