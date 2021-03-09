@@ -6,8 +6,9 @@ export class User {
     public categories: string[],
     public history: string[],
     public favorites: string[],
+    public isAdmin: boolean,
     private _token: string,
-    private _tokenExpirationDate?: Date
+    private _tokenExpirationDate?: Date,
   ) { }
 
   get token() {

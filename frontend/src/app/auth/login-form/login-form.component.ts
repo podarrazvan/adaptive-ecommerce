@@ -21,6 +21,9 @@ export class LoginFormComponent {
   showNewPassword = false;
   email;
   code;
+  infoMessage: string;
+  success: boolean;
+  showInfo = false;
 
   constructor(
     private authService: AuthService,
@@ -34,19 +37,7 @@ export class LoginFormComponent {
     //   this.error = true;
     // }
     const password = form.value.password;
-    if (this.showNewPassword) {
-      const confirmPassword = form.value.confirmPassword;
-      if (password === confirmPassword) {
-        this.usersService
-          .updatePassword(this.email, this.code, password)
-          .subscribe((response) => {
-            alert('Password updated!');
-            this.router.navigate(['../']);
-          });
-      } else {
-        alert("Passwords don't match");
-      }
-    }
+
     if (this.showResetPasswordCode) {
       this.code = form.value.code;
       this.usersService
@@ -69,6 +60,27 @@ export class LoginFormComponent {
         this.showResetPasswordCode = true;
       });
     }
+
+    if (this.showNewPassword) {
+      const confirmPassword = form.value.confirmPassword;
+      if (password === confirmPassword) {
+        this.usersService
+          .updatePassword(this.email, this.code, password)
+          .subscribe((response) => {
+            this.infoMessage = 'Password updated!';
+            this.success = true;
+            this.showInfo = true;
+            setTimeout(() => {
+              this.router.navigate(['../']);
+            }, 5000);
+          });
+      } else {
+        this.infoMessage = "Passwords don't match";
+        this.success = false;
+        this.showInfo = true;
+      }
+    }
+
     if (
       !this.resetPasswordMode &&
       !this.showResetPasswordCode &&
@@ -88,8 +100,10 @@ export class LoginFormComponent {
           form.reset();
         },
         (errorMessage) => {
-          // this.error = errorMessage;
-          // this.isLoading = false;
+          this.infoMessage = ' Wrong email or password!';
+          this.showInfo = true;
+          this.success = false;
+          this.isLoading = false;
         }
       );
     }

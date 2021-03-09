@@ -1,0 +1,21 @@
+@import "/src/app/shared/styles/colors";
+@import "/src/app/shared/styles/border-radius";
+
+.alert {
+  width: 100%;
+  height: 100px;
+  margin-bottom: 2px;
+  display: flex;
+  place-content: center;
+  align-items: center;
+  background-color: $main-red;
+  color: white;
+  border-radius: $small-border-radius;
+  box-shadow: 0 7px 20px 0 rgba(36, 41, 66, 0.15);
+  p {
+    font-weight: bold;
+  }
+}
+.success {
+  background-color: yellowgreen;
+}

@@ -1,13 +1,14 @@
 export interface AuthResponseData {
+  id: string;
   token: string;
   email: string;
   password: string;
   refreshToken: string;
   expiresIn: string;
-  id: string;
   history: string[];
   categories: string[];
   favorites: string[];
+  isAdmin: boolean;
 }
 
 export interface NewUserDto {
@@ -17,14 +18,16 @@ export interface NewUserDto {
 }
 
 export interface AuthUserInfoDto {
-  email: string;
-  password: string;
   id: string;
   token: string;
+  email: string;
+  password: string;
+  refreshToken?: string;
   expiresIn?: string;
   history: string[];
   categories: string[];
   favorites: string[];
+  isAdmin: boolean;
 }
 
 // export interface UpdateUser {
@@ -46,6 +49,7 @@ export interface Logout {
   categories: string[];
   favorites: string[];
   token: string;
+  isAdmin: boolean;
   _tokenExpirationDate: string;
 }
 
@@ -58,5 +62,6 @@ export interface AutoLogout {
   favorites: string[];
   _token: string;
   _tokenExpirationDate: string;
+  isAdmin: boolean;
 }
 //!
