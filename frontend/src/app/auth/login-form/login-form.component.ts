@@ -14,8 +14,6 @@ import { UsersService } from 'src/app/pages/admin/users/user.service';
 })
 export class LoginFormComponent {
   isLoading = false;
-  error = false;
-  auth;
   resetPasswordMode = false;
   showResetPasswordCode = false;
   showNewPassword = false;

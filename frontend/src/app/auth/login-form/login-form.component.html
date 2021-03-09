@@ -1,7 +1,6 @@
 <app-info-alert [message]="infoMessage"[success]="success" *ngIf="showInfo"></app-info-alert>
 <div class="login">
   <h3 class="card-top" [class.cardTop]="resetPasswordMode"> {{resetPasswordMode? "Password reset":"Login"}} </h3>
-  <h1 *ngIf="error" style="color:red">Your email must be wrong...</h1>
   <form class="auth-form" #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" *ngIf="!isLoading">
     <div class="form-group">
       <ng-container *ngIf="!showResetPasswordCode && !showNewPassword">
@@ -14,8 +13,10 @@
           name="email"
           required
           email
+          #email="ngModel"
           placeholder="email"
         />
+        <span class="help-blok" *ngIf="!email.valid && email.touched" style="color:red">Please enter a valid email adress!</span>
       </ng-container>
       <ng-container *ngIf="showResetPasswordCode">
         <label for="code">Code</label>
@@ -42,7 +43,10 @@
         required
         minlength="6"
         placeholder="password"
+        password
+        #password="ngModel"
       />
+      <span class="help-blok" *ngIf="!password.valid && password.touched" style="color:red">Password too short!</span>
     </ng-container>
     <ng-container class="form-group" *ngIf="showNewPassword">
       <label for="confirmPassword">Confirm password <span class="required-field"> *</span></label>
@@ -62,6 +66,7 @@
     </div>
     <div class="login-btn">
       <button
+        [disabled]="!authForm.valid"
         class="white-btn"
         type="submit"
        
