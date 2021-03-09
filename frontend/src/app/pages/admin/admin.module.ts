@@ -1,10 +1,12 @@
+import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 import { DeleteAlertComponent } from './../../shared/components/delete-alert/delete-alert.component';
-import { SharedModule } from './../../shared/modules/shared.modules';
+import { SharedModule } from '../../shared/modules/shared.module';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { AddProductComponent } from './add-product/add-product.component';
 import { DescriptionStylesComponent } from './add-product/description-styles/description-styles.component';
@@ -54,19 +56,26 @@ const COMPONENTS = [
   DiscountModalComponent,
   PageEditComponent,
   NameEditComponent,
-  AdminsComponent
+  AdminsComponent,
+];
+
+export const MODULES = [
+  BrowserModule,
+  CommonModule,
+  SharedModule,
+  // !!! MOVE ALL MATERIAL MODULES TO A SEPARATE MODULE . FOR EX. angular-material.module.ts, import and export that in SharedModule
+  MatFormFieldModule,
+  MatCheckboxModule,
+  MatInputModule,
 ];
 
 @NgModule({
   declarations: [...COMPONENTS, AdminComponent, CategoriesEditComponent],
   imports: [
-    SharedModule,
-    MatFormFieldModule,
-    MatCheckboxModule,
-    MatInputModule,
+    ...MODULES,
     RouterModule.forChild([
       {
-        path:'admin',
+        path: 'admin',
         component: AdminComponent,
         // canActivate: [AuthGuard],
         children: [
@@ -78,7 +87,7 @@ const COMPONENTS = [
           { path: 'website-edit', component: WebsiteEditComponent },
           { path: 'users', component: UsersComponent },
           { path: 'admins', component: AdminsComponent },
-        ]
+        ],
       },
     ]),
   ],

@@ -11,17 +11,13 @@ import { SharedDataService } from '../../shared/services/shared-data.service';
 })
 export class SearchBarComponent {
   searchBar: FormGroup;
-
-  categories: Categories[] = [];
-
   selectedCategory: Categories;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private sharedDataService: SharedDataService
+    public sharedDataService: SharedDataService
   ) {
-    this.categories = this.sharedDataService.getWebsiteConfigs().categories;
     this.buildFormGroup();
   }
 

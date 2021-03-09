@@ -1,10 +1,12 @@
-import { WishlistItemComponent } from './../../pages/wishlist/wishlist-item/wishlist-item.component';
+import { ProductsService } from './../../pages/admin/products/products.service';
+import { DiscountService } from '../services/database/discount.service';
+import { WishlistItemComponent } from '../../pages/wishlist/wishlist-item/wishlist-item.component';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
-import {MatMenuModule} from '@angular/material/menu';
+import { MatMenuModule } from '@angular/material/menu';
 
 import { DeleteAlertService } from '../components/delete-alert/delete-alert.service';
 import { FooterComponent } from '../../components/footer/footer.component';
@@ -38,53 +40,55 @@ import { PercentagePipe } from '../pipes/percentage.pipe';
 import { CountdownModule } from 'ngx-countdown';
 import { CountdownComponent } from '../components/countdown/countdown.component';
 
-
 const COMPONENTS = [
-    NavbarComponent,
-    WebsiteTopComponent,
-    TopMostSearchedComponent,
-    TopActionsComponent,
-    TopBarComponent,
-    FooterComponent,
-    GetProductComponent,
-    ShortenPipe,
-    SignupFormComponent,
-    LoginFormComponent,
-    RatingComponent,
-    GetRecommendedProductComponent,
-    SearchBarComponent,
-    HorizontalProductComponent,
-    TinyMCEComponent,
-    BottomProductsComponent,
-    SimpleHorizontalProductComponent,
-    FooterAddressComponent,
-    FooterQuickMenuComponent,
-    CustomerServiceComponent,
-    FooterFollowUsComponent,
-    WishlistItemComponent,
-    PercentagePipe,
-    NewPricePipe,
-    CountdownComponent,
-]
+  NavbarComponent,
+  WebsiteTopComponent,
+  TopMostSearchedComponent,
+  TopActionsComponent,
+  TopBarComponent,
+  FooterComponent,
+  GetProductComponent,
+  ShortenPipe,
+  SignupFormComponent,
+  LoginFormComponent,
+  RatingComponent,
+  GetRecommendedProductComponent,
+  SearchBarComponent,
+  HorizontalProductComponent,
+  TinyMCEComponent,
+  BottomProductsComponent,
+  SimpleHorizontalProductComponent,
+  FooterAddressComponent,
+  FooterQuickMenuComponent,
+  CustomerServiceComponent,
+  FooterFollowUsComponent,
+  WishlistItemComponent,
+  PercentagePipe,
+  NewPricePipe,
+  CountdownComponent,
+];
 
 const MODULES = [
-  MatIconModule,
-  RouterModule,
+  CommonModule,
   FormsModule,
   ReactiveFormsModule,
-  CommonModule,
+  RouterModule,
   EditorModule,
   MatMenuModule,
-  CountdownModule
-]
+  MatIconModule,
+  CountdownModule,
+];
 @NgModule({
-    declarations: [
-      ...COMPONENTS
-    ],
-    imports: [
-     ...MODULES
-    ],
-    providers: [ConfigsService,SharedDataService, DeleteAlertService,StatisticsService],
-    exports: [...COMPONENTS,...MODULES]
-  })
-  export class SharedModule { }
+  declarations: [...COMPONENTS],
+  imports: [...MODULES],
+  providers: [
+    ConfigsService,
+    SharedDataService,
+    DeleteAlertService,
+    StatisticsService,
+    DiscountService,
+    ProductsService
+  ],
+  exports: [...COMPONENTS, ...MODULES],
+})
+export class SharedModule {}

@@ -13,6 +13,7 @@ import { ConfigsService } from 'src/app/shared/services/database/configs.sevice'
 })
 export class AdminComponent {
   nothingSelected = true;
+
   constructor(
     private activeRouter: ActivatedRoute,
     private configsService: ConfigsService,
@@ -21,11 +22,14 @@ export class AdminComponent {
   ) {
     this.adminService.adminFormGroup = buildAdminFormGroup();
     this.adminService.productFormGroup = buildProductFormGroup();
-    const configs = this.sharedDataService.getWebsiteConfigs();
-    if (configs._id === undefined) {
-      this.configsService.createconfigs();
-    }
+
+    // !! nuj ce face asta
+    // const configs = this.sharedDataService.getWebsiteConfigs();
+    // if (configs._id === undefined) {
+    //   this.configsService.createconfigs();
+    // }
   }
+
   //TODO use observabile!
   ngDoCheck(): void {
     this.checkUrl();

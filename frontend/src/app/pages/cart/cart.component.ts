@@ -16,7 +16,7 @@ export class CartComponent implements OnInit, DoCheck {
     private sharedDataService: SharedDataService,
     private router: Router
   ) {}
- 
+
   cart;
   showCart = false;
 
@@ -29,7 +29,7 @@ export class CartComponent implements OnInit, DoCheck {
 
   ngOnInit(): void {
     this.mobile = this.sharedDataService.mobile;
-    const products = JSON.parse(localStorage.getItem('cart'));
+    const products = JSON.parse(localStorage.getItem('cart')) || [];
     for (let product of products) {
       const key = product.id;
       const quantity = product.quantity;

@@ -1,4 +1,4 @@
-<div class="brand-card">
+<div *ngIf="(sharedDataService.brand$ | async) as brand" class="brand-card">
     <img [src]="brand.img" alt="">
     <h5>All the Lorem Ipsum generators on the Internet
         tend to repeat predefined chunks as necessary, making this the first true generator on the Internetandful

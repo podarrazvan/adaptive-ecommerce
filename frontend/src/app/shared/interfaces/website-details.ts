@@ -2,14 +2,14 @@ import { Brand } from './brand.interface';
 import { Categories } from './categories.interface';
 import { Shipping } from './shipping.interface';
 
-export interface Configs {
+export interface Layout {
   _id?: string;
   name: string;
   categories: Categories[];
   shipping: Shipping[];
   brands: Brand[];
   footer: {
-    adress: string; 
+    adress: string;
     phone: string;
     email: string;
     facebookImage: string;
@@ -21,7 +21,7 @@ export interface Configs {
     instagramImage: string;
     instagramUrl: string;
   };
-  
+
   aboutUs: string;
   termsOfUse: string;
 }

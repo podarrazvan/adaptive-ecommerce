@@ -1,5 +1,3 @@
-import { SharedDataService } from 'src/app/shared/services/shared-data.service';
-import { ActivatedRoute } from '@angular/router';
 import { Component } from '@angular/core';
 
 @Component({
@@ -8,12 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
-  constructor(
-    route: ActivatedRoute,
-    private sharedDataService: SharedDataService
-  ) {
-    route.data.subscribe((response) => {
-      this.sharedDataService.setConfigs(response.webConfig);
-    });
-  }
+
 }

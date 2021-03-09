@@ -7,9 +7,6 @@ import { SharedDataService } from 'src/app/shared/services/shared-data.service';
   styleUrls: ['./home-main-categories.component.scss'],
 })
 export class HomeMainCategoriesComponent {
-  categories;
-  constructor(private sharedDataService: SharedDataService) {
-    const data = this.sharedDataService.getWebsiteConfigs();
-    this.categories = data.categories;
+  constructor(public sharedDataService: SharedDataService) {
   }
 }

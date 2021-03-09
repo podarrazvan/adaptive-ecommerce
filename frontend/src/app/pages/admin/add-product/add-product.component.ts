@@ -34,7 +34,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
   onEditMode: boolean;
 
   constructor(
-    private sharedDataService: SharedDataService,
+    public sharedDataService: SharedDataService,
     private productsService: ProductsService,
     private imagesService: ImagesService,
     private adminService: AdminService
@@ -46,9 +46,6 @@ export class AddProductComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // this.buildFormGroup();
-    const response = this.sharedDataService.getWebsiteConfigs();
-    this.categories = response.categories;
-    this.brands = response.brands;
   }
 
   onSubmit() {

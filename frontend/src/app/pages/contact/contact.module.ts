@@ -4,7 +4,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { RouterModule } from '@angular/router';
 import { EditorModule } from '@tinymce/tinymce-angular';
-import { SharedModule } from '../../shared/modules/shared.modules';
+import { SharedModule } from '../../shared/modules/shared.module';
 import { ContactComponent } from './contact.component';
 
 @NgModule({

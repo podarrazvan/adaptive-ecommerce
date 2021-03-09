@@ -10,16 +10,13 @@ import { AdminService } from '../../admin.service';
 })
 export class NameEditComponent {
   editName = false;
-  name;
   configs;
 
   constructor(
     private adminService: AdminService,
     private configsService: ConfigsService,
-    private sharedDataService: SharedDataService
+    public sharedDataService: SharedDataService
   ) {
-    this.configs = this.sharedDataService.getWebsiteConfigs();
-    this.name = this.configs.name;
   }
 
   get formName() {

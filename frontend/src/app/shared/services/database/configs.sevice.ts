@@ -1,7 +1,7 @@
+import { map } from 'rxjs/operators';
 import { environment } from '../../../../environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Configs } from '../../interfaces/website-details';
 import { SharedDataService } from '../shared-data.service';
 import { Coupon } from '../../interfaces/coupon.interface';
 
@@ -9,39 +9,36 @@ import { Coupon } from '../../interfaces/coupon.interface';
 export class ConfigsService {
   categories: string[];
   category;
-  
+
   constructor(
     private http: HttpClient,
     private sharedDataService: SharedDataService
   ) {}
 
   createconfigs() {
-    const configs = this.sharedDataService.getWebsiteConfigs();
+    // !!! aveai configs aici
     this.http
-      .post(`${environment.api}/website`, configs)
+      .post(`${environment.api}/website`, null)
       .subscribe(() => location.reload());
   }
 
   updateWebsite(sectionName: string, value) {
     const data = { data: value };
-    const id = this.sharedDataService.getWebsiteConfigs()._id;
+    const id = this.sharedDataService.layout$.pipe(map(layout => layout._id));
     this.http
       .put(`${environment.api}/website/${id}/${sectionName}`, data)
       .subscribe();
   }
 
-  getconfigs() {
-    return this.http.get<Configs>(
-      `${environment.api}/website`
-    );
-  }
+
 
   getCoupons() {
-    return this.http.get<Coupon[]>(`${environment.api}/coupons`);      
+    return this.http.get<Coupon[]>(`${environment.api}/coupons`);
   }
 
-  editPages(content: string, page: string) {
-    const id = this.sharedDataService.getWebsiteConfigs()._id;
+  async editPages(content: string, page: string) {
+    // !!! nu stiu daca asta e cea mai buna solutie
+    const id = await this.sharedDataService.layout$.pipe(map(layout => layout._id)).toPromise();
     const pageContent = { content };
     this.http
       .put(`${environment.api}/pages/${page}/${id}`, pageContent)
@@ -54,5 +51,5 @@ export class ConfigsService {
     );
   }
 
-  
+
 }

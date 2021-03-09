@@ -1,32 +1,35 @@
+import { SharedDataService } from 'src/app/shared/services/shared-data.service';
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { AuthService } from './auth/auth.service';
-import { SharedDataService } from './shared/services/shared-data.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  providers: [SharedDataService, AuthService],
 })
 export class AppComponent implements OnInit {
-  title = 'ecommerce';
-
   constructor(
-    private sharedData: SharedDataService,
+    public sharedDataService: SharedDataService,
     private authService: AuthService,
-    private router: Router,
+    private router: Router
   ) {}
 
   async ngOnInit() {
     this.router.events.subscribe((evt) => {
-      if(!(evt instanceof NavigationEnd)) {
+      if (!(evt instanceof NavigationEnd)) {
         return;
-      } 
-      window.scrollTo(0,0);
+      }
+      window.scrollTo(0, 0);
     });
-    
+
+    this.sharedDataService.setLayout(
+      await this.sharedDataService.getLayout().toPromise()
+    );
+
     if (JSON.parse(localStorage.getItem('userData')) != null) {
-      this.sharedData.setUserDetails(
+      this.sharedDataService.setUserDetails(
         JSON.parse(localStorage.getItem('userData'))
       );
     } else {
@@ -37,7 +40,7 @@ export class AppComponent implements OnInit {
         categories: [],
         lastVisit: date,
       };
-      this.sharedData.setUserDetails(user);
+      this.sharedDataService.setUserDetails(user);
     }
     this.authService.autoLogin();
   }

@@ -9,9 +9,6 @@ import { buildOrderFormGroup } from './order.form-builder';
 })
 export class CheckoutComponent {
   constructor(private checkoutService: CheckoutService){
-     // if (this.sharedDataService.totalCart == null) {
-    //   this.router.navigate(['../cart']);
-    // }
     this.checkoutService.orderFormGroup = buildOrderFormGroup();
   }
 

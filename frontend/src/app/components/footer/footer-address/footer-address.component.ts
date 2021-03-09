@@ -7,17 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./footer-address.component.scss'],
 })
 export class FooterAddressComponent {
-  footer: Footer;
-
-  constructor(private sharedDataService: SharedDataService) {
-    const response = this.sharedDataService.getWebsiteConfigs();
-    const { adress, phone, email } = response.footer;
-    this.footer = { adress, phone, email };
-  }
-}
-
-interface Footer {
-  adress: string;
-  phone: string;
-  email: string;
+  constructor(public sharedDataService: SharedDataService) {}
 }
