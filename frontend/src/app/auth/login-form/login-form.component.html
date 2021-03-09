@@ -46,7 +46,7 @@
         password
         #password="ngModel"
       />
-      <span class="help-blok" *ngIf="!password.valid && password.touched" style="color:red">Password too short!</span>
+      <span class="help-blok" *ngIf="!password.valid && password.touched" style="color:red">Password is too short!</span>
     </ng-container>
     <ng-container class="form-group" *ngIf="showNewPassword">
       <label for="confirmPassword">Confirm password <span class="required-field"> *</span></label>
@@ -59,7 +59,10 @@
         required
         minlength="6"
         placeholder="confirm password"
+        confirmPassword
+        #confirmPassword="ngModel"
       />
+      <span class="help-blok" *ngIf="!confirmPassword.valid && confirmPassword.touched" style="color:red">Password is too short!</span>
     </ng-container>
     <div class="form-group">
       <a class="password-reset" *ngIf="!resetPasswordMode" (click)="resetPasswordMode = true">Oh, no... I forgot my password! :(</a>

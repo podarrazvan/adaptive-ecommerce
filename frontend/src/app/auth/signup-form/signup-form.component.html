@@ -7,7 +7,9 @@
     *ngIf="!isLoading"
   >
     <div class="form-group">
-      <label for="username">Username</label>
+      <label for="username"
+        >Username <span class="required-field"> *</span></label
+      >
       <input
         type="text"
         id="username"
@@ -15,10 +17,17 @@
         ngModel
         name="username"
         required
-        email
+        username
+        #username="ngModel"
         placeholder="username"
       />
     </div>
+    <span
+      class="help-blok"
+      *ngIf="!username.valid && username.touched"
+      style="color: red"
+      >Please enter username</span
+    >
     <div class="form-group">
       <label for="email">E-Mail <span class="required-field"> *</span></label>
       <input
@@ -29,8 +38,15 @@
         name="email"
         required
         email
+        #email="ngModel"
         placeholder="email"
       />
+      <span
+        class="help-blok"
+        *ngIf="!email.valid && email.touched"
+        style="color: red"
+        >Please enter a valid email adress!</span
+      >
     </div>
     <div class="form-group">
       <label for="password"
@@ -45,7 +61,15 @@
         required
         minlength="6"
         placeholder="password"
+        password
+        #password="ngModel"
       />
+      <span
+        class="help-blok"
+        *ngIf="!password.valid && password.touched"
+        style="color: red"
+        >Password is too short!</span
+      >
     </div>
     <div class="form-group">
       <label for="password2"
@@ -60,10 +84,18 @@
         required
         minlength="6"
         placeholder="verify password"
+        confirmPassword
+        #confirmPassword="ngModel"
       />
+      <span
+        class="help-blok"
+        *ngIf="!confirmPassword.valid && confirmPassword.touched"
+        style="color: red"
+        >Password is too short!</span
+      >
     </div>
     <div class="signup-btn">
-      <button class="white-btn" type="submit">
+      <button class="white-btn" type="submit" [disabled]="!authForm.valid">
         {{ addAdmin ? "Add admin" : "Sign Up" }}
       </button>
     </div>
