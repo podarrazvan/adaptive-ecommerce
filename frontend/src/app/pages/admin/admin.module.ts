@@ -29,6 +29,7 @@ import { DiscountModalComponent } from './products/discount-modal/discount-modal
 import { PageEditComponent } from './website-edit/page-edit/page-edit.component';
 import { NameEditComponent } from './website-edit/name-edit/name-edit.component';
 import { AdminsComponent } from './admins/admins.component';
+import { AdminGuard } from 'src/app/auth/admin.guard';
 
 const COMPONENTS = [
   AddProductComponent,
@@ -68,7 +69,7 @@ const COMPONENTS = [
       {
         path:'admin',
         component: AdminComponent,
-        // canActivate: [AuthGuard],
+        canActivate: [AdminGuard],
         children: [
           { path: 'add-product', component: AddProductComponent },
           { path: 'orders', component: OrdersComponent },

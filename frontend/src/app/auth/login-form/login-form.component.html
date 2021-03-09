@@ -1,3 +1,4 @@
+<app-info-alert [message]="infoMessage"[success]="success" *ngIf="showInfo"></app-info-alert>
 <div class="login">
   <h3 class="card-top" [class.cardTop]="resetPasswordMode"> {{resetPasswordMode? "Password reset":"Login"}} </h3>
   <h1 *ngIf="error" style="color:red">Your email must be wrong...</h1>

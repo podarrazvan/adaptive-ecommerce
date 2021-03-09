@@ -78,6 +78,7 @@ export class AuthService {
       favorites,
       _token,
       _tokenExpirationDate,
+      isAdmin
     } = userData;
 
     const loadedUser = new User(
@@ -87,6 +88,7 @@ export class AuthService {
       categories,
       history,
       favorites,
+      isAdmin,
       _token,
       new Date(_tokenExpirationDate)
     );
@@ -108,6 +110,7 @@ export class AuthService {
       history,
       categories,
       favorites,
+      isAdmin,
       token,
       expiresIn,
     } = authUserInfo;
@@ -119,6 +122,7 @@ export class AuthService {
       history,
       categories,
       favorites,
+      isAdmin,
       token,
       expirationDate
     );
@@ -152,6 +156,7 @@ export class AuthService {
       history,
       categories,
       favorites,
+      isAdmin,
       token,
     } = updateUser;
     const user = new User(
@@ -161,6 +166,7 @@ export class AuthService {
       history,
       categories,
       favorites,
+      isAdmin,
       token
     );
     this.http.put(`${environment.api}/users/update`, user).subscribe();
