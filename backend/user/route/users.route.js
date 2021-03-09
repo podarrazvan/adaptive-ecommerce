@@ -88,12 +88,13 @@ router.post("/login", (req, res, next) => {
       res.status(200).json({
         token: token,
         expiresIn: 3600,
-        userId: getUser._id,
+        id: getUser._id,
         email: getUser.email,
         password: getUser.password,
         favorites: getUser.favorites,
         categories: getUser.categories,
         history: getUser.history,
+        isAdmin: getUser.isAdmin,
       });
     })
     .catch((err) => {
