@@ -28,6 +28,8 @@ export class AppComponent implements OnInit {
       await this.sharedDataService.getLayout().toPromise()
     );
 
+    console.log('delete this')
+
     if (JSON.parse(localStorage.getItem('userData')) != null) {
       this.sharedDataService.setUserDetails(
         JSON.parse(localStorage.getItem('userData'))
