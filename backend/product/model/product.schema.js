@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
         tags: [{type: String, require: true}],
         description: {type: String, require: true},
         thumbnail:{type: String, require: true},
+        mainImg:{type: String},
         images:[{type: String, require: true}],
         quantity: {type: Number, require: true},
         views: {type: Number, require: true},
