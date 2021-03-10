@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { User } from '../../../shared/interfaces/user.interface';
 
-@Injectable()
+@Injectable({providedIn:'root'})
 export class UsersService {
   constructor(private http: HttpClient) {}
 

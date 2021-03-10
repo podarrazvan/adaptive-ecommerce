@@ -20,7 +20,7 @@ export class NameEditComponent {
   }
 
   get formName() {
-    return this.adminService.adminFormGroup.get('configs.name');
+    return this.adminService.adminFormGroup.get('configs');
   }
 
   setName() {

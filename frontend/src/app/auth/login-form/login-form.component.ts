@@ -35,7 +35,6 @@ export class LoginFormComponent {
     //   this.error = true;
     // }
     const password = form.value.password;
-
     if (this.showResetPasswordCode) {
       this.code = form.value.code;
       this.usersService

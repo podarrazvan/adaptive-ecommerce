@@ -13,7 +13,7 @@
     </button>
   </ng-container>
   <h2 class="center website-name" *ngIf="!editName">
-    {{ name }}
+    {{ formName.value.name }}
   </h2>
   <button
     *ngIf="!editName"

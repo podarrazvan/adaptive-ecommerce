@@ -24,7 +24,7 @@ export class AdminComponent {
     this.adminService.productFormGroup = buildProductFormGroup();
 
     // !! nuj ce face asta
-    // const configs = this.sharedDataService.getWebsiteConfigs();
+    const configs = this.sharedDataService.layout$;
     // if (configs._id === undefined) {
     //   this.configsService.createconfigs();
     // }

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Message } from 'src/app/shared/interfaces/message.interface';
 import { environment } from 'src/environments/environment.prod';
 
-@Injectable()
+@Injectable({providedIn:"root"})
 export class MessagesService {
   error: any;
 

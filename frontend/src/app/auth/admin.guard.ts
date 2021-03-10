@@ -23,11 +23,11 @@ export class AdminGuard implements CanActivate {
     | UrlTree
     | Promise<boolean | UrlTree>
     | Observable<boolean | UrlTree> {
-    return this.authService.user.pipe(
+    return this.authService.user$.pipe(
       take(1),
-      map((user) => {
-        if (user) {
-          if (user.isAdmin) {
+      map((user$) => {
+        if (user$) {
+          if (user$.isAdmin) {
             return true;
           }
         }

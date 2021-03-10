@@ -1,4 +1,3 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { DeleteAlertComponent } from './../../shared/components/delete-alert/delete-alert.component';
 import { SharedModule } from '../../shared/modules/shared.module';
@@ -61,7 +60,6 @@ const COMPONENTS = [
 ];
 
 export const MODULES = [
-  BrowserModule,
   CommonModule,
   SharedModule,
   // !!! MOVE ALL MATERIAL MODULES TO A SEPARATE MODULE . FOR EX. angular-material.module.ts, import and export that in SharedModule
@@ -76,9 +74,9 @@ export const MODULES = [
     ...MODULES,
     RouterModule.forChild([
       {
-        path: 'admin',
+        path: '',
         component: AdminComponent,
-        canActivate: [AdminGuard],
+        // canActivate: [AdminGuard],
         children: [
           { path: 'add-product', component: AddProductComponent },
           { path: 'orders', component: OrdersComponent },

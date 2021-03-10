@@ -7,6 +7,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared/modules/shared.module';
 import { Interceptor } from './shared/interceptor';
 import { AppRoutesModule } from './app.routes';
+import { AdminModule } from './pages/admin/admin.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,6 +17,7 @@ import { AppRoutesModule } from './app.routes';
     SharedModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    AdminModule
     ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true },

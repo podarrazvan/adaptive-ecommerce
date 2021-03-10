@@ -7,6 +7,8 @@ import { WishlistComponent } from './pages/wishlist/wishlist.component';
 import { SearchComponent } from './pages/search/search.component';
 import { CategoriesComponent } from './pages/categories/categories.component';
 import { OrderStatusPageComponent } from './pages/checkout/order-status-page/order-status-page.component';
+import { AuthComponent } from './auth/auth.component';
+import { AdminComponent } from './pages/admin/admin.component';
 
 const routes: Routes = [
   {
@@ -41,6 +43,8 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/contact/contact.module').then((m) => m.ContactModule),
   },
+  { path: 'auth', component: AuthComponent },
+
   {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),

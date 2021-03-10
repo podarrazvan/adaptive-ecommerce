@@ -2,7 +2,7 @@ import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
-import { throwError, BehaviorSubject } from 'rxjs';
+import { throwError, BehaviorSubject, Observable } from 'rxjs';
 
 import { User } from './user.model';
 import {
@@ -16,7 +16,8 @@ import {
 export class AuthService {
   [x: string]: any;
 
-  user = new BehaviorSubject<User>(null);
+  private userSubject$ = new BehaviorSubject<User>(null);
+  public user$: Observable<User> = this.userSubject$.asObservable();
 
   constructor(private http: HttpClient) {}
 
@@ -94,7 +95,7 @@ export class AuthService {
     );
 
     if (loadedUser.token) {
-      this.user.next(loadedUser);
+      this.userSubject$.next(loadedUser);
       const expirationDuration =
         new Date(userData._tokenExpirationDate).getTime() -
         new Date().getTime();
@@ -126,13 +127,13 @@ export class AuthService {
       token,
       expirationDate
     );
-    this.user.next(user);
+    this.userSubject$.next(user);
     this.autoLogout(+expiresIn * 1000);
     localStorage.setItem('userData', JSON.stringify(user));
   }
 
   logout() {
-    this.user.next(null);
+    this.userSubject$.next(null);
     const userData: Logout = JSON.parse(localStorage.getItem('userData'));
     this.updateUser(userData);
     localStorage.removeItem('userData');

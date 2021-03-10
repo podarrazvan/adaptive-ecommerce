@@ -17,7 +17,6 @@ export class ConfigsService {
 
   createconfigs() {
     // !!! aveai configs aici
-    //const configs = this.sharedDataService.getWebsiteConfigs();
     this.http
       .post(`${environment.api}/website`, null)
       .subscribe(() => location.reload());
@@ -26,6 +25,7 @@ export class ConfigsService {
   updateWebsite(sectionName: string, value) {
     const data = { data: value };
     const id = this.sharedDataService.layout$.pipe(map(layout => layout._id));
+    console.log(id);
     this.http
       .put(`${environment.api}/website/${id}/${sectionName}`, data)
       .subscribe();

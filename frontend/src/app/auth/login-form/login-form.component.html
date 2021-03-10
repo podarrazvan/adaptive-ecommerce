@@ -1,7 +1,18 @@
-<app-info-alert [message]="infoMessage"[success]="success" *ngIf="showInfo"></app-info-alert>
+<app-info-alert
+  [message]="infoMessage"
+  [success]="success"
+  *ngIf="showInfo"
+></app-info-alert>
 <div class="login">
-  <h3 class="card-top" [class.cardTop]="resetPasswordMode"> {{resetPasswordMode? "Password reset":"Login"}} </h3>
-  <form class="auth-form" #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" *ngIf="!isLoading">
+  <h3 class="card-top" [class.cardTop]="resetPasswordMode">
+    {{ resetPasswordMode ? "Password reset" : "Login" }}
+  </h3>
+  <form
+    class="auth-form"
+    #authForm="ngForm"
+    (ngSubmit)="onSubmit(authForm)"
+    *ngIf="!isLoading"
+  >
     <div class="form-group">
       <ng-container *ngIf="!showResetPasswordCode && !showNewPassword">
         <label for="email">E-Mail <span class="required-field"> *</span></label>
@@ -16,7 +27,12 @@
           #email="ngModel"
           placeholder="email"
         />
-        <span class="help-blok" *ngIf="!email.valid && email.touched" style="color:red">Please enter a valid email adress!</span>
+        <span
+          class="help-blok"
+          *ngIf="!email.valid && email.touched"
+          style="color: red"
+          >Please enter a valid email adress!</span
+        >
       </ng-container>
       <ng-container *ngIf="showResetPasswordCode">
         <label for="code">Code</label>
@@ -32,8 +48,13 @@
         />
       </ng-container>
     </div>
-    <ng-container class="form-group" *ngIf="!resetPasswordMode || showNewPassword">
-      <label for="password">Password <span class="required-field"> *</span></label>
+    <ng-container
+      class="form-group"
+      *ngIf="!resetPasswordMode || showNewPassword"
+    >
+      <label for="password"
+        >Password <span class="required-field"> *</span></label
+      >
       <input
         type="password"
         id="password"
@@ -46,10 +67,17 @@
         password
         #password="ngModel"
       />
-      <span class="help-blok" *ngIf="!password.valid && password.touched" style="color:red">Password is too short!</span>
+      <span
+        class="help-blok"
+        *ngIf="!password.valid && password.touched"
+        style="color: red"
+        >Password is too short!</span
+      >
     </ng-container>
     <ng-container class="form-group" *ngIf="showNewPassword">
-      <label for="confirmPassword">Confirm password <span class="required-field"> *</span></label>
+      <label for="confirmPassword"
+        >Confirm password <span class="required-field"> *</span></label
+      >
       <input
         type="password"
         id="confirmPassword"
@@ -62,21 +90,31 @@
         confirmPassword
         #confirmPassword="ngModel"
       />
-      <span class="help-blok" *ngIf="!confirmPassword.valid && confirmPassword.touched" style="color:red">Password is too short!</span>
+      <span
+        class="help-blok"
+        *ngIf="!confirmPassword.valid && confirmPassword.touched"
+        style="color: red"
+        >Password is too short!</span
+      >
     </ng-container>
     <div class="form-group">
-      <a class="password-reset" *ngIf="!resetPasswordMode" (click)="resetPasswordMode = true">Oh, no... I forgot my password! :(</a>
-    </div>
-    <div class="login-btn">
-      <button
-        [disabled]="!authForm.valid"
-        class="white-btn"
-        type="submit"
-       
+      <a
+        class="password-reset"
+        *ngIf="!resetPasswordMode"
+        (click)="resetPasswordMode = true"
+        >Oh, no... I forgot my password! :(</a
       >
-      {{resetPasswordMode? "Send":"Login"}}
-       </button>
-     
     </div>
+    <div class="login-btn" *ngIf="!showResetPasswordCode">
+      <button [disabled]="!authForm.valid" class="white-btn" type="submit">
+        {{ resetPasswordMode ? "Send" : "Login" }}
+      </button>
+
+    </div>
+    <!--Enter code btn-->
+    <div class="login-btn" *ngIf="showResetPasswordCode">
+      <button class="white-btn" type="submit">Send code</button>
+    </div>
+    <!---->
   </form>
 </div>
