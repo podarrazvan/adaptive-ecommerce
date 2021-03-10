@@ -1,3 +1,8 @@
+<app-info-alert
+  [message]="infoMessage"
+  [success]="success"
+  *ngIf="showInfo"
+></app-info-alert>
 <div class="sign-up">
   <h3 class="card-top">{{ addAdmin ? "Add admin" : "Sign Up" }}</h3>
   <form

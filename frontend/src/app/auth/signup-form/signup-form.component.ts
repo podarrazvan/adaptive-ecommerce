@@ -1,4 +1,4 @@
-import { Component, Input,EventEmitter, Output } from '@angular/core';
+import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -15,6 +15,9 @@ export class SignupFormComponent {
   @Output() adminCreated = new EventEmitter(null);
   isLoading = false;
   error: string = null;
+  infoMessage: string;
+  success: boolean;
+  showInfo: boolean;
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -29,10 +32,17 @@ export class SignupFormComponent {
       authObs.subscribe(
         (response) => {
           this.isLoading = false;
-          if(!this.addAdmin) {
-            this.router.navigate(['../']);
+          if (response.message) {
+            this.infoMessage = response.message;
+            this.success = false;
+            this.showInfo = true;
           } else {
-            this.adminCreated.emit(response);
+            if (!this.addAdmin) {
+              this.router.navigate(['../']);
+            } else {
+              this.adminCreated.emit(response);
+            }
+            form.reset();
           }
         },
         (errorMessage) => {
@@ -40,10 +50,10 @@ export class SignupFormComponent {
           this.isLoading = false;
         }
       );
-
-      form.reset();
     } else {
-      alert("passwords don't match");
+      this.infoMessage = "Passwords don't match";
+      this.success = false;
+      this.showInfo = true;
     }
   }
 }

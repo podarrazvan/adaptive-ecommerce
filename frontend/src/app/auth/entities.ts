@@ -9,6 +9,7 @@ export interface AuthResponseData {
   categories: string[];
   favorites: string[];
   isAdmin: boolean;
+  message?: string;
 }
 
 export interface NewUserDto {

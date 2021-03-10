@@ -21,7 +21,6 @@ export class SharedDataService implements OnDestroy {
 
   private layoutSubject$ = new BehaviorSubject<Layout>(null);
   public layout$: Observable<Layout> = this.layoutSubject$.asObservable();
-  layoutId: string;
 
   userDetails = new BehaviorSubject<User>(null); // !! maybe UserDetails interface if is different than User
 
@@ -40,7 +39,6 @@ export class SharedDataService implements OnDestroy {
 
   setLayout(layout: Layout) {
     this.layoutSubject$.next(layout);
-    this.layoutId = layout._id;
   }
 
   setUserDetails(details: User) {
