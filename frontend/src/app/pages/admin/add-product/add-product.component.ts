@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Categories } from 'src/app/shared/interfaces/categories.interface';
 import { ImagesService } from 'src/app/shared/services/database/images.service';
 import { TinyMCEComponent } from '../../../shared/components/tinymce/tinymce.component';
@@ -12,7 +12,7 @@ import { ProductsService } from '../products/products.service';
   templateUrl: './add-product.component.html',
   styleUrls: ['./add-product.component.scss'],
 })
-export class AddProductComponent implements OnInit, OnDestroy {
+export class AddProductComponent implements OnDestroy {
   public tinyMCE: TinyMCEComponent;
 
   loading = true; //TODO
@@ -24,6 +24,8 @@ export class AddProductComponent implements OnInit, OnDestroy {
   tag: string;
 
   images: string[] = [];
+  mainImg: string;
+  thumbnail: string;
 
   products = [];
   categories: Categories[];
@@ -44,30 +46,32 @@ export class AddProductComponent implements OnInit, OnDestroy {
     return this.adminService.productFormGroup.get('product');
   }
 
-  ngOnInit(): void {
-    // this.buildFormGroup();
-  }
-
   onSubmit() {
-    if (this.images != undefined) {
-      this.productForm.patchValue({
-        images: this.images,
-        tags: this.tags,
-      });
-      if (this.sharedDataService.productEdit) {
-        this.productsService.editProduct(
-          this.productForm.value,
-          this.sharedDataService.product._id
-        );
+    if(this.productForm.valid) {
+      if (this.images != undefined) {
+        this.productForm.patchValue({
+          images: this.images,
+          tags: this.tags,
+          thumbnail: this.thumbnail,
+          mainImg: this.mainImg
+        });
+        if (this.sharedDataService.productEdit) {
+          this.productsService.editProduct(
+            this.productForm.value,
+            this.sharedDataService.product._id
+          );
+        } else {
+          this.productsService.createAndStoreProduct(this.productForm.value);
+        }
+        this.notComplete = false;
+        this.tags = [];
+        this.images = [];
+        // this.productForm.reset();
       } else {
-        this.productsService.createAndStoreProduct(this.productForm.value);
+        alert('Please add at last one photo!');
       }
-      this.notComplete = false;
-      this.tags = [];
-      this.images = [];
-      // this.productForm.reset();
     } else {
-      alert('Please add at last one photo!');
+      alert('Invalid form!');
     }
   }
 
@@ -76,6 +80,30 @@ export class AddProductComponent implements OnInit, OnDestroy {
     this.imagesService.uploadImg(image).subscribe((responseData) => {
       this.images.push(responseData.url);
     });
+  }
+
+  uploadThumbnail(img: any) {
+    const image = (img.target as HTMLInputElement).files[0];
+    this.imagesService.uploadImg(image).subscribe((responseData) => {
+      this.thumbnail = responseData.url;
+    });
+  }
+
+  uploadMainImg(img: any) {
+    const image = (img.target as HTMLInputElement).files[0];
+    this.imagesService.uploadImg(image).subscribe((responseData) => {
+      this.mainImg = responseData.url;
+    });
+  }
+
+  deleteThumbnail(img) {
+    this.imagesService.deletePhoto(img);
+    this.thumbnail = null;
+  }
+
+  deleteMainImg(img) {
+    this.imagesService.deletePhoto(img);
+    this.mainImg = null;
   }
 
   deletePhoto(img, i) {

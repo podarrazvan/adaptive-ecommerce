@@ -75,16 +75,16 @@ export class FooterEditComponent {
       adress,
     };
     const twitter = {
-      twitterUrl,
-      twitterImage,
+      url:twitterUrl,
+      image:twitterImage,
     };
     const facebook = {
-      facebookUrl,
-      facebookImage,
+      url:facebookUrl,
+      image:facebookImage,
     };
     const instagram = {
-      instagramUrl,
-      instagramImage,
+      url:instagramUrl,
+      image:instagramImage,
     };
     this.configsService.updateWebsite('websiteFooter', footer);
     this.configsService.updateWebsite('websiteTwitter', twitter);

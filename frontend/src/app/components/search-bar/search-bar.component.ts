@@ -34,7 +34,7 @@ export class SearchBarComponent {
     this.searchBar.patchValue({
       category: category,
     });
-    this.selectedCategory = category;
+    this.selectedCategory = category.name;
   }
 
   private buildFormGroup() {

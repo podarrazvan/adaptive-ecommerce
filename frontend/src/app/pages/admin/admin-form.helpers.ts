@@ -6,16 +6,18 @@ const fb: FormBuilder = new FormBuilder();
 export const buildProductFormGroup = () => {
   return fb.group({
     product: fb.group({
-      title: fb.control(null),
-      category: fb.control(null),
-      brand: fb.control(null),
-      price: fb.control(null),
-      images: fb.control(null),
-      description: fb.control(null),
-      tags: fb.control(null),
-      quantity: fb.control(null),
-      minPrice: fb.control(null),
-      salesWeekTarget: fb.control(null),
+      title: fb.control('',Validators.required),
+      category: fb.control('',Validators.required),
+      brand: fb.control('',Validators.required),
+      price: fb.control('',Validators.required),
+      images: fb.control('',Validators.required),
+      thumbnail: fb.control('',Validators.required),
+      mainImg: fb.control('',Validators.required),
+      description: fb.control('',Validators.required),
+      tags: fb.control('',Validators.required),
+      quantity: fb.control('',Validators.required),
+      minPrice: fb.control(''),
+      salesWeekTarget: fb.control(''),
     }),
   });
 };
