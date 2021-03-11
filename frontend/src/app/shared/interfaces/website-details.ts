@@ -21,7 +21,22 @@ export interface Layout {
     instagramImage: string;
     instagramUrl: string;
   };
-
+  schedule: {
+    sundayStart: string,
+    sundayEnd: string,
+    mondayStart: string,
+    mondayEnd: string,
+    tuesdayStart: string,
+    tuesdayEnd: string,
+    wednesdayStart: string,
+    wednesdayEnd: string,
+    thursdaysStart: string,
+    thursdaysEnd: string,
+    fridayStart: string,
+    fridayEnd: string,
+    saturdayStart: string,
+    saturdayEnd: string,
+  },
   aboutUs: string;
   termsOfUse: string;
 }

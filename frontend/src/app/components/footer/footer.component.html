@@ -4,6 +4,19 @@
       <h1>A nice logo</h1>
       <app-footer-address></app-footer-address>
     </div>
+    <div class="schedule">
+      <h3>Schedule</h3>
+      <div class="info schedule" *ngIf="(sharedDataService.layout$ | async).schedule as schedule">
+        <!-- <mat-icon>query_builder</mat-icon> -->
+        <p>Sunday {{schedule.sundayStart}} - {{schedule.sundayEnd}}</p>
+        <p>Monday {{schedule.mondayStart}} - {{schedule.sundayEnd}}</p>
+        <p>Tuesday {{schedule.tuesdayStart}} - {{schedule.sundayEnd}}</p>
+        <p>Wednesday {{schedule.wednesdayStart}} - {{schedule.sundayEnd}}</p>
+        <p>Thursdays {{schedule.thursdaysStart}} - {{schedule.sundayEnd}}</p>
+        <p>Friday {{schedule.fridayStart}} - {{schedule.sundayEnd}}</p>
+        <p>Saturday {{schedule.saturdayStart}} - {{schedule.sundayEnd}}</p>
+      </div>
+    </div>
     <div class="quick-menu">
       <h3>Quick menu</h3>
       <app-footer-quick-menu></app-footer-quick-menu>
