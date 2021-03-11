@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { AdminGuard } from 'src/app/auth/admin.guard';
 
 import { AddProductComponent } from './add-product/add-product.component';
 import { DescriptionStylesComponent } from './add-product/description-styles/description-styles.component';
@@ -30,7 +31,7 @@ import { DiscountModalComponent } from './products/discount-modal/discount-modal
 import { PageEditComponent } from './website-edit/page-edit/page-edit.component';
 import { NameEditComponent } from './website-edit/name-edit/name-edit.component';
 import { AdminsComponent } from './admins/admins.component';
-import { AdminGuard } from 'src/app/auth/admin.guard';
+import { ScheduleEditComponent } from './website-edit/footer-edit/schedule-edit/schedule-edit.component';
 
 const COMPONENTS = [
   AddProductComponent,
@@ -57,6 +58,7 @@ const COMPONENTS = [
   PageEditComponent,
   NameEditComponent,
   AdminsComponent,
+  ScheduleEditComponent
 ];
 
 export const MODULES = [

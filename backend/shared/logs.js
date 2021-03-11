@@ -72,6 +72,11 @@ module.exports = {
       UPDATE: "Instagram updated successfully",
       FAILED: "Instagram failed to update",
     },
+    SCHEDULE: {
+      SET: "Schedule added successfully",
+      UPDATE: "Schedule updated successfully",
+      FAILED: "Schedule failed to update",
+    }
   },
   TERMS_OF_USE: {
     SET: "TERMS OF USE added successfully",

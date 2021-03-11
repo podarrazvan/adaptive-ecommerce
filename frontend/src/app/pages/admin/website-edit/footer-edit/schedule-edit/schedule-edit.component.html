@@ -1,0 +1,170 @@
+<h1>Schedule</h1>
+<div class="row" [formGroup]="scheduleForm">
+  <div class="col">
+    <h3>Sunday</h3>
+    <label for="SundayStart">Start</label>
+    <select
+      formControlName="sundayStart"
+      class="custom-select my-1 mr-sm-2"
+      id="SundayStart"
+    >
+      <option *ngFor="let hour of scheduleHours" [value]="hour">
+        {{ hour }}
+      </option>
+    </select>
+    <label for="sundayEnd">End</label>
+    <select
+      formControlName="sundayEnd"
+      class="custom-select my-1 mr-sm-2"
+      id="sundayEnd"
+    >
+      <option *ngFor="let hour of scheduleHours" [value]="hour">
+        {{ hour }}
+      </option>
+    </select>
+  </div>
+
+  <div class="col">
+    <h3>Monday</h3>
+    <label for="mondayStart">Start</label>
+    <select
+      formControlName="mondayStart"
+      class="custom-select my-1 mr-sm-2"
+      id="mondayStart"
+    >
+      <option *ngFor="let hour of scheduleHours" [value]="hour">
+        {{ hour }}
+      </option>
+    </select>
+    <label for="mondayEnd">End</label>
+    <select
+      formControlName="mondayEnd"
+      class="custom-select my-1 mr-sm-2"
+      id="mondayEnd"
+    >
+      <option *ngFor="let hour of scheduleHours" [value]="hour">
+        {{ hour }}
+      </option>
+    </select>
+  </div>
+
+  <div class="col">
+    <h3>Tuesday</h3>
+    <label for="tuesdayStart">Start</label>
+    <select
+      formControlName="tuesdayStart"
+      class="custom-select my-1 mr-sm-2"
+      id="tuesdayStart"
+    >
+      <option *ngFor="let hour of scheduleHours" [value]="hour">
+        {{ hour }}
+      </option>
+    </select>
+    <label for="tuesdayEnd">End</label>
+    <select
+      formControlName="tuesdayEnd"
+      class="custom-select my-1 mr-sm-2"
+      id="tuesdayEnd"
+    >
+      <option *ngFor="let hour of scheduleHours" [value]="hour">
+        {{ hour }}
+      </option>
+    </select>
+  </div>
+
+  <div class="col">
+    <h3>Wednesday</h3>
+    <label for="wednesdayStart">Start</label>
+    <select
+      formControlName="wednesdayStart"
+      class="custom-select my-1 mr-sm-2"
+      id="wednesdayStart"
+    >
+      <option *ngFor="let hour of scheduleHours" [value]="hour">
+        {{ hour }}
+      </option>
+    </select>
+    <label for="wednesdayEnd">End</label>
+    <select
+      formControlName="wednesdayEnd"
+      class="custom-select my-1 mr-sm-2"
+      id="wednesdayEnd"
+    >
+      <option *ngFor="let hour of scheduleHours" [value]="hour">
+        {{ hour }}
+      </option>
+    </select>
+  </div>
+
+  <div class="col">
+    <h3>Thursdays</h3>
+    <label for="thursdaysStart">Start</label>
+    <select
+      formControlName="thursdaysStart"
+      class="custom-select my-1 mr-sm-2"
+      id="thursdaysStart"
+    >
+      <option *ngFor="let hour of scheduleHours" [value]="hour">
+        {{ hour }}
+      </option>
+    </select>
+    <label for="thursdaysEnd">End</label>
+    <select
+      formControlName="thursdaysEnd"
+      class="custom-select my-1 mr-sm-2"
+      id="thursdaysEnd"
+    >
+      <option *ngFor="let hour of scheduleHours" [value]="hour">
+        {{ hour }}
+      </option>
+    </select>
+  </div>
+
+  <div class="col">
+    <h3>Friday</h3>
+    <label for="fridayStart">Start</label>
+    <select
+      formControlName="fridayStart"
+      class="custom-select my-1 mr-sm-2"
+      id="fridayStart"
+    >
+      <option *ngFor="let hour of scheduleHours" [value]="hour">
+        {{ hour }}
+      </option>
+    </select>
+    <label for="fridayEnd">End</label>
+    <select
+      formControlName="fridayEnd"
+      class="custom-select my-1 mr-sm-2"
+      id="fridayEnd"
+    >
+      <option *ngFor="let hour of scheduleHours" [value]="hour">
+        {{ hour }}
+      </option>
+    </select>
+  </div>
+
+  <div class="col">
+    <h3>Saturday</h3>
+    <label for="saturdayStart">Start</label>
+    <select
+      formControlName="saturdayStart"
+      class="custom-select my-1 mr-sm-2"
+      id="saturdayStart"
+    >
+      <option *ngFor="let hour of scheduleHours" [value]="hour">
+        {{ hour }}
+      </option>
+    </select>
+    <label for="saturdayEnd">End</label>
+    <select
+      formControlName="saturdayEnd"
+      class="custom-select my-1 mr-sm-2"
+      id="saturdayEnd"
+    >
+      <option *ngFor="let hour of scheduleHours" [value]="hour">
+        {{ hour }}
+      </option>
+    </select>
+  </div>
+</div>

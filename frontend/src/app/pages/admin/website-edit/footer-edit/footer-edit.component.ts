@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { Footer } from 'src/app/shared/interfaces/footer.interface';
+import { FormGroup } from '@angular/forms';
 import { ConfigsService } from 'src/app/shared/services/database/configs.sevice';
 import { ImagesService } from 'src/app/shared/services/database/images.service';
 import { SharedDataService } from 'src/app/shared/services/shared-data.service';
@@ -30,6 +29,10 @@ export class FooterEditComponent {
 
   get footerForm() {
     return this.adminService.adminFormGroup.get(['configs', 'footer']);
+  }
+
+  get scheduleForm() {
+    return this.adminService.adminFormGroup.get('schedule');
   }
 
   onClose() {
@@ -68,7 +71,6 @@ export class FooterEditComponent {
       twitterUrl,
       twitterImage,
     } = this.footerForm.value;
-
     const footer = {
       email,
       phone,
@@ -86,10 +88,13 @@ export class FooterEditComponent {
       url:instagramUrl,
       image:instagramImage,
     };
+    //! send a request only for what you change!
     this.configsService.updateWebsite('websiteFooter', footer);
     this.configsService.updateWebsite('websiteTwitter', twitter);
     this.configsService.updateWebsite('websiteFacebook', facebook);
     this.configsService.updateWebsite('websiteInstagram', instagram);
+    this.configsService.updateWebsite('websiteScheduleForm', this.scheduleForm.value);
+    //!
     this.close.emit(this.footerForm.value);
   }
 }

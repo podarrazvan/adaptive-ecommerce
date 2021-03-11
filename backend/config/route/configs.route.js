@@ -176,4 +176,18 @@ router.put("/:id/websiteInstagram", (req, res, next) => {
   );
 });
 
+router.put("/:id/websiteScheduleForm", (req, res, next) => {
+  const schedule = req.body.data;
+  const _id = req.params.id;
+  const websiteSchedule = new collection({ _id, schedule });
+  collection.findByIdAndUpdate({ _id }, websiteSchedule).then(
+    (result) => {
+      res.status(200).json({ message: LOGS.CONFIGS.SCHEDULE.UPDATE });
+    },
+    (err) => {
+      res.status(401).json({ message: LOGS.CONFIGS.SCHEDULE.FAILED });
+    }
+  );
+});
+
 module.exports = router;

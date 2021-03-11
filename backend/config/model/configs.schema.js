@@ -39,6 +39,22 @@ const websiteSchema = mongoose.Schema({
   },
   aboutUs: { type: String },
   termsOfUse: { type: String },
+  schedule: {
+    sundayStart: { type: String },
+    sundayEnd: { type: String },
+    mondayStart: { type: String },
+    mondayEnd: { type: String },
+    tuesdayStart: { type: String },
+    tuesdayEnd: { type: String },
+    wednesdayStart: { type: String },
+    wednesdayEnd: { type: String },
+    thursdaysStart: { type: String },
+    thursdaysEnd: { type: String },
+    fridayStart: { type: String },
+    fridayEnd: { type: String },
+    saturdayStart: { type: String },
+    saturdayEnd: { type: String },
+  },
 });
 
 module.exports = mongoose.model("Configs", websiteSchema);
