@@ -64,7 +64,6 @@ router.get("", (req, res, next) => {
 router.get("/:id", (req, res, next) => {
   const _id = req.params.id;
   Order.findOne({_id}).then((order) => {
-    console.log(order);
     res.status(200).json(order);
   });
 });

@@ -7,7 +7,8 @@ export interface Product {
   tags: string[];
   quantity:number;
   images: any;
-  thumbnail?: string;
+  thumbnail: string;
+  mainImg?: string;
   rating?: number;
   _id?: string;
   cut?: number;

@@ -9,12 +9,12 @@ export class HomeNewReleasesCarouselComponent implements OnInit {
 
   @Input() products;
 
-  slides: Slide[][] = [[]];
+  slides: Slide[][] = [];
   singleSlide: any;
   index = 0;
 
   ngOnInit(): void {
-
+    
     const elements = 3;
     const lastIndex = 0;
     
@@ -32,8 +32,7 @@ export class HomeNewReleasesCarouselComponent implements OnInit {
         this.slides.push(slide);
         slide = [];
       }
-    }
-    
+    }    
     this.singleSlide = this.slides[this.index]; 
   }
 

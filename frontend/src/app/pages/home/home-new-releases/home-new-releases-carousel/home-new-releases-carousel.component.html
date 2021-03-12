@@ -1,5 +1,5 @@
 <div class="carousel">
-    <div class="product" *ngFor="let slide of singleSlide">
+    <div class="product" [routerLink]="['product',slide._id]" *ngFor="let slide of singleSlide">
         <app-get-product
             [product]="slide"
         ></app-get-product>

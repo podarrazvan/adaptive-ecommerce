@@ -47,31 +47,40 @@ export class AddProductComponent implements OnDestroy {
   }
 
   onSubmit() {
-    if(this.productForm.valid) {
-      if (this.images != undefined) {
-        this.productForm.patchValue({
-          images: this.images,
-          tags: this.tags,
-          thumbnail: this.thumbnail,
-          mainImg: this.mainImg
-        });
+    if (this.images != undefined) {
+      this.productForm.patchValue({
+        images: this.images,
+        tags: this.tags,
+        thumbnail: this.thumbnail,
+        mainImg: this.mainImg,
+      });
+      if (this.productForm.valid) {
         if (this.sharedDataService.productEdit) {
           this.productsService.editProduct(
             this.productForm.value,
             this.sharedDataService.product._id
           );
         } else {
+          //! DELETE THIS!
+          // const title = this.productForm.value.title;
+          // for (let i = 0; i < 20; i++) {
+          //   this.productForm.patchValue({
+          //     title: title + ` (${i})`,
+          //   });
+          //   this.productsService.createAndStoreProduct(this.productForm.value);
+          // }
+          //!
           this.productsService.createAndStoreProduct(this.productForm.value);
         }
         this.notComplete = false;
         this.tags = [];
         this.images = [];
-        // this.productForm.reset();
+        this.productForm.reset();
       } else {
-        alert('Please add at last one photo!');
+        alert('Invalid form!');
       }
     } else {
-      alert('Invalid form!');
+      alert('Please add at last one photo!');
     }
   }
 

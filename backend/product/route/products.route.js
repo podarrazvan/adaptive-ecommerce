@@ -8,7 +8,7 @@ const router = express.Router();
 router.post("", (req, res, next) => {
   const {
     title,
-    caregory,
+    category,
     brand,
     price,
     tags,
@@ -22,10 +22,10 @@ router.post("", (req, res, next) => {
     productNumber,
     minPrice,
     salesWeekTarget
-  } = req.body;
+  } = req.body;  
   const product = new Product({
     title,
-    caregory,
+    category,
     brand,
     price,
     tags,
@@ -57,7 +57,7 @@ router.put("/:id", (req, res, next) => {
   const _id = req.params.id;
   const {
     title,
-    caregory,
+    category,
     brand,
     price,
     tags,
@@ -75,7 +75,7 @@ router.put("/:id", (req, res, next) => {
   const product = new Product({
     _id,
     title,
-    caregory,
+    category,
     brand,
     price,
     tags,
@@ -116,8 +116,17 @@ router.get("/id/:id", (req, res, next) => {
     res.status(200).json(prod);
   });
 });
+
 router.get("/paginated", paginatedResults(Product), (req, res, next) => {
   res.json(res.paginatedResults);
+});
+
+router.get("/last", (req, res, next) => {
+  const limit = parseInt(req.query.limit);
+  const category = req.query.category;
+  Product.find({category}).sort({_id:-1}).limit(limit).then((prod) => {
+    res.status(200).json(prod);
+  });
 });
 
 router.get("", (req, res, next) => {

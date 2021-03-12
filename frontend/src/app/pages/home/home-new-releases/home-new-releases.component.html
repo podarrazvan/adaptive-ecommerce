@@ -1,28 +1,26 @@
-<div class="top">
-    <div class="left">
-      <hr />
+<ng-container *ngIf="!loading">
+  <div class="top">
+      <div class="left">
+        <hr />
+      </div>
+      <div class="center">
+        <img
+          src="http://landing.engotheme.com/html/ecome/demo/img/real.png"
+        />
+        <p>New Releases</p>
+      </div>
+      <div class="right">
+        <hr />
+      </div>
     </div>
-    <div class="center">
-      <img
-        src="http://landing.engotheme.com/html/ecome/demo/img/real.png"
-      />
-      <p>New Releases</p>
+    <div class="buttons-area">
+      <div class="buttons"  *ngFor="let category of (sharedDataService.layout$ | async).categories">
+        <button (click)="showProducts(category.name)"class="main-btn">{{category.name}}</button>
+      </div>
     </div>
-    <div class="right">
-      <hr />
+    <div class="carousel">
+        <app-home-new-releases-carousel
+        [products]="products">
+        </app-home-new-releases-carousel>
     </div>
-  </div>
-  <div class="buttons-area">
-    <div class="buttons">
-      <button class="main-btn">Tv & Video</button>
-      <button class="main-btn">Audio & Theater</button>
-      <button class="main-btn">Camera, Photo & Video</button>
-      <button class="main-btn">Cell Phones & Accessories</button>
-      <button class="main-btn">Headphones</button>
-    </div>
-  </div>
-  <div class="carousel">
-      <app-home-new-releases-carousel
-      [products]="products">
-      </app-home-new-releases-carousel>
-  </div>
+</ng-container>

@@ -24,7 +24,7 @@
         class="custom-select my-1 mr-sm-2"
         id="inputCategory"
       >
-        <option *ngFor="let category of (sharedDataService.layout$ | async).categories" [value]="category">
+        <option *ngFor="let category of (sharedDataService.layout$ | async).categories" [value]="category.name">
           {{ category.name }}
         </option>
       </select>

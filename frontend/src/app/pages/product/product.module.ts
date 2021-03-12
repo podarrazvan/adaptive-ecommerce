@@ -19,7 +19,7 @@ import { WebsiteFeaturesComponent } from './website-features/website-features.co
   imports: [
     CommonModule,
     SharedModule,
-    RouterModule.forChild([{ path: 'product/:key', component: ProductComponent }]),
+    RouterModule.forChild([{ path: ':key', component: ProductComponent }]),
   ],
   exports: [RouterModule],
 })
