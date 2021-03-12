@@ -1,7 +1,7 @@
 const express = require("express");
 const Product = require("../model/product.schema");
 
-const LOGS = require("../../shared/logs")
+const LOGS = require("../../shared/logs");
 
 const router = express.Router();
 
@@ -21,8 +21,8 @@ router.post("", (req, res, next) => {
     initialQuantity,
     productNumber,
     minPrice,
-    salesWeekTarget
-  } = req.body;  
+    salesWeekTarget,
+  } = req.body;
   const product = new Product({
     title,
     category,
@@ -39,7 +39,7 @@ router.post("", (req, res, next) => {
     productNumber,
     autoMode: {
       minPrice,
-      salesWeekTarget
+      salesWeekTarget,
     },
   });
   product.save().then((createdProduct) => {
@@ -70,7 +70,7 @@ router.put("/:id", (req, res, next) => {
     initialQuantity,
     productNumber,
     minPrice,
-    salesWeekTarget
+    salesWeekTarget,
   } = req.body;
   const product = new Product({
     _id,
@@ -89,7 +89,7 @@ router.put("/:id", (req, res, next) => {
     productNumber,
     autoMode: {
       minPrice,
-      salesWeekTarget
+      salesWeekTarget,
     },
     initialQuantity: req.body.initialQuantity,
     productNumber: req.body.productNumber,
@@ -124,11 +124,29 @@ router.get("/paginated", paginatedResults(Product), (req, res, next) => {
 router.get("/last", (req, res, next) => {
   const limit = parseInt(req.query.limit);
   const category = req.query.category;
-  Product.find({category}).sort({_id:-1}).limit(limit).then((prod) => {
+  Product.find({ category })
+    .sort({ _id: -1 })
+    .limit(limit)
+    .then((prod) => {
+      res.status(200).json(prod);
+    });
+});
+
+//! Should be displayed according to the user's preferences
+router.get("/main-products", (req, res, next) => {
+  const size = parseInt(req.query.size);
+  Product.aggregate([{ $sample: { size } }]).then((prod) => {
     res.status(200).json(prod);
   });
 });
 
+router.get("/you-may-like", (req, res, next) => {
+  const size = parseInt(req.query.size);
+  Product.aggregate([{ $sample: { size } }]).then((prod) => {
+    res.status(200).json(prod);
+  });
+});
+//!
 router.get("", (req, res, next) => {
   Product.find().then((products) => {
     res.status(200).json(products);

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output,EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-home-you-may-like-top',
@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./home-you-may-like-top.component.scss']
 })
 export class HomeYouMayLikeTopComponent {
+  @Output() refresh = new EventEmitter();
 
+  onRefresh() {
+    this.refresh.emit();
+  }
 }

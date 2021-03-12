@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Product } from 'src/app/shared/interfaces/product.interface';
+import { ProductsService } from '../../admin/products/products.service';
 
 @Component({
   selector: 'app-home-main',
@@ -6,8 +8,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./home-main.component.scss']
 })
 export class HomeMainComponent {
+  numberOfProducts = 3;
+  products: Product[];
+  mainProduct: Product[];
+  loading = true;
 
-  product = {title: "iPhone 12 Pro Max", cut:40, img: 'https://s1.flanco.ro/catalog/product/cache/368/image/400x400/9df78eab33525d08d6e5fb8d27136e95/1/4/143545_2_1.jpg', price: 999}
-  products = [this.product, this.product]
+  constructor(private productsService: ProductsService) {
+    this.productsService.getMainProducts(this.numberOfProducts).subscribe((response) => {
+      this.products = response;
+      this.mainProduct = this.products.splice(0,1);
+      this.loading = false;
+    });
+  }
+
 
 }

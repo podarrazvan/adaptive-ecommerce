@@ -1,4 +1,4 @@
-<div class="main">
+<div class="main" *ngIf="!loading">
   <div class="bottom">
     <div class="categories">
       <app-home-main-categories></app-home-main-categories>
@@ -7,7 +7,7 @@
       <app-home-main-ad></app-home-main-ad>
     </div>
     <div class="product">
-      <app-home-main-product [product]="product"></app-home-main-product>
+      <app-home-main-product [product]="mainProduct[0]"></app-home-main-product><!--fix [0]-->
     </div>
   </div>
   <div class="products">

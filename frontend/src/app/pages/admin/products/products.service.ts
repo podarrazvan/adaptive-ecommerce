@@ -73,10 +73,21 @@ export class ProductsService {
       `${environment.api}/products/paginated?page=${page}&limit=${limit}`
     );
   }
-
   getLastProducts(limit: number, category: string) {
     return this.http.get<Product[]>(
       `${environment.api}/products/last?limit=${limit}&category=${category}`
+    );
+  }
+
+  getMainProducts(size: number) {
+    return this.http.get<Product[]>(
+      `${environment.api}/products/main-products?size=${size}`
+    );
+  }
+
+  getYouMayLikeProducts(size: number) {
+    return this.http.get<Product[]>(
+      `${environment.api}/products/you-may-like?size=${size}`
     );
   }
 
