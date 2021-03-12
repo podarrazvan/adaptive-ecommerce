@@ -28,6 +28,7 @@ export class ProductsService {
       productNumber: productNumber,
       brand: product.brand,
       model: product.model,
+      sold:0,
     };
     this.http
       .post<{ name: string }>(`${environment.api}/products`, productData, {
@@ -88,6 +89,12 @@ export class ProductsService {
   getYouMayLikeProducts(size: number) {
     return this.http.get<Product[]>(
       `${environment.api}/products/you-may-like?size=${size}`
+    );
+  }
+
+  getBestSellersProducts() {
+    return this.http.get<{main: Product,middle: Product[], bottom: Product[]}>(
+      `${environment.api}/products/best-sellers`
     );
   }
 

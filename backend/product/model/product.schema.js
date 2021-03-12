@@ -18,6 +18,7 @@ const mongoose = require('mongoose');
             salesWeekTarget: {type: Number, require: true} // how many should be sold each week in auto mode
         },
         initialQuantity: {type: Number, require: true},
+        sold: {type: Number, require: true},
         productNumber:{type: Number, require: true}, //date in seconds since midnight, 1 Jan 1970
     });
 

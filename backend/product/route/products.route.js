@@ -147,6 +147,21 @@ router.get("/you-may-like", (req, res, next) => {
   });
 });
 //!
+
+router.get("/best-sellers", (req, res, next) => {
+  const limit = 7
+  Product.find()
+    .sort({ sold: -1 })
+    .limit(limit)
+    .then((products) => {
+      res.status(200).json({
+        main: products[0],
+        middle: products.slice(1,4),
+        bottom: products.slice(4,7)
+      });
+    });
+});
+
 router.get("", (req, res, next) => {
   Product.find().then((products) => {
     res.status(200).json(products);

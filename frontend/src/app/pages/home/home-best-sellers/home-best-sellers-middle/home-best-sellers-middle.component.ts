@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Product } from 'src/app/shared/interfaces/product.interface';
 
 @Component({
@@ -7,10 +7,6 @@ import { Product } from 'src/app/shared/interfaces/product.interface';
   styleUrls: ['./home-best-sellers-middle.component.scss']
 })
 export class HomeBestSellersMiddleComponent {
-
-  product = {images:['https://storage.googleapis.com/flip-global/device-images/apple_iphone-x_space-grey_sell.jpg'],
-            category: 'phones', title: "iPhone 12 Pro Max",price:999}
-
-  products = [this.product, this.product, this.product, this.product];
-
+  @Input() products: Product[];
+  @Input() mainProduct: Product;
 }

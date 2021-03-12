@@ -18,5 +18,6 @@ export interface Product {
   views: number;
   productNumber: number;
   brand: string;
-  model: string
+  model: string;
+  sold: number;
 }
