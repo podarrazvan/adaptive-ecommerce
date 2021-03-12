@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Product } from 'src/app/shared/interfaces/product.interface';
 
 @Component({
   selector: 'app-home-main-ad',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./home-main-ad.component.scss']
 })
 export class HomeMainAdComponent {
-
+  @Input() ad: Product;
 }

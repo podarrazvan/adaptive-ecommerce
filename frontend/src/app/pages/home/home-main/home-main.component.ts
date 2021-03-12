@@ -8,15 +8,17 @@ import { ProductsService } from '../../admin/products/products.service';
   styleUrls: ['./home-main.component.scss']
 })
 export class HomeMainComponent {
-  numberOfProducts = 3;
+  numberOfProducts = 4;
   products: Product[];
-  mainProduct: Product[];
+  mainProduct: Product;
+  mainAd: Product;
   loading = true;
 
   constructor(private productsService: ProductsService) {
     this.productsService.getMainProducts(this.numberOfProducts).subscribe((response) => {
-      this.products = response;
-      this.mainProduct = this.products.splice(0,1);
+      this.products = response.products;
+      this.mainProduct = response.mainProduct;
+      this.mainAd = response.mainAd;
       this.loading = false;
     });
   }

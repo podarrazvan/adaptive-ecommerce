@@ -81,7 +81,7 @@ export class ProductsService {
   }
 
   getMainProducts(size: number) {
-    return this.http.get<Product[]>(
+    return this.http.get<{products: Product[], mainProduct: Product, mainAd: Product}>(
       `${environment.api}/products/main-products?size=${size}`
     );
   }

@@ -136,7 +136,11 @@ router.get("/last", (req, res, next) => {
 router.get("/main-products", (req, res, next) => {
   const size = parseInt(req.query.size);
   Product.aggregate([{ $sample: { size } }]).then((prod) => {
-    res.status(200).json(prod);
+    res.status(200).json({
+      products: prod.splice(0,2),
+      mainAd: prod[0],
+      mainProduct: prod[1] 
+    });
   });
 });
 
