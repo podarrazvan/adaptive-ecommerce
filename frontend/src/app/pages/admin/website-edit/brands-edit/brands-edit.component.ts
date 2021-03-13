@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { ConfigsService } from 'src/app/shared/services/database/configs.sevice';
 import { ImagesService } from 'src/app/shared/services/database/images.service';
+import { SharedDataService } from 'src/app/shared/services/shared-data.service';
 import { AdminService } from '../../admin.service';
 
 @Component({
@@ -11,20 +12,25 @@ import { AdminService } from '../../admin.service';
 })
 export class BrandsEditComponent {
   formGroup: FormGroup;
+  brandsHide = true;
+  editBrandMode: number;
+  editBrandLogo: boolean;
+  brandLogoPath: string;
+  valid: boolean;
+  brands; //! NOT OK
 
   constructor(
     private fb: FormBuilder,
     private configsService: ConfigsService,
     private imagesService: ImagesService,
-    private adminService: AdminService
+    private adminService: AdminService,
+    public sharedDataService: SharedDataService
   ) {
     this.buildFormGroup(fb);
+    this.sharedDataService.layout$.subscribe((response) => {
+      this.brands = response.brands; //! DON'T USE brands, USE brandsForm()
+    });
   }
-
-  brandsHide = true;
-  editBrandMode: number;
-  brandLogoPath: string;
-  valid: boolean;
 
   get brandsForm() {
     return this.adminService.adminFormGroup.get('configs.brands') as FormArray;
@@ -36,7 +42,8 @@ export class BrandsEditComponent {
 
   addNewValue() {
     this.brandsForm.push(this.createBrand());
-    this.configsService.updateWebsite('websiteBrands', this.brandsForm.value).subscribe();
+    this.brands.push({ name: this.brandName, image: this.brandLogoPath }); //! NOT OK!
+    this.configsService.updateWebsite('websiteBrands', this.brands).subscribe();
   }
 
   public createBrand(): FormGroup {
@@ -50,10 +57,28 @@ export class BrandsEditComponent {
 
   delete(index) {
     this.brandsForm.value.splice(index, 1);
-    this.configsService.updateWebsite('websiteBrands', this.brandsForm.value).subscribe();
+    this.brands.splice(index, 1); //! NOT OK!
+    this.configsService.updateWebsite('websiteBrands', this.brands).subscribe();
   }
 
-  edit(index) {}
+  edit(index) {
+    let image;
+    if (this.editBrandLogo) {
+      image = this.brandLogoPath;
+      if (image === undefined) {
+        image = this.brands[index].image;
+      }
+    } else {
+      image = this.brands[index].image;
+    }
+    this.brands[index] = { name: this.brandName, image }; //! NOT OK!
+    this.configsService
+      .updateWebsite('websiteBrands', this.brands)
+      .subscribe(() => {
+        this.editBrandMode = null;
+        this.editBrandLogo = false;
+      });
+  }
 
   brandLogo(img: Event) {
     const image = (img.target as HTMLInputElement).files[0];
