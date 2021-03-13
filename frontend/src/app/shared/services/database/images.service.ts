@@ -16,11 +16,7 @@ export class ImagesService {
     );
   }
 
-
   deletePhoto(img: string) {
-    // TODO
+    return this.http.delete(`${environment.api}/images/${img}`);
   }
-
-  
-
 }

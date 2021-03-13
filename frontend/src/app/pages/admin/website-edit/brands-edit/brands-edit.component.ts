@@ -56,9 +56,12 @@ export class BrandsEditComponent {
   }
 
   delete(index) {
-    this.brandsForm.value.splice(index, 1);
-    this.brands.splice(index, 1); //! NOT OK!
-    this.configsService.updateWebsite('websiteBrands', this.brands).subscribe();
+    this.configsService.updateWebsite('websiteBrands', this.brands).subscribe(()=>{
+      this.brandsForm.value.splice(index, 1);
+      const img = this.brands[index].image.split('/')[5];
+      this.brands.splice(index, 1); //! NOT OK!
+      this.imagesService.deletePhoto(img).subscribe();
+    });
   }
 
   edit(index) {
