@@ -24,7 +24,7 @@ export class NameEditComponent {
   }
 
   setName() {
-    this.configsService.updateWebsite('websiteName', this.formName.value.name);
+    this.configsService.updateWebsite('websiteName', this.formName.value.name).subscribe();
     this.editName = false;
   }
 }

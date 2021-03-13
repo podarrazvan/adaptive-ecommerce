@@ -24,7 +24,7 @@ export class ShippingEditComponent {
 
   addNewValue(form) {
     this.shippings.push(form.value);
-    this.configsService.updateWebsite('websiteShipping',form.value);
+    this.configsService.updateWebsite('websiteShipping',form.value).subscribe();
     this.newShippings.emit(this.shippings);
   }
 }

@@ -36,7 +36,7 @@ export class BrandsEditComponent {
 
   addNewValue() {
     this.brandsForm.push(this.createBrand());
-    this.configsService.updateWebsite('websiteBrands', this.brandsForm.value);
+    this.configsService.updateWebsite('websiteBrands', this.brandsForm.value).subscribe();
   }
 
   public createBrand(): FormGroup {
@@ -50,7 +50,7 @@ export class BrandsEditComponent {
 
   delete(index) {
     this.brandsForm.value.splice(index, 1);
-    this.configsService.updateWebsite('websiteBrands', this.brandsForm.value);
+    this.configsService.updateWebsite('websiteBrands', this.brandsForm.value).subscribe();
   }
 
   edit(index) {}

@@ -89,11 +89,11 @@ export class FooterEditComponent {
       image:instagramImage,
     };
     //! send a request only for what you change!
-    this.configsService.updateWebsite('websiteFooter', footer);
-    this.configsService.updateWebsite('websiteTwitter', twitter);
-    this.configsService.updateWebsite('websiteFacebook', facebook);
-    this.configsService.updateWebsite('websiteInstagram', instagram);
-    this.configsService.updateWebsite('websiteScheduleForm', this.scheduleForm.value);
+    this.configsService.updateWebsite('websiteFooter', footer).subscribe();
+    this.configsService.updateWebsite('websiteTwitter', twitter).subscribe();
+    this.configsService.updateWebsite('websiteFacebook', facebook).subscribe();
+    this.configsService.updateWebsite('websiteInstagram', instagram).subscribe();
+    this.configsService.updateWebsite('websiteScheduleForm', this.scheduleForm.value).subscribe();
     //!
     this.close.emit(this.footerForm.value);
   }

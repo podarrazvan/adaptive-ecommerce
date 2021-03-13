@@ -43,13 +43,13 @@ export class CouponsEditComponent {
 
   addNewValue() {
     this.couponsForm.push(this.createCoupon());
-    this.configsService.updateWebsite('websiteCoupons', this.couponsForm.value);
+    this.configsService.updateWebsite('websiteCoupons', this.couponsForm.value).subscribe();
     this.couponFormGroup.reset();
   }
 
   delete(index) {
     this.couponsForm.value.splice(index, 1);
-    this.configsService.updateWebsite('websiteCoupons', this.couponsForm.value);
+    this.configsService.updateWebsite('websiteCoupons', this.couponsForm.value).subscribe();
   }
 
   edit(index) {}

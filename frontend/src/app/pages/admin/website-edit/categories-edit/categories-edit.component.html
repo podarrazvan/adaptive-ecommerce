@@ -38,7 +38,7 @@ Edit
           </div>
         </div>
         <ul class="list-group">
-          <div *ngFor="let category of categoriesForm.value; let i = index">
+          <div *ngFor="let category of categories let i = index">
             <!--To do: implement active-->
             <li class="list-group-item">
               <h1 *ngIf="editCategoryMode != i">{{ category.name }}</h1>
@@ -47,8 +47,8 @@ Edit
                 [hidden]="editCategoryMode != i"
                 type="text"
                 class="form-control"
-                [value]="category"
-                #editedCategory
+                [value]="category.name"
+                formControlName="name"
               />
               <hr />
               <div class="buttons-website-edit">
@@ -65,7 +65,7 @@ Edit
                 </button>
                 <button
                   *ngIf="editCategoryMode == i"
-                  (click)="edit(editedCategory, category)"
+                  (click)="edit(i)"
                   class="btn btn-primary"
                 >
                   Done
