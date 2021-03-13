@@ -7,8 +7,8 @@ const userSchema = mongoose.Schema({
     password: {type: String, requird: true},
     favorites: [{type: String}], //product's id
     history: [{
-        id: {type: String}, //product's id
-        time: {type: Number} //time spent on a product in seconds
+        product: {type: String}, //product's id
+        //TODO time: {type: Number} //time spent on a product in seconds
     }],
     categories: [{type: String}], //top most viewed categories
     isAdmin: {type: Boolean},

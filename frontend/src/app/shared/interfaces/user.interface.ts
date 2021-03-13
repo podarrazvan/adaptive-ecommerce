@@ -9,7 +9,9 @@ export interface User {
     settings?: Settings;
     addresses?: Address;
     favorite: string[];
-    history: string[];
+    history: [{
+        product: string
+    }];
     lastVisit: Date;
     categories: string[];
     isActive?: boolean;

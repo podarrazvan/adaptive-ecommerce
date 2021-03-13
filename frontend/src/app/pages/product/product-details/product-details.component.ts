@@ -9,17 +9,15 @@ import { SharedDataService } from '../../../shared/services/shared-data.service'
   styleUrls: ['./product-details.component.scss']
 })
 export class ProductDetailsComponent implements OnInit {
-
   @Input() product;
+  brand: Brand;
 
   constructor(private sharedDataService: SharedDataService){}
 
-  brand: Brand;
-
   ngOnInit() {
-    // this.sharedDataService.configs.subscribe((response)=> {
-    //   this.brand = response.brands.find( ({ name }) => name === this.product.brand );
-    // })
+    this.sharedDataService.layout$.subscribe((response)=> {
+      this.brand = response.brands.find( ({ name }) => name === this.product.brand );
+    })
   }
 
   addToCart(quantity) {

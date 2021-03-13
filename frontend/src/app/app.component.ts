@@ -36,7 +36,7 @@ export class AppComponent implements OnInit {
       const date = new Date();
       const user = {
         favorite: [],
-        history: [],
+        history: {}[''],
         categories: [],
         lastVisit: date,
       };

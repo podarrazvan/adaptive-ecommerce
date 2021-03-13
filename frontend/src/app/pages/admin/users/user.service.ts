@@ -31,4 +31,9 @@ export class UsersService {
   checkCode(email, code) {
     return this.http.get(`${environment.api}/users/check-code/${email}/${code}`);
   }
+
+  updateHistory(email, history) {
+    const user = {email, history}
+    return this.http.put(`${environment.api}/users/history`, user);
+  }
 }

@@ -1,39 +1,30 @@
 <div class="product-page" *ngIf="!loading">
   <div class="top">
     <div class="product">
-     <app-product-img
-     *ngIf="!loading"
-      [product]="product"
-     ></app-product-img>
+      <app-product-img [product]="product"></app-product-img>
     </div>
     <div class="center">
-      <app-product-details
-      *ngIf="!loading"
-        [product]="product"
-      ></app-product-details>
+      <app-product-details [product]="product"></app-product-details>
     </div>
     <div class="right">
       <app-website-features></app-website-features>
     </div>
   </div>
-  <div
-  [innerHTML]="sanitizer.bypassSecurityTrustHtml(product.description)"
->
-  {{ product.description }}
-  <!-- <div class="recommended-products">
+  <div [innerHTML]="sanitizer.bypassSecurityTrustHtml(product.description)">
+    {{ product.description }}
+    <!-- <div class="recommended-products">
     <h1>Recommanded:</h1>
     <div class="products">
       <app-get-recommended-product
-        *ngFor="let t of times"
         [product]="recommendedProduct"
       ></app-get-recommended-product>
     </div>
-  </div> -->
-  <!-- <div class="short-description">
+  </div>
+    <div class="short-description">
     <h3>{{product.shortDescription}} </h3>
   </div>
   <div class="description">
     <h4>{{shortDescription}} </h4>
   </div> -->
-</div>
+  </div>
 </div>

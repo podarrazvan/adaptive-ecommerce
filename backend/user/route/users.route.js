@@ -7,7 +7,7 @@ const LOGS = require("../../shared/logs");
 const checkAuth = require("../../shared/middlewares/check-auth");
 const checkAdmin = require("../../shared/middlewares/check-admin");
 
-const User = require("../model/user.schema");
+const User = new require("../model/user.schema");
 
 const router = express.Router();
 
@@ -133,20 +133,21 @@ router.put("/update", checkAuth, (req, res, next) => {
   );
 });
 
-router.put("/history", (req, res, next) => {
-  const recivedHistoryLength = Object.values(req.body.history);
+router.put("/history", (req, res, next) => { // TODO add checkAuth
   const history = req.body.history;
-  User.findOne({ email: req.body.email }).then((user) => {
-    const oldHistoryLength = Object.values(user.history);
-    if (recivedHistoryLength.length === oldHistoryLength.length + 1) {
-      User.findByIdAndUpdate(
-        {
-          _id: req.body._id,
-        },
-        { history }
-      );
-    }
-  });
+  const email = req.body.email;
+  User.findOne({email}).then((user) => {
+    const _id = user._id;
+    const userHistory = new User({_id, history });
+    User.findOneAndUpdate({ _id}, userHistory).then(
+      (result) => {
+        res.status(200).json({ message: LOGS.USER.UPDATED });
+      },
+      (err) => {
+        res.status(401).json({ message: LOGS.USER.DELETED }); //! DELETED?!
+      }
+    );
+  })
 });
 
 router.get("/check-code/:email/:recoveryPasswordCode", (req, res, next) => {

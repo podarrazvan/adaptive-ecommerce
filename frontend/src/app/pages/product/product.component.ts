@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { User } from '../../shared/interfaces/user.interface';
 import { SharedDataService } from '../../shared/services/shared-data.service';
 import { ProductsService } from '../admin/products/products.service';
+import { UsersService } from '../admin/users/user.service';
 
 @Component({
   selector: 'app-product',
@@ -19,7 +20,8 @@ export class ProductComponent implements OnInit {
     private productsService: ProductsService,
     private route: ActivatedRoute,
     public sanitizer: DomSanitizer,
-    private sharedDataService: SharedDataService
+    private sharedDataService: SharedDataService,
+    private usersService: UsersService
   ) {}
 
   ngOnInit(): void {
@@ -29,13 +31,27 @@ export class ProductComponent implements OnInit {
       this.loading = false;
       this.sharedDataService.userDetails.subscribe((response) => {
         this.user = response;
-        if (this.user.history.indexOf(key) != -1) {
-        } else {
-          this.user.history.push(key);
+        const product = { product: key };
+        const exists = this.productExists(key);
+        if (!exists) {
+          this.user.history.push(product);
           this.sharedDataService.updateUserDetails(this.user);
           this.productsService.updateProduct(this.product);
+          if (this.user.email != undefined) {
+            this.usersService
+              .updateHistory(this.user.email, this.user.history)
+              .subscribe();
+          }
         }
       });
     });
+  }
+  productExists(key) {
+    for (let product of this.user.history) {
+      if (product.product == key) {
+        return true;
+      }
+    }
+    return false;
   }
 }
