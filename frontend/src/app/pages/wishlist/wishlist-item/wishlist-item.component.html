@@ -1,23 +1,23 @@
 <div class="item">
     <div class="delete-btn">
-        <button class="empty-btn">
+        <button (click)="deleteProduct()" class="empty-btn">
             X
         </button>
     </div>
     <div class="product-img">
-        <img [src]="product.img">
+        <img [src]="product.thumbnail">
     </div>
     <div class="product-title">
-        <a>{{product.title}}</a>
+        <a [routerLink]="['../','product',product._id]">{{product.title}}</a>
     </div>
     <div class="price">
         <p>$ {{product.price}}</p>
     </div>
     <div class="status">
-        <p>{{product.avalabile? "In stock": "Out of stock"}}</p>
+        <p>{{product.sold< product.initialQuantity? "In stock": "Out of stock"}}</p>
     </div>
     <div class="button">
-        <button class="gradient-btn">Add to cart</button>
+        <button (click)="addToCart()" class="gradient-btn">Add to cart</button>
     </div>
 </div>
 <hr>

@@ -58,6 +58,15 @@
   margin-top: 20px;
 }
 
+.cart-favorites-btn-group {
+  display: flex;
+  .favorites {
+    margin-left: 10px;
+    border-radius: 50%;
+    border: solid 1px $non-color-1;
+  }
+}
+
 .add-to-cart-btn {
   width: 210px;
   height: 47px;

@@ -150,6 +150,23 @@ router.put("/history", (req, res, next) => { // TODO add checkAuth
   })
 });
 
+router.put("/favorites", (req, res, next) => { // TODO add checkAuth
+  const favorites = req.body.favorites;
+  const email = req.body.email;
+  User.findOne({email}).then((user) => {
+    const _id = user._id;
+    const userFavorites = new User({_id, favorites });
+    User.findOneAndUpdate({ _id}, userFavorites).then(
+      (result) => {
+        res.status(200).json({ message: LOGS.USER.UPDATED });
+      },
+      (err) => {
+        res.status(401).json({ message: LOGS.USER.DELETED }); //! DELETED?!
+      }
+    );
+  })
+});
+
 router.get("/check-code/:email/:recoveryPasswordCode", (req, res, next) => {
   const { email, recoveryPasswordCode } = req.params;
   User.findOne({ email, recoveryPasswordCode }).then((user) => {

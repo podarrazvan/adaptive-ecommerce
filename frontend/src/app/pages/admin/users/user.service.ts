@@ -36,4 +36,9 @@ export class UsersService {
     const user = {email, history}
     return this.http.put(`${environment.api}/users/history`, user);
   }
+
+  updateFavorites(email, favorites) {
+    const user = {email, favorites}
+    return this.http.put(`${environment.api}/users/favorites`, user);
+  }
 }

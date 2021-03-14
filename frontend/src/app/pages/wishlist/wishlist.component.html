@@ -1,7 +1,9 @@
-<div class="wishlit">
+<div class="wishlit" *ngIf="products.length > 0">
     <h3 class="card-top">Wishlist</h3>
     <app-wishlist-item
         *ngFor="let prod of products"
         [product]='prod'
+        (delete)="deletedProduct($event)"
     ></app-wishlist-item>
 </div>
+<h1 *ngIf="products.length === 0">Nothing to show...</h1>

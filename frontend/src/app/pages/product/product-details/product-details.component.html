@@ -36,7 +36,7 @@
       </button>
     </div>
   </div>
-  <div>
+  <div class="cart-favorites-btn-group">
     <button (click)="addToCart(quantity)" class="add-to-cart-btn">
       <input
         #quantity
@@ -47,5 +47,6 @@
         [max]="product.quantity"
       /><span> Add to cart</span><img src="../../../../assets/shopping-cart.svg">
     </button>
+    <button (click)="addFavorite()" class="empty-btn favorites"><img src="../../../../assets/heart.svg"></button>
   </div>
 </div>
