@@ -10,7 +10,7 @@ export class ProductsService {
 
   createAndStoreProduct(product: Product) {
     const date = new Date().getTime();
-    const productNumber = Math.round((date / 1000)-1615160000);
+    const productNumber = Math.round(date / 1000 - 1615160000);
     const productData: Product = {
       title: product.title,
       category: product.category,
@@ -28,7 +28,7 @@ export class ProductsService {
       productNumber: productNumber,
       brand: product.brand,
       model: product.model,
-      sold:0,
+      sold: 0,
     };
     this.http
       .post<{ name: string }>(`${environment.api}/products`, productData, {
@@ -45,12 +45,9 @@ export class ProductsService {
   }
 
   editProduct(product: Product, _id) {
-    this.http
-    .put(`${environment.api}/products/${_id}`, product)
-    .subscribe();
+    this.http.put(`${environment.api}/products/${_id}`, product).subscribe();
   }
 
-  
   getProductsByCategory(category: string) {
     return this.http.get<Product[]>(
       `${environment.api}/products/category/${category}`
@@ -58,15 +55,11 @@ export class ProductsService {
   }
 
   getProduct(key: string) {
-    return this.http.get<Product>(
-      `${environment.api}/products/id/${key}`
-    );
+    return this.http.get<Product>(`${environment.api}/products/id/${key}`);
   }
 
   getProducts() {
-    return this.http.get<Product[]>(
-      `${environment.api}/products`
-    );
+    return this.http.get<Product[]>(`${environment.api}/products`);
   }
 
   getPaginatedProducts(page: number, limit: number) {
@@ -81,9 +74,11 @@ export class ProductsService {
   }
 
   getMainProducts(size: number) {
-    return this.http.get<{products: Product[], mainProduct: Product, mainAd: Product}>(
-      `${environment.api}/products/main-products?size=${size}`
-    );
+    return this.http.get<{
+      products: Product[];
+      mainProduct: Product;
+      mainAd: Product;
+    }>(`${environment.api}/products/main-products?size=${size}`);
   }
 
   getYouMayLikeProducts(size: number) {
@@ -93,14 +88,23 @@ export class ProductsService {
   }
 
   getBestSellersProducts() {
-    return this.http.get<{main: Product,middle: Product[], bottom: Product[]}>(
-      `${environment.api}/products/best-sellers`
-    );
+    return this.http.get<{
+      main: Product;
+      middle: Product[];
+      bottom: Product[];
+      extra: Product[];
+    }>(`${environment.api}/products/best-sellers`);
+  }
+
+  getTopRatedProducts() {
+    return this.http.get<Product[]>(`${environment.api}/products/top-rated`);
+  }
+
+  getFeaturedProducts(size: number) {
+    return this.http.get<Product[]>(`${environment.api}/products/featured-products?size=${size}`);
   }
 
   deleteProduct(id: string) {
-    return this.http.delete(
-      `${environment.api}/products/${id}`
-    );
+    return this.http.delete(`${environment.api}/products/${id}`);
   }
 }

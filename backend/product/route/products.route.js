@@ -137,9 +137,9 @@ router.get("/main-products", (req, res, next) => {
   const size = parseInt(req.query.size);
   Product.aggregate([{ $sample: { size } }]).then((prod) => {
     res.status(200).json({
-      products: prod.splice(0,2),
+      products: prod.splice(0, 2),
       mainAd: prod[0],
-      mainProduct: prod[1] 
+      mainProduct: prod[1],
     });
   });
 });
@@ -150,21 +150,40 @@ router.get("/you-may-like", (req, res, next) => {
     res.status(200).json(prod);
   });
 });
+
+router.get("/featured-products", (req, res, next) => {
+  const size = parseInt(req.query.size);
+  Product.aggregate([{ $sample: { size } }]).then((prod) => {
+    res.status(200).json(prod);
+  });
+});
 //!
 
 router.get("/best-sellers", (req, res, next) => {
-  const limit = 7
+  const extraProducts = 3;
+  const limit = 7 + extraProducts;
   Product.find()
     .sort({ sold: -1 })
     .limit(limit)
     .then((products) => {
       res.status(200).json({
         main: products[0],
-        middle: products.slice(1,4),
-        bottom: products.slice(4,7)
+        middle: products.slice(1, 4),
+        bottom: products.slice(4, 7),
+        extra: products.slice(7, limit),
       });
     });
 });
+
+//! Should be selected according to the rating
+//! after rating is implemented. See Trello [products] Top Rated Products
+router.get("/top-rated", (req, res, next) => {
+  const size = 3;
+  Product.aggregate([{ $sample: { size } }]).then((prod) => {
+    res.status(200).json(prod);
+  });
+});
+//!
 
 router.get("", (req, res, next) => {
   Product.find().then((products) => {

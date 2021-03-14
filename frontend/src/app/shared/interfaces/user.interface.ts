@@ -8,7 +8,7 @@ export interface User {
     password?: string;
     settings?: Settings;
     addresses?: Address;
-    favorites: string[];
+    favorites?: string[];
     history: [{
         product: string
     }];

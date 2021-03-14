@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { ProductsService } from 'src/app/pages/admin/products/products.service';
+import { Product } from '../../interfaces/product.interface';
+import { SharedDataService } from '../../services/shared-data.service';
 
 @Component({
   selector: 'app-bottom-products',
@@ -6,17 +9,28 @@ import { Component } from '@angular/core';
   styleUrls: ['./bottom-products.component.scss']
 })
 export class BottomProductsComponent  {
+  topRatedProducts: Product[];
+  featuredProducts: Product[];
+  topSellingProducts: Product[];
 
-  product1 = {img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrLV8locO81b2WCuM3H29R6IF4SMpfa95QuJlygT-z6EbWVp4yoodzSiz6IXf18FKg8kIkA04&usqp=CAc", title:"Samsung Galaxy S20", price:999};
+  constructor(private productsService: ProductsService,private sharedDataService: SharedDataService) {
+    this.productsService.getBestSellersProducts().subscribe((response) => {
+      const bestSellers = {
+        mainProduct: response.main,
+        middleProducts: response.middle,
+        bottomProducts: response.bottom,
+        extra: response.extra
+      };
+      this.sharedDataService.setBestSellers(bestSellers);
+      this.topSellingProducts = bestSellers.extra;
+    })
 
-  product2 = {img: "https://s13emagst.akamaized.net/products/32294/32293558/images/res_88cbf99e4a9995e798a9fe13a533e345.jpg?width=450&height=450&hash=E4BCB52AE771F568E51B9A8ADDB6617E", title:"Samsung Galaxy Note 20", price:1100};
+    this.productsService.getTopRatedProducts().subscribe((result) => {
+      this.topRatedProducts = result;
+    });
 
-  product3 = {img: "https://s13emagst.akamaized.net/products/30019/30018358/images/res_04135f21a2f8fb0914ef9ef489b2773b.jpg?width=450&height=450&hash=8707D4EBB77157F269C389E7D67544FE", title:" iPhone SE 2", price:500};
-
-  featuredProducts = [this.product1, this.product2, this.product3];
-
-  topRatedProducts = [this.product3, this.product2, this.product1];
-
-  topSellingProducts = [this.product2, this.product3, this.product1];
-
+    this.productsService.getFeaturedProducts(3).subscribe((result) => {
+      this.featuredProducts = result;
+    })  
+  }
 }
