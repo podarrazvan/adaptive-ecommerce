@@ -55,21 +55,42 @@ form {
   margin: 5px;
 }
 
+.tag-input-group {
+  display: flex;
+  .tag-label-input {
+    display: grid;
+  }
+  .tag-input {
+    height: 35px;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+  }
+  .black-btn {
+    margin-top: auto;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    height: 35px;
+    padding: 5px 10px;
+  }
+}
+
 .tags,
 .tags-area {
   margin-top: 20px;
 }
 
 .tags-area {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
   min-height: 150px;
   border: 1px solid #ccc !important;
   border-radius: $very-small-border-radius;
-  flex-direction: row !important;
-  column-count: 5; //TO FIX!
 }
 
 .tag-btn {
   margin-top: 10px;
+  min-width: 100px;
 }
 
 .quantityInput {

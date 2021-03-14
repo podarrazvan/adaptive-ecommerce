@@ -173,22 +173,21 @@
       <div class="tags col">
         <div clas="tags-input">
           <div class="form-row align-items-center">
-            <div class="col-auto">
-              <label for="tagInput"><b>Tags</b></label>
-              <input
-                type="text"
-                class="form-control"
-                id="tagInput"
-                placeholder="Tag"
-                #tag
-              />
-            </div>
-            <div class="col-auto">
-              <br />
+            <div class="tag-input-group">
+              <div class="tag-label-input">
+                <label for="tagInput"><b>Tags</b></label>
+                <input
+                  type="text"
+                  class="tag-input"
+                  id="tagInput"
+                  placeholder="Tag"
+                  #tag
+                />
+              </div>
               <button
                 type="button"
                 (click)="addTag(tag)"
-                class="btn btn-primary"
+                class="btn black-btn"
               >
                 Add tag
               </button>
@@ -222,7 +221,7 @@
             <button
               type="button"
               (click)="deleteTag(i)"
-              class="btn btn-success tag-btn"
+              class="main-btn tag-btn"
             >
               {{ tag }} | X
             </button>
@@ -252,7 +251,7 @@
     </div>
     <!-- <app-add-discount *ngIf="addDiscount"></app-add-discount> -->
     <hr />
-    <button class="btn btn-danger" (click)="onSubmit()">
+    <button class="gradient-btn" (click)="onSubmit()">
       {{ onEditMode ? "Edit" : "Add product" }}
     </button>
   </div>
