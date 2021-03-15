@@ -1,9 +1,9 @@
 .brands {
     display: flex;
+    margin-bottom: 10px;
     img {
         cursor: pointer;
         max-height: 100px;
-        width: 100px;
         margin: 20px 50px;
     }
     img:hover {

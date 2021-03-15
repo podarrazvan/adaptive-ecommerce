@@ -11,6 +11,7 @@ import { HomeBestSellersComponent } from './home/home-best-sellers/home-best-sel
 import { HomeNewReleasesComponent } from './home/home-new-releases/home-new-releases.component';
 import { HomeComponent } from './home/home.component';
 import { HomeModules } from './home/home.modules';
+import { ProductsByBrandComponent } from './products-by-brand/products-by-brand.component';
 import { SearchComponent } from './search/search.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
 
@@ -25,6 +26,7 @@ const COMPONENTS = [
   HomeBestSellersComponent,
   HomeNewReleasesComponent,
   WishlistComponent,
+  ProductsByBrandComponent
 ];
 
 @NgModule({

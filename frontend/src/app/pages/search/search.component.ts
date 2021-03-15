@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from '../admin/products/products.service';
 
@@ -7,22 +7,17 @@ import { ProductsService } from '../admin/products/products.service';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
 })
-export class SearchComponent implements OnInit {
-  constructor(
-    private route: ActivatedRoute,
-    private productsService: ProductsService,
-  ) {}
-
+export class SearchComponent {
   urlData: { search: string[]; category: string };
-
-  // products: Product[];
-
   products = [];
   productsData;
   categories: string[];
   category;
 
-  ngOnInit(): void {
+  constructor(
+    private route: ActivatedRoute,
+    private productsService: ProductsService
+  ) {
     this.urlData = {
       category: this.route.snapshot.params['category'],
       search: this.route.snapshot.params['search'].split('-'),
@@ -47,14 +42,12 @@ export class SearchComponent implements OnInit {
 
   getProductsByCategory(cat: string) {
     let products = [];
-    this.productsService
-      .getProductsByCategory(cat)
-      .subscribe((response) => {
-        for (let product of response) {
-          products.push(product);
-        }
-        this.filtreResult(products);
-      });
+    this.productsService.getProductsByCategory(cat).subscribe((response) => {
+      for (let product of response) {
+        products.push(product);
+      }
+      this.filtreResult(products);
+    });
   }
 
   filtreResult(products) {

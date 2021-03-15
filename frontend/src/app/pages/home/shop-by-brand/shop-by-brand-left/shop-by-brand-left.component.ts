@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { SharedDataService } from '../../../../shared/services/shared-data.service';
+import { Component, Input } from '@angular/core';
+import { Brand } from 'src/app/shared/interfaces/brand.interface';
 
 @Component({
   selector: 'app-shop-by-brand-left',
@@ -7,5 +7,5 @@ import { SharedDataService } from '../../../../shared/services/shared-data.servi
   styleUrls: ['./shop-by-brand-left.component.scss'],
 })
 export class ShopByBrandLeftComponent{
-  constructor(public sharedDataService: SharedDataService) {}
+  @Input() brand: Brand;
 }

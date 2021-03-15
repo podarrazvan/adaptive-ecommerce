@@ -1,7 +1,5 @@
-<div *ngIf="(sharedDataService.brand$ | async) as brand" class="brand-card">
-    <img [src]="brand.img" alt="">
-    <h5>All the Lorem Ipsum generators on the Internet
-        tend to repeat predefined chunks as necessary, making this the first true generator on the Internetandful
-        of model sentence</h5>
-    <button [routerLink]="brand.name">Shop this brand</button>
+<div class="brand-card">
+    <img [src]="brand.image" [alt]="brand.name">
+    <h5>{{brand.description}}</h5>
+    <button [routerLink]="['/search-by-brand',brand.name]">Shop this brand</button>
 </div>

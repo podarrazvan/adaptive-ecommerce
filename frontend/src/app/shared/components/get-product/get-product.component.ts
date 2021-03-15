@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
 import { Product } from '../../interfaces/product.interface';
 
 @Component({
@@ -11,13 +10,9 @@ export class GetProductComponent {
 
   @Input() product: Product;
   @Input() fullContent: boolean;
+  @Input() search: boolean;
 
   showHiddenBtn = false;
 
-  constructor(private router: Router) { }
-
-  openProduct() {
-    this.router.navigate(['/product', this.product._id]);
-  }
 
 }

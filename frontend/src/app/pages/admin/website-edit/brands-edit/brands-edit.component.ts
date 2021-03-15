@@ -40,9 +40,13 @@ export class BrandsEditComponent {
     return this.formGroup.get('name').value;
   }
 
+  get brandDescription() {
+    return this.formGroup.get('description').value;
+  }
+
   addNewValue() {
     this.brandsForm.push(this.createBrand());
-    this.brands.push({ name: this.brandName, image: this.brandLogoPath }); //! NOT OK!
+    this.brands.push({ name: this.brandName,description: this.brandDescription, image: this.brandLogoPath }); //! NOT OK!
     this.configsService.updateWebsite('websiteBrands', this.brands).subscribe();
   }
 
@@ -94,6 +98,7 @@ export class BrandsEditComponent {
     this.formGroup = fb.group({
       name: fb.control(null),
       image: fb.control(null),
+      description: fb.control(null)
     });
   }
 }

@@ -1,6 +1,6 @@
 <app-shop-by-brand-top></app-shop-by-brand-top>
-<app-shop-by-brand-logos></app-shop-by-brand-logos>
+<app-shop-by-brand-logos [brands]="brands"(selectedBrand)="selected($event)"></app-shop-by-brand-logos>
 <div class="bottom">
-    <app-shop-by-brand-left></app-shop-by-brand-left>
-    <app-shop-by-brand-products></app-shop-by-brand-products>
+    <app-shop-by-brand-left [brand]="selectedBrand"></app-shop-by-brand-left>
+    <app-shop-by-brand-products [products]="products"></app-shop-by-brand-products>
 </div>

@@ -8,7 +8,7 @@ import { SearchComponent } from './pages/search/search.component';
 import { CategoriesComponent } from './pages/categories/categories.component';
 import { OrderStatusPageComponent } from './pages/checkout/order-status-page/order-status-page.component';
 import { AuthComponent } from './auth/auth.component';
-import { AdminComponent } from './pages/admin/admin.component';
+import { ProductsByBrandComponent } from './pages/products-by-brand/products-by-brand.component';
 
 const routes: Routes = [
   {
@@ -25,6 +25,7 @@ const routes: Routes = [
 
   { path: 'wishlist', component: WishlistComponent },
   { path: 'search/:category/:search', component: SearchComponent },
+  { path: 'search-by-brand/:brand', component: ProductsByBrandComponent },
   {
     path: 'product',
     loadChildren: () =>

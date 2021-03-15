@@ -7,6 +7,7 @@ const websiteSchema = mongoose.Schema({
     {
       name: { type: String },
       image: { type: String },
+      description: { type: String },
     },
   ],
   shipping: [

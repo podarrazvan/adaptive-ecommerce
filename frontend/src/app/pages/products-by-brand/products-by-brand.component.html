@@ -1,0 +1,14 @@
+<ng-container *ngIf="!loading">
+  <div class="container">
+    <div *ngIf="products.length == 0">
+      <h1>Nothing to show...</h1>
+    </div>
+  </div>
+  <div class="products-grid">
+    <app-get-product
+      *ngFor="let product of products"
+      [product]="product"
+      [search]="true"
+    ></app-get-product>
+  </div>
+</ng-container>

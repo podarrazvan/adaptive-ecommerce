@@ -7,6 +7,7 @@
   border: 2px solid $gray-80;
   border-radius: $small-border-radius;
   padding: 30px;
+  cursor: pointer;
   &:hover {
     border: none;
     border-bottom-left-radius: 0;
@@ -109,4 +110,8 @@
 
 .compare {
   float: right;
+}
+
+.search {
+  height: 420px;
 }

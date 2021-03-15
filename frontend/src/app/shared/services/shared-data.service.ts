@@ -70,8 +70,4 @@ export class SharedDataService implements OnDestroy {
   updateCart(newStatus: boolean) {
     this.emptyCartSubject$.next(newStatus);
   }
-
-  updateBrand(newBrand) {
-    this.brandSubject$.next(newBrand);
-  }
 }

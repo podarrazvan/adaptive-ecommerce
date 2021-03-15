@@ -1,4 +1,9 @@
-<div class="product" [class.fullContent]="fullContent">
+<div
+  class="product"
+  [class.fullContent]="fullContent"
+  [class.search]="search"
+  [routerLink]="['/product', product._id]"
+>
   <div class="cut" *ngIf="product.cut">{{ product.cut }}%</div>
   <div class="img">
     <img [src]="product.thumbnail" [alt]="product.title" />
