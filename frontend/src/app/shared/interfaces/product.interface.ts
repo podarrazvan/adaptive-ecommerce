@@ -3,9 +3,8 @@ export interface Product {
   description: string;
   price: number;
   category: string;
-  homepagePosition?: string;
   tags: string[];
-  quantity:number;
+  quantity: number;
   images: any;
   thumbnail: string;
   mainImg?: string;
@@ -14,7 +13,7 @@ export interface Product {
   cut?: number;
   minPrice: number;
   salesWeekTarget: number;
-  initialQuantity:number;
+  initialQuantity: number;
   views: number;
   productNumber: number;
   brand: string;

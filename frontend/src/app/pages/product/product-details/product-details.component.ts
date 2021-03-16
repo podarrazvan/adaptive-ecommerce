@@ -27,15 +27,33 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   addToCart(quantity) {
-    let cart: CartItem[] = [];
-    const cartItem: CartItem = {
-      id: this.product._id,
-      quantity: quantity.value,
-      price: +this.product.price * +quantity.value,
-      name: this.product.title,
-    };
-    cart.push(cartItem);
-    localStorage.setItem('cart', JSON.stringify(cart));
+    let cart = JSON.parse(localStorage.getItem('cart'));
+    if (cart === null) {
+      cart = [];
+    }
+    const exists = this.productExists(this.product._id, cart);
+    if (!exists) {
+      const cartItem: CartItem = {
+        id: this.product._id,
+        quantity: quantity.value,
+        price: +this.product.price * +quantity.value,
+        name: this.product.title,
+      };
+      cart.push(cartItem);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      alert('Added to cart!');
+    } else {
+      alert('Already in cart!');
+    }
+  }
+
+  productExists(id, cart) {
+    for (let product of cart) {
+      if (product.id == id) {
+        return true;
+      }
+    }
+    return false;
   }
 
   addFavorite() {
@@ -45,10 +63,12 @@ export class ProductDetailsComponent implements OnInit {
       if (user.favorites.indexOf(id) === -1) {
         user.favorites.push(id);
         this.sharedDataService.updateUserDetails(user);
-        if(user.email != undefined) {
-          this.usersService.updateFavorites(user.email, user.favorites).subscribe(()=>{
-            alert('Added to favorites!');
-          });
+        if (user.email != undefined) {
+          this.usersService
+            .updateFavorites(user.email, user.favorites)
+            .subscribe(() => {
+              alert('Added to favorites!');
+            });
         }
       }
     });

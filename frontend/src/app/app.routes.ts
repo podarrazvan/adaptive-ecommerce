@@ -9,6 +9,7 @@ import { CategoriesComponent } from './pages/categories/categories.component';
 import { OrderStatusPageComponent } from './pages/checkout/order-status-page/order-status-page.component';
 import { AuthComponent } from './auth/auth.component';
 import { ProductsByBrandComponent } from './pages/products-by-brand/products-by-brand.component';
+import { SpecialForYouComponent } from './pages/special-for-you/special-for-you.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'wishlist', component: WishlistComponent },
   { path: 'search/:category/:search', component: SearchComponent },
   { path: 'search-by-brand/:brand', component: ProductsByBrandComponent },
+  { path: 'special-for-you', component: SpecialForYouComponent }, //TODO add authGuard
   {
     path: 'product',
     loadChildren: () =>

@@ -1,40 +1,61 @@
 <div class="carousel">
-    <div class="product" *ngFor="let card of singleSlide">
-        <div class="product-img">
-            <div class="cut">
-                <p>{{card.price | percentage: card.discount.price}}</p>
-            </div>
-            <img [src]="card.images[0]" [alt]="card.title">
-        </div>
-        <div class="product-price">
-            <span class="new">${{card.price | newPrice:card.discount.price}}</span>
-            <span class="old">${{card.price }}</span>
-        </div>
-        <div class="product-title">
-            <h3>
-                <a [routerLink]="['product',card._id]">{{card.title}}</a>
-            </h3>
-        </div>
-        <div class="deal-progress">
-            <div class="deal-stock">
-                <span class="stock-sold">{{card.initialQuantity | percentage: card.quantity}} already claimed</span>
-                <span class="stock-available">Available: <strong>{{card.quantity}}</strong></span>
-            </div>
-            <div class="progress">
-                <span class="progress-bar" [ngStyle]="{'width.%':card.progressBar}"></span>
-            </div>
-        </div>
-        <div class="deal-end">
-            <h3>Deal ends in:</h3>
-            <app-countdown [endDate]="card.discount.expirationDate"></app-countdown>
-        </div>
+  <div class="product" *ngFor="let card of singleSlide">
+    <div class="product-img">
+      <div class="cut">
+        <p>{{ card.price | percentage: card.discount.price }}</p>
+      </div>
+      <img [src]="card.images[0]" [alt]="card.title" />
     </div>
-    <a class="carousel-control-prev" (click)="previous()" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="carousel-control-next" (click)="next()" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
+    <div class="product-price">
+      <span class="new">${{ card.price | newPrice: card.discount.price }}</span>
+      <span class="old">${{ card.price }}</span>
+    </div>
+    <div class="product-title">
+      <h3>
+        <a [routerLink]="['/product', card._id]">{{ card.title }}</a>
+      </h3>
+    </div>
+    <div class="deal-progress">
+      <div class="deal-stock">
+        <span class="stock-sold"
+          >{{ card.initialQuantity | percentage: card.quantity }} already
+          claimed</span
+        >
+        <span class="stock-available"
+          >Available: <strong>{{ card.quantity }}</strong></span
+        >
+      </div>
+      <div class="progress">
+        <span
+          class="progress-bar"
+          [ngStyle]="{ 'width.%': card.progressBar }"
+        ></span>
+      </div>
+    </div>
+    <div class="deal-end">
+      <h3>Deal ends in:</h3>
+      <app-countdown [endDate]="card.discount.expirationDate"></app-countdown>
+    </div>
+    <div class="add-to-cart-btn">
+      <button (click)="addToCart(card)" class="gradient-btn">Claim</button>
+    </div>
+  </div>
+  <a
+    class="carousel-control-prev"
+    (click)="previous()"
+    role="button"
+    data-slide="prev"
+  >
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a
+    class="carousel-control-next"
+    (click)="next()"
+    role="button"
+    data-slide="next"
+  >
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
 </div>

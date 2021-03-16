@@ -111,6 +111,10 @@ export class ProductsService {
     return this.http.get<Product[]>(`${environment.api}/products/featured-products?size=${size}`);
   }
 
+  getSpecialForYouProducts() {
+    return this.http.get<Product[]>(`${environment.api}/products/special-for-you`);
+  }
+
   deleteProduct(id: string) {
     return this.http.delete(`${environment.api}/products/${id}`);
   }

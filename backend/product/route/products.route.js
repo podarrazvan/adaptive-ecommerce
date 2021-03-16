@@ -1,5 +1,6 @@
 const express = require("express");
 const Product = require("../model/product.schema");
+const Discount = require("../../discount/model/discount.schema");
 
 const LOGS = require("../../shared/logs");
 
@@ -128,10 +129,10 @@ router.get("/paginated/brand", (req, res, next) => {
   const limit = parseInt(req.query.limit);
   const startIndex = (page - 1) * limit;
   const endIndex = page * limit;
-  
+
   const results = {};
 
-  if (endIndex < (Product.countDocuments().exec())) {
+  if (endIndex < Product.countDocuments().exec()) {
     results.next = {
       page: page + 1,
       limit: limit,
@@ -145,10 +146,12 @@ router.get("/paginated/brand", (req, res, next) => {
     };
   }
   try {
-      Product.find({brand}).limit(limit).skip(startIndex).then((documents) => {
-      res.status(200).json(documents);
-    });
-  
+    Product.find({ brand })
+      .limit(limit)
+      .skip(startIndex)
+      .then((documents) => {
+        res.status(200).json(documents);
+      });
   } catch (e) {
     res.status(401).json({ message: e.message });
   }
@@ -190,7 +193,57 @@ router.get("/featured-products", (req, res, next) => {
     res.status(200).json(prod);
   });
 });
-//!
+
+router.get("/special-for-you", (req, res, next) => {
+  //TODO add checkAuth
+  const limit = 6;
+  const forUser = "60142c44c463fe314b645bbc"; //! Replace this with user's id!
+  Discount.find({ forUser }).then((discounts) => {
+    let activePromotions = [];
+    const expirationDate = new Date();
+    for (let promotion of discounts) {
+      if (promotion.expirationDate > expirationDate) {
+        activePromotions.push(promotion);
+      } else {
+        Discount.findByIdAndDelete({ _id: promotion._id }).then(() => {});
+      }
+    }
+    if (activePromotions.length >= limit) {
+      res.status(200).json(activePromotions);
+    } else {
+      Product.find({ $and: [{ "autoMode.minPrice": { $ne: null } }] })
+        .sort({ sold: 1 })
+        .limit(limit)
+        .then((products) => {
+          expirationDate.setDate(new Date().getDate() + 1);
+          let promotions = [];
+          for (let product of products) {
+            const maxDiscount = product.autoMode.minPrice;
+            const productPrice = product.price;
+            const minDiscount = productPrice - productPrice * 0.1; // DISCOUNT WILL BE AT LAST 10%
+            const price = Math.round(
+              productPrice -
+                (Math.random() * (minDiscount - maxDiscount) + maxDiscount)
+            );
+            const discount = new Discount({
+              price,
+              expirationDate,
+              productId: product._id,
+              forUser,
+            });
+            discount.save().then((createdDiscount) => {
+              const id = createdDiscount._id;
+              promotions.push(id);
+              if (promotions.length === limit) {
+                res.status(200).json(promotions);
+              }
+            });
+          }
+        });
+    }
+  });
+});
+// //!
 
 router.get("/best-sellers", (req, res, next) => {
   const extraProducts = 3;

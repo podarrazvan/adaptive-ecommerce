@@ -1,9 +1,10 @@
 const mongoose = require("mongoose");
 
-const couponSchema = mongoose.Schema({
+const discountSchema = mongoose.Schema({
   price: { type: Number, requird: true },
   expirationDate:{type: Date, requird: true},
-  productId: {type: String, requird: true}
+  productId: {type: String, requird: true},
+  forUser: {type: String}
 });
 
-module.exports = mongoose.model("Discounts", couponSchema);
+module.exports = mongoose.model("Discounts", discountSchema);
