@@ -16,7 +16,7 @@ export class SpecialForYouComponent {
       this.discountService.getPromotions().subscribe(response => {
         for(let promotion of response) {
           const promo = {
-            price: promotion.price,
+            cut: promotion.cut,
             expirationDate: promotion.expirationDate
           }
           this.getProducts(promotion.productId, promo);

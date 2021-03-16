@@ -1,6 +1,6 @@
 export interface Discount {
     id?: string;
-    price: number;
+    cut: number;
     expirationDate: Date;
     productId: string;
 }

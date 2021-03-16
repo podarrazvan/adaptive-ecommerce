@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { DiscountService } from 'src/app/shared/services/database/discount.service';
 import { User } from '../../shared/interfaces/user.interface';
 import { SharedDataService } from '../../shared/services/shared-data.service';
 import { ProductsService } from '../admin/products/products.service';
@@ -11,7 +12,7 @@ import { UsersService } from '../admin/users/user.service';
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss'],
 })
-export class ProductComponent implements OnInit {
+export class ProductComponent {
   product;
   loading = true;
   user: User;
@@ -21,14 +22,12 @@ export class ProductComponent implements OnInit {
     private route: ActivatedRoute,
     public sanitizer: DomSanitizer,
     private sharedDataService: SharedDataService,
-    private usersService: UsersService
-  ) {}
-
-  ngOnInit(): void {
+    private usersService: UsersService,
+    private discountService: DiscountService
+  ) {
     const key = this.route.snapshot.params['key'];
     this.productsService.getProduct(key).subscribe((response) => {
-      this.product = response;
-      this.loading = false;
+      this.checkPromotion(response);
       this.sharedDataService.userDetails.subscribe((response) => {
         this.user = response;
         const product = { product: key };
@@ -46,6 +45,46 @@ export class ProductComponent implements OnInit {
       });
     });
   }
+
+  checkPromotion(product) {
+    let price;
+    //TODO check auth
+    let authenticated = false;
+    //
+    if (authenticated) {
+      this.discountService
+        .checkAuthForPromotion(product._id)
+        .subscribe((response) => {
+          if (response.length > 0) {
+            for (let discount of response) {
+              price = product.price - discount.cut;
+              this.product = product;
+              this.product.price = price;
+              this.loading = false;
+            }
+          } else {
+            this.product = product;
+            this.loading = false;
+          }
+        });
+    } else {
+      this.discountService
+        .checkForPromotion(product._id)
+        .subscribe((response) => {
+          if (response != null) {
+            price = product.price - response.cut;
+          } else {
+            price = product.price;
+          }
+          this.product = product;
+          this.product.price = price;
+          this.loading = false;
+        });
+    }
+  }
+
+  setProduct() {}
+
   productExists(key) {
     for (let product of this.user.history) {
       if (product.product == key) {

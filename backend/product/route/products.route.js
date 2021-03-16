@@ -221,12 +221,12 @@ router.get("/special-for-you", (req, res, next) => {
             const maxDiscount = product.autoMode.minPrice;
             const productPrice = product.price;
             const minDiscount = productPrice - productPrice * 0.1; // DISCOUNT WILL BE AT LAST 10%
-            const price = Math.round(
+            const cut = Math.round(
               productPrice -
                 (Math.random() * (minDiscount - maxDiscount) + maxDiscount)
             );
             const discount = new Discount({
-              price,
+              cut,
               expirationDate,
               productId: product._id,
               forUser,

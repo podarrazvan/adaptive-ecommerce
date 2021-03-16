@@ -35,7 +35,7 @@ export class DiscountModalComponent {
   }
   private buildFormGroup() {
     this.discountForm = this.formBuilder.group({
-      price: ['', Validators.required],
+      cut: ['', Validators.required],
       expirationDate: ['', Validators.required],
       id: [''],
     });

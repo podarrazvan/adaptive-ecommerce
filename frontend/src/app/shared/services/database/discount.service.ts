@@ -18,7 +18,7 @@ export class DiscountService {
 
   createDiscount(discount: Discount) {
     const discountData = {
-      price: discount.price,
+      cut: discount.cut,
       expirationDate: discount.expirationDate,
       productId: discount.id,
     };
@@ -31,5 +31,13 @@ export class DiscountService {
 
   getCoupon(code) {
     return this.http.get<Coupon>(`${environment.api}/coupons/${code}`);
+  }
+
+  checkForPromotion(product) {
+    return this.http.get<Discount>(`${environment.api}/discount/by-product/${product}`);
+  }
+
+  checkAuthForPromotion(product) {//! send user _id too!
+    return this.http.get<Discount[]>(`${environment.api}/discount/by-product/auth/${product}`);
   }
 }

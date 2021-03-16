@@ -63,9 +63,10 @@ export class ProductsService {
   }
 
   getPaginatedProducts(page: number, limit: number) {
-    return this.http.get<Product[]>(
-      `${environment.api}/products/paginated?page=${page}&limit=${limit}`
-    );
+    return this.http.get<{
+      next: { page: number; limit: number };
+      results: Product[];
+    }>(`${environment.api}/products/paginated?page=${page}&limit=${limit}`);
   }
 
   getPaginatedProductsByBrand(page: number, limit: number, brand: string) {
@@ -108,11 +109,15 @@ export class ProductsService {
   }
 
   getFeaturedProducts(size: number) {
-    return this.http.get<Product[]>(`${environment.api}/products/featured-products?size=${size}`);
+    return this.http.get<Product[]>(
+      `${environment.api}/products/featured-products?size=${size}`
+    );
   }
 
   getSpecialForYouProducts() {
-    return this.http.get<Product[]>(`${environment.api}/products/special-for-you`);
+    return this.http.get<Product[]>(
+      `${environment.api}/products/special-for-you`
+    );
   }
 
   deleteProduct(id: string) {

@@ -18,16 +18,6 @@ export class ProductsComponent implements OnInit {
   productToAddOnHomepage: Product;
   idOfProductToAddOnHomepage: string;
 
-  constructor(
-    private sharedDataService: SharedDataService,
-    private router: Router,
-    private deleteAlertService: DeleteAlertService,
-    private productsService: ProductsService,
-    private imagesService: ImagesService,
-  ) {}
-
-  mobile: boolean;
-
   products: Product[];
   productsData;
 
@@ -43,14 +33,24 @@ export class ProductsComponent implements OnInit {
   discountProductId: string;
   showDiscount = false;
 
+  constructor(
+    private sharedDataService: SharedDataService,
+    private router: Router,
+    private deleteAlertService: DeleteAlertService,
+    private productsService: ProductsService,
+    private imagesService: ImagesService
+  ) {}
+
   ngOnInit(): void {
-    this.mobile = this.sharedDataService.mobile;
-    this.getProducts(1,10);
+    this.getProducts(1, 10);
   }
 
-
   getProducts(page, limit) {
-    this.productsService.getPaginatedProducts(page,limit).subscribe(response => this.products = response);
+    this.productsService
+      .getPaginatedProducts(page, limit)
+      .subscribe((response) => {
+        this.products = response.results;
+      });
   }
 
   onDelete(id, index, img) {
@@ -71,7 +71,7 @@ export class ProductsComponent implements OnInit {
   }
 
   openEdit(type: string, product: Product) {
-   this.showEditProduct = true;
+    this.showEditProduct = true;
   }
 
   close(type: string) {
@@ -104,5 +104,4 @@ export class ProductsComponent implements OnInit {
     this.discountProductId = id;
     this.showDiscount = true;
   }
-
 }

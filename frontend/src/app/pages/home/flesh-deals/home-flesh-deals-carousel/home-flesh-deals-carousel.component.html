@@ -2,12 +2,12 @@
   <div class="product" *ngFor="let card of singleSlide">
     <div class="product-img">
       <div class="cut">
-        <p>{{ card.price | percentage: card.discount.price }}</p>
+        <p>{{ card.price | percentage: card.discount.cut }}</p>
       </div>
       <img [src]="card.images[0]" [alt]="card.title" />
     </div>
     <div class="product-price">
-      <span class="new">${{ card.price | newPrice: card.discount.price }}</span>
+      <span class="new">${{ card.price | newPrice: card.discount.cut }}</span>
       <span class="old">${{ card.price }}</span>
     </div>
     <div class="product-title">
