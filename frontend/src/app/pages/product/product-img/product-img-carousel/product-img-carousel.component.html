@@ -1,9 +1,9 @@
 <div class="carousel">
-    <button class="empty-btn"><mat-icon>keyboard_arrow_up</mat-icon></button>
-    <div *ngFor="let img of images; let i = index">
-        <div class="secondary-img" *ngIf="i != selectedImgIndex">
-          <img (click)="imgSelected(i)" [src]="img" alt="secondary image" />
+    <button (click)="next()" class="empty-btn"><mat-icon>keyboard_arrow_up</mat-icon></button>
+    <div *ngFor="let img of singleSlide; let i = index">
+        <div class="secondary-img">
+          <img (click)="imgSelected(img)" [src]="img" alt="secondary image" />
         </div>
       </div>
-    <button class="empty-btn"><mat-icon>keyboard_arrow_down</mat-icon></button>
+    <button (click)="previous()" class="empty-btn"><mat-icon>keyboard_arrow_down</mat-icon></button>
 </div>

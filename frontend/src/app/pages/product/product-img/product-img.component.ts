@@ -8,6 +8,6 @@ import { Component, Input } from '@angular/core';
 export class ProductImgComponent {
 
   @Input() product;
-  mainImgIndex;
+  selectedImg;
 
 }
