@@ -40,6 +40,7 @@ import { PercentagePipe } from '../pipes/percentage.pipe';
 import { CountdownModule } from 'ngx-countdown';
 import { CountdownComponent } from '../components/countdown/countdown.component';
 import { InfoAlertComponent } from '../components/info-alert/info-alert.component';
+import { PaginationComponent } from '../components/pagination/pagination.component';
 
 const COMPONENTS = [
   NavbarComponent,
@@ -67,7 +68,8 @@ const COMPONENTS = [
   PercentagePipe,
   NewPricePipe,
   CountdownComponent,
-  InfoAlertComponent
+  InfoAlertComponent,
+  PaginationComponent,
 ];
 
 const MODULES = [

@@ -33,6 +33,9 @@ export class ProductsComponent implements OnInit {
   discountProductId: string;
   showDiscount = false;
 
+  currentPage = 1;
+  haveNext = true;
+
   constructor(
     private sharedDataService: SharedDataService,
     private router: Router,
@@ -42,13 +45,18 @@ export class ProductsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getProducts(1, 10);
+    this.getProducts(this.currentPage, 10);
   }
 
   getProducts(page, limit) {
     this.productsService
       .getPaginatedProducts(page, limit)
       .subscribe((response) => {
+        if (response.next === undefined) {
+          this.haveNext = false;
+        } else {
+          this.haveNext = true;
+        }
         this.products = response.results;
       });
   }
@@ -103,5 +111,15 @@ export class ProductsComponent implements OnInit {
   openDiscount(id) {
     this.discountProductId = id;
     this.showDiscount = true;
+  }
+
+  previousPage() {
+    this.currentPage--;
+    this.getProducts(this.currentPage, 10);
+  }
+
+  nextPage() {
+    this.currentPage++;
+    this.getProducts(this.currentPage, 10);
   }
 }

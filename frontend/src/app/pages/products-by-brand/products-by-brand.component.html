@@ -11,4 +11,5 @@
       [search]="true"
     ></app-get-product>
   </div>
+  <app-pagination [haveNext]="haveNext" (nextPage)="nextPage()" (previousPage)="previousPage()"></app-pagination>
 </ng-container>

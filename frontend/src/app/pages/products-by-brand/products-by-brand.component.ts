@@ -11,15 +11,36 @@ import { ProductsService } from '../admin/products/products.service';
 export class ProductsByBrandComponent {
   loading = true;
   products: Product[];
-  page = 1;
-  productsOnPage = 20;
+
+  productsOnPage = 6;
+  currentPage = 1;
+  haveNext = true;
 
   constructor(private route: ActivatedRoute, private productsService: ProductsService) {
-    const brand = this.route.snapshot.params['brand'];
-    this.productsService.getPaginatedProductsByBrand(this.page, this.productsOnPage, brand).subscribe((response)=> {
-      this.products = response;
-      this.loading = false;
-    })
+    this.getProducts(this.currentPage, this.productsOnPage);
    }
+
+   getProducts(page, limit) {
+    const brand = this.route.snapshot.params['brand'];
+    this.productsService.getPaginatedProductsByBrand(page, limit, brand).subscribe((response)=> {
+        if (response.length < limit) { //!FIX THIS  USE SOMETHING SIMILAR WITH product.component
+          this.haveNext = false;
+        } else {
+          this.haveNext = true;
+        }
+        this.loading = false;
+        this.products = response;
+      });
+  }
+
+   previousPage() {
+    this.currentPage--;
+    this.getProducts(this.currentPage, this.productsOnPage);
+  }
+
+  nextPage() {
+    this.currentPage++;
+    this.getProducts(this.currentPage, this.productsOnPage);
+  }
 
 }

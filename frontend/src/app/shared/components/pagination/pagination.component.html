@@ -1,0 +1,9 @@
+<div class="pagination">
+  <div class="control">
+    <button (click)="previous()" *ngIf="currentPage != 1" class="empty-btn">
+      {{ "\<" }}
+    </button>
+    {{ currentPage }}
+    <button (click)="next()" *ngIf="haveNext" class="empty-btn">></button>
+  </div>
+</div>

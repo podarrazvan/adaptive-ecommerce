@@ -3,7 +3,6 @@
   <div *ngIf="deleteAlert">
     <app-delete-alert itemToDelete="product"></app-delete-alert>
   </div>
-  <!--Desktop version-->
   <table class="table">
     <thead>
       <tr>
@@ -19,7 +18,7 @@
     </thead>
     <tbody *ngFor="let product of products; let i = index">
       <tr>
-        <td scope="row">{{ i + 1 }}</td>
+        <td scope="row">{{currentPage===1? i+1 : (i + ((currentPage-1) * 10))+1}}</td>
         <td>
           <img
             class="product-img"
@@ -56,4 +55,5 @@
       </tr>
     </tbody>
   </table>
+  <app-pagination [haveNext]="haveNext" (nextPage)="nextPage()" (previousPage)="previousPage()"></app-pagination>
 </div>
