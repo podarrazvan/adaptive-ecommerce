@@ -2,16 +2,22 @@
 @import "/src/app/shared/styles/border-radius";
 
 .product {
-  height: 100%;
+  height: 420px;
   position: relative;
   border: 2px solid $gray-80;
   border-radius: $small-border-radius;
   padding: 30px;
+  //TODO delete when you finish .product-buttons
+  margin-bottom: 10px;
+  ////////////////////
   cursor: pointer;
   &:hover {
     border: none;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
+    //TODO delete when you finish .product-buttons
+    border-radius: $small-border-radius;
+    //
     box-shadow: 0 7px 20px 0 rgba(36, 41, 66, 0.15);
   }
 }
@@ -90,7 +96,8 @@
   background-color: $non-color-2;
 }
 
-.product:hover + .product-buttons, .product-buttons:hover{
+.product:hover + .product-buttons,
+.product-buttons:hover {
   opacity: 1;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;

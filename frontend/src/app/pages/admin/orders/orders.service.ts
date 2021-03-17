@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Order } from 'src/app/shared/interfaces/order.interface';
 
-@Injectable()
+@Injectable({providedIn:"root"})
 export class OrdersService {
   error: any;
 
