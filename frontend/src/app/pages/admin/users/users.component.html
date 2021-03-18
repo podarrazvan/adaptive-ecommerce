@@ -1,32 +1,33 @@
 <div class="content">
-    <table class="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Username</th>
-            <th scope="col">Email</th>
-            <th scope="col">Is Active</th>
-            <th scope="col">Delete</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let userData of users; let i = index">
-            <td>
-              {{i}}
-            </td>
-            <td>
-              {{userData.user.email}}
-            </td>
-            <td>
-              {{userData.user.username}}
-            </td>
-            <td>
-              <!-- is active -->
-            </td>
-            <td>
-              <button class="main-btn">Delete</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+  <table class="table table-striped" *ngIf="!loading">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Email</th>
+        <th scope="col">Username</th>
+        <!-- <th scope="col" class="active">Is Active</th> -->
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users; let i = index">
+        <td>
+          {{ i + 1 }}
+        </td>
+        <td>
+          {{ user.email }}
+        </td>
+        <td>
+          {{ user.username }}
+        </td>
+        <!-- <td>
+          is active
+        </td> -->
+        <td>
+          <button (click)="deleteUser(i)" class="main-btn">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <app-pagination [haveNext]="haveNext" (nextPage)="nextPage()" (previousPage)="previousPage()"></app-pagination>
 </div>

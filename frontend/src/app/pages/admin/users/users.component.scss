@@ -1,10 +1,15 @@
 .content {
-    margin-top: 50px;
-    width: 100%;
+  margin-top: 50px;
+  width: 100%;
 }
 
 table {
-    max-width: 500px;
-    margin: auto;
-    color: white;
+  max-width: 500px;
+  margin: auto;
+}
+
+.active {
+  display: flex;
+  min-width: 100px;
+  border-bottom: 1px solid #dee2e6; //! this should not be here, fix it!
 }

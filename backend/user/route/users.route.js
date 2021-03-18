@@ -11,10 +11,8 @@ const User = new require("../model/user.schema");
 
 const router = express.Router();
 
-router.get("", (req, res, next) => {
-  User.find().then((documents) => {
-    res.status(200).json(documents);
-  });
+router.get("", paginatedResults(User),(req, res, next) => { //! add checkAdmin!
+  res.json(res.paginatedResults);
 });
 
 router.post("/signup", (req, res, next) => {
@@ -232,5 +230,50 @@ router.delete("/admins/delete/:username", checkAdmin, (req, res, next) => {
     }
   );
 });
+
+router.delete("/delete/:username", (req, res, next) => {//! add checkAdmin
+  const username = req.params.username;
+  User.deleteOne({ username }).then(
+    (result) => {
+      res.status(200).json({ message: LOGS.USER.DELETED });
+    },
+    (err) => {
+      res.status(401).json({ message: LOGS.USER.NOT_DELETED });
+    }
+  );
+});
+
+function paginatedResults(model) {
+  return async (req, res, next) => {
+    const page = parseInt(req.query.page);
+    const limit = parseInt(req.query.limit);
+
+    const startIndex = (page - 1) * limit;
+    const endIndex = page * limit;
+
+    const results = {};
+
+    if (endIndex < (await model.countDocuments().exec())) {
+      results.next = {
+        page: page + 1,
+        limit: limit,
+      };
+    }
+
+    if (startIndex > 0) {
+      results.previous = {
+        page: page - 1,
+        limit: limit,
+      };
+    }
+    try {
+      results.results = await model.find().limit(limit).skip(startIndex).exec();
+      res.paginatedResults = results;
+      next();
+    } catch (e) {
+      res.status(401).json({ message: e.message });
+    }
+  };
+}
 
 module.exports = router;
