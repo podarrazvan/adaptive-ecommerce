@@ -1,11 +1,16 @@
-<div class="container">
-  <div *ngIf="products.length == 0">
-    <h1>Nothing to show...</h1>
+<div class="container" *ngIf="pages.length == 0">
+  <h1>Nothing to show...</h1>
+</div>
+<ng-container *ngIf="pages.length > 0">
+  <div class="products-grid">
+    <app-get-product
+      *ngFor="let product of pages[pageIndex]"
+      [product]="product"
+    ></app-get-product>
   </div>
-</div>
-<div class="products-grid">
-  <app-get-product
-    *ngFor="let product of products"
-    [product]="product"
-  ></app-get-product>
-</div>
+  <app-pagination
+    [haveNext]="haveNext"
+    (nextPage)="nextPage()"
+    (previousPage)="previousPage()"
+  ></app-pagination>
+</ng-container>
