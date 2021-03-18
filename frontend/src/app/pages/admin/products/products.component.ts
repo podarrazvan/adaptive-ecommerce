@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { DiscountService } from 'src/app/shared/services/database/discount.service';
 import { ImagesService } from 'src/app/shared/services/database/images.service';
 import { DeleteAlertService } from '../../../shared/components/delete-alert/delete-alert.service';
 import { Product } from '../../../shared/interfaces/product.interface';
@@ -18,7 +19,7 @@ export class ProductsComponent implements OnInit {
   productToAddOnHomepage: Product;
   idOfProductToAddOnHomepage: string;
 
-  products: Product[];
+  products: Product[] = [];
   productsData;
 
   categories: string[];
@@ -34,14 +35,18 @@ export class ProductsComponent implements OnInit {
   showDiscount = false;
 
   currentPage = 1;
+  limit = 10;
   haveNext = true;
+
+  loading = true;
 
   constructor(
     private sharedDataService: SharedDataService,
     private router: Router,
     private deleteAlertService: DeleteAlertService,
     private productsService: ProductsService,
-    private imagesService: ImagesService
+    private imagesService: ImagesService,
+    private discountService: DiscountService
   ) {}
 
   ngOnInit(): void {
@@ -49,6 +54,7 @@ export class ProductsComponent implements OnInit {
   }
 
   getProducts(page, limit) {
+    this.loading = true;
     this.productsService
       .getPaginatedProducts(page, limit)
       .subscribe((response) => {
@@ -57,7 +63,7 @@ export class ProductsComponent implements OnInit {
         } else {
           this.haveNext = true;
         }
-        this.products = response.results;
+        this.checkPrice(response.results);
       });
   }
 
@@ -115,11 +121,30 @@ export class ProductsComponent implements OnInit {
 
   previousPage() {
     this.currentPage--;
-    this.getProducts(this.currentPage, 10);
+    this.getProducts(this.currentPage, this.limit);
   }
 
   nextPage() {
     this.currentPage++;
-    this.getProducts(this.currentPage, 10);
+    this.getProducts(this.currentPage, this.limit);
+  }
+
+  checkPrice(products) {
+    this.products = [];
+    for (let product of products) {
+      this.discountService
+        .checkForPromotion(product._id)
+        .subscribe((response) => {
+          let price;
+          if (response != null) {
+            price = product.price - response.cut;
+          } else {
+            price = product.price;
+          }
+          product.price = price;
+          this.products.push(product);
+        });
+    }
+    this.loading = false;
   }
 }

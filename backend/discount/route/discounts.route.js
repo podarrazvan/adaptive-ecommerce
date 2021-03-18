@@ -47,7 +47,7 @@ router.get("", (req, res, next) => {
 
 router.get("/by-product/:product", (req, res, next) => {
   const productId = req.params.product;
-  Discount.findOne({ productId, forUser: { $exists: true } }).then((result) => {
+  Discount.findOne({ productId }).then((result) => {
     const promotion = result;
     const today = new Date();
     if (promotion != null) {
@@ -56,14 +56,12 @@ router.get("/by-product/:product", (req, res, next) => {
       } else {
         //!delete discount
       }
-    } else {
-      res.status(200).json();
     }
+    res.status(200).json();
   });
 });
 
-router.get("/by-product/auth/:product", (req, res, next) => {
-  //! use chceckAuth
+router.get("/by-product/auth/:product", (req, res, next) => {//! use chceckAuth
   const productId = req.params.product;
   const forUser = "60142c44c463fe314b645bb"; //! Replace this with user's id!
   Discount.find({ $or: [{ productId }, { forUser }] }).then((promotion) => {
