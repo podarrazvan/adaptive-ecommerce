@@ -64,3 +64,11 @@ div.products {
   overflow: auto;
   padding-bottom: 50px;
 }
+
+.total {
+  display: flex;
+  h2 {
+    margin-left: 20px;
+    margin-top: 5px;
+  }
+}

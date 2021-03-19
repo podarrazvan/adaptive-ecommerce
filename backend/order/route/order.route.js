@@ -61,9 +61,9 @@ router.get("", (req, res, next) => {
   });
 });
 
-router.get("/:id", (req, res, next) => {
-  const _id = req.params.id;
-  Order.findOne({_id}).then((order) => {
+router.get("/:orderNumber", (req, res, next) => {
+  const orderNumber = req.params.orderNumber;
+  Order.findOne({orderNumber}).then((order) => {
     res.status(200).json(order);
   });
 });

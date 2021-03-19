@@ -1,0 +1,10 @@
+<div class="container">
+  <div class="order">
+    <h3 class="card-top">Order Number</h3>
+
+    <div class="input">
+      <input class="form-control" placeholder="Order number" #orderNumber/>
+      <button [routerLink]="['/order-status',orderNumber.value]" class="black-btn">Search</button>
+    </div>
+  </div>
+</div>

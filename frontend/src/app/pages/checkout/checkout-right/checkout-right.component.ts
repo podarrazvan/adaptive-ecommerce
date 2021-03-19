@@ -52,7 +52,8 @@ export class CheckoutRightComponent {
     for (let prod of this.products) {
       const product = prod.id;
       const quantity = prod.quantity;
-      this.productsFrom.push(this.createProduct(product, quantity));
+      const price = prod.price;
+      this.productsFrom.push(this.createProduct(product, quantity, price));
     }
     this.orderDetailsForm.patchValue({ total: this.total });
     const date = new Date();
@@ -60,12 +61,12 @@ export class CheckoutRightComponent {
     this.ordersService
       .addOrder(this.checkoutForm.value)
       .subscribe((response) => {
-        const id = response.body.order._id;
-        this.router.navigate(['../order-status', id]);
+        const orderNumber = response.body.order.orderNumber;
+        this.router.navigate(['../order-status', orderNumber]);
       });
   }
 
-  public createProduct(product, quantity): FormGroup {
-    return this.fb.group({ product, quantity });
+  public createProduct(product, quantity, price): FormGroup {
+    return this.fb.group({ product, quantity, price });
   }
 }

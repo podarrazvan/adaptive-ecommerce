@@ -1,0 +1,27 @@
+@import "/src/app/shared/styles/border-radius";
+@import "/src/app/shared/styles/colors";
+
+.container {
+  width: 100%;
+  margin-top: 50px;
+}
+.order {
+  border: 1px solid $gray-80;
+  border-radius: $small-border-radius;
+  width: 50%;
+  padding: 20px;
+  margin: auto;
+}
+
+.card-top {
+  width: 130px;
+  margin: auto;
+  top: -35px;
+}
+.input {
+  display: flex;
+  flex-direction: column;
+}
+.black-btn {
+  margin-top: 10px;
+}

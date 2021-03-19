@@ -20,15 +20,27 @@ export class OrderStatusPageComponent {
   loading = true;
   product: OrderProduct;
   products: OrderProduct[]=[];
+  status: string;
 
   constructor(private route: ActivatedRoute,
               private productsService: ProductsService,
               private ordersService: OrdersService,
               private router: Router) { 
                 
-    const id = this.route.snapshot.params['id'];
-    this.ordersService.getOrder(id).subscribe((order)=> {
+    const number = this.route.snapshot.params['number'];
+    this.ordersService.getOrder(number).subscribe((order)=> {
       this.order = order;
+      switch(order.status) {
+        case('new'):
+        this.status = "The order has been placed and is waiting to be processed."
+        break;
+        case('processed'):
+        this.status = "Your order has been processed and handed over to the courier. Use the AWB to track it on the courier's website."
+        break;
+        case('canceled'):
+        this.status = 'Your order has been canceled';
+        break;
+      }
       for(let product of order.products) {
         this.productsService.getProduct(product.product).subscribe((prod) => {
           const total = prod.price * product.quantity; 
@@ -46,7 +58,7 @@ export class OrderStatusPageComponent {
   }
 
   openProduct(id) {
-    this.router.navigate(['../product',id]);
+    this.router.navigate(['/product',id]);
   }
 
 }

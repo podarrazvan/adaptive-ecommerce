@@ -25,6 +25,9 @@ export class CartComponent implements OnInit, DoCheck {
   shipping = 0;
   total = 0;
 
+  rightText =
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin interdum, nisl at laoreet vehicula, sapien enim volutpat massa, at placerat metus libero sit amet ipsum. Mauris semper viverra nulla, eget tristique erat rutrum vitae. Etiam ornare placerat quam condimentum faucibus. Proin rhoncus nulla in diam mollis facilisis. Mauris ut mauris vitae sem rutrum pretium non in est. Ut posuere ipsum ac ligula accumsan, at porttitor leo tincidunt. Curabitur et ornare metus, nec aliquet tellus. Donec quis malesuada tortor. Donec tempus vel erat vel gravida. Donec dictum tincidunt pellentesque. Quisque malesuada efficitur nisi, id pretium neque congue at. Nulla ac pharetra tellus. Fusce convallis tristique eleifend. Donec blandit tristique enim eu dapibus. Morbi nec vehicula augue, a viverra nisl.';
+
   paidFor = false;
 
   constructor(
@@ -90,11 +93,11 @@ export class CartComponent implements OnInit, DoCheck {
             if (response.length > 0) {
               for (let discount of response) {
                 price = product.price - discount.cut;
-                this.addProductToCart(product, price, quantity);
+                this.addProductToCart(product, price, quantity, product._id);
               }
             } else {
               price = product.price;
-              this.addProductToCart(product, price, quantity);
+              this.addProductToCart(product, price, quantity, product._id);
             }
           });
       } else {
@@ -106,17 +109,18 @@ export class CartComponent implements OnInit, DoCheck {
             } else {
               price = product.price;
             }
-            this.addProductToCart(product, price, quantity);
+            this.addProductToCart(product, price, quantity, product._id);
           });
       }
     });
   }
 
-  addProductToCart(product, price, quantity) {
+  addProductToCart(product, price, quantity, _id) {
     let itemTotal = 0;
     itemTotal += price * quantity;
 
     this.cart.push({
+      _id,
       img: product.images[0],
       title: product.title,
       quantity: quantity,

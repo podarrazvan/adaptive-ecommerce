@@ -1,65 +1,69 @@
-<div class="content">
-    <div class="order-status">
-        <div class="top">
-            <h1>Thank you for your order</h1>
-          </div>
-          <div class="order" *ngIf="!loading">
-            <div class="customer">
-              <div class="customer-left">
-                <div>
-                  <b>Customer:</b>
-                  <h4>{{ order.name }}</h4>
-                </div>
-                <br />
-                <div>
-                  <b>Email:</b>
-                  <h4>{{ order.email }}</h4>
-                </div>
-                 <div>
-                  <b>Order Number:</b>
-                  <h4>{{ order.orderNumber }}</h4>
-                </div>
-              </div>
-              <div class="vl"></div>
-              <div class="adress">
-                <div>
-                  <b>Adress:</b>
-                  <h4>{{ order.adress }}</h4>
-                </div>
-                <div>
-                  <b>City:</b>
-                  <h4>{{ order.city }}</h4>
-                </div>
-                <div>
-                  <b>State:</b>
-                  <h4>{{ order.state }}</h4>
-                </div>
-                <div>
-                  <b>Zip code:</b>
-                  <h4>{{ order.zipCode }}</h4>
-                </div>
-              </div>
-            </div>
-            <h1>Products</h1>
-            <hr />
-            <div class="products">
-              <div class="product" *ngFor="let product of products">
-                <button
-                  class="empty-btn"
-                  (click)="openProduct(product.id)"
-                >
-                  <div>
-                    <b
-                      >{{ product.quantity }} x {{ product.name }} =
-                      {{ product.total }}$</b
-                    >
-                  </div></button
-                ><br />
-              </div>
-            </div>
-              <hr />
-              <h1><b>Total</b></h1>
-              <h2 style="color: green">{{ order.total }}</h2>
-          </div>
+<div class="content" *ngIf="!loading">
+  <div class="order-status">
+    <div class="top">
+      <h1>Order {{ order.orderNumber }} status</h1>
     </div>
+    <div class="order" *ngIf="!loading">
+      <div class="customer">
+        <div class="customer-left">
+          <div>
+            <b>Customer:</b>
+            <h4>{{ order.name }}</h4>
+          </div>
+          <br />
+          <div>
+            <b>Email:</b>
+            <h4>{{ order.email }}</h4>
+          </div>
+          <div>
+            <b>Order Number:</b>
+            <h4>{{ order.orderNumber }}</h4>
+          </div>
+        </div>
+        <div class="vl"></div>
+        <div class="adress">
+          <div>
+            <b>Adress:</b>
+            <h4>{{ order.adress }}</h4>
+          </div>
+          <div>
+            <b>City:</b>
+            <h4>{{ order.city }}</h4>
+          </div>
+          <div>
+            <b>State:</b>
+            <h4>{{ order.state }}</h4>
+          </div>
+          <div>
+            <b>Zip code:</b>
+            <h4>{{ order.zipCode }}</h4>
+          </div>
+        </div>
+      </div>
+      <h1>Products</h1>
+      <hr />
+      <div class="products">
+        <div class="product" *ngFor="let product of products">
+          <button class="empty-btn" (click)="openProduct(product.id)">
+            <div>
+              <b
+                >{{ product.quantity }} x {{ product.name }} =
+                {{ product.total }}$</b
+              >
+            </div></button
+          ><br />
+        </div>
+      </div>
+      <hr>
+      <h1>Status</h1>
+      <div class="status">
+       <h2> {{ status }}</h2>
+      </div>
+      <hr />
+      <div class="total">
+        <h1><b>Total</b></h1>
+        <h2 style="color: green">{{ order.total }}</h2>
+      </div>
+    </div>
+  </div>
 </div>

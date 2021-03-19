@@ -10,6 +10,7 @@ import { OrderStatusPageComponent } from './pages/checkout/order-status-page/ord
 import { AuthComponent } from './auth/auth.component';
 import { ProductsByBrandComponent } from './pages/products-by-brand/products-by-brand.component';
 import { SpecialForYouComponent } from './pages/special-for-you/special-for-you.component';
+import { TrackOrderComponent } from './pages/track-order/track-order.component';
 
 const routes: Routes = [
   {
@@ -33,14 +34,20 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/product/product.module').then((m) => m.ProductModule),
   },
+  { path: 'category/:category', component: CategoriesComponent },
   {
     path: 'cart',
     loadChildren: () =>
       import('./pages/cart/cart.module').then((m) => m.CartModule),
   },
-  { path: 'category/:category', component: CategoriesComponent },
+  {
+    path: 'checkout',
+    loadChildren: () =>
+      import('./pages/checkout/checkout.module').then((m) => m.CheckoutModule),
+  },
 
-  { path: 'order-status/:id', component: OrderStatusPageComponent },
+  { path: 'track-order', component: TrackOrderComponent },
+  { path: 'order-status/:number', component: OrderStatusPageComponent },
   {
     path: 'contact',
     loadChildren: () =>
@@ -61,11 +68,7 @@ const routes: Routes = [
 })
 export class AppRoutesModule {}
 
-// {
-//   path: 'checkout',
-//   loadChildren: () =>
-//     import('../../pages/checkout/checkout.module').then((m) => m.CheckoutModule),
-// },
+
 
 // {
 //   path: 'profile',

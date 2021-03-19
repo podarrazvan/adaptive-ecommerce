@@ -37,7 +37,7 @@
     </div>
   </div>
   <div class="cart-favorites-btn-group">
-    <button (click)="addToCart(quantity)" class="add-to-cart-btn">
+    <div class="add-to-cart-btn">
       <input
         #quantity
         class="form-input"
@@ -45,8 +45,14 @@
         min="1"
         value="1"
         [max]="product.quantity"
-      /><span> Add to cart</span><img src="../../../../assets/shopping-cart.svg">
+      />
+      <button (click)="addToCart(quantity)" class="empty-btn">
+        <span> Add to cart</span
+        ><img src="../../../../assets/shopping-cart.svg" />
+      </button>
+    </div>
+    <button (click)="addFavorite()" class="empty-btn favorites">
+      <img src="../../../../assets/heart.svg" />
     </button>
-    <button (click)="addFavorite()" class="empty-btn favorites"><img src="../../../../assets/heart.svg"></button>
   </div>
 </div>

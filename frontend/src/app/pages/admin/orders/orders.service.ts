@@ -28,8 +28,8 @@ export class OrdersService {
     return this.http.get<Order[]>(`${environment.api}/order`);
   }
 
-  getOrder(id) {
-    return this.http.get<Order>(`${environment.api}/order/${id}`);
+  getOrder(number) {
+    return this.http.get<Order>(`${environment.api}/order/${number}`);
   }
 
   deleteOrder(id: string) {

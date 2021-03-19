@@ -17,7 +17,7 @@ import { OrderStatusPageComponent } from './order-status-page/order-status-page.
     imports: [
       SharedModule,
       CommonModule,
-      RouterModule.forChild([{ path: 'checkout', component: CheckoutComponent }])
+      RouterModule.forChild([{ path: '', component: CheckoutComponent }])
     ],
   })
   export class CheckoutModule {}

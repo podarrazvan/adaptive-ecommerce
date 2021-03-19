@@ -14,6 +14,7 @@ import { HomeModules } from './home/home.modules';
 import { ProductsByBrandComponent } from './products-by-brand/products-by-brand.component';
 import { SearchComponent } from './search/search.component';
 import { SpecialForYouComponent } from './special-for-you/special-for-you.component';
+import { TrackOrderComponent } from './track-order/track-order.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
 
 const COMPONENTS = [
@@ -28,7 +29,8 @@ const COMPONENTS = [
   HomeNewReleasesComponent,
   WishlistComponent,
   ProductsByBrandComponent,
-  SpecialForYouComponent
+  SpecialForYouComponent,
+  TrackOrderComponent
 ];
 
 @NgModule({

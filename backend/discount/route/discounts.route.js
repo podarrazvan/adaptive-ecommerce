@@ -59,23 +59,13 @@ router.get("/by-product/:product", (req, res, next) => {
 router.get("/by-product/auth/:product", (req, res, next) => {
   //! use chceckAuth
   const productId = req.params.product;
-  const forUser = "60142c44c463fe314b645bb"; //! Replace this with user's id!
-  Discount.find({ $or: [{ productId }, { forUser }] }).then((promotion) => {
+  const forUser = "60142c44c463fe314b645bbc"; //! Replace this with user's id!
+  Discount.findOne({ $or: [{ productId }, { forUser }] }).then((promotion) => {
     const today = new Date();
-    if (promotion.expirationDate > today) {
-      res.status(200).json(promotion);
-    } else {
-      //!delete discount
-      Discount.findOneAndUpdate(
-        {
-          _id: promotion._id,
-        },
-
-        {
-          discount: null,
-        }
-      );
+    if (promotion && promotion.expirationDate > today) {
+      return res.status(200).json(promotion);
     }
+    res.status(200).json();
   });
 });
 
