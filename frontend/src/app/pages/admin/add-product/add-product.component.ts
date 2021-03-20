@@ -63,7 +63,7 @@ export class AddProductComponent implements OnDestroy {
         } else {
           //! DELETE THIS!
           // const title = this.productForm.value.title;
-          // for (let i = 0; i < 20; i++) {
+          // for (let i = 0; i < 33; i++) {
           //   this.productForm.patchValue({
           //     title: title + ` (${i})`,
           //   });
@@ -75,6 +75,9 @@ export class AddProductComponent implements OnDestroy {
         this.notComplete = false;
         this.tags = [];
         this.images = [];
+        this.thumbnail = null;
+        this.mainImg = null;
+        this.productForm.get('description').patchValue(null);//! NOT WORKING!
         this.productForm.reset();
       } else {
         alert('Invalid form!');

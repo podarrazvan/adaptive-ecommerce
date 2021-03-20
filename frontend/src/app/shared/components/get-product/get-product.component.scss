@@ -2,7 +2,8 @@
 @import "/src/app/shared/styles/border-radius";
 
 .product {
-  height: 420px;
+  height: 100%;
+  min-height: 420px;
   position: relative;
   border: 2px solid $gray-80;
   border-radius: $small-border-radius;
@@ -121,4 +122,5 @@
 
 .search {
   height: 420px;
+  max-width: 293px;
 }
