@@ -11,6 +11,7 @@ import { AuthComponent } from './auth/auth.component';
 import { ProductsByBrandComponent } from './pages/products-by-brand/products-by-brand.component';
 import { SpecialForYouComponent } from './pages/special-for-you/special-for-you.component';
 import { TrackOrderComponent } from './pages/track-order/track-order.component';
+import { InfoComponent } from './pages/info/info.component';
 
 const routes: Routes = [
   {
@@ -53,12 +54,14 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/contact/contact.module').then((m) => m.ContactModule),
   },
-  { path: 'auth', component: AuthComponent },
 
   {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
   },
+
+  { path: 'info/:page', component: InfoComponent },
+
   { path: '**', component: PageNotFoundComponent },
 ];
 

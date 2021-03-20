@@ -83,8 +83,6 @@ export class ProductComponent {
     }
   }
 
-  setProduct() {}
-
   productExists(key) {
     for (let product of this.user.history) {
       if (product.product == key) {

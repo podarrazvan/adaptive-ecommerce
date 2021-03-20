@@ -11,6 +11,7 @@ import { HomeBestSellersComponent } from './home/home-best-sellers/home-best-sel
 import { HomeNewReleasesComponent } from './home/home-new-releases/home-new-releases.component';
 import { HomeComponent } from './home/home.component';
 import { HomeModules } from './home/home.modules';
+import { InfoComponent } from './info/info.component';
 import { ProductsByBrandComponent } from './products-by-brand/products-by-brand.component';
 import { SearchComponent } from './search/search.component';
 import { SpecialForYouComponent } from './special-for-you/special-for-you.component';
@@ -30,7 +31,8 @@ const COMPONENTS = [
   WishlistComponent,
   ProductsByBrandComponent,
   SpecialForYouComponent,
-  TrackOrderComponent
+  TrackOrderComponent,
+  InfoComponent
 ];
 
 @NgModule({
