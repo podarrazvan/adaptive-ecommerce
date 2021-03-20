@@ -77,7 +77,7 @@ export class HomeFleshDealsCarouselComponent implements OnInit {
       const cartItem: CartItem = {
         id: product._id,
         quantity: 1,
-        price: +product.price,
+        price: +product.price - product.discount.cut,
         name: product.title,
       };
       cart.push(cartItem);

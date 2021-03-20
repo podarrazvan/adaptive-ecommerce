@@ -8,13 +8,13 @@
         <img [src]="product.img">
     </div>
     <div class="product-title">
-        <a [routerLink]="['/product',product._id]">{{product.title}}</a>
+        <a [routerLink]="['/product',product.id]">{{product.name}}</a>
     </div>
-    <div class="quantity">
-        <input type="number" [value]="product.quantity">
+    <div class="quantity" [formGroup]="quantityForm">
+        <input formControlName="quantity" min="1" type="number" [placeholder]="product.quantity">
     </div>
     <div class="price">
-        <p>$ {{product.total}}</p>
+        <p>$ {{product.price * quantity}}</p>
     </div>
 </div>
 <hr>

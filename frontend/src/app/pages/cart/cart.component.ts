@@ -20,7 +20,7 @@ export class CartComponent implements OnInit, DoCheck {
   @ViewChild('paypal', { static: true }) paypalElement: ElementRef;
   cart;
   showCart = false;
-
+  quantity;
   subtotal = 0;
   shipping = 0;
   total = 0;
@@ -39,36 +39,40 @@ export class CartComponent implements OnInit, DoCheck {
 
   ngOnInit(): void {
     const products = JSON.parse(localStorage.getItem('cart')) || [];
+    if (products.length === 0) {
+      this.router.navigate(['../']);
+    }
     for (let product of products) {
       const key = product.id;
       const quantity = product.quantity;
-      this.getProduct(key, quantity);
+      const price = product.price;
+      this.getProduct(key, quantity, price);
     }
     this.showCart = true;
-    paypal
-      .Buttons({
-        createOrder: (data, actions) => {
-          return actions.order.create({
-            purchase_units: [
-              {
-                // description: this.product.description,
-                amount: {
-                  currency_code: 'USD',
-                  value: this.sharedDataService.totalCart,
-                },
-              },
-            ],
-          });
-        },
-        onApprove: async (data, actions) => {
-          const order = await actions.order.capture();
-          this.paidFor = true;
-        },
-        onError: (err) => {
-          console.log(err);
-        },
-      })
-      .render(this.paypalElement.nativeElement);
+    // paypal
+    //   .Buttons({
+    //     createOrder: (data, actions) => {
+    //       return actions.order.create({
+    //         purchase_units: [
+    //           {
+    //             // description: this.product.description,
+    //             amount: {
+    //               currency_code: 'USD',
+    //               value: this.sharedDataService.totalCart,
+    //             },
+    //           },
+    //         ],
+    //       });
+    //     },
+    //     onApprove: async (data, actions) => {
+    //       const order = await actions.order.capture();
+    //       this.paidFor = true;
+    //     },
+    //     onError: (err) => {
+    //       console.log(err);
+    //     },
+    //   })
+    //   .render(this.paypalElement.nativeElement);
   }
   // *TODO Use observable
   ngDoCheck() {
@@ -76,102 +80,88 @@ export class CartComponent implements OnInit, DoCheck {
     // console.log(this.sharedDataService.totalCart);
   }
 
-  getProduct(key: string, quantity: number) {
+  getProduct(id: string, quantity: number, price: number) {
     this.cart = [];
 
-    this.productsService.getProduct(key).subscribe((response) => {
+    this.productsService.getProduct(id).subscribe((response) => {
       const product = response;
-      let price;
-
-      //TODO check auth
-      let authenticated = true;
-      //
-      if (authenticated) {
-        this.discountService
-          .checkAuthForPromotion(product._id)
-          .subscribe((response) => {
-            if (response.length > 0) {
-              for (let discount of response) {
-                price = product.price - discount.cut;
+      if (product.price != price) {
+        // //TODO check auth
+        let authenticated = true;
+        //
+        if (authenticated) {
+          this.discountService
+            .checkAuthForPromotion(product._id)
+            .subscribe((response) => {
+              if (response.length > 0) {
+                this.addProductToCart(product, price, quantity, product._id);
+              } else {
                 this.addProductToCart(product, price, quantity, product._id);
               }
-            } else {
-              price = product.price;
-              this.addProductToCart(product, price, quantity, product._id);
-            }
-          });
+            });
+        } else {
+          this.discountService
+            .checkForPromotion(product._id)
+            .subscribe((response) => {
+              if (response != null) {
+                this.addProductToCart(product, price, quantity, product._id);
+              }
+            });
+        }
       } else {
-        this.discountService
-          .checkForPromotion(product._id)
-          .subscribe((response) => {
-            if (response != null) {
-              price = product.price - response.cut;
-            } else {
-              price = product.price;
-            }
-            this.addProductToCart(product, price, quantity, product._id);
-          });
+        this.addProductToCart(product, price, quantity, product._id);
       }
     });
   }
 
-  addProductToCart(product, price, quantity, _id) {
+  addProductToCart(product, price, quantity, id) {
     let itemTotal = 0;
     itemTotal += price * quantity;
-
     this.cart.push({
-      _id,
+      id,
       img: product.images[0],
-      title: product.title,
+      name: product.title,
       quantity: quantity,
       total: itemTotal,
+      price,
     });
     this.subtotal += itemTotal;
     this.total = this.subtotal + this.shipping;
   }
 
   onDelete(index: number) {
-    // this.total -= this.cart[index].product.price * this.cart[index].quantity;
+    this.total -= this.cart[index].total;
     this.cart.splice(index, 1);
     if (this.cart.length === 0) {
       this.sharedDataService.updateCart(true);
       localStorage.removeItem('cart');
       this.router.navigate(['../']);
     } else {
-      this.updateLocalstorage();
+      localStorage.setItem('cart', JSON.stringify(this.cart));
     }
   }
 
-  increaseQuantity(index: number) {
-    if (this.cart[index].quantity <= +this.cart[index].product.quantity) {
-      this.cart[index].quantity++;
-      this.total += +this.cart[index].product.price;
-      this.updateLocalstorage();
-    }
-  }
-
-  decreaseQuantity(index: number) {
-    if (this.cart[index].quantity != 0) {
-      this.cart[index].quantity--;
-      this.total -= +this.cart[index].product.price;
-      this.updateLocalstorage();
-    }
-  }
-
-  updateLocalstorage() {
-    //   let cartUpdated = [];
-    //   for (let product of this.cart) {
-    //     console.log(product);
-    //     cartUpdated.push({
-    //       category: product.product.category,
-    //       product: product.key,
-    //       quantity: product.quantity,
-    //     });
-    //   }
-    //   localStorage.setItem('cart', JSON.stringify(cartUpdated));
+  updateTotal(data) {
+    this.total += data.total;
+    const index = this.findIndex(data.id);
+    this.cart[index].total += data.total;
+    this.cart[index].quantity = data.quantity;
+    localStorage.setItem('cart', JSON.stringify(this.cart));
   }
 
   coupon(discount) {
     this.subtotal -= discount;
   }
+
+  //! find a better way!
+  findIndex(id) {
+    let index = 0;
+    for (let item of this.cart) {
+      if (item._id === id) {
+        return index;
+      }
+      index++;
+    }
+  }
+  //!
 }

@@ -10,7 +10,13 @@ export interface Product {
   mainImg?: string;
   rating?: number;
   _id?: string;
+  //! duplicate cut! 
+  discount?: {
+    cut: number;
+    expirationDate: Date;
+  }
   cut?: number;
+  //!
   minPrice: number;
   salesWeekTarget: number;
   initialQuantity: number;
