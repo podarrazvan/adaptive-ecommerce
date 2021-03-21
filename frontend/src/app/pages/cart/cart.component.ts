@@ -86,17 +86,18 @@ export class CartComponent implements OnInit, DoCheck {
     this.productsService.getProduct(id).subscribe((response) => {
       const product = response;
       if (product.price != price) {
-        // //TODO check auth
+        //TODO check auth
         let authenticated = true;
         //
         if (authenticated) {
           this.discountService
             .checkAuthForPromotion(product._id)
             .subscribe((response) => {
-              if (response.length > 0) {
+              console.log(response);
+              if (response !=null) {
                 this.addProductToCart(product, price, quantity, product._id);
               } else {
-                this.addProductToCart(product, price, quantity, product._id);
+                this.addProductToCart(product, product.price, quantity, product._id);
               }
             });
         } else {
@@ -109,7 +110,7 @@ export class CartComponent implements OnInit, DoCheck {
             });
         }
       } else {
-        this.addProductToCart(product, price, quantity, product._id);
+        this.addProductToCart(product,product.price, quantity, product._id);
       }
     });
   }

@@ -21,6 +21,7 @@
 .link {
   h2 {
     color: $main-red;
+    cursor: pointer;
   }
 
   span {
@@ -38,5 +39,16 @@ img {
   img {
     transform: scale(1.25);
     transition: all 1s linear;
+  }
+}
+
+.price {
+  font-size: 16px;
+  font-weight: 500;
+  color: $gray-30;
+  margin-bottom: 20px;
+  span {
+    color: $main-red;
+    font-size: 30px;
   }
 }

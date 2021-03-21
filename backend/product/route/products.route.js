@@ -118,6 +118,41 @@ router.get("/id/:id", (req, res, next) => {
   });
 });
 
+router.get("/paginated/category", (req, res, next) => {
+  const category = req.query.name;
+  //TODO paginatedResults(category);
+  const page = parseInt(req.query.page);
+  const limit = parseInt(req.query.limit);
+  const startIndex = (page - 1) * limit;
+  const endIndex = page * limit;
+
+  const results = {};
+
+  if (endIndex < Product.countDocuments().exec()) {
+    results.next = {
+      page: page + 1,
+      limit: limit,
+    };
+  }
+
+  if (startIndex > 0) {
+    results.previous = {
+      page: page - 1,
+      limit: limit,
+    };
+  }
+  try {
+    Product.find({ category })
+      .limit(limit)
+      .skip(startIndex)
+      .then((documents) => {
+        res.status(200).json(documents);
+      });
+  } catch (e) {
+    res.status(401).json({ message: e.message });
+  }
+});
+
 router.get("/paginated", paginatedResults(Product), (req, res, next) => {
   res.json(res.paginatedResults);
 });

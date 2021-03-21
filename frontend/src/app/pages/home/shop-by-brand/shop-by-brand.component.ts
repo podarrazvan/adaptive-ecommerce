@@ -27,6 +27,7 @@ export class ShopByBrandComponent {
 
   selected(index) {
     this.selectedBrand = this.brands[index];
+    this.getProducts(this.selectedBrand.name);
   }
 
   getProducts(name) {

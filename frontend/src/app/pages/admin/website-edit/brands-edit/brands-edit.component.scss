@@ -1,10 +1,12 @@
 .list-group {
-    margin-top: 10px;
-    text-align: center;
-  }
+  height: 460px;
+  margin-top: 10px;
+  text-align: center;
+  overflow-y: auto;
+}
 
 .brand-img {
-    width: 100px;
+  width: 100px;
 }
 
 .alert-box {

@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Product } from 'src/app/shared/interfaces/product.interface';
+import { DiscountService } from 'src/app/shared/services/database/discount.service';
 import { ProductsService } from '../admin/products/products.service';
 
 @Component({
@@ -6,52 +9,66 @@ import { ProductsService } from '../admin/products/products.service';
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.scss'],
 })
-export class CategoriesComponent implements OnInit {
+export class CategoriesComponent {
+  products: Product[];
+  currentPage = 1;
+  limit = 15;
+  haveNext = true;
+
+  loading = true;
+
   constructor(
-    private productsService: ProductsService
-  ) {}
-
-  urlData: { category: string };
-
-  // isLoading = true;
-
-  // products: Product[];
-
-  products = [];
-  isLoading = false;
-
-  ngOnInit(): void {
-    for (let i = 0; i < 8; i++) {
-      this.products.push({
-        title: 'iPhone 12 Pro Max',
-        cut: -40,
-        img:
-          'https://s1.flanco.ro/catalog/product/cache/368/image/400x400/9df78eab33525d08d6e5fb8d27136e95/1/4/143545_2_1.jpg',
-        price: 999,
-      });
-      this.products.push({
-        title: 'iPhone 12 Pro Max',
-        img:
-          'https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSYyf_q2kgES_sP7wJVVdmv27TY3xa2lJSrcQ6TUBQk10ORSyLDtHre_Ig4wvI&usqp=CAc',
-        price: 999,
-      });
-    }
-
-    // this.urlData = {
-    //   category: this.route.snapshot.params['category'],
-    // };
-    // this.getProducts(this.urlData.category);
+    private route: ActivatedRoute,
+    private productsService: ProductsService,
+    private discountService: DiscountService
+  ) {
+    this.getProducts(this.currentPage, this.limit);
   }
 
-  getProducts(category: string) {
-    this.products = [];
+  previousPage() {
+    this.currentPage--;
+    this.getProducts(this.currentPage, this.limit);
+  }
+
+  nextPage() {
+    this.currentPage++;
+    this.getProducts(this.currentPage, this.limit);
+  }
+
+  getProducts(page, limit) {
+    const category = this.route.snapshot.params['category'];
+    this.loading = true;
     this.productsService
-      .getProductsByCategory(category)
+      .getPaginatedProductsByCategory(page, limit, category)
       .subscribe((response) => {
-        for (let product of response) {
-          this.products.push(product);
+        if (response.length < limit) {
+          //!FIX THIS  USE SOMETHING SIMILAR WITH product.component
+          this.haveNext = false;
+        } else {
+          this.haveNext = true;
         }
-        this.isLoading = false;
+        this.loading = false;
+        this.checkPrice(response);
       });
   }
+  //! THIS IS WRONG!
+  checkPrice(products) {
+    this.products = [];
+    for (let product of products) {
+      this.discountService
+        .checkForPromotion(product._id)
+        .subscribe((response) => {
+          let price;
+          if (response != null) {
+            price = product.price - response.cut;
+          } else {
+            price = product.price;
+          }
+          product.price = price;
+          this.products.push(product);
+        });
+    }
+    this.loading = false;
+  }
+  //!
 }

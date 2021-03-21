@@ -72,7 +72,7 @@
         value="terms-of-use"
       />
       <label for="option2"
-        >I’ve read and accept the <a>terms & conditions *</a></label
+        >I’ve read and accept the <a [routerLink]="['/info','terms-of-use']">terms & conditions *</a></label
       >
     </div>
     <button (click)="placeOrder()" class="gradient-btn">Place order</button>

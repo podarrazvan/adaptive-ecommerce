@@ -75,6 +75,12 @@ export class ProductsService {
     );
   }
 
+  getPaginatedProductsByCategory(page: number, limit: number, category: string) {
+    return this.http.get<Product[]>(
+      `${environment.api}/products/paginated/category?page=${page}&limit=${limit}&name=${category}`
+    );
+  }
+
   getLastProducts(limit: number, category: string) {
     return this.http.get<Product[]>(
       `${environment.api}/products/last?limit=${limit}&category=${category}`

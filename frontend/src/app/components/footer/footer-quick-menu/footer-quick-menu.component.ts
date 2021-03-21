@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SharedDataService } from 'src/app/shared/services/shared-data.service';
 
 @Component({
   selector: 'app-footer-quick-menu',
@@ -6,7 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./footer-quick-menu.component.scss']
 })
 export class FooterQuickMenuComponent {
-
-  categories = ['Phones', 'Laptops', 'Audio', 'Video', 'TV\'s'];
-
+  constructor(public sharedDataService:SharedDataService){}
 }
