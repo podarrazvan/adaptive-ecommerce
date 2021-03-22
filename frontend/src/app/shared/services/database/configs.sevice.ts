@@ -22,9 +22,8 @@ export class ConfigsService {
       .subscribe(() => location.reload());
   }
 
-  updateWebsite(sectionName: string, value) {
+  updateWebsite(sectionName: string, value, id) {
     const data = { data: value };
-    const id = this.sharedDataService.layoutId;
     return this.http
       .put(`${environment.api}/website/${id}/${sectionName}`, data)
   }

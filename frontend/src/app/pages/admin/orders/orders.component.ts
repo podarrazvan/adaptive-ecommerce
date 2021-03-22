@@ -37,8 +37,10 @@ export class OrdersComponent {
   }
 
   openOrder(order: Order) {
-    this.orderToShow = order;
-    this.showOrder = true;
+    if (!this.deleteAlert) {  //! you can do it better, don't emit openOrder!
+      this.orderToShow = order;
+      this.showOrder = true;
+    }
   }
 
   closeOrder() {

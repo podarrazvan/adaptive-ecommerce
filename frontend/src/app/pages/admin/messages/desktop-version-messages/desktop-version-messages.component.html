@@ -23,7 +23,7 @@
       <td>{{ email.email }}</td>
       <td>{{ email.message | shorten: 30 }}</td>
       <td>{{ email.date | date }}</td>
-      <td>
+      <td class="delete-button">
         <button class="empty-btn" (click)="onDelete(i)">
           <mat-icon>delete</mat-icon>
         </button>

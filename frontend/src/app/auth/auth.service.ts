@@ -14,16 +14,16 @@ import {
 } from './entities';
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  [x: string]: any;
 
   private userSubject$ = new BehaviorSubject<User>(null);
   public user$: Observable<User> = this.userSubject$.asObservable();
+
+  tokenExpirationTimer; //! NOT USED!
 
   constructor(private http: HttpClient) {}
 
   signup(newUser: NewUserDto, addAdmin) {
     if(addAdmin){
-      const user = JSON.parse(localStorage.getItem('userData'));
       return this.http
       .post<AuthResponseData>(`${environment.api}/users/admins/signup`, {
         ...newUser,

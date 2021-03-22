@@ -22,8 +22,7 @@ export class SharedDataService implements OnDestroy {
 
   private layoutSubject$ = new BehaviorSubject<Layout>(null);
   public layout$: Observable<Layout> = this.layoutSubject$.asObservable();
-  layoutId = "6039cc381b8e9dba840b9302";
-
+  
   private bestSellersSubject$ = new BehaviorSubject<BestSellers>(null);
   public bestSellers$: Observable<BestSellers> = this.bestSellersSubject$.asObservable();
 
@@ -44,7 +43,6 @@ export class SharedDataService implements OnDestroy {
 
   setLayout(layout: Layout) {
     this.layoutSubject$.next(layout);
-    this.layoutId = layout._id;
   }
 
   setBestSellers(bestSellers) {

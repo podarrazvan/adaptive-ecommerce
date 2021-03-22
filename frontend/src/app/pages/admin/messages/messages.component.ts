@@ -37,13 +37,15 @@ export class MessagesComponent implements OnInit {
   }
 
   openEmail(i) {
-    const index = i;
-    this.messageToShow = this.emails[index];
-    this.showMessage = true;
-    if (!this.emails[index].seen) {
-      this.messagesService.updateMessage(this.emails[index]);
-      this.emails[index].seen = true;
-      this.sharedDataService.unreadMessages--;
+    if (!this.deleteAlert) { //! you can do it better, don't emit openEmail!
+      const index = i;
+      this.messageToShow = this.emails[index];
+      this.showMessage = true;
+      if (!this.emails[index].seen) {
+        this.messagesService.updateMessage(this.emails[index]);
+        this.emails[index].seen = true;
+        this.sharedDataService.unreadMessages--;
+      }
     }
   }
 

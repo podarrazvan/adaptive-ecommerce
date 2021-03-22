@@ -10,7 +10,7 @@
 <div *ngIf="deleteAlert">
   <app-delete-alert itemToDelete="message"></app-delete-alert>
 </div>
-<div class="container"*ngIf="orders.length == 0 && mobileOrders.length == 0" >
+<div class="container" *ngIf="orders.length == 0 && mobileOrders.length == 0">
   <h1>No orders yet...</h1>
 </div>
 
@@ -24,33 +24,34 @@
         <th scope="col">Adress</th>
         <th scope="col">Price</th>
         <th scope="col">Date</th>
-        <th scpe="col">Open</th>
         <th scpe="col">Delete</th>
-        <th scpe="col"></th>
         <th scpe="col"></th>
       </tr>
     </thead>
     <tbody *ngFor="let order of orders; let i = index">
-      <tr>
+      <tr (click)="openOrder(order)" class="open-order">
         <th scope="row">{{ i + 1 }}</th>
-        <th scope="row canceled" *ngIf="order.status == 'canceled'" style="color: gray">
+        <th
+          scope="row canceled"
+          *ngIf="order.status == 'canceled'"
+          style="color: gray"
+        >
           <b>CANCELED</b>
         </th>
         <th scope="row new" *ngIf="order.status == 'new'" style="color: red">
           <b>NEW</b>
         </th>
-        <th scope="row processed" *ngIf="order.status == 'processed'" style="color: green">
+        <th
+          scope="row processed"
+          *ngIf="order.status == 'processed'"
+          style="color: green"
+        >
           <b>PROCESSED</b>
         </th>
         <td>{{ order.name }}</td>
         <td>{{ order.adress | shorten: 30 }}</td>
         <td>{{ order.total }}</td>
         <td>{{ order.date | date }}</td>
-        <td>
-          <button (click)="openOrder(order)" class="empty-btn">
-            <mat-icon>launch</mat-icon>
-          </button>
-        </td>
         <td>
           <button class="empty-btn" (click)="onDelete(i)">
             <mat-icon>delete</mat-icon>
@@ -60,4 +61,3 @@
     </tbody>
   </table>
 </div>
-

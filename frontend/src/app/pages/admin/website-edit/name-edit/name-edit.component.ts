@@ -24,7 +24,10 @@ export class NameEditComponent {
   }
 
   setName() {
-    this.configsService.updateWebsite('websiteName', this.formName.value.name).subscribe();
-    this.editName = false;
+    this.sharedDataService.layout$.subscribe((response)=>{
+      const id = response._id;
+      this.configsService.updateWebsite('websiteName', this.formName.value.name, id).subscribe();
+      this.editName = false;
+    })
   }
 }
