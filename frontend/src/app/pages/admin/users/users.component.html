@@ -1,4 +1,8 @@
 <div class="content">
+  <app-delete-alert
+    (delete)="onDelete($event)"
+    *ngIf="deleteUser"
+  ></app-delete-alert>
   <table class="table table-striped" *ngIf="!loading">
     <thead>
       <tr>
@@ -24,10 +28,14 @@
           is active
         </td> -->
         <td>
-          <button (click)="deleteUser(i)" class="main-btn">Delete</button>
+          <button (click)="deleteUserAlert(i)" class="main-btn">Delete</button>
         </td>
       </tr>
     </tbody>
   </table>
-  <app-pagination [haveNext]="haveNext" (nextPage)="nextPage()" (previousPage)="previousPage()"></app-pagination>
+  <app-pagination
+    [haveNext]="haveNext"
+    (nextPage)="nextPage()"
+    (previousPage)="previousPage()"
+  ></app-pagination>
 </div>

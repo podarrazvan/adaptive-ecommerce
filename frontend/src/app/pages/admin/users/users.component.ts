@@ -13,6 +13,8 @@ export class UsersComponent {
   currentPage = 1;
   limit = 10;
   haveNext: boolean;
+  deleteIndex: number;
+  deleteUser = false;
 
   constructor(private userService: UsersService) {
     this.getUsers(this.currentPage, this.limit);
@@ -20,7 +22,7 @@ export class UsersComponent {
 
   getUsers(page, limit) {
     this.userService.getUsers(page, limit).subscribe((response) => {
-      if(response.next === undefined) {
+      if (response.next === undefined) {
         this.haveNext = false;
       } else {
         this.haveNext = true;
@@ -30,14 +32,24 @@ export class UsersComponent {
     });
   }
 
-  deleteUser(index) {
+  deleteUserAlert(index) {
+    this.deleteIndex = index;
     if (this.users[index].username === 'admin') {
       alert("This user can't be deleted!");
     } else {
-      const username = this.users[index].username;
+      this.deleteUser = true;
+    }
+  }
+
+  onDelete(confirmed) {
+    if (confirmed) {
+      const username = this.users[this.deleteIndex].username;
       this.userService.deleteUser(username).subscribe(() => {
-        this.users.splice(index, 1);
+        this.users.splice(this.deleteIndex, 1);
+        this.deleteUser = false;
       });
+    } else {
+      this.deleteUser = false;
     }
   }
 
