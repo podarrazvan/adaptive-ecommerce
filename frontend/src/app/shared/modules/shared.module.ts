@@ -8,7 +8,6 @@ import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 
-import { DeleteAlertService } from '../components/delete-alert/delete-alert.service';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { GetProductComponent } from '../components/get-product/get-product.component';
 import { GetRecommendedProductComponent } from '../components/get-recommended-product/get-recommended-product.component';
@@ -88,7 +87,6 @@ const MODULES = [
   providers: [
     ConfigsService,
     SharedDataService,
-    DeleteAlertService,
     StatisticsService,
     DiscountService,
     ProductsService

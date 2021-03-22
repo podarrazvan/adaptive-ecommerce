@@ -7,7 +7,7 @@ import { AdminService } from '../../admin.service';
 @Component({
   selector: 'app-categories-edit',
   templateUrl: './categories-edit.component.html',
-  styleUrls: ['./categories-edit.component.scss']
+  styleUrls: ['./categories-edit.component.scss'],
 })
 export class CategoriesEditComponent {
   categoriesFormGroup: FormGroup;
@@ -20,15 +20,17 @@ export class CategoriesEditComponent {
     private configsService: ConfigsService,
     private adminService: AdminService,
     public sharedDataService: SharedDataService
-  ) { 
-    this.buildFormGroup(fb)
-    this.sharedDataService.layout$.subscribe((response)=>{
-      this.categories = response.categories;//! DON'T USE categories, USE categoriesForm()
+  ) {
+    this.buildFormGroup(fb);
+    this.sharedDataService.layout$.subscribe((response) => {
+      this.categories = response.categories; //! DON'T USE categories, USE categoriesForm()
     });
   }
 
   get categoriesForm() {
-    return this.adminService.adminFormGroup.get('configs.categories') as FormArray;
+    return this.adminService.adminFormGroup.get(
+      'configs.categories'
+    ) as FormArray;
   }
 
   get categoryName() {
@@ -37,33 +39,47 @@ export class CategoriesEditComponent {
 
   addNewValue() {
     this.categoriesForm.push(this.createCategory());
-    this.categories.push({name: this.categoryName}); //! NOT OK!
-    this.configsService.updateWebsite('websiteCategories', this.categories).subscribe();
+    this.categories.push({ name: this.categoryName }); //! NOT OK!
+    this.sharedDataService.layout$.subscribe((response) => {
+      const id = response._id;
+      this.configsService
+        .updateWebsite('websiteCategories', this.categories, id)
+        .subscribe();
+    });
   }
 
   delete(index) {
     this.categoriesForm.value.splice(index, 1);
     this.categories.splice(index, 1);
-    this.configsService.updateWebsite('websiteCategories', this.categories).subscribe();
+    this.sharedDataService.layout$.subscribe((response) => {
+      const id = response._id;
+      this.configsService
+        .updateWebsite('websiteCategories', this.categories, id)
+        .subscribe();
+    });
   }
 
   edit(index) {
-    this.categories[index] = {name: this.categoryName}; //! NOT OK!
-    this.categoriesForm.value[index] = {name: this.categoryName}; //! NOT OK!
-    this.configsService.updateWebsite('websiteCategories', this.categories).subscribe(()=>{
-      this.editCategoryMode = null
+    this.categories[index] = { name: this.categoryName }; //! NOT OK!
+    this.categoriesForm.value[index] = { name: this.categoryName }; //! NOT OK!
+    this.sharedDataService.layout$.subscribe((response) => {
+      const id = response._id;
+      this.configsService
+        .updateWebsite('websiteCategories', this.categories, id)
+        .subscribe(() => {
+          this.editCategoryMode = null;
+        });
     });
   }
 
   public createCategory(): FormGroup {
     const name = this.categoryName;
-    return this.fb.group({name});
+    return this.fb.group({ name });
   }
 
-   private buildFormGroup(fb) {
+  private buildFormGroup(fb) {
     this.categoriesFormGroup = fb.group({
       name: fb.control(null),
     });
   }
-
 }

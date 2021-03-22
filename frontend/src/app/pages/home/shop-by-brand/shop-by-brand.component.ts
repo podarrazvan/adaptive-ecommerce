@@ -19,9 +19,11 @@ export class ShopByBrandComponent {
   
   constructor(private sharedDataService: SharedDataService, private productsService: ProductsService) {
     this.sharedDataService.layout$.subscribe((response)=> {
-      this.brands = response.brands;
-      this.selectedBrand = this.brands[0];
-      this.getProducts(this.selectedBrand.name);
+      if(response.brands.length>0){
+        this.brands = response.brands;
+        this.selectedBrand = this.brands[0];
+        this.getProducts(this.selectedBrand.name);
+      }
     })
   }
 

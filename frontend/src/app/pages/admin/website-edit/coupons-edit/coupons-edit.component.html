@@ -8,7 +8,7 @@
       <div class="cancel-btn">
         <button (click)="couponsHide = true" class="btn btn-danger">X</button>
       </div>
-      <form [formGroup]="couponFormGroup">
+      <form [formGroup]="couponFormGroup" (ngSubmit)="addNewValue()">
         <div class="form-row align-items-center">
           <div class="col-auto">
             <label for="couponInput"><b>Add a new coupon</b></label>

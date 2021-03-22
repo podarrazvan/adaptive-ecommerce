@@ -25,6 +25,8 @@
   }
   .center {
     display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
     margin-top: 10px;
     .simple-btn {
       margin-left: 5px;

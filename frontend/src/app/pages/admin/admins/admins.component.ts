@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { DeleteAlertService } from 'src/app/shared/components/delete-alert/delete-alert.service';
 import { User } from 'src/app/shared/interfaces/user.interface';
 import { UsersService } from '../users/user.service';
 
@@ -12,34 +11,31 @@ export class AdminsComponent {
   admins: User[];
   addAdmin = false;
   deleteAdmin = false;
+  deleteIndex: number;
 
-  constructor(
-    private usersService: UsersService,
-    private deleteAlertService: DeleteAlertService
-  ) {
+  constructor(private usersService: UsersService) {
     this.usersService.getAdmins().subscribe((results) => {
       this.admins = results;
     });
   }
 
-  onDelete(index) {
-    if (this.admins[index].username === 'admin') {
+  onDelete(confirmed) {
+    if (confirmed) {
+      this.usersService
+        .deleteAdmin(this.admins[this.deleteIndex].username)
+        .subscribe(() => this.admins.splice(this.deleteIndex, 1));
+      this.deleteAdmin = false;
+    } else {
+      this.deleteAdmin = false;
+    }
+  }
+
+  deleteAlert(index) {
+    this.deleteIndex = index
+    if (this.admins[this.deleteIndex].username === 'admin') {
       alert("This admin can't be deleted!");
     } else {
       this.deleteAdmin = true;
-      this.deleteAlertService.deleteAdmin.subscribe((response) => {
-        switch (response) {
-          case true:
-            this.usersService
-              .deleteAdmin(this.admins[index].username)
-              .subscribe(() => this.admins.splice(index, 1));
-            this.deleteAdmin = false;
-            break;
-          case false:
-            this.deleteAdmin = false;
-            break;
-        }
-      });
     }
   }
   adminCreated(newAdmin) {

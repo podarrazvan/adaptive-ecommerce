@@ -2,13 +2,13 @@
   <div *ngIf="showMessage">
     <app-message [message]="messageToShow" (close)="close()"></app-message>
   </div>
-  <div *ngIf="deleteAlert">
-    <app-delete-alert itemToDelete="message"></app-delete-alert>
+  <div *ngIf="deleteAlertMessage">
+    <app-delete-alert (delete)="onDelete($event)"></app-delete-alert>
   </div>
  <app-desktop-version-messages
   [emails]="emails"
   (open)="openEmail($event)"
-  (delete)="onDelete($event)"
+  (delete)="deleteAlert($event)"
  ></app-desktop-version-messages>
 </div>
 

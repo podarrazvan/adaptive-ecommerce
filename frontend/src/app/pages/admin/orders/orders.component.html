@@ -8,9 +8,9 @@
   (updated)="orderUpdated()"
 ></app-order>
 <div *ngIf="deleteAlert">
-  <app-delete-alert itemToDelete="message"></app-delete-alert>
+  <app-delete-alert (delete)="onDelete($event)" *ngIf="deleteAlert"></app-delete-alert>
 </div>
-<div class="container" *ngIf="orders.length == 0 && mobileOrders.length == 0">
+<div class="container" *ngIf="orders.length == 0">
   <h1>No orders yet...</h1>
 </div>
 
@@ -53,7 +53,7 @@
         <td>{{ order.total }}</td>
         <td>{{ order.date | date }}</td>
         <td>
-          <button class="empty-btn" (click)="onDelete(i)">
+          <button class="empty-btn" (click)="openDeleteAlert(i)">
             <mat-icon>delete</mat-icon>
           </button>
         </td>

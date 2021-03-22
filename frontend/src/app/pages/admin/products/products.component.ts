@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DiscountService } from 'src/app/shared/services/database/discount.service';
 import { ImagesService } from 'src/app/shared/services/database/images.service';
-import { DeleteAlertService } from '../../../shared/components/delete-alert/delete-alert.service';
 import { Product } from '../../../shared/interfaces/product.interface';
 import { SharedDataService } from '../../../shared/services/shared-data.service';
 import { ProductsService } from './products.service';
@@ -43,7 +42,6 @@ export class ProductsComponent implements OnInit {
   constructor(
     private sharedDataService: SharedDataService,
     private router: Router,
-    private deleteAlertService: DeleteAlertService,
     private productsService: ProductsService,
     private imagesService: ImagesService,
     private discountService: DiscountService
@@ -67,21 +65,19 @@ export class ProductsComponent implements OnInit {
       });
   }
 
-  onDelete(id, index, img) {
+  onDelete(confirmed) {
+    if (confirmed) {
+      this.deleteAlert = false;
+      this.onProductDeleted();
+    } else {
+      this.deleteAlert = false;
+    }
+  }
+
+  openDeleteAlert(index) {
+    this.productToDeleteIndex = index;
+    console.log(index);
     this.deleteAlert = true;
-    this.deleteAlertService.deleteProduct.subscribe((response) => {
-      switch (response) {
-        case true:
-          this.productToDeleteIndex = index;
-          this.productToDelete = { id: id, img: img };
-          this.deleteAlert = false;
-          this.onProductDeleted();
-          break;
-        case false:
-          this.deleteAlert = false;
-          break;
-      }
-    });
   }
 
   openEdit(type: string, product: Product) {
@@ -99,11 +95,18 @@ export class ProductsComponent implements OnInit {
   }
 
   onProductDeleted() {
+    console.log(this.products[this.productToDeleteIndex])
     this.productsService
-      .deleteProduct(this.productToDelete.id)
+      .deleteProduct(this.products[this.productToDeleteIndex]._id)
       .subscribe(() => {
-        for (let img of this.productToDelete.img) {
-          this.imagesService.deletePhoto(img);
+        this.imagesService
+          .deletePhoto(this.products[this.productToDeleteIndex].mainImg)
+          .subscribe();
+        this.imagesService
+          .deletePhoto(this.products[this.productToDeleteIndex].thumbnail)
+          .subscribe();
+        for (let img of this.products[this.productToDeleteIndex].images) {
+          this.imagesService.deletePhoto(img).subscribe();
         }
       });
     this.products.splice(this.productToDeleteIndex, 1);

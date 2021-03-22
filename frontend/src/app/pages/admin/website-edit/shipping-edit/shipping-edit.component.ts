@@ -1,11 +1,12 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ConfigsService } from 'src/app/shared/services/database/configs.sevice';
+import { SharedDataService } from 'src/app/shared/services/shared-data.service';
 import { Shipping } from '../../../../shared/interfaces/shipping.interface';
 
 @Component({
   selector: 'app-shipping-edit',
   templateUrl: './shipping-edit.component.html',
-  styleUrls: ['./shipping-edit.component.scss']
+  styleUrls: ['./shipping-edit.component.scss'],
 })
 export class ShippingEditComponent {
   @Input() shippings: Shipping[];
@@ -13,18 +14,25 @@ export class ShippingEditComponent {
 
   shippingHide = true;
 
-  constructor(private configsService: ConfigsService) { }
+  constructor(
+    private configsService: ConfigsService,
+    public sharedDataService: SharedDataService
+  ) {}
 
   editShippingMode: number;
 
+  delete(index) {}
 
-  delete(index){}
-
-  edit(){}
+  edit() {}
 
   addNewValue(form) {
     this.shippings.push(form.value);
-    this.configsService.updateWebsite('websiteShipping',form.value).subscribe();
-    this.newShippings.emit(this.shippings);
+    this.sharedDataService.layout$.subscribe((response) => {
+      const id = response._id;
+      this.configsService
+        .updateWebsite('websiteShipping', form.value, id)
+        .subscribe();
+      this.newShippings.emit(this.shippings);
+    });
   }
 }

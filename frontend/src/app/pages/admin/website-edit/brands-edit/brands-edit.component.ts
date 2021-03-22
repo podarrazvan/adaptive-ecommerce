@@ -46,8 +46,17 @@ export class BrandsEditComponent {
 
   addNewValue() {
     this.brandsForm.push(this.createBrand());
-    this.brands.push({ name: this.brandName,description: this.brandDescription, image: this.brandLogoPath }); //! NOT OK!
-    this.configsService.updateWebsite('websiteBrands', this.brands).subscribe();
+    this.brands.push({
+      name: this.brandName,
+      description: this.brandDescription,
+      image: this.brandLogoPath,
+    }); //! NOT OK!
+    this.sharedDataService.layout$.subscribe((response) => {
+      const id = response._id;
+      this.configsService
+        .updateWebsite('websiteBrands', this.brands, id)
+        .subscribe();
+    });
   }
 
   public createBrand(): FormGroup {
@@ -63,8 +72,13 @@ export class BrandsEditComponent {
     const img = this.brands[index].image.split('/')[5];
     this.brandsForm.value.splice(index, 1);
     this.brands.splice(index, 1); //! NOT OK!
-    this.configsService.updateWebsite('websiteBrands', this.brands).subscribe();
-    this.imagesService.deletePhoto(img).subscribe();
+    this.sharedDataService.layout$.subscribe((response) => {
+      const id = response._id;
+      this.configsService
+        .updateWebsite('websiteBrands', this.brands, id)
+        .subscribe();
+      this.imagesService.deletePhoto(img).subscribe();
+    });
   }
 
   edit(index) {
@@ -78,12 +92,15 @@ export class BrandsEditComponent {
       image = this.brands[index].image;
     }
     this.brands[index] = { name: this.brandName, image }; //! NOT OK!
-    this.configsService
-      .updateWebsite('websiteBrands', this.brands)
-      .subscribe(() => {
-        this.editBrandMode = null;
-        this.editBrandLogo = false;
-      });
+    this.sharedDataService.layout$.subscribe((response) => {
+      const id = response._id;
+      this.configsService
+        .updateWebsite('websiteBrands', this.brands, id)
+        .subscribe(() => {
+          this.editBrandMode = null;
+          this.editBrandLogo = false;
+        });
+    });
   }
 
   brandLogo(img: Event) {
@@ -98,7 +115,7 @@ export class BrandsEditComponent {
     this.formGroup = fb.group({
       name: fb.control(null),
       image: fb.control(null),
-      description: fb.control(null)
+      description: fb.control(null),
     });
   }
 }

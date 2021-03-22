@@ -109,17 +109,17 @@ export class AddProductComponent implements OnDestroy {
   }
 
   deleteThumbnail(img) {
-    this.imagesService.deletePhoto(img);
+    this.imagesService.deletePhoto(img).subscribe();
     this.thumbnail = null;
   }
 
   deleteMainImg(img) {
-    this.imagesService.deletePhoto(img);
+    this.imagesService.deletePhoto(img).subscribe();
     this.mainImg = null;
   }
 
   deletePhoto(img, i) {
-    this.imagesService.deletePhoto(img);
+    this.imagesService.deletePhoto(img).subscribe();
     this.images.splice(i, 1);
   }
 

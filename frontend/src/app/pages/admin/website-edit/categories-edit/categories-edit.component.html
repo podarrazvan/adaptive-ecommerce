@@ -15,7 +15,7 @@ Edit
         </button>
       </div>
 
-      <form [formGroup]="categoriesFormGroup">
+      <form [formGroup]="categoriesFormGroup" (ngSubmit)="addNewValue()">
         <div class="form-row align-items-center">
           <div class="col-auto">
             <label for="categoryInput"><b>Add a new category</b></label>
@@ -29,8 +29,7 @@ Edit
           <div class="col-auto">
             <!--To do: fix newCategory.valid-->
             <button
-              type="button"
-              (click)="addNewValue()"
+              type="submit"
               class="main-btn"
             >
               Add

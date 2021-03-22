@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { ConfigsService } from 'src/app/shared/services/database/configs.sevice';
-import { DiscountService } from 'src/app/shared/services/database/discount.service';
+import { SharedDataService } from 'src/app/shared/services/shared-data.service';
 import { Coupon } from '../../../../shared/interfaces/coupon.interface';
 import { AdminService } from '../../admin.service';
 
@@ -17,7 +17,8 @@ export class CouponsEditComponent {
   constructor(
     private fb: FormBuilder,
     private configsService: ConfigsService,
-    private adminService: AdminService
+    private adminService: AdminService,
+    private sharedDataService: SharedDataService
   ) {
     this.buildFormGroup(fb);
   }
@@ -43,13 +44,19 @@ export class CouponsEditComponent {
 
   addNewValue() {
     this.couponsForm.push(this.createCoupon());
-    this.configsService.updateWebsite('websiteCoupons', this.couponsForm.value).subscribe();
+    this.sharedDataService.layout$.subscribe((response) => {
+      const id = response._id;
+    this.configsService.updateWebsite('websiteCoupons', this.couponsForm.value, id).subscribe();
     this.couponFormGroup.reset();
+  });
   }
 
   delete(index) {
     this.couponsForm.value.splice(index, 1);
-    this.configsService.updateWebsite('websiteCoupons', this.couponsForm.value).subscribe();
+    this.sharedDataService.layout$.subscribe((response) => {
+          const id = response._id;
+    this.configsService.updateWebsite('websiteCoupons', this.couponsForm.value, id).subscribe();
+  });
   }
 
   edit(index) {}

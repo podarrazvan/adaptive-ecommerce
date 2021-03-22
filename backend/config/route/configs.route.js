@@ -1,6 +1,6 @@
 const express = require("express");
 const collection = new require("../model/configs.schema");
-const LOGS = require("../../shared/logs")
+const LOGS = require("../../shared/logs");
 
 const router = express.Router();
 
@@ -33,7 +33,7 @@ router.post("", (req, res, next) => {
       url: req.body.instagramUrl,
     },
     aboutUs: req.body.aboutUs,
-    termsOfUse: req.body.termsOfUse
+    termsOfUse: req.body.termsOfUse,
   });
   website.save().then((data) => {
     res.status(201).json({
@@ -54,8 +54,7 @@ router.get("", (req, res, next) => {
 router.put("/:id/websiteName", (req, res, next) => {
   const name = req.body.data;
   const _id = req.params.id;
-  const websiteName = new collection({ _id, name });
-  collection.findByIdAndUpdate({ _id: _id }, websiteName).then(
+  collection.findByIdAndUpdate({ _id }, { name }).then(
     (result) => {
       res.status(200).json({ message: LOGS.CONFIGS.NAME.UPDATE });
     },
@@ -68,15 +67,14 @@ router.put("/:id/websiteName", (req, res, next) => {
 router.put("/:id/websiteCategories", (req, res, next) => {
   const categories = req.body.data;
   const _id = req.params.id;
-  collection
-    .findByIdAndUpdate({_id }, {categories}).then(
-      (result) => {
-        res.status(200).json({ message: LOGS.CONFIGS.CATEGORIES.UPDATE });
-      },
-      (err) => {
-        res.status(401).json({ message: LOGS.CONFIGS.CATEGORIES.FAILED });
-      }
-    );
+  collection.findByIdAndUpdate({ _id }, { categories }).then(
+    (result) => {
+      res.status(200).json({ message: LOGS.CONFIGS.CATEGORIES.UPDATE });
+    },
+    (err) => {
+      res.status(401).json({ message: LOGS.CONFIGS.CATEGORIES.FAILED });
+    }
+  );
 });
 
 router.put("/:id/websiteBrands", (req, res, next) => {
@@ -85,7 +83,7 @@ router.put("/:id/websiteBrands", (req, res, next) => {
 
   collection.findByIdAndUpdate({ _id }, { brands }).then(
     (result) => {
-      res.status(200).json({ message: LOGS.CONFIGS.BRANDS.UPDATE});
+      res.status(200).json({ message: LOGS.CONFIGS.BRANDS.UPDATE });
     },
     (err) => {
       res.status(401).json({ message: LOGS.CONFIGS.BRANDS.FAILED });
@@ -96,7 +94,7 @@ router.put("/:id/websiteBrands", (req, res, next) => {
 router.put("/:id/websiteShipping", (req, res, next) => {
   const shipping = req.body.data;
   const _id = req.params.id;
-  collection.findByIdAndUpdate({ _id: _id }, {shipping})  .then(
+  collection.findByIdAndUpdate({ _id: _id }, { shipping }).then(
     (result) => {
       res.status(200).json({ message: LOGS.CONFIGS.SHIPPING.UPDATE });
     },
@@ -166,7 +164,7 @@ router.put("/:id/websiteInstagram", (req, res, next) => {
   const instagram = req.body.data;
   const _id = req.params.id;
   const websiteInstagram = new collection({ _id, instagram });
-  collection.updateOne({ _id: _id }, websiteInstagram)  .then(
+  collection.updateOne({ _id: _id }, websiteInstagram).then(
     (result) => {
       res.status(200).json({ message: LOGS.CONFIGS.INSTAGRAM.UPDATE });
     },

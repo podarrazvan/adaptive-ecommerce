@@ -1,7 +1,9 @@
 .list-group {
-    margin-top: 10px;
-    text-align: center;
-  }
+  max-height: 460px;
+  margin-top: 10px;
+  text-align: center;
+  overflow-y: auto;
+}
 
 .alert-box {
   top: 10vh;

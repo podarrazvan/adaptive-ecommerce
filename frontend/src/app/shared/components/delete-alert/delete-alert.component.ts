@@ -1,44 +1,18 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { DeleteAlertService } from './delete-alert.service';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-delete-alert',
   templateUrl: './delete-alert.component.html',
   styleUrls: ['./delete-alert.component.scss'],
 })
-export class DeleteAlertComponent implements OnInit, OnDestroy {
-  constructor(private deleteAlertService: DeleteAlertService) {}
-
-  @Input() itemToDelete: string;
-
-  item: string;
-
-  ngOnInit() {
-    this.item = this.itemToDelete;
+export class DeleteAlertComponent {
+  @Output() delete = new EventEmitter<boolean>(null);
+    
+  yes() {
+      this.delete.emit(true);
   }
 
-  actionBtn(action: boolean) {
-    switch (
-      this.itemToDelete
-    ) {
-      case 'product':
-        this.deleteAlertService.deleteAlertProduct(action);
-        break;
-      case 'message':
-        this.deleteAlertService.deleteAlertMessage(action);
-        break;
-      case 'order':
-        this.deleteAlertService.deleteAlertOrder(action);
-        break;
-      case 'admin':
-        this.deleteAlertService.deleteAlertAdmin(action);
-        break;
-    }
-  }
-  ngOnDestroy(): void {
-    this.deleteAlertService.deleteAlertProduct(null);
-    this.deleteAlertService.deleteAlertMessage(null);
-    this.deleteAlertService.deleteAlertOrder(null);
-    this.deleteAlertService.deleteAlertAdmin(null);
+  no() {
+      this.delete.emit(false);
   }
 }

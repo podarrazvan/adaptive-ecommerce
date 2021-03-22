@@ -1,7 +1,7 @@
 <app-discount-modal [id]="discountProductId" (close)="showDiscount = false" *ngIf="showDiscount"></app-discount-modal>
 <div class="container">
   <div *ngIf="deleteAlert">
-    <app-delete-alert itemToDelete="product"></app-delete-alert>
+    <app-delete-alert  (delete)="onDelete($event)" *ngIf="deleteAlert"></app-delete-alert>
   </div>
   <table class="table">
     <thead>
@@ -47,7 +47,7 @@
         <td>
           <button
             class="empty-btn"
-            (click)="onDelete(product._id, i, product.images)"
+            (click)="openDeleteAlert(i)"
           >
             <mat-icon>delete</mat-icon>
           </button>
