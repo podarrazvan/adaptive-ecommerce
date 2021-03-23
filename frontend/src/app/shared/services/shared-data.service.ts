@@ -6,6 +6,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Product } from '../interfaces/product.interface';
 import { User } from '../interfaces/user.interface';
 import { BestSellers } from '../interfaces/best-sellers.interface';
+import { Statistics } from '../interfaces/statistics.interface';
 
 interface Brand {
   name: string;
@@ -22,6 +23,9 @@ export class SharedDataService implements OnDestroy {
 
   private layoutSubject$ = new BehaviorSubject<Layout>(null);
   public layout$: Observable<Layout> = this.layoutSubject$.asObservable();
+
+  private statisticsSubject$ = new BehaviorSubject<Statistics>(null);
+  public statistics$: Observable<Statistics> = this.statisticsSubject$.asObservable();
   
   private bestSellersSubject$ = new BehaviorSubject<BestSellers>(null);
   public bestSellers$: Observable<BestSellers> = this.bestSellersSubject$.asObservable();
@@ -43,6 +47,10 @@ export class SharedDataService implements OnDestroy {
 
   setLayout(layout: Layout) {
     this.layoutSubject$.next(layout);
+  }
+
+  setStatistics(statistics: Statistics) {
+    this.statisticsSubject$.next(statistics);
   }
 
   setBestSellers(bestSellers) {

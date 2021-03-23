@@ -5,6 +5,7 @@ import { AdminService } from './admin.service';
 import { buildAdminFormGroup } from './admin.form-builder';
 import { buildProductFormGroup } from './admin-form.helpers';
 import { ConfigsService } from 'src/app/shared/services/database/configs.sevice';
+import { StatisticsService } from 'src/app/shared/services/database/statistics.service';
 
 @Component({
   selector: 'app-admin',
@@ -18,16 +19,24 @@ export class AdminComponent {
     private activeRouter: ActivatedRoute,
     private configsService: ConfigsService,
     private sharedDataService: SharedDataService,
-    private adminService: AdminService
+    private adminService: AdminService,
+    private statisticsService: StatisticsService
   ) {
     this.adminService.adminFormGroup = buildAdminFormGroup();
     this.adminService.productFormGroup = buildProductFormGroup();
 
-    // !! nuj ce face asta
-    const configs = this.sharedDataService.layout$;
-    // if (configs._id === undefined) {
-    //   this.configsService.createconfigs();
-    // }
+    this.sharedDataService.layout$.subscribe((response) => {
+      if (response === null) {
+        this.configsService.createconfigs();
+      }
+      setTimeout(()=>{//! not ok, fix it!
+      this.sharedDataService.statistics$.subscribe((response) => {
+          if (response === null) {
+            this.statisticsService.createStatistics().subscribe();
+          }
+        });
+      },300);
+    });
   }
 
   //TODO use observabile!

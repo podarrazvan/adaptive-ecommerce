@@ -6,6 +6,7 @@
     <app-get-product
       *ngFor="let product of pages[pageIndex]"
       [product]="product"
+      [search]="true"
     ></app-get-product>
   </div>
   <app-pagination

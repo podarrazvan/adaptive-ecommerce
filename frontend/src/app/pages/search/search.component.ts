@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/shared/interfaces/product.interface';
 import { DiscountService } from 'src/app/shared/services/database/discount.service';
+import { StatisticsService } from 'src/app/shared/services/database/statistics.service';
 import { ProductsService } from '../admin/products/products.service';
 
 @Component({
@@ -24,13 +25,14 @@ export class SearchComponent {
   constructor(
     private route: ActivatedRoute,
     private productsService: ProductsService,
-    private discountService: DiscountService
+    private discountService: DiscountService,
+    private statisticsService: StatisticsService,
   ) {
     this.urlData = {
       category: this.route.snapshot.params['category'],
       search: this.route.snapshot.params['search'].split('-'),
     };
-
+    this.statisticsService.updateSearch(this.urlData.search.join(' ')).subscribe();
     if (this.urlData.category != 'all') {
       this.getProductsByCategory(this.urlData.category);
     } else {

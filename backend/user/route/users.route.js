@@ -231,7 +231,7 @@ router.delete("/admins/delete/:username", checkAdmin, (req, res, next) => {
   );
 });
 
-router.delete("/delete/:username", (req, res, next) => {//! add checkAdmin
+router.delete("/delete/:username",checkAdmin, (req, res, next) => {
   const username = req.params.username;
   User.deleteOne({ username }).then(
     (result) => {

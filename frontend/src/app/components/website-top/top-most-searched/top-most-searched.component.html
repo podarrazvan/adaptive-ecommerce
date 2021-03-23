@@ -1,7 +1,7 @@
 <div class="most-searched">
     <p class="elements">Most searched: </p>
-    <a [routerLink]="['search','all',element]" class="elements" *ngFor="let element of elements">
-        {{element}}
+    <a [routerLink]="['search','all',element.searchedElement]" class="elements" *ngFor="let element of elements">
+        {{element.searchedElement}}
     </a>
 </div>
 
