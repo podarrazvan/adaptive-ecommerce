@@ -19,6 +19,8 @@ router.post("", checkAdmin, (req, res, next) => {
   });
 });
 
+//TODO use something built in mongo
+
 router.put("/search", (req, res, next) => {
   const searchedElement = req.body.searchedElement;
   let newSearch = {
@@ -44,10 +46,10 @@ router.put("/search", (req, res, next) => {
     }
     collection.findByIdAndUpdate({ _id }, { search }).then(
       (result) => {
-        res.status(200).json({ message: LOGS.CONFIGS.NAME.UPDATE });
+        res.status(200).json();//TODO add message?
       },
       (err) => {
-        res.status(401).json({ message: LOGS.CONFIGS.NAME.FAILED });
+        res.status(401).json();//TODO add message?
       }
     );
   });
@@ -72,6 +74,7 @@ router.get("/most-searched", (req, res, next) => {
    res.status(200).json(sorted);
   });
 });
+//
 
 router.get("", (req, res, next) => {
   collection.find().then((documents) => {

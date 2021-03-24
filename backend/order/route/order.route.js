@@ -9,7 +9,7 @@ router.post("", (req, res, next) => {
   const { shipping, payment, total, status, date } = req.body.orderDetails;
   const { orderNotes, products } = req.body;
   const d = new Date().getTime();
-  const orderNumber = Math.round((d / 1000)-1615160000);
+  const orderNumber = Math.round(d / 1000 - 1615160000);
   order = new Order({
     name,
     email,
@@ -24,7 +24,7 @@ router.post("", (req, res, next) => {
     date,
     orderNotes,
     products,
-    orderNumber
+    orderNumber,
   });
   order
     .save()
@@ -44,8 +44,7 @@ router.post("", (req, res, next) => {
 router.put("/update/:id/:status", (req, res, next) => {
   const _id = req.params.id;
   const status = req.params.status;
-  const newStatus = new Order({ _id, status });
-  Order.findByIdAndUpdate({ _id: _id }, newStatus).then(
+  Order.findByIdAndUpdate({ _id }, { status }).then(
     (result) => {
       res.status(200).json({ message: LOGS.ORDER.UPDATE });
     },
@@ -63,19 +62,21 @@ router.get("", (req, res, next) => {
 
 router.get("/:orderNumber", (req, res, next) => {
   const orderNumber = req.params.orderNumber;
-  Order.findOne({orderNumber}).then((order) => {
+  Order.findOne({ orderNumber }).then((order) => {
     res.status(200).json(order);
   });
 });
 
 router.delete("/delete/:id", (req, res, next) => {
   const _id = req.params.id;
-  Order.findOneAndDelete({ _id: _id }).then((result) => {
-    res.status(200).json({ message: LOGS.ORDER.DELETED });
-  },
-  (err) => {
-    res.status(401).json({ message: LOGS.ORDER.FAILED_DELETE });
-  });
+  Order.findOneAndDelete({ _id: _id }).then(
+    (result) => {
+      res.status(200).json({ message: LOGS.ORDER.DELETED });
+    },
+    (err) => {
+      res.status(401).json({ message: LOGS.ORDER.FAILED_DELETE });
+    }
+  );
 });
 
 module.exports = router;

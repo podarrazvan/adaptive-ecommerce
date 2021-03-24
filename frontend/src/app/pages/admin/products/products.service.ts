@@ -44,6 +44,10 @@ export class ProductsService {
       .subscribe();
   }
 
+  updateSold(status, order) {
+    return this.http.put(`${environment.api}/products/sold/${status}`, order);
+  }
+
   editProduct(product: Product, _id) {
     this.http.put(`${environment.api}/products/${_id}`, product).subscribe();
   }
@@ -75,7 +79,11 @@ export class ProductsService {
     );
   }
 
-  getPaginatedProductsByCategory(page: number, limit: number, category: string) {
+  getPaginatedProductsByCategory(
+    page: number,
+    limit: number,
+    category: string
+  ) {
     return this.http.get<Product[]>(
       `${environment.api}/products/paginated/category?page=${page}&limit=${limit}&name=${category}`
     );

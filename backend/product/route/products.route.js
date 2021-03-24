@@ -1,6 +1,7 @@
 const express = require("express");
 const Product = require("../model/product.schema");
 const Discount = require("../../discount/model/discount.schema");
+const checkAdmin = require("../../shared/middlewares/check-admin");
 
 const LOGS = require("../../shared/logs");
 
@@ -21,6 +22,7 @@ router.post("", (req, res, next) => {
     views,
     initialQuantity,
     productNumber,
+    sold,
     minPrice,
     salesWeekTarget,
   } = req.body;
@@ -38,6 +40,7 @@ router.post("", (req, res, next) => {
     views,
     initialQuantity,
     productNumber,
+    sold,
     autoMode: {
       minPrice,
       salesWeekTarget,
@@ -70,6 +73,7 @@ router.put("/:id", (req, res, next) => {
     views,
     initialQuantity,
     productNumber,
+    sold,
     minPrice,
     salesWeekTarget,
   } = req.body;
@@ -88,6 +92,7 @@ router.put("/:id", (req, res, next) => {
     views,
     initialQuantity,
     productNumber,
+    sold,
     autoMode: {
       minPrice,
       salesWeekTarget,
@@ -105,6 +110,33 @@ router.put("/:id", (req, res, next) => {
     }
   );
 });
+
+//TODO use something built in mongo
+router.put("/sold/:status", checkAdmin, (req, res, next) => {
+  const products = req.body;
+  const status = req.params.status;
+  console.log(status);
+  for (let product of products) {
+    const _id = product.product;
+    Product.findOne({ _id }).then((oldProduct) => {
+      if (status === "processed") {
+        const quantity = +oldProduct.quantity - +product.quantity;
+        const sold = +oldProduct.sold + +product.quantity;
+        Product.findByIdAndUpdate({ _id }, { quantity, sold }).then();
+      } else if (status === "canceled") {
+        const quantity = +oldProduct.quantity + +product.quantity;
+        const sold = +oldProduct.sold - +product.quantity;
+        Product.findByIdAndUpdate({ _id }, { quantity, sold }).then();
+      }
+    });
+  }
+
+  //! not ok!
+  res.status(200).json();
+  //!
+  //TODO send a response!
+});
+//
 
 router.get("/category/:category", (req, res, next) => {
   Product.find({ category: req.params.category }).then((documents) => {

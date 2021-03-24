@@ -7,34 +7,37 @@ import { OrdersService } from '../orders.service';
 @Component({
   selector: 'app-order',
   templateUrl: './order.component.html',
-  styleUrls: ['./order.component.scss']
+  styleUrls: ['./order.component.scss'],
 })
 export class OrderComponent implements OnInit {
-
   @Input() order: Order;
 
   @Output() close = new EventEmitter<void>();
   @Output() updated = new EventEmitter<void>();
 
-  constructor(private productsService: ProductsService,
-              private ordersService: OrdersService,
-              private router: Router) { }
+  constructor(
+    private productsService: ProductsService,
+    private ordersService: OrdersService,
+    private router: Router
+  ) {}
 
   loading = true;
 
-  products: [{quantity?:number, name?: string, total?: number, id?: string}] = [{}] //TODO use interface
+  products: [
+    { quantity?: number; name?: string; total?: number; id?: string }
+  ] = [{}]; //TODO use interface
 
   ngOnInit(): void {
-    this.products.splice(0,1);
-    for(let product of this.order.products) {
-      this.productsService.getProduct( product.product).subscribe(response => {
+    this.products.splice(0, 1);
+    for (let product of this.order.products) {
+      this.productsService.getProduct(product.product).subscribe((response) => {
         const prod = response;
         const total = prod.price * product.quantity;
         this.products.push({
           quantity: product.quantity,
           name: prod.title,
           total: total,
-          id: product.product
+          id: product.product,
         });
       });
     }
@@ -42,20 +45,29 @@ export class OrderComponent implements OnInit {
   }
 
   openProduct(id) {
-    this.router.navigate(['/product',id]);
+    this.router.navigate(['/product', id]);
   }
 
   updateOrder(status: string) {
-    if(status != ''){
-      this.ordersService.updateOrder(this.order._id,status).subscribe(()=> this.updated.emit());
-
+    if (status === 'processed' && this.order.status != status) {
+      this.ordersService.updateOrder(this.order._id, status).subscribe(() => {
+        this.productsService
+          .updateSold(status, this.order.products)
+          .subscribe(() => {
+            this.updated.emit();
+          });
+      });
+    } else if (status === 'canceled' && this.order.status != status) {
+      alert("Please don't forget to refund the money!");
+      this.ordersService.updateOrder(this.order._id, status).subscribe(() => {
+        this.productsService
+          .updateSold(status, this.order.products)
+          .subscribe(() => {
+            this.updated.emit();
+          });
+      });
     } else {
       this.close.emit();
     }
-
-    if(status === 'canceled' ){
-      alert('Please don\'t forget to refund the money!')
-    }
   }
-
 }
