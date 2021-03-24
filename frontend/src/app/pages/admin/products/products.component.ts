@@ -76,7 +76,6 @@ export class ProductsComponent implements OnInit {
 
   openDeleteAlert(index) {
     this.productToDeleteIndex = index;
-    console.log(index);
     this.deleteAlert = true;
   }
 
@@ -95,18 +94,21 @@ export class ProductsComponent implements OnInit {
   }
 
   onProductDeleted() {
-    console.log(this.products[this.productToDeleteIndex])
+    const product = this.products[this.productToDeleteIndex];
     this.productsService
-      .deleteProduct(this.products[this.productToDeleteIndex]._id)
+      .deleteProduct(product._id)
       .subscribe(() => {
+        const mainImg = product.mainImg.split('/');
         this.imagesService
-          .deletePhoto(this.products[this.productToDeleteIndex].mainImg)
+          .deletePhoto(mainImg[5])
           .subscribe();
+          const thumbnail = product.thumbnail.split('/');
         this.imagesService
-          .deletePhoto(this.products[this.productToDeleteIndex].thumbnail)
+          .deletePhoto(thumbnail[5])
           .subscribe();
-        for (let img of this.products[this.productToDeleteIndex].images) {
-          this.imagesService.deletePhoto(img).subscribe();
+        for (let img of product.images) {
+          const image = img.split('/');
+          this.imagesService.deletePhoto(image[5]).subscribe();
         }
       });
     this.products.splice(this.productToDeleteIndex, 1);
