@@ -1,4 +1,4 @@
-<div class="content">
+<div class="content shadow">
   <div [formGroup]="productForm">
     <div class="form-row">
       <label for="inputTitle"><b>Title</b></label>
@@ -173,7 +173,7 @@
       <div class="tags col">
         <div clas="tags-input">
           <div class="form-row align-items-center">
-            <div class="tag-input-group">
+            <div class="tag-input-group" [formGroup]="tagsForm">
               <div class="tag-label-input">
                 <label for="tagInput"><b>Tags</b></label>
                 <input
@@ -181,12 +181,12 @@
                   class="tag-input"
                   id="tagInput"
                   placeholder="Tag"
-                  #tag
+                  formControlName="tag"
                 />
               </div>
               <button
                 type="button"
-                (click)="addTag(tag)"
+                (click)="addTag()"
                 class="btn black-btn"
               >
                 Add tag

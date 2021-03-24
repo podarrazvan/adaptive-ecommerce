@@ -1,20 +1,23 @@
 <div class="item">
-    <div class="delete-btn">
-        <button (click)="onDelete()" class="empty-btn">
-            X
-        </button>
-    </div>
-    <div class="product-img">
-        <img [src]="product.img">
-    </div>
-    <div class="product-title">
-        <a [routerLink]="['/product',product.id]">{{product.name}}</a>
-    </div>
-    <div class="quantity" [formGroup]="quantityForm">
-        <input formControlName="quantity" min="1" type="number" [placeholder]="product.quantity">
-    </div>
-    <div class="price">
-        <p>$ {{product.price * quantity}}</p>
-    </div>
+  <div class="delete-btn">
+    <button (click)="onDelete()" class="empty-btn">X</button>
+  </div>
+  <div class="product-img">
+    <img [src]="product.img" />
+  </div>
+  <div class="product-title">
+    <a [routerLink]="['/product', product.id]">{{ product.name }}</a>
+  </div>
+  <form class="quantity" [formGroup]="quantityForm">
+    <input
+      formControlName="quantity"
+      min="1"
+      type="number"
+      [placeholder]="product.quantity"
+    />
+  </form>
+  <div class="price">
+    <p>$ {{ product.price * quantity }}</p>
+  </div>
 </div>
-<hr>
+<hr />

@@ -5,7 +5,7 @@
       <!-- <app-loading></app-loading> -->
     </div>
     <div *ngIf="!loading">
-      <button (click)="updateOrder('')" class="btn btn-danger">X</button>
+      <button (click)="updateOrder('')" class="btn red-btn">X</button>
       <div class="customer">
         <div class="customer-left">
           <h3>
@@ -63,7 +63,7 @@
         <button (click)="updateOrder('processed')" class="btn btn-success">
           Process the order
         </button>
-        <button (click)="updateOrder('canceled')" class="btn btn-danger">
+        <button (click)="updateOrder('canceled')" class="btn red-btn">
           Cancel the order
         </button>
       </div>

@@ -25,17 +25,16 @@ export class ProductComponent {
     private usersService: UsersService,
     private discountService: DiscountService
   ) {
-    const key = this.route.snapshot.params['key'];
-    this.productsService.getProduct(key).subscribe((response) => {
+    const productId = this.route.snapshot.params['key'];
+    this.productsService.getProduct(productId).subscribe((response) => {
+      const product = response;
       this.checkPromotion(response);
-      this.sharedDataService.userDetails.subscribe((response) => {
+      this.sharedDataService.userDetails$.subscribe((response) => {
         this.user = response;
-        const product = { product: key };
-        const exists = this.productExists(key);
-        if (!exists) {
-          this.user.history.push(product);
+        if (this.user.history.indexOf(productId) === -1) {
+          this.user.history.push(productId);
           this.sharedDataService.updateUserDetails(this.user);
-          this.productsService.updateProduct(this.product);
+          this.productsService.updateProduct(product);
           if (this.user.email != undefined) {
             this.usersService
               .updateHistory(this.user.email, this.user.history)
@@ -81,14 +80,5 @@ export class ProductComponent {
           this.loading = false;
         });
     }
-  }
-
-  productExists(key) {
-    for (let product of this.user.history) {
-      if (product.product == key) {
-        return true;
-      }
-    }
-    return false;
   }
 }

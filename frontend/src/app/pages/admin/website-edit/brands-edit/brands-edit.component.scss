@@ -22,7 +22,7 @@
   margin-bottom: 50px;
 }
 
-.btn-danger {
+.red-btn {
   float: right;
   margin-bottom: 10px;
 }
@@ -43,4 +43,14 @@
   textarea {
     width: 100%;
   }
+}
+
+.red-btn {
+  margin-top: 5px;
+  height: 30px;
+  padding: 5px 10px;
+}
+
+.buttons-website-edit {
+  align-items: center;
 }

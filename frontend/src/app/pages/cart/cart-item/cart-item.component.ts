@@ -19,7 +19,10 @@ export class CartItemComponent implements OnInit {
 
   ngOnInit(){
     this.quantityForm = this.fb.group({
-      quantity: this.fb.control(this.product.quantity),
+      quantity: this.fb.control(null),
+    });
+    this.quantityForm.patchValue({
+      quantity: this.product.quantity
     });
   }
 

@@ -6,7 +6,6 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { Router } from '@angular/router';
 import { ProductsService } from '../admin/products/products.service';
 import { DiscountService } from 'src/app/shared/services/database/discount.service';
 
@@ -18,7 +17,7 @@ declare var paypal;
 })
 export class CartComponent implements OnInit, DoCheck {
   @ViewChild('paypal', { static: true }) paypalElement: ElementRef;
-  cart;
+  cart = [];
   showCart = false;
   quantity;
   subtotal = 0;
@@ -33,20 +32,19 @@ export class CartComponent implements OnInit, DoCheck {
   constructor(
     private productsService: ProductsService,
     private discountService: DiscountService,
-    private sharedDataService: SharedDataService,
-    private router: Router
   ) {}
 
   ngOnInit(): void {
     const products = JSON.parse(localStorage.getItem('cart')) || [];
     if (products.length === 0) {
-      this.router.navigate(['../']);
+      localStorage.removeItem('cart');
     }
     for (let product of products) {
       const key = product.id;
       const quantity = product.quantity;
       const price = product.price;
       this.getProduct(key, quantity, price);
+      localStorage.setItem('cart', JSON.stringify(this.cart));
     }
     this.showCart = true;
     // paypal
@@ -85,32 +83,38 @@ export class CartComponent implements OnInit, DoCheck {
 
     this.productsService.getProduct(id).subscribe((response) => {
       const product = response;
-      if (product.price != price) {
-        //TODO check auth
-        let authenticated = true;
-        //
-        if (authenticated) {
-          this.discountService
-            .checkAuthForPromotion(product._id)
-            .subscribe((response) => {
-              console.log(response);
-              if (response !=null) {
-                this.addProductToCart(product, price, quantity, product._id);
-              } else {
-                this.addProductToCart(product, product.price, quantity, product._id);
-              }
-            });
+      if (product != null) {
+        if (product.price != price) {
+          //TODO check auth
+          let authenticated = true;
+          //
+          if (authenticated) {
+            this.discountService
+              .checkAuthForPromotion(product._id)
+              .subscribe((response) => {
+                if (response != null) {
+                  this.addProductToCart(product, price, quantity, product._id);
+                } else {
+                  this.addProductToCart(
+                    product,
+                    product.price,
+                    quantity,
+                    product._id
+                  );
+                }
+              });
+          } else {
+            this.discountService
+              .checkForPromotion(product._id)
+              .subscribe((response) => {
+                if (response != null) {
+                  this.addProductToCart(product, price, quantity, product._id);
+                }
+              });
+          }
         } else {
-          this.discountService
-            .checkForPromotion(product._id)
-            .subscribe((response) => {
-              if (response != null) {
-                this.addProductToCart(product, price, quantity, product._id);
-              }
-            });
+          this.addProductToCart(product, product.price, quantity, product._id);
         }
-      } else {
-        this.addProductToCart(product,product.price, quantity, product._id);
       }
     });
   }
@@ -134,9 +138,7 @@ export class CartComponent implements OnInit, DoCheck {
     this.total -= this.cart[index].total;
     this.cart.splice(index, 1);
     if (this.cart.length === 0) {
-      this.sharedDataService.updateCart(true);
       localStorage.removeItem('cart');
-      this.router.navigate(['../']);
     } else {
       localStorage.setItem('cart', JSON.stringify(this.cart));
     }

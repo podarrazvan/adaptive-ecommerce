@@ -3,7 +3,7 @@
   <div *ngIf="deleteAlert">
     <app-delete-alert  (delete)="onDelete($event)" *ngIf="deleteAlert"></app-delete-alert>
   </div>
-  <table class="table">
+  <table class="table shadow">
     <thead>
       <tr>
         <th scope="col">#</th>
@@ -27,7 +27,9 @@
           />
         </td>
         <td>
-          <b>{{ product.title | shorten: 20 }}</b>
+          <a [routerLink]="['/product',product._id]">
+            <b>{{ product.title | shorten: 20 }}</b>
+          </a>
         </td>
         <td>
           <b>{{ product.price }}</b>

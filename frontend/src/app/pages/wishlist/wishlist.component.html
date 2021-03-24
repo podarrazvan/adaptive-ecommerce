@@ -1,9 +1,15 @@
-<div class="wishlit" *ngIf="products.length > 0">
+<div class="wishlit">
     <h3 class="card-top">Wishlist</h3>
+    <ng-container *ngIf="products.length > 0">
     <app-wishlist-item
-        *ngFor="let prod of products"
-        [product]='prod'
-        (delete)="deletedProduct($event)"
+      *ngFor="let prod of products"
+      [product]="prod"
+      (delete)="deletedProduct($event)"
     ></app-wishlist-item>
+  </ng-container>
+  <ng-container *ngIf="products.length === 0">
+    <div class="no-elements">
+      <p>No products were added to the wishlist</p>
+    </div>
+  </ng-container>
 </div>
-<h1 *ngIf="products.length === 0">Nothing to show...</h1>

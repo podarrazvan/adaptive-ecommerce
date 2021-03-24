@@ -1,4 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Categories } from 'src/app/shared/interfaces/categories.interface';
 import { ImagesService } from 'src/app/shared/services/database/images.service';
 import { TinyMCEComponent } from '../../../shared/components/tinymce/tinymce.component';
@@ -14,6 +15,7 @@ import { ProductsService } from '../products/products.service';
 })
 export class AddProductComponent implements OnDestroy {
   public tinyMCE: TinyMCEComponent;
+  tagsForm: FormGroup;
 
   loading = true; //TODO
   autoMode = false;
@@ -21,7 +23,6 @@ export class AddProductComponent implements OnDestroy {
   addDiscount = false;
 
   tags: string[] = [];
-  tag: string;
 
   images: string[] = [];
   mainImg: string;
@@ -39,11 +40,18 @@ export class AddProductComponent implements OnDestroy {
     public sharedDataService: SharedDataService,
     private productsService: ProductsService,
     private imagesService: ImagesService,
-    private adminService: AdminService
-  ) {}
+    private adminService: AdminService,
+    private fb: FormBuilder
+  ) {
+    this.buildTagsFormGroup();
+  }
 
   get productForm() {
     return this.adminService.productFormGroup.get('product');
+  }
+
+  get tag() {
+    return this.tagsForm.get('tag').value;
   }
 
   onSubmit() {
@@ -77,7 +85,7 @@ export class AddProductComponent implements OnDestroy {
         this.images = [];
         this.thumbnail = null;
         this.mainImg = null;
-        this.productForm.get('description').patchValue(null);//! NOT WORKING!
+        this.productForm.get('description').patchValue(null); //! NOT WORKING!
         this.productForm.reset();
       } else {
         alert('Invalid form!');
@@ -123,8 +131,11 @@ export class AddProductComponent implements OnDestroy {
     this.images.splice(i, 1);
   }
 
-  addTag(tag) {
-    this.tags.push(tag.value);
+  addTag() {
+    if (this.tagsForm.valid) {
+      this.tags.push(this.tag);
+      this.tagsForm.reset();
+    }
   }
 
   deleteTag(index) {
@@ -135,6 +146,12 @@ export class AddProductComponent implements OnDestroy {
     const div = document.createElement('div');
     div.innerHTML = content;
     this.productForm.get('description').patchValue(div.innerHTML);
+  }
+
+  private buildTagsFormGroup() {
+    this.tagsForm = this.fb.group({
+      tag: ['', Validators.required],
+    });
   }
 
   ngOnDestroy(): void {

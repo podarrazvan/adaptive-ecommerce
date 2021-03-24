@@ -3,18 +3,25 @@
     <div class="card-top">
       <h1>Cart</h1>
     </div>
-    <div class="product">
-      <app-cart-item
-        *ngFor="let item of cart; let i = index"
-        [product]="item"
-        [index]="i"
-        (deleteIndex)="onDelete($event)"
-        (newTotal)="updateTotal($event)"
-      ></app-cart-item>
-    </div>
-    <div class="bottom">
-      <app-cart-coupon (dicount)="coupon($event)"></app-cart-coupon>
-    </div>
+    <ng-container *ngIf="cart.length > 0">
+      <div class="product">
+        <app-cart-item
+          *ngFor="let item of cart; let i = index"
+          [product]="item"
+          [index]="i"
+          (deleteIndex)="onDelete($event)"
+          (newTotal)="updateTotal($event)"
+        ></app-cart-item>
+      </div>
+      <div class="bottom">
+        <app-cart-coupon (dicount)="coupon($event)"></app-cart-coupon>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="cart.length === 0">
+     <div class="no-elements">
+       <p>No products were added to the cart</p>
+     </div>
+    </ng-container>
   </div>
   <div class="right">
     <div class="card-top">
@@ -32,9 +39,16 @@
       <hr />
     </div>
     <div class="bottom-right">
-      <button routerLink="../checkout" class="gradient-btn">
-        Proceed to checkout
-      </button>
+      <ng-container *ngIf="cart.length > 0">
+        <button routerLink="../checkout" class="gradient-btn">
+          Proceed to checkout
+        </button>
+      </ng-container>
+      <ng-container *ngIf="cart.length === 0">
+        <button routerLink="/special-for-you" class="gradient-btn">
+          Make me a discount
+        </button>
+      </ng-container>
     </div>
     <!-- <div class="paypal-option">
       <hr />

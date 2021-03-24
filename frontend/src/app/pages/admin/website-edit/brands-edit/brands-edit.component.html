@@ -6,7 +6,7 @@
   <div class="alert">
     <div [formGroup]="formGroup" class="alert-box">
       <div class="cancel-btn">
-        <button (click)="brandsHide = true" class="btn btn-danger">X</button>
+        <button (click)="brandsHide = true" class="btn red-btn">X</button>
       </div>
       <label for="nameInput"><b>Add a new brand</b></label>
       <input
@@ -54,7 +54,7 @@
                   <button
                     *ngIf="!editBrandLogo"
                     (click)="editBrandLogo = true"
-                    class="btn btn-danger img-edit-btn"
+                    class="btn red-btn img-edit-btn"
                   >
                     X
                   </button>
@@ -89,8 +89,8 @@
                 <mat-icon>create</mat-icon>
               </button>
               <ng-container *ngIf="editBrandMode == i">
-                <button (click)="editBrandMode = null">Cancel</button>
-                <button (click)="edit(i)" class="btn btn-primary">Done</button>
+                <button class="btn red-btn" (click)="editBrandMode = null">Cancel</button>
+                <button (click)="edit(i)" class="">Done</button>
               </ng-container>
             </div>
           </li>

@@ -3,9 +3,9 @@
   width: fit-content;
 }
 .side-bar {
-  height: 110vh;
+  margin-top: 50px;
   width: 14vw;
-  padding: 80px 60px 50px 0px;
+  padding: 40px 60px 40px 0px;
 }
 
 hr {
@@ -43,4 +43,5 @@ hr {
   ul {
     display: none;
   }
+  box-shadow: none !important;
 }

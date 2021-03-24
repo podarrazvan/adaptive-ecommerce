@@ -115,7 +115,6 @@ router.put("/:id", (req, res, next) => {
 router.put("/sold/:status", checkAdmin, (req, res, next) => {
   const products = req.body;
   const status = req.params.status;
-  console.log(status);
   for (let product of products) {
     const _id = product.product;
     Product.findOne({ _id }).then((oldProduct) => {

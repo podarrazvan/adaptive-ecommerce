@@ -18,9 +18,6 @@ export class SharedDataService implements OnDestroy {
   private brandSubject$ = new BehaviorSubject<Brand>(null);
   public brand$ = this.brandSubject$.asObservable();
 
-  private emptyCartSubject$ = new BehaviorSubject<boolean>(true);
-  private emptyCart$ = this.emptyCartSubject$.asObservable();
-
   private layoutSubject$ = new BehaviorSubject<Layout>(null);
   public layout$: Observable<Layout> = this.layoutSubject$.asObservable();
 
@@ -30,7 +27,8 @@ export class SharedDataService implements OnDestroy {
   private bestSellersSubject$ = new BehaviorSubject<BestSellers>(null);
   public bestSellers$: Observable<BestSellers> = this.bestSellersSubject$.asObservable();
 
-  userDetails = new BehaviorSubject<User>(null); // !! maybe UserDetails interface if is different than User
+  private userDetailsSubject$ = new BehaviorSubject<User>(null);
+  public userDetails$: Observable<User> = this.userDetailsSubject$.asObservable();
 
   // !! fa-le si pe astea cum e mai sus
   productEdit: boolean;
@@ -58,12 +56,13 @@ export class SharedDataService implements OnDestroy {
   }
 
   setUserDetails(details: User) {
-    this.userDetails.next(details);
+    this.userDetailsSubject$.next(details);
+    localStorage.setItem('userData', JSON.stringify(details));
   }
 
   updateUserDetails(details: User) {
     localStorage.setItem('userData', JSON.stringify(details));
-    this.userDetails.next(details);
+    this.userDetailsSubject$.next(details);
   }
 
   ngOnDestroy() {
@@ -71,9 +70,5 @@ export class SharedDataService implements OnDestroy {
     this.product = null;
     this.unreadMessages = null;
     this.totalCart = null;
-  }
-
-  updateCart(newStatus: boolean) {
-    this.emptyCartSubject$.next(newStatus);
   }
 }

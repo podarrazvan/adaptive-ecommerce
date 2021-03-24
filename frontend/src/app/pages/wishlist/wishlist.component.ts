@@ -18,7 +18,7 @@ export class WishlistComponent {
     private productsService: ProductsService,
     private usersService: UsersService
   ) {
-    this.sharedDataService.userDetails.subscribe((response) => {
+    this.sharedDataService.userDetails$.subscribe((response) => {
       this.user = response;
       this.products = [];
       for (let product of response.favorites) {

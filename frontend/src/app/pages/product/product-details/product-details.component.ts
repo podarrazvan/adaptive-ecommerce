@@ -57,7 +57,7 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   addFavorite() {
-    this.sharedDataService.userDetails.subscribe((response) => {
+    this.sharedDataService.userDetails$.subscribe((response) => {
       let user = response;
       const id = this.product._id;
       if (user.favorites.indexOf(id) === -1) {
