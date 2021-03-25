@@ -8,13 +8,20 @@ export interface IProduct {
   images: any;
   thumbnail: string;
   mainImg?: string;
-  rating: number;
+  rating: {
+    average: number;
+    fiveStars: number;
+    forStars: number;
+    oneStar: number;
+    threeStars: number;
+    twoStars: number;
+  };
   _id?: string;
-  //! duplicate cut! 
+  //! duplicate cut!
   discount?: {
     cut: number;
     expirationDate: Date;
-  }
+  };
   cut?: number;
   //!
   minPrice: number;

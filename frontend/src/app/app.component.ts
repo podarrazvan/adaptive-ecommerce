@@ -40,7 +40,7 @@ export class AppComponent implements OnInit {
     } else {
       const date = new Date();
       const user = {
-        favorite: [],
+        favorites: [],
         history: [],
         categories: [],
         lastVisit: date,

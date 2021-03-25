@@ -19,6 +19,14 @@ const userSchema = mongoose.Schema({
   },
   initialQuantity: { type: Number, require: true },
   sold: { type: Number, require: true },
+  rating: {
+    oneStar:{type: Number},
+    twoStars:{type: Number},
+    threeStars:{type: Number},
+    forStars:{type: Number},
+    fiveStars:{type: Number},
+    average:{type: Number}
+  },
   productNumber: { type: Number, require: true }, //date in seconds since midnight, 1 Jan 1970
 });
 

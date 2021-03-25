@@ -1,11 +1,19 @@
-.full-stars, .stars {
-    display: flex;
+.full-stars,
+.stars {
+  display: flex;
+}
+
+.stars {
+  background-color: whitesmoke;
 }
 
 mat-icon {
-    color: yellow;
+  cursor: pointer;
+  color: rgb(255, 191, 0);
 }
 
-mat-icon:hover {
-    color: yellow
+.stars:hover {
+  mat-icon {
+    color: rgb(255, 255, 0);
+  }
 }
