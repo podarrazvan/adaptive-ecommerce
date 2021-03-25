@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CartItem } from 'src/app/shared/interfaces/cartItem.interface';
 import { IProduct } from 'src/app/shared/interfaces/product.interface';
+import { SharedDataService } from 'src/app/shared/services/shared-data.service';
 
 @Component({
   selector: 'app-home-flesh-deals-carousel',
@@ -15,7 +16,7 @@ export class HomeFleshDealsCarouselComponent implements OnInit {
   singleSlide: any;
   index = 0;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private sharedDataService: SharedDataService) {}
 
   ngOnInit(): void {
     const elements = 3;
@@ -81,7 +82,7 @@ export class HomeFleshDealsCarouselComponent implements OnInit {
         name: product.title,
       };
       cart.push(cartItem);
-      localStorage.setItem('cart', JSON.stringify(cart));
+      this.sharedDataService.setCart(cart);
       this.router.navigate(['/cart']);
     } else {
       alert('Already in cart!');

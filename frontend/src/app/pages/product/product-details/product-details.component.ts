@@ -40,7 +40,7 @@ export class ProductDetailsComponent implements OnInit {
         name: this.product.title,
       };
       cart.push(cartItem);
-      localStorage.setItem('cart', JSON.stringify(cart));
+      this.sharedDataService.setCart(cart);
       alert('Added to cart!');
     } else {
       alert('Already in cart!');

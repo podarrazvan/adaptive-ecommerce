@@ -10,6 +10,8 @@ import { CheckoutService } from '../checkout.service';
   styleUrls: ['./checkout-right.component.scss'],
 })
 export class CheckoutRightComponent {
+  //TODO @ViewChild('paypal', { static: true }) paypalElement: ElementRef;
+  //TODO paidFor = false;
   total = 0;
   subtotal = 0;
   products;
@@ -70,3 +72,29 @@ export class CheckoutRightComponent {
     return this.fb.group({ product, quantity, price });
   }
 }
+
+//TODO 
+ // paypal
+    //   .Buttons({
+    //     createOrder: (data, actions) => {
+    //       return actions.order.create({
+    //         purchase_units: [
+    //           {
+    //             // description: this.product.description,
+    //             amount: {
+    //               currency_code: 'USD',
+    //               value: this.sharedDataService.totalCart,
+    //             },
+    //           },
+    //         ],
+    //       });
+    //     },
+    //     onApprove: async (data, actions) => {
+    //       const order = await actions.order.capture();
+    //       this.paidFor = true;
+    //     },
+    //     onError: (err) => {
+    //       console.log(err);
+    //     },
+    //   })
+    //   .render(this.paypalElement.nativeElement);

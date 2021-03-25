@@ -7,6 +7,7 @@ import { IProduct } from '../interfaces/product.interface';
 import { User } from '../interfaces/user.interface';
 import { BestSellers } from '../interfaces/best-sellers.interface';
 import { Statistics } from '../interfaces/statistics.interface';
+import { CartItem } from '../interfaces/cartItem.interface';
 
 interface Brand {
   name: string;
@@ -23,19 +24,20 @@ export class SharedDataService implements OnDestroy {
 
   private statisticsSubject$ = new BehaviorSubject<Statistics>(null);
   public statistics$: Observable<Statistics> = this.statisticsSubject$.asObservable();
-  
+
   private bestSellersSubject$ = new BehaviorSubject<BestSellers>(null);
   public bestSellers$: Observable<BestSellers> = this.bestSellersSubject$.asObservable();
 
   private userDetailsSubject$ = new BehaviorSubject<User>(null);
   public userDetails$: Observable<User> = this.userDetailsSubject$.asObservable();
 
+  private cartSubject$ = new BehaviorSubject<CartItem[]>(null);
+  public cart$: Observable<CartItem[]> = this.cartSubject$.asObservable();
+
   // !! fa-le si pe astea cum e mai sus
   productEdit: boolean;
   product: IProduct;
   unreadMessages: number;
-  totalCart: number;
-  mobile: boolean;
 
   constructor(private http: HttpClient) {}
 
@@ -45,6 +47,26 @@ export class SharedDataService implements OnDestroy {
 
   setLayout(layout: Layout) {
     this.layoutSubject$.next(layout);
+  }
+
+  getCart() {
+    const cart = JSON.parse(localStorage.getItem('cart'));
+    this.cartSubject$.next(cart);
+  }
+
+  setCart(cart: CartItem[]) {
+    localStorage.setItem('cart', JSON.stringify(cart));
+    this.cartSubject$.next(cart);
+  }
+
+  updateCartItemQuantity(index, quantity, product) {
+    let cart = JSON.parse(localStorage.getItem('cart'));
+
+    product.quantity = quantity;
+    product.total = +quantity * +product.price;
+    cart[index] = product;
+
+    this.setCart(cart);
   }
 
   setStatistics(statistics: Statistics) {
@@ -69,6 +91,5 @@ export class SharedDataService implements OnDestroy {
     this.productEdit = null;
     this.product = null;
     this.unreadMessages = null;
-    this.totalCart = null;
   }
 }

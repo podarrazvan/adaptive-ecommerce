@@ -8,16 +8,16 @@
   <div class="product-title">
     <a [routerLink]="['/product', product.id]">{{ product.name }}</a>
   </div>
-  <form class="quantity" [formGroup]="quantityForm">
+  <form class="quantity">
     <input
-      formControlName="quantity"
+      (input)="onQuantityChange($event.target.value)"
       min="1"
       type="number"
-      [placeholder]="product.quantity"
+      [value]="product.quantity"
     />
   </form>
   <div class="price">
-    <p>$ {{ product.price * quantity }}</p>
+    <p>$ {{ product.total }}</p>
   </div>
 </div>
 <hr />

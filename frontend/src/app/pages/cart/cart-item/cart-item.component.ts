@@ -1,39 +1,31 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { SharedDataService } from 'src/app/shared/services/shared-data.service';
 
 @Component({
   selector: 'app-cart-item',
   templateUrl: './cart-item.component.html',
   styleUrls: ['./cart-item.component.scss'],
 })
-export class CartItemComponent implements OnInit {
+export class CartItemComponent {
   @Input() product;
   @Input() index;
   @Output() deleteIndex = new EventEmitter<number>();
   @Output() newTotal = new EventEmitter<UpdatePoduct>();
-  quantityForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
-    
-  }
+  constructor(private sharedDataService: SharedDataService) {}
 
-  ngOnInit(){
-    this.quantityForm = this.fb.group({
-      quantity: this.fb.control(null),
-    });
-    this.quantityForm.patchValue({
-      quantity: this.product.quantity
-    });
-  }
-
-  get quantity() {
-    const id = this.product._id;
-    const oldPrice = this.product.total;
-    const quantity = this.quantityForm.get('quantity').value;
-    this.product.total = +quantity * +this.product.price;
-    const total = this.product.total - oldPrice;
-    this.newTotal.emit({id,total, quantity})
-    return quantity;
+  onQuantityChange(value) {
+    this.sharedDataService.updateCartItemQuantity(
+      this.index,
+      value,
+      this.product
+    );
   }
 
   onDelete() {
