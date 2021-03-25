@@ -1,5 +1,5 @@
 <ng-container *ngIf="sharedDataService.layout$ | async as layout">
-  <div class="website-edit-box">
+  <div class="website-edit-box shadow">
     <div *ngIf="showEditTermsOfUse">
       <app-page-edit
         (close)="closeTermsOfUseEdit()"
