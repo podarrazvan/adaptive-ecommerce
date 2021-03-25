@@ -1,6 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Categories } from 'src/app/shared/interfaces/categories.interface';
+import { IProductModel } from 'src/app/shared/interfaces/product-model.interface';
 import { ImagesService } from 'src/app/shared/services/database/images.service';
 import { TinyMCEComponent } from '../../../shared/components/tinymce/tinymce.component';
 import { Brand } from '../../../shared/interfaces/brand.interface';
@@ -16,6 +17,7 @@ import { ProductsService } from '../products/products.service';
 export class AddProductComponent implements OnDestroy {
   public tinyMCE: TinyMCEComponent;
   tagsForm: FormGroup;
+  modelsForm: FormGroup;
 
   loading = true; //TODO
   autoMode = false;
@@ -36,6 +38,8 @@ export class AddProductComponent implements OnDestroy {
 
   onEditMode: boolean;
 
+  models: IProductModel[] = [];
+
   constructor(
     public sharedDataService: SharedDataService,
     private productsService: ProductsService,
@@ -43,7 +47,7 @@ export class AddProductComponent implements OnDestroy {
     private adminService: AdminService,
     private fb: FormBuilder
   ) {
-    this.buildTagsFormGroup();
+    this.buildForms();
   }
 
   get productForm() {
@@ -54,6 +58,14 @@ export class AddProductComponent implements OnDestroy {
     return this.tagsForm.get('tag').value;
   }
 
+  get name() {
+    return this.modelsForm.get('name').value;
+  }
+
+  get price() {
+    return this.modelsForm.get('price').value;
+  }
+
   onSubmit() {
     if (this.images != undefined) {
       this.productForm.patchValue({
@@ -61,6 +73,7 @@ export class AddProductComponent implements OnDestroy {
         tags: this.tags,
         thumbnail: this.thumbnail,
         mainImg: this.mainImg,
+        productModels: this.models,
       });
       if (this.productForm.valid) {
         if (this.sharedDataService.productEdit) {
@@ -71,7 +84,7 @@ export class AddProductComponent implements OnDestroy {
         } else {
           //! DELETE THIS!
           // const title = this.productForm.value.title;
-          // for (let i = 0; i < 33; i++) {
+          // for (let i = 0; i < 5; i++) {
           //   this.productForm.patchValue({
           //     title: title + ` (${i})`,
           //   });
@@ -82,6 +95,7 @@ export class AddProductComponent implements OnDestroy {
         }
         this.notComplete = false;
         this.tags = [];
+        this.models = [];
         this.images = [];
         this.thumbnail = null;
         this.mainImg = null;
@@ -142,15 +156,34 @@ export class AddProductComponent implements OnDestroy {
     this.tags.splice(index, 1);
   }
 
+  addModel() {
+    if (this.modelsForm.valid) {
+      const model = {
+        name: this.name,
+        price: this.price,
+      };
+      this.models.push(model);
+      this.modelsForm.reset();
+    }
+  }
+
+  deleteModel(index) {
+    this.models.splice(index, 1);
+  }
+
   ckeditorContentChanged(content) {
     const div = document.createElement('div');
     div.innerHTML = content;
     this.productForm.get('description').patchValue(div.innerHTML);
   }
 
-  private buildTagsFormGroup() {
+  private buildForms() {
     this.tagsForm = this.fb.group({
       tag: ['', Validators.required],
+    });
+    this.modelsForm = this.fb.group({
+      name: ['', Validators.required],
+      price: ['', Validators.required],
     });
   }
 

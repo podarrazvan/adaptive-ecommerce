@@ -24,7 +24,12 @@
         class="custom-select my-1 mr-sm-2"
         id="inputCategory"
       >
-        <option *ngFor="let category of (sharedDataService.layout$ | async).categories" [value]="category.name">
+        <option
+          *ngFor="
+            let category of (sharedDataService.layout$ | async).categories
+          "
+          [value]="category.name"
+        >
           {{ category.name }}
         </option>
       </select>
@@ -43,7 +48,10 @@
         class="custom-select my-1 mr-sm-2"
         id="inputBrand"
       >
-        <option *ngFor="let brand of (sharedDataService.layout$ | async).brands" [value]="brand.name">
+        <option
+          *ngFor="let brand of (sharedDataService.layout$ | async).brands"
+          [value]="brand.name"
+        >
           {{ brand.name }}
         </option>
       </select>
@@ -123,7 +131,13 @@
         <div class="prev-images" *ngIf="mainImg">
           <div class="image">
             <div class="button">
-              <button type="button" (click)="deleteMainImg(mainImg)" class="delete-btn">X</button>
+              <button
+                type="button"
+                (click)="deleteMainImg(mainImg)"
+                class="delete-btn"
+              >
+                X
+              </button>
             </div>
             <img [src]="mainImg" />
           </div>
@@ -142,7 +156,13 @@
         <div class="prev-images" *ngIf="thumbnail">
           <div class="image">
             <div class="button">
-              <button type="button" (click)="deleteThumbnail(thumbnail)" class="delete-btn">X</button>
+              <button
+                type="button"
+                (click)="deleteThumbnail(thumbnail)"
+                class="delete-btn"
+              >
+                X
+              </button>
             </div>
             <img [src]="thumbnail" />
           </div>
@@ -184,11 +204,7 @@
                   formControlName="tag"
                 />
               </div>
-              <button
-                type="button"
-                (click)="addTag()"
-                class="btn black-btn"
-              >
+              <button type="button" (click)="addTag()" class="btn black-btn">
                 Add tag
               </button>
             </div>
@@ -230,6 +246,49 @@
       </div>
     </div>
     <hr />
+    <div class="row">
+      <div class="models col">
+        <div clas="models-input">
+          <div class="form-row align-items-center">
+            <div class="model-input-group" [formGroup]="modelsForm">
+              <div class="model-input">
+                <label for="nameInput"><b>Model Name</b></label>
+                <input
+                  class="model-input"
+                  id="nameInput"
+                  placeholder="Name"
+                  formControlName="name"
+                />
+              </div>
+              <div class="model-input">
+                <label for="priceInput"><b>Model Price</b></label>
+                <input
+                  class="model-input"
+                  id="priceInput"
+                  placeholder="Price"
+                  formControlName="price"
+                />
+              </div>
+              <button type="button" (click)="addModel()" class="btn black-btn model-btn">
+                Add model
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="models-area">
+          <div *ngFor="let model of models; let i = index">
+            <button
+              type="button"
+              (click)="deleteModel(i)"
+              class="simple-btn model-btn"
+            >
+              X <br>name: {{ model.name }}<hr> price: {{ model.price }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr />
     <mat-checkbox (click)="autoMode = !autoMode">Auto Mode</mat-checkbox>
     <div class="auto-mode" *ngIf="autoMode">
       <mat-form-field>
@@ -249,7 +308,6 @@
         />
       </mat-form-field>
     </div>
-    <!-- <app-add-discount *ngIf="addDiscount"></app-add-discount> -->
     <hr />
     <button class="gradient-btn" (click)="onSubmit()">
       {{ onEditMode ? "Edit" : "Add product" }}

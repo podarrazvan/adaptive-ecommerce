@@ -12,7 +12,12 @@ const userSchema = mongoose.Schema({
   quantity: { type: Number, require: true },
   views: { type: Number, require: true },
   brand: { type: String, require: true },
-  productModel: [{ type: String, require: true }],
+  productModels: [
+    {
+      name: { type: String },
+      price: { type: String },
+    },
+  ],
   autoMode: {
     minPrice: { type: Number }, // min price for auto generated offers
     salesWeekTarget: { type: Number }, // how many should be sold each week in auto mode
@@ -20,12 +25,12 @@ const userSchema = mongoose.Schema({
   initialQuantity: { type: Number, require: true },
   sold: { type: Number, require: true },
   rating: {
-    oneStar:{type: Number},
-    twoStars:{type: Number},
-    threeStars:{type: Number},
-    forStars:{type: Number},
-    fiveStars:{type: Number},
-    average:{type: Number}
+    oneStar: { type: Number },
+    twoStars: { type: Number },
+    threeStars: { type: Number },
+    forStars: { type: Number },
+    fiveStars: { type: Number },
+    average: { type: Number },
   },
   productNumber: { type: Number, require: true }, //date in seconds since midnight, 1 Jan 1970
 });

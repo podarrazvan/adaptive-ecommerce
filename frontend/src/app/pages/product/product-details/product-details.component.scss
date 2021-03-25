@@ -28,8 +28,13 @@
     color: green !important;
   }
 }
+
+.product-model,
 .brand {
   font-weight: bold;
+}
+
+.brand {
   img {
     height: 30px;
     width: 30px;
@@ -47,8 +52,10 @@
 }
 
 .model {
-  .simple-btn {
-    margin: 10px;
+  margin-bottom: 15px;
+  .main-btn {
+    margin-right: 10px;
+    margin-left: 0;
   }
 }
 

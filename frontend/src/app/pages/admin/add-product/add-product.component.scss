@@ -13,7 +13,8 @@ form {
 }
 
 .price-input,
-.tags-input {
+.tags-input,
+.models-input {
   display: flex;
 }
 
@@ -67,26 +68,42 @@ form {
     border-bottom-right-radius: 50%;
   }
   .black-btn {
-    margin-top: auto;
     border-top-left-radius: 0px;
     border-bottom-left-radius: 0px;
-    height: 35px;
-    padding: 5px 10px;
   }
 }
 
+.black-btn {
+  margin-top: auto;
+  height: 35px;
+  padding: 5px 10px;
+}
+
 .tags,
-.tags-area {
+.tags-area,
+.models-area {
   margin-top: 20px;
 }
 
-.tags-area {
+.tags-area,
+.models-area {
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
   min-height: 150px;
-  border: 1px solid #ccc !important;
+  border: 1px solid $gray-40 !important;
   border-radius: $very-small-border-radius;
+}
+
+.model-input-group {
+  display: flex;
+  .model-input {
+    display: grid;
+    margin: 0px 5px;
+  }
+  .model-btn {
+    margin-bottom: 5px;
+  }
 }
 
 .tag-btn {

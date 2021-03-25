@@ -28,11 +28,11 @@
       Id: <span>{{ product.productNumber }}</span>
     </p>
   </div>
-  <div class="product-model" *ngIf="product.models">
-    <p>Model:</p>
+  <div class="product-model" *ngIf="product.productModels.length>0">
+    <p>Model</p>
     <div class="model">
-      <button class="simple-btn" *ngFor="let model of product.models">
-        {{ model }}
+      <button class="main-btn" *ngFor="let model of product.productModels">
+        {{ model.name }}
       </button>
     </div>
   </div>

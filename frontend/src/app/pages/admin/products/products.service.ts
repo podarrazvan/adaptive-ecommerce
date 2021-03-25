@@ -27,9 +27,9 @@ export class ProductsService {
       initialQuantity: product.quantity,
       productNumber: productNumber,
       brand: product.brand,
-      model: product.model,
+      productModels: product.productModels,
       sold: 0,
-      rating:0,
+      rating: null,
     };
     this.http
       .post<{ name: string }>(`${environment.api}/products`, productData, {

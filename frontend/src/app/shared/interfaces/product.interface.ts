@@ -1,3 +1,5 @@
+import { IProductModel } from "./product-model.interface";
+
 export interface IProduct {
   title: string;
   description: string;
@@ -8,7 +10,7 @@ export interface IProduct {
   images: any;
   thumbnail: string;
   mainImg?: string;
-  rating: {
+  rating: { //TODO use iterface!
     average: number;
     fiveStars: number;
     forStars: number;
@@ -30,6 +32,6 @@ export interface IProduct {
   views: number;
   productNumber: number;
   brand: string;
-  model: string;
+  productModels: IProductModel;
   sold: number;
 }

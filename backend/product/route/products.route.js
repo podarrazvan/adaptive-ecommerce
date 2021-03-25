@@ -24,6 +24,7 @@ router.post("", (req, res, next) => {
     productNumber,
     minPrice,
     salesWeekTarget,
+    productModels
   } = req.body;
   const product = new Product({
     title,
@@ -48,6 +49,7 @@ router.post("", (req, res, next) => {
       fiveStars: 0,
       average: 0,
     },
+    productModels,
     autoMode: {
       minPrice,
       salesWeekTarget,
@@ -81,6 +83,7 @@ router.put("/:id", (req, res, next) => {
     initialQuantity,
     productNumber,
     sold,
+    productModels,
     oneStar,
     twoStars,
     threeStars,
@@ -107,6 +110,7 @@ router.put("/:id", (req, res, next) => {
     initialQuantity,
     productNumber,
     sold,
+    productModels,
     rating: {
       oneStar,
       twoStars,
