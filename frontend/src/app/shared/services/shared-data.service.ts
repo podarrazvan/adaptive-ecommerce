@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Layout } from './../interfaces/website-details';
 import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Product } from '../interfaces/product.interface';
+import { IProduct } from '../interfaces/product.interface';
 import { User } from '../interfaces/user.interface';
 import { BestSellers } from '../interfaces/best-sellers.interface';
 import { Statistics } from '../interfaces/statistics.interface';
@@ -32,7 +32,7 @@ export class SharedDataService implements OnDestroy {
 
   // !! fa-le si pe astea cum e mai sus
   productEdit: boolean;
-  product: Product;
+  product: IProduct;
   unreadMessages: number;
   totalCart: number;
   mobile: boolean;

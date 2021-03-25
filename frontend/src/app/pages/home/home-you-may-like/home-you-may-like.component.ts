@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Product } from 'src/app/shared/interfaces/product.interface';
+import { IProduct } from 'src/app/shared/interfaces/product.interface';
 import { ProductsService } from '../../admin/products/products.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { ProductsService } from '../../admin/products/products.service';
   styleUrls: ['./home-you-may-like.component.scss']
 })
 export class HomeYouMayLikeComponent {
-  products: Product[];
+  products: IProduct[];
   numberOfProducts = 6;
   loading = true;
 

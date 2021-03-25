@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Product } from 'src/app/shared/interfaces/product.interface';
+import { IProduct } from 'src/app/shared/interfaces/product.interface';
 import { User } from 'src/app/shared/interfaces/user.interface';
 import { SharedDataService } from 'src/app/shared/services/shared-data.service';
 import { ProductsService } from '../admin/products/products.service';
@@ -11,7 +11,7 @@ import { UsersService } from '../admin/users/user.service';
   styleUrls: ['./wishlist.component.scss'],
 })
 export class WishlistComponent {
-  products: Product[];
+  products: IProduct[];
   user: User;
   constructor(
     private sharedDataService: SharedDataService,

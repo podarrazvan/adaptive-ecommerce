@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Product } from 'src/app/shared/interfaces/product.interface';
+import { IProduct } from 'src/app/shared/interfaces/product.interface';
 import { DiscountService } from 'src/app/shared/services/database/discount.service';
 import { ProductsService } from '../admin/products/products.service';
 
@@ -9,7 +9,7 @@ import { ProductsService } from '../admin/products/products.service';
 })
 export class SpecialForYouComponent {
   productsFound = false;
-  products: Product[] = [];
+  products: IProduct[] = [];
 
   constructor(private productsService: ProductsService,private discountService: DiscountService) { 
     this.productsService.getSpecialForYouProducts().subscribe(()=>{

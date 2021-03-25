@@ -1,5 +1,5 @@
 import { FormBuilder, Validators } from '@angular/forms';
-import { Product } from 'src/app/shared/interfaces/product.interface';
+import { IProduct } from 'src/app/shared/interfaces/product.interface';
 
 const fb: FormBuilder = new FormBuilder();
 
@@ -22,7 +22,7 @@ export const buildProductFormGroup = () => {
   });
 };
 
-export function mapProducts(formArray, products: Product[] = []) {
+export function mapProducts(formArray, products: IProduct[] = []) {
   formArray.clear();
   products.forEach((p) => {
     formArray.push(

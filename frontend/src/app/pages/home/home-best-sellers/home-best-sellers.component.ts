@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Product } from 'src/app/shared/interfaces/product.interface';
+import { IProduct } from 'src/app/shared/interfaces/product.interface';
 import { SharedDataService } from 'src/app/shared/services/shared-data.service';
 
 @Component({
@@ -8,9 +8,9 @@ import { SharedDataService } from 'src/app/shared/services/shared-data.service';
   styleUrls: ['./home-best-sellers.component.scss'],
 })
 export class HomeBestSellersComponent {
-  mainProduct: Product;
-  middleProducts: Product[];
-  bottomProducts: Product[];
+  mainProduct: IProduct;
+  middleProducts: IProduct[];
+  bottomProducts: IProduct[];
   loading = true;
 
   constructor(private sharedDataService: SharedDataService) {

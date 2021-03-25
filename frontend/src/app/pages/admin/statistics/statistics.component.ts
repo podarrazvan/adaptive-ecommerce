@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { StatisticsService } from 'src/app/shared/services/database/statistics.service';
-import { Product } from '../../../shared/interfaces/product.interface';
+import { IProduct } from '../../../shared/interfaces/product.interface';
 import { ProductsService } from '../products/products.service';
 
 @Component({
@@ -31,7 +31,7 @@ export class StatisticsComponent {
 
   productsStatistics;
 
-  products: [{ product?: Product; views?: number }];
+  products: [{ product?: IProduct; views?: number }];
   productsData;
   categories: string[];
   category;

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Brand } from 'src/app/shared/interfaces/brand.interface';
-import { Product } from 'src/app/shared/interfaces/product.interface';
+import { IProduct } from 'src/app/shared/interfaces/product.interface';
 import { SharedDataService } from 'src/app/shared/services/shared-data.service';
 import { ProductsService } from '../../admin/products/products.service';
 
@@ -15,7 +15,7 @@ export class ShopByBrandComponent {
   page = 1;
   pageLimit = 4;
   selectedBrand: Brand;
-  products: Product[];
+  products: IProduct[];
   
   constructor(private sharedDataService: SharedDataService, private productsService: ProductsService) {
     this.sharedDataService.layout$.subscribe((response)=> {

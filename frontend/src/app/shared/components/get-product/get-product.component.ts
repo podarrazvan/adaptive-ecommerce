@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Product } from '../../interfaces/product.interface';
+import { IProduct } from '../../interfaces/product.interface';
 
 @Component({
   selector: 'app-get-product',
@@ -8,7 +8,7 @@ import { Product } from '../../interfaces/product.interface';
 })
 export class GetProductComponent {
 
-  @Input() product: Product;
+  @Input() product: IProduct;
   @Input() fullContent: boolean;
   @Input() search: boolean;
 

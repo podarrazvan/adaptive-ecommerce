@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ProductsService } from 'src/app/pages/admin/products/products.service';
-import { Product } from '../../interfaces/product.interface';
+import { IProduct } from '../../interfaces/product.interface';
 import { SharedDataService } from '../../services/shared-data.service';
 
 @Component({
@@ -9,9 +9,9 @@ import { SharedDataService } from '../../services/shared-data.service';
   styleUrls: ['./bottom-products.component.scss']
 })
 export class BottomProductsComponent  {
-  topRatedProducts: Product[];
-  featuredProducts: Product[];
-  topSellingProducts: Product[];
+  topRatedProducts: IProduct[];
+  featuredProducts: IProduct[];
+  topSellingProducts: IProduct[];
 
   constructor(private productsService: ProductsService,private sharedDataService: SharedDataService) {
     this.productsService.getBestSellersProducts().subscribe((response) => {

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CartItem } from 'src/app/shared/interfaces/cartItem.interface';
-import { Product } from 'src/app/shared/interfaces/product.interface';
+import { IProduct } from 'src/app/shared/interfaces/product.interface';
 
 @Component({
   selector: 'app-home-flesh-deals-carousel',
@@ -67,7 +67,7 @@ export class HomeFleshDealsCarouselComponent implements OnInit {
     this.singleSlide = this.slides[this.index];
   }
 
-  addToCart(product: Product) {
+  addToCart(product: IProduct) {
     let cart = JSON.parse(localStorage.getItem('cart'));
     if (cart === null) {
       cart = [];

@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment.prod';
-import { Product } from 'src/app/shared/interfaces/product.interface';
+import { IProduct } from 'src/app/shared/interfaces/product.interface';
 
 @Injectable()
 export class ProductsService {
   error: any;
   constructor(private http: HttpClient) {}
 
-  createAndStoreProduct(product: Product) {
+  createAndStoreProduct(product: IProduct) {
     const date = new Date().getTime();
     const productNumber = Math.round(date / 1000 - 1615160000);
-    const productData: Product = {
+    const productData: IProduct = {
       title: product.title,
       category: product.category,
       price: product.price,
@@ -29,6 +29,7 @@ export class ProductsService {
       brand: product.brand,
       model: product.model,
       sold: 0,
+      rating:0,
     };
     this.http
       .post<{ name: string }>(`${environment.api}/products`, productData, {
@@ -37,7 +38,7 @@ export class ProductsService {
       .subscribe();
   }
 
-  updateProduct(product: Product) {
+  updateProduct(product: IProduct) {
     product.views = +product.views + 1;
     this.http
       .put(`${environment.api}/products/${product._id}`, product)
@@ -48,33 +49,33 @@ export class ProductsService {
     return this.http.put(`${environment.api}/products/sold/${status}`, order);
   }
 
-  editProduct(product: Product, _id) {
+  editProduct(product: IProduct, _id) {
     this.http.put(`${environment.api}/products/${_id}`, product).subscribe();
   }
 
   getProductsByCategory(category: string) {
-    return this.http.get<Product[]>(
+    return this.http.get<IProduct[]>(
       `${environment.api}/products/category/${category}`
     );
   }
 
   getProduct(key: string) {
-    return this.http.get<Product>(`${environment.api}/products/id/${key}`);
+    return this.http.get<IProduct>(`${environment.api}/products/id/${key}`);
   }
 
   getProducts() {
-    return this.http.get<Product[]>(`${environment.api}/products`);
+    return this.http.get<IProduct[]>(`${environment.api}/products`);
   }
 
   getPaginatedProducts(page: number, limit: number) {
     return this.http.get<{
       next: { page: number; limit: number };
-      results: Product[];
+      results: IProduct[];
     }>(`${environment.api}/products/paginated?page=${page}&limit=${limit}`);
   }
 
   getPaginatedProductsByBrand(page: number, limit: number, brand: string) {
-    return this.http.get<Product[]>(
+    return this.http.get<IProduct[]>(
       `${environment.api}/products/paginated/brand?page=${page}&limit=${limit}&name=${brand}`
     );
   }
@@ -84,52 +85,52 @@ export class ProductsService {
     limit: number,
     category: string
   ) {
-    return this.http.get<Product[]>(
+    return this.http.get<IProduct[]>(
       `${environment.api}/products/paginated/category?page=${page}&limit=${limit}&name=${category}`
     );
   }
 
   getLastProducts(limit: number, category: string) {
-    return this.http.get<Product[]>(
+    return this.http.get<IProduct[]>(
       `${environment.api}/products/last?limit=${limit}&category=${category}`
     );
   }
 
   getMainProducts(size: number) {
     return this.http.get<{
-      products: Product[];
-      mainProduct: Product;
-      mainAd: Product;
+      products: IProduct[];
+      mainProduct: IProduct;
+      mainAd: IProduct;
     }>(`${environment.api}/products/main-products?size=${size}`);
   }
 
   getYouMayLikeProducts(size: number) {
-    return this.http.get<Product[]>(
+    return this.http.get<IProduct[]>(
       `${environment.api}/products/you-may-like?size=${size}`
     );
   }
 
   getBestSellersProducts() {
     return this.http.get<{
-      main: Product;
-      middle: Product[];
-      bottom: Product[];
-      extra: Product[];
+      main: IProduct;
+      middle: IProduct[];
+      bottom: IProduct[];
+      extra: IProduct[];
     }>(`${environment.api}/products/best-sellers`);
   }
 
   getTopRatedProducts() {
-    return this.http.get<Product[]>(`${environment.api}/products/top-rated`);
+    return this.http.get<IProduct[]>(`${environment.api}/products/top-rated`);
   }
 
   getFeaturedProducts(size: number) {
-    return this.http.get<Product[]>(
+    return this.http.get<IProduct[]>(
       `${environment.api}/products/featured-products?size=${size}`
     );
   }
 
   getSpecialForYouProducts() {
-    return this.http.get<Product[]>(
+    return this.http.get<IProduct[]>(
       `${environment.api}/products/special-for-you`
     );
   }

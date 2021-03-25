@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Product } from 'src/app/shared/interfaces/product.interface';
+import { IProduct } from 'src/app/shared/interfaces/product.interface';
 import { DiscountService } from 'src/app/shared/services/database/discount.service';
 import { StatisticsService } from 'src/app/shared/services/database/statistics.service';
 import { ProductsService } from '../admin/products/products.service';
@@ -14,7 +14,7 @@ export class SearchComponent {
   urlData: { search: string[]; category: string };
   productsData;
   category;
-  pages: Product[][] = [];
+  pages: IProduct[][] = [];
 
   limit = 15;
   pageIndex = 0;
@@ -91,7 +91,7 @@ export class SearchComponent {
   }
 
   //! NOT OK, FIX IT!
-  paginaton(products: Product[]) {
+  paginaton(products: IProduct[]) {
     let index = -1;
     let productsLeft = products.length;
 

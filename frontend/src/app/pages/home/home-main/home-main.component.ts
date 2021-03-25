@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Product } from 'src/app/shared/interfaces/product.interface';
+import { IProduct } from 'src/app/shared/interfaces/product.interface';
 import { ProductsService } from '../../admin/products/products.service';
 
 @Component({
@@ -9,9 +9,9 @@ import { ProductsService } from '../../admin/products/products.service';
 })
 export class HomeMainComponent {
   numberOfProducts = 4;
-  products: Product[];
-  mainProduct: Product;
-  mainAd: Product;
+  products: IProduct[];
+  mainProduct: IProduct;
+  mainAd: IProduct;
   loading = true;
 
   constructor(private productsService: ProductsService) {

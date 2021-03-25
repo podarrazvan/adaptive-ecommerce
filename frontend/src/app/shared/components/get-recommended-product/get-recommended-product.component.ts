@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Product } from '../../interfaces/product.interface';
+import { IProduct } from '../../interfaces/product.interface';
 
 @Component({
   selector: 'app-get-recommended-product',
@@ -8,6 +8,6 @@ import { Product } from '../../interfaces/product.interface';
 })
 export class GetRecommendedProductComponent {
 
-  @Input() product: Product;
+  @Input() product: IProduct;
 
 }

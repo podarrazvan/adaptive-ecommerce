@@ -1,4 +1,4 @@
-export interface Product {
+export interface IProduct {
   title: string;
   description: string;
   price: number;
@@ -8,7 +8,7 @@ export interface Product {
   images: any;
   thumbnail: string;
   mainImg?: string;
-  rating?: number;
+  rating: number;
   _id?: string;
   //! duplicate cut! 
   discount?: {

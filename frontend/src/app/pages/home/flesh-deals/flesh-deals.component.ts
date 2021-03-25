@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DiscountService } from 'src/app/shared/services/database/discount.service';
-import { Product } from '../../../shared/interfaces/product.interface';
+import { IProduct } from '../../../shared/interfaces/product.interface';
 import { ProductsService } from '../../admin/products/products.service';
 
 @Component({
@@ -14,7 +14,7 @@ export class FleshDealsComponent implements OnInit {
     private productsService: ProductsService
   ) {}
 
-  products: Product[] = [];
+  products: IProduct[] = [];
 
   productsFound = false;
 

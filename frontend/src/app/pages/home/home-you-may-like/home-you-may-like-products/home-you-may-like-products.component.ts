@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Product } from 'src/app/shared/interfaces/product.interface';
+import { IProduct } from 'src/app/shared/interfaces/product.interface';
 
 @Component({
   selector: 'app-home-you-may-like-products',
@@ -7,5 +7,5 @@ import { Product } from 'src/app/shared/interfaces/product.interface';
   styleUrls: ['./home-you-may-like-products.component.scss']
 })
 export class HomeYouMayLikeProductsComponent {
-  @Input() products: Product[];
+  @Input() products: IProduct[];
 }

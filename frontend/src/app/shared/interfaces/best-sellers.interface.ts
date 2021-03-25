@@ -1,8 +1,8 @@
-import { Product } from "./product.interface";
+import { IProduct } from "./product.interface";
 
 export interface BestSellers {
-    mainProduct: Product,
-    middleProducts: Product[],
-    bottomProducts: Product[],
-    extra: Product[],
+    mainProduct: IProduct,
+    middleProducts: IProduct[],
+    bottomProducts: IProduct[],
+    extra: IProduct[],
 }

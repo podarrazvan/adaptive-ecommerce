@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Product } from 'src/app/shared/interfaces/product.interface';
+import { IProduct } from 'src/app/shared/interfaces/product.interface';
 
 @Component({
   selector: 'app-home-best-sellers-bottom',
@@ -7,6 +7,6 @@ import { Product } from 'src/app/shared/interfaces/product.interface';
   styleUrls: ['./home-best-sellers-bottom.component.scss']
 })
 export class HomeBestSellersBottomComponent {
-  @Input() products: Product[];
+  @Input() products: IProduct[];
 
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DiscountService } from 'src/app/shared/services/database/discount.service';
 import { ImagesService } from 'src/app/shared/services/database/images.service';
-import { Product } from '../../../shared/interfaces/product.interface';
+import { IProduct } from '../../../shared/interfaces/product.interface';
 import { SharedDataService } from '../../../shared/services/shared-data.service';
 import { ProductsService } from './products.service';
 
@@ -15,10 +15,10 @@ export class ProductsComponent implements OnInit {
   componentFactoryResolver: any;
   alertHost: any;
   closeSub: any;
-  productToAddOnHomepage: Product;
+  productToAddOnHomepage: IProduct;
   idOfProductToAddOnHomepage: string;
 
-  products: Product[] = [];
+  products: IProduct[] = [];
   productsData;
 
   categories: string[];
@@ -79,7 +79,7 @@ export class ProductsComponent implements OnInit {
     this.deleteAlert = true;
   }
 
-  openEdit(type: string, product: Product) {
+  openEdit(type: string, product: IProduct) {
     this.showEditProduct = true;
   }
 
@@ -87,7 +87,7 @@ export class ProductsComponent implements OnInit {
     this.showEditProduct = false;
   }
 
-  openEditProduct(product: Product) {
+  openEditProduct(product: IProduct) {
     this.sharedDataService.product = product;
     this.sharedDataService.productEdit = true;
     this.router.navigate(['admin', 'add-product']);
