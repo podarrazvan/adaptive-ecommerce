@@ -8,13 +8,14 @@
 @import "./app/shared/styles/buttons/gradient-btn.scss";
 @import "./app/shared/styles/buttons/custom-input-files.scss";
 @import "./app/shared/styles/buttons/red-btn.scss";
+@import "./app/shared/styles/buttons/green-btn.scss";
 @import "./app/shared/styles/colors.scss";
 @import "./app/shared/styles/border-radius.scss";
 
 * {
   margin: 0;
   font-family: "Helvetica Neue LT Std", sans-serif;
-  //color: $gray-10;
+  color: $gray-20;
   font-size: 14px;
   outline: none !important;
 }

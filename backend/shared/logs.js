@@ -42,6 +42,13 @@ module.exports = {
       UPDATE: "Brand updated successfully",
       FAILED: "Brand failed to update",
     },
+
+    COUPONS: {
+      CREATED: "Coupon created successfully",
+      UPDATE: "Coupon updated successfully",
+      FAILED: "Coupon failed to update",
+    },
+
     SHIPPING: {
       CREATED: "Shipping method created successfully",
       UPDATE: "Shipping method updated successfully",

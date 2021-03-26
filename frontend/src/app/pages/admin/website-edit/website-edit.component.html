@@ -56,10 +56,10 @@
     <hr />
 
     <!--Coupons-->
-    <div class="edit-option">
+    <div *ngIf="(sharedDataService.layout$ | async).coupons as coupons" class="edit-option">
       <h2 class="left">Coupons</h2>
       <div class="simple-btn" *ngFor="let coupon of coupons; let i = index">
-        {{ coupon }}
+        {{ coupon.code }}
       </div>
       <app-coupons-edit></app-coupons-edit>
     </div>

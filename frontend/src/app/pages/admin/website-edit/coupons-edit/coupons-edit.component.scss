@@ -6,17 +6,36 @@
   margin-left: -30vw;
 }
 
-.main-btn {
-  margin-top: 20px;
-  width: 100px;
-}
-
 .cancel-btn {
   width: 100%;
   margin-bottom: 50px;
 }
 
-.red-btn {
+.cancel {
   float: right;
   margin-bottom: 10px;
+}
+
+.new-coupon {
+  width: 100%;
+}
+
+input {
+  margin-bottom: 5px;
+}
+
+.add-btn-area {
+  display: flex;
+  place-content: center;
+  align-items: center;
+  width: 100%;
+  .add-btn {
+    margin-top: 10px;
+    padding: 0px 80px;
+  }
+}
+
+.coupon-info {
+  display: flex;
+  place-content: center;
 }

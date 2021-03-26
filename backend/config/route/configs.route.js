@@ -91,6 +91,19 @@ router.put("/:id/websiteBrands", (req, res, next) => {
   );
 });
 
+router.put("/:id/websiteCoupons", (req, res, next) => {
+  const coupons = req.body.data;
+  const _id = req.params.id;
+  collection.findByIdAndUpdate({ _id }, { coupons }).then(
+    (result) => {
+      res.status(200).json({ message: LOGS.CONFIGS.COUPONS.UPDATE });
+    },
+    (err) => {
+      res.status(401).json({ message: LOGS.CONFIGS.COUPONS.FAILED });
+    }
+  );
+});
+
 router.put("/:id/websiteShipping", (req, res, next) => {
   const shipping = req.body.data;
   const _id = req.params.id;

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { ConfigsService } from 'src/app/shared/services/database/configs.sevice';
 import { SharedDataService } from 'src/app/shared/services/shared-data.service';
@@ -11,8 +11,15 @@ import { AdminService } from '../../admin.service';
   styleUrls: ['./coupons-edit.component.scss'],
 })
 export class CouponsEditComponent {
-  @Input() coupons: Coupon[] = [];
+  coupons: Coupon[] = [];
   @Output() newCoupons = new EventEmitter<Coupon[]>();
+
+  couponFormGroup: FormGroup;
+  couponsArray: Coupon[];
+
+  couponsHide = true;
+
+  editCouponMode: number;
 
   constructor(
     private fb: FormBuilder,
@@ -21,14 +28,13 @@ export class CouponsEditComponent {
     private sharedDataService: SharedDataService
   ) {
     this.buildFormGroup(fb);
+    this.sharedDataService.layout$.subscribe((layout) => {
+      this.coupons = layout.coupons;
+      for (let coupon of layout.coupons) {
+        this.couponsForm.push(this.createCoupon(coupon.code, coupon.discount));
+      }
+    });
   }
-
-  couponFormGroup: FormGroup;
-  couponsArray: Coupon[];
-
-  couponsHide = true;
-
-  editCouponMode: number;
 
   get code() {
     return this.couponFormGroup.get('code');
@@ -39,31 +45,55 @@ export class CouponsEditComponent {
   }
 
   get couponsForm() {
-    return this.adminService.adminFormGroup.get('configs.couons') as FormArray;
+    return this.adminService.adminFormGroup.get('configs.coupons') as FormArray;
   }
 
   addNewValue() {
-    this.couponsForm.push(this.createCoupon());
+    const code = this.code;
+    const discount = this.discount;
+    this.couponsForm.push(this.createCoupon(code, discount));
     this.sharedDataService.layout$.subscribe((response) => {
       const id = response._id;
-    this.configsService.updateWebsite('websiteCoupons', this.couponsForm.value, id).subscribe();
-    this.couponFormGroup.reset();
-  });
+      this.configsService
+        .updateWebsite('websiteCoupons', this.couponsForm.value, id)
+        .subscribe();
+      this.couponFormGroup.reset();
+    });
   }
 
   delete(index) {
     this.couponsForm.value.splice(index, 1);
     this.sharedDataService.layout$.subscribe((response) => {
-          const id = response._id;
-    this.configsService.updateWebsite('websiteCoupons', this.couponsForm.value, id).subscribe();
-  });
+      const id = response._id;
+      this.configsService
+        .updateWebsite('websiteCoupons', this.couponsForm.value, id)
+        .subscribe();
+    });
   }
 
-  edit(index) {}
+  edit(index) {
+    this.editCouponMode = null;
+    const coupon = {
+      code: this.code.value,
+      discount: this.discount.value,
+    };
+    this.couponsForm.value[index] = coupon;
+    this.coupons[index] = coupon;
+    this.sharedDataService.layout$.subscribe((response) => {
+      const id = response._id;
+      let layout = response;
+      layout.coupons = this.couponsForm.value;
+      this.configsService
+        .updateWebsite('websiteCoupons', layout.coupons, id)
+        .subscribe(() => {
+          if (response != layout) {
+            this.sharedDataService.setLayout(layout);
+          }
+        });
+    });
+  }
 
-  public createCoupon(): FormGroup {
-    const code = this.code;
-    const discount = this.discount;
+  public createCoupon(code, discount): FormGroup {
     return this.fb.group({
       code,
       discount,

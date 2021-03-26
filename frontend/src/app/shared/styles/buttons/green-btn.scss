@@ -1,0 +1,14 @@
+@import "/src/app/shared/styles/colors";
+
+.green-btn {
+  border: none;
+  border-radius: 10px;
+  transition: all 0.3s ease 0s;
+  background-color: $main-green;
+  color: white;
+}
+
+.green-btn:hover {
+  background-color: white;
+  color: black;
+}

@@ -6,46 +6,66 @@
   <div class="alert">
     <div class="alert-box">
       <div class="cancel-btn">
-        <button (click)="couponsHide = true" class="btn red-btn">X</button>
+        <button (click)="couponsHide = true" class="btn red-btn cancel">X</button>
       </div>
       <form [formGroup]="couponFormGroup" (ngSubmit)="addNewValue()">
         <div class="form-row align-items-center">
-          <div class="col-auto">
-            <label for="couponInput"><b>Add a new coupon</b></label>
+          <div class="new-coupon">
+            <label for="couponCodeInput"><b>Code</b></label>
             <input
               type="text"
               class="form-control"
-              id="couponInput"
+              id="couponCodeInput"
               placeholder="Code"
               formControlName="code"
             />
+            <label for="couponDiscountInput"><b>Discount</b></label>
             <input
               type="number"
               class="form-control"
-              id="couponInput"
+              id="couponDiscountInput"
               placeholder="Discount"
               formControlName="discount"
             />
-          </div>
-          <div class="col-auto">
-            <button type="submit" class="main-btn">Add</button>
+            <div class="add-btn-area">
+              <button type="submit" class="gradient-btn add-btn">Add</button>
+            </div>
           </div>
         </div>
       </form>
+      <hr />
       <ul class="list-group">
         <div *ngFor="let coupon of coupons; let i = index">
           <!--To do: implement active-->
           <li class="list-group-item">
-            <h1 *ngIf="editCouponMode != i">{{ coupon }}</h1>
-
-            <input
-              [hidden]="editCouponMode != i"
-              type="text"
-              class="form-control"
-              [value]="coupon"
-              #editedCoupon
-            />
-            <hr />
+            <form [formGroup]="couponFormGroup">
+              <div class="coupon-info" *ngIf="editCouponMode != i">
+                <h1>Code: {{ coupon.code }} | 
+                Discount: {{ coupon.discount }}</h1>
+              </div>
+              <ng-container *ngIf="editCouponMode === i">
+                <label for="editCode">Code</label>
+                <input
+                  id="editCode"
+                  type="text"
+                  class="form-control"
+                  [value]="coupon.code"
+                  formControlName="code"
+                  placeholder="Code"
+                />
+                <hr />
+                <label for="editDiscount">Discount</label>
+                <input
+                  id="editDiscount"
+                  type="number"
+                  class="form-control"
+                  [value]="coupon.discount"
+                  formControlName="discount"
+                  placeholder="Discount"
+                />
+              </ng-container>
+              <hr />
+            </form>
             <div class="buttons-website-edit">
               <button (click)="delete(i, coupon)" class="empty-btn">
                 <mat-icon>delete</mat-icon>
@@ -59,9 +79,16 @@
                 <mat-icon>create</mat-icon>
               </button>
               <button
+              *ngIf="editCouponMode == i"
+              (click)="editCouponMode = null"
+              class="btn red-btn"
+            >
+              Cancel
+            </button>
+              <button
                 *ngIf="editCouponMode == i"
-                (click)="edit(editedCoupon, coupon)"
-                class="btn btn-primary"
+                (click)="edit(i)"
+                class="btn green-btn"
               >
                 Done
               </button>
