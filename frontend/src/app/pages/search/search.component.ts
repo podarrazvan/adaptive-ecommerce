@@ -26,13 +26,22 @@ export class SearchComponent {
     private route: ActivatedRoute,
     private productsService: ProductsService,
     private discountService: DiscountService,
-    private statisticsService: StatisticsService,
+    private statisticsService: StatisticsService
   ) {
+    this.route.url.subscribe((url) => {
+      this.newSearch();
+    });
+  }
+
+  newSearch() {
+    this.pages = [];
     this.urlData = {
       category: this.route.snapshot.params['category'],
       search: this.route.snapshot.params['search'].split('-'),
     };
-    this.statisticsService.updateSearch(this.urlData.search.join(' ')).subscribe();
+    this.statisticsService
+      .updateSearch(this.urlData.search.join(' '))
+      .subscribe();
     if (this.urlData.category != 'all') {
       this.getProductsByCategory(this.urlData.category);
     } else {
@@ -107,13 +116,12 @@ export class SearchComponent {
       if (productsLeft - this.limit > 0) {
         productsLeft -= this.limit;
         productsOnPage = this.limit;
-           
       } else {
         productsOnPage = productsLeft;
       }
 
       for (let i = 0; i < productsOnPage; i++) {
-        index ++;
+        index++;
         let product = products[index];
         //! too many requests!
         this.discountService
@@ -128,7 +136,7 @@ export class SearchComponent {
             product.price = price;
             page.push(product);
           });
-          //!
+        //!
       }
       this.pages.push(page);
     }
