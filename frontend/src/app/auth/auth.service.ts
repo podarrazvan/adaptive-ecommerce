@@ -12,6 +12,7 @@ import {
   Logout,
   NewUserDto
 } from './entities';
+import { Router } from '@angular/router';
 @Injectable({ providedIn: 'root' })
 export class AuthService {
 
@@ -20,7 +21,7 @@ export class AuthService {
 
   tokenExpirationTimer; //! NOT USED!
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   signup(newUser: NewUserDto, addAdmin) {
     if(addAdmin){
@@ -115,7 +116,7 @@ export class AuthService {
       token,
       expiresIn,
     } = authUserInfo;
-    const expirationDate = new Date(new Date().getTime() + +expiresIn * 100);
+    const expirationDate = new Date(new Date().getTime() + +expiresIn * 1000);
     const user = new User(
       email,
       password,
@@ -137,6 +138,7 @@ export class AuthService {
     const userData: Logout = JSON.parse(localStorage.getItem('userData'));
     this.updateUser(userData);
     localStorage.removeItem('userData');
+    this.router.navigate(['/auth']);
     if (this.tokenExpirationTimer) {
       clearTimeout(this.tokenExpirationTimer);
     }

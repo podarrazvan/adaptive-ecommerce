@@ -8,6 +8,11 @@
   justify-content: space-between;
 }
 
+.product {
+  height: calc(100% - 210px);
+  overflow-y: auto;
+}
+
 .left,
 .right {
   min-height: 580px;
