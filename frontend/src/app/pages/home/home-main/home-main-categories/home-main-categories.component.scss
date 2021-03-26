@@ -1,9 +1,12 @@
 @import "/src/app/shared/styles/border-radius";
+@import "/src/app/shared/styles/colors";
 
 .list-group {
   border-radius: $small-border-radius;
   width: 250px;
   margin-right: 10px;
+  height: 415px;
+  overflow-y: auto;
 }
 
 li {
@@ -12,4 +15,5 @@ li {
 
 mat-icon {
   float: right;
+  color: $non-color-1;
 }

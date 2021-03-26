@@ -1,5 +1,5 @@
 <ul class="list-group">
-  <li class="list-group-item" *ngFor="let category of (sharedDataService.layout$ | async).categories">
+  <li class="list-group-item" *ngFor="let category of categories">
     <a routerLink="">{{ category.name }} <mat-icon>keyboard_arrow_right</mat-icon></a>
   </li>
 </ul>
