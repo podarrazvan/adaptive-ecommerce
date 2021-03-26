@@ -25,22 +25,25 @@ export class ProductComponent {
     private usersService: UsersService,
     private discountService: DiscountService
   ) {
-    const productId = this.route.snapshot.params['key'];
-    this.productsService.getProduct(productId).subscribe((response) => {
-      const product = response;
-      this.checkPromotion(response);
-      this.sharedDataService.userDetails$.subscribe((response) => {
-        this.user = response;
-        if (this.user.history.indexOf(productId) === -1) {
-          this.user.history.push(productId);
-          this.sharedDataService.updateUserDetails(this.user);
-          this.productsService.updateProduct(product);
-          if (this.user.email != undefined) {
-            this.usersService
-              .updateHistory(this.user.email, this.user.history)
-              .subscribe();
+    this.route.url.subscribe(() => {
+      this.loading = true;
+      const productId = this.route.snapshot.params['key'];
+      this.productsService.getProduct(productId).subscribe((response) => {
+        const product = response;
+        this.checkPromotion(response);
+        this.sharedDataService.userDetails$.subscribe((response) => {
+          this.user = response;
+          if (this.user.history.indexOf(productId) === -1) {
+            this.user.history.push(productId);
+            this.sharedDataService.updateUserDetails(this.user);
+            this.productsService.updateProduct(product);
+            if (this.user.email != undefined) {
+              this.usersService
+                .updateHistory(this.user.email, this.user.history)
+                .subscribe();
+            }
           }
-        }
+        });
       });
     });
   }
