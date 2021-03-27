@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { DiscountService } from 'src/app/shared/services/database/discount.service';
 import { OrdersService } from '../../admin/orders/orders.service';
 import { CheckoutService } from '../checkout.service';
 
@@ -16,6 +17,7 @@ export class CheckoutRightComponent {
   subtotal = 0;
   products;
   shippingPrice;
+  cutTotal = 0;
   shippingMethods = [
     { name: 'Free', price: 0 },
     { name: '15$', price: 15 },
@@ -25,13 +27,16 @@ export class CheckoutRightComponent {
     private fb: FormBuilder,
     private checkoutService: CheckoutService,
     private ordersService: OrdersService,
-    private router: Router
+    private router: Router,
+    private discountService: DiscountService
   ) {
     this.products = JSON.parse(localStorage.getItem('cart'));
     for (let product of this.products) {
       this.total += product.price;
     }
     this.subtotal = this.total;
+    const coupon = JSON.parse(localStorage.getItem('coupon'));
+    this.checkCoupon(coupon.code);
   }
 
   get checkoutForm() {
@@ -64,12 +69,24 @@ export class CheckoutRightComponent {
       .addOrder(this.checkoutForm.value)
       .subscribe((response) => {
         const orderNumber = response.body.order.orderNumber;
+        localStorage.removeItem('cart');
+        localStorage.removeItem('coupon');
         this.router.navigate(['../order-status', orderNumber]);
       });
   }
 
   public createProduct(product, quantity, price): FormGroup {
     return this.fb.group({ product, quantity, price });
+  }
+
+  checkCoupon(code) {
+    this.discountService.getCoupon(code).subscribe((coupon) =>  {
+      this.cutTotal = coupon.discount;
+      if(this.cutTotal > this.total){
+        this.cutTotal = this.total;
+      }
+      this.total -= this.cutTotal;
+    }); 
   }
 }
 

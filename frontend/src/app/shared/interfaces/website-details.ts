@@ -9,7 +9,6 @@ export interface Layout {
   categories: Categories[];
   shipping: Shipping[];
   brands: Brand[];
-  coupons:Coupon[];
   footer: {
     adress: string;
     phone: string;

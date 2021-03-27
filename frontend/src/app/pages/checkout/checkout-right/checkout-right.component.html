@@ -13,9 +13,15 @@
     </div>
   </div>
   <hr />
-  <div class="subtotal">
-    <p>Subtotal</p>
-    <p class="subtotal-value">$ {{subtotal}}</p>
+  <div>
+    <div class="subtotal">
+      <p>Subtotal</p>
+      <p class="subtotal-value">$ {{subtotal}}</p>
+    </div>
+    <div class="coupon" *ngIf="cutTotal>0">
+      <p>Coupon</p>
+      <p class="coupon-value">$ -{{cutTotal}}</p>
+    </div>
   </div>
   <hr />
   <div class="shipping">

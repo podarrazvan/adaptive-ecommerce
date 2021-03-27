@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Coupon } from 'src/app/shared/interfaces/coupon.interface';
+import { DiscountService } from 'src/app/shared/services/database/discount.service';
 import { SharedDataService } from '../../../shared/services/shared-data.service';
 
 @Component({
@@ -6,26 +8,20 @@ import { SharedDataService } from '../../../shared/services/shared-data.service'
   templateUrl: './website-edit.component.html',
   styleUrls: ['./website-edit.component.scss'],
 })
-export class WebsiteEditComponent implements OnInit {
-  constructor(public sharedDataService: SharedDataService) {}
-
+export class WebsiteEditComponent {
   showEditTermsOfUse = false;
   showEditAboutUs = false;
   showEditFooter = false;
 
-  coupons: string[] = [];
+  coupons: Coupon[] = [];
 
-  ngOnInit(): void {
-    // this.sharedDataService.configs.subscribe(response => this.configs = response);
-    // this.configsService.getCoupons().subscribe(response=> {
-    //   for(let coupon of response) {
-    //     this.coupons.push(coupon.code);
-    //   }
-    // });
-  }
-
-  edit(newValue, id, type) {
-
+  constructor(
+    public sharedDataService: SharedDataService,
+    private discountService: DiscountService
+  ) {
+    this.discountService.getCoupons().subscribe((coupons) => {
+      this.coupons = coupons;
+    });
   }
 
   editTermsOfUse() {
@@ -45,7 +41,7 @@ export class WebsiteEditComponent implements OnInit {
   }
 
   footerEdit(footer) {
-    this.showEditFooter = false
+    this.showEditFooter = false;
     // !! tre alta tehnica aici
     // this.configs.footer.adress = footer.adress;
     // this.configs.footer.email = footer.email;
@@ -56,9 +52,4 @@ export class WebsiteEditComponent implements OnInit {
     // this.configs.footer.instagramImage = footer.instagramLogo;
     // this.configs.youtube.image = footer.youtubeLogo;
   }
-
-  saveInfo() {
-    // this.configsService.configs(this.configs);
-  }
-
 }

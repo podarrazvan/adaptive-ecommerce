@@ -13,7 +13,23 @@ export class DiscountService {
       code: coupon.code,
       discount: coupon.discount,
     };
-    this.http.post(`${environment.api}/coupons`, couponToAdd).subscribe();
+    return this.http.post(`${environment.api}/coupons`, couponToAdd);
+  }
+
+  getCoupon(code) {
+    return this.http.get<Coupon>(`${environment.api}/coupons/${code}`);
+  }
+
+  getCoupons() {
+    return this.http.get<Coupon[]>(`${environment.api}/coupons`);
+  }
+
+  editCoupon(coupon){
+    return this.http.put(`${environment.api}/coupons`,coupon);
+  }
+
+  deleteCoupon(id){
+    return this.http.delete(`${environment.api}/coupons/${id}`);
   }
 
   createDiscount(discount: Discount) {
@@ -27,10 +43,6 @@ export class DiscountService {
 
   getPromotions() {
     return this.http.get<Discount[]>(`${environment.api}/discount`);
-  }
-
-  getCoupon(code) {
-    return this.http.get<Coupon>(`${environment.api}/coupons/${code}`);
   }
 
   checkForPromotion(product) {

@@ -7,14 +7,13 @@ import { DiscountService } from 'src/app/shared/services/database/discount.servi
   styleUrls: ['./cart-coupon.component.scss']
 })
 export class CartCouponComponent {
-
-  @Output() discount = new EventEmitter<number>();
+  @Output() discount = new EventEmitter();
 
   constructor(private discountService: DiscountService) { }
 
-  addCoupon(code) {
-    this.discountService.getCoupon(code.value).subscribe(response =>  {
-      this.discount.emit(response.discount);
+  addCoupon(coupon) {
+    this.discountService.getCoupon(coupon.value).subscribe(response =>  {
+      this.discount.emit(response);
     });
   }
 

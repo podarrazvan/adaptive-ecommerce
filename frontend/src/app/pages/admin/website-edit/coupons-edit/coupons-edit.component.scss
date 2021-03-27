@@ -1,9 +1,15 @@
 .alert-box {
   top: 10vh;
   bottom: 20vh;
-  height: fit-content;
+  width: 50vw;
   max-height: 80vh;
   margin-left: -30vw;
+  
+}
+
+.list-group {
+  height: 51%;
+  overflow-y: auto;
 }
 
 .cancel-btn {

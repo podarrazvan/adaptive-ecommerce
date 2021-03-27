@@ -1,10 +1,11 @@
 const express = require("express");
 const collection = new require("../model/configs.schema");
 const LOGS = require("../../shared/logs");
+const checkAdmin = require("../../shared/middlewares/check-admin");
 
 const router = express.Router();
 
-router.post("", (req, res, next) => {
+router.post("",checkAdmin, (req, res, next) => {
   const website = new collection({
     name: req.body.name,
     categories: req.body.categories,
@@ -51,7 +52,7 @@ router.get("", (req, res, next) => {
   });
 });
 
-router.put("/:id/websiteName", (req, res, next) => {
+router.put("/:id/websiteName",checkAdmin, (req, res, next) => {
   const name = req.body.data;
   const _id = req.params.id;
   collection.findByIdAndUpdate({ _id }, { name }).then(
@@ -64,7 +65,7 @@ router.put("/:id/websiteName", (req, res, next) => {
   );
 });
 
-router.put("/:id/websiteCategories", (req, res, next) => {
+router.put("/:id/websiteCategories",checkAdmin, (req, res, next) => {
   const categories = req.body.data;
   const _id = req.params.id;
   collection.findByIdAndUpdate({ _id }, { categories }).then(
@@ -77,7 +78,7 @@ router.put("/:id/websiteCategories", (req, res, next) => {
   );
 });
 
-router.put("/:id/websiteBrands", (req, res, next) => {
+router.put("/:id/websiteBrands",checkAdmin, (req, res, next) => {
   const brands = req.body.data;
   const _id = req.params.id;
 
@@ -91,20 +92,7 @@ router.put("/:id/websiteBrands", (req, res, next) => {
   );
 });
 
-router.put("/:id/websiteCoupons", (req, res, next) => {
-  const coupons = req.body.data;
-  const _id = req.params.id;
-  collection.findByIdAndUpdate({ _id }, { coupons }).then(
-    (result) => {
-      res.status(200).json({ message: LOGS.CONFIGS.COUPONS.UPDATE });
-    },
-    (err) => {
-      res.status(401).json({ message: LOGS.CONFIGS.COUPONS.FAILED });
-    }
-  );
-});
-
-router.put("/:id/websiteShipping", (req, res, next) => {
+router.put("/:id/websiteShipping",checkAdmin, (req, res, next) => {
   const shipping = req.body.data;
   const _id = req.params.id;
   collection.findByIdAndUpdate({ _id: _id }, { shipping }).then(
@@ -117,7 +105,7 @@ router.put("/:id/websiteShipping", (req, res, next) => {
   );
 });
 
-router.put("/:id/websiteFooter", (req, res, next) => {
+router.put("/:id/websiteFooter",checkAdmin, (req, res, next) => {
   const footer = req.body.data;
   const _id = req.params.id;
   const websiteFooter = new collection({ _id, footer });
@@ -131,7 +119,7 @@ router.put("/:id/websiteFooter", (req, res, next) => {
   );
 });
 
-router.put("/:id/websiteFacebook", (req, res, next) => {
+router.put("/:id/websiteFacebook",checkAdmin, (req, res, next) => {
   const facebook = req.body.data;
   const _id = req.params.id;
   const websiteFacebook = new collection({ _id, facebook });
@@ -145,7 +133,7 @@ router.put("/:id/websiteFacebook", (req, res, next) => {
   );
 });
 
-router.put("/:id/websiteYoutube", (req, res, next) => {
+router.put("/:id/websiteYoutube",checkAdmin, (req, res, next) => {
   const youtube = req.body.data;
   const _id = req.params.id;
   const websiteYoutube = new collection({ _id, youtube });
@@ -159,7 +147,7 @@ router.put("/:id/websiteYoutube", (req, res, next) => {
   );
 });
 
-router.put("/:id/websiteTwitter", (req, res, next) => {
+router.put("/:id/websiteTwitter",checkAdmin, (req, res, next) => {
   const twitter = req.body.data;
   const _id = req.params.id;
   const websiteTwitter = new collection({ _id, twitter });
@@ -173,7 +161,7 @@ router.put("/:id/websiteTwitter", (req, res, next) => {
   );
 });
 
-router.put("/:id/websiteInstagram", (req, res, next) => {
+router.put("/:id/websiteInstagram",checkAdmin, (req, res, next) => {
   const instagram = req.body.data;
   const _id = req.params.id;
   const websiteInstagram = new collection({ _id, instagram });
@@ -187,7 +175,7 @@ router.put("/:id/websiteInstagram", (req, res, next) => {
   );
 });
 
-router.put("/:id/websiteScheduleForm", (req, res, next) => {
+router.put("/:id/websiteScheduleForm",checkAdmin, (req, res, next) => {
   const schedule = req.body.data;
   const _id = req.params.id;
   const websiteSchedule = new collection({ _id, schedule });

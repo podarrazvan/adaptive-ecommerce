@@ -15,8 +15,6 @@ export class CartComponent {
   cartLength: number;
   showCart = false;
   quantity;
-  subtotal = 0;
-  shipping = 0;
   total = 0;
 
   rightText =
@@ -32,11 +30,14 @@ export class CartComponent {
   }
 
   getCart() {
+    this.total = 0;
+    const coupon = JSON.parse(localStorage.getItem('coupon'));
+    if(coupon != null) {
+      this.total -= coupon.discount;
+    }
     this.sharedDataService.cart$.subscribe((response) => {
       const products = response;
       this.cartLength = products.length;
-      this.total = 0;
-      this.subtotal = 0;
       if (products.length === 0) {
         localStorage.removeItem('cart');
       }
@@ -105,8 +106,10 @@ export class CartComponent {
     if (this.cart.length === this.cartLength) {
       this.updatedCart = this.cart;
     }
-    this.subtotal += itemTotal;
-    this.total = this.subtotal + this.shipping;
+    this.total += itemTotal;
+    if(this.total < 0) {
+      this.total = 0;
+    }
   }
 
   onDelete(index: number) {
@@ -120,8 +123,12 @@ export class CartComponent {
   }
 
 
-  coupon(discount) {
-    this.subtotal -= discount;
+  coupon(coupon) {
+    localStorage.setItem('coupon', JSON.stringify(coupon))
+    this.total -= coupon.discount;
+    if(this.total < 0) {
+      this.total = 0;
+    }
   }
 
   //! find a better way!

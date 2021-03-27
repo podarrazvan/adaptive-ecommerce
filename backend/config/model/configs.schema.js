@@ -56,10 +56,6 @@ const websiteSchema = mongoose.Schema({
     saturdayStart: { type: String },
     saturdayEnd: { type: String },
   },
-  coupons:[{
-    code: { type: String },
-    discount: { type: Number },
-  }]
 });
 
 module.exports = mongoose.model("Configs", websiteSchema);

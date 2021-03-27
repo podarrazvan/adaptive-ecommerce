@@ -1,12 +1,10 @@
 const express = require("express");
-
 const Coupon = new require("../model/coupon.schema");
-
 const LOGS = require("../../shared/logs")
-
+const checkAdmin = require("../../shared/middlewares/check-admin");
 const router = express.Router();
 
-router.post("", (req, res, next) => {
+router.post("",checkAdmin, (req, res, next) => {
   const {code, discount} = req.body;
   const coupon = new Coupon({code,discount});
   coupon.save().then((createdCoupon) => {
@@ -20,18 +18,15 @@ router.post("", (req, res, next) => {
   });
 });
 
-router.get("", (req, res, next) => {
+router.get("",checkAdmin, (req, res, next) => {
   Coupon.find().then((coupons) => {
     res.status(200).json(coupons);
   });
 });
 
-router.put("/:id", (req, res, next) => {
-  const _id = req.params.id;
-  const {code, discount} = req.body;
-  const coupon = new Coupon({_id,code,discount});
-
-  Coupon.updateOne({ _id }, coupon).then(
+router.put("",checkAdmin, (req, res, next) => {
+  const {_id,code, discount} = req.body;
+  Coupon.findByIdAndUpdate({ _id }, {code,discount}).then(
     (result) => {
       res.status(200).json({ message: LOGS.COUPONS.UPDATE });
     },
@@ -43,6 +38,12 @@ router.put("/:id", (req, res, next) => {
 
 router.get("/:code", (req, res, next) => {
   Coupon.findOne({code:req.params.code}).then((coupon) => {
+    res.status(200).json(coupon);
+  });
+});
+
+router.delete("/:id", checkAdmin, (req, res, next) => {
+  Coupon.deleteOne({ _id: req.params.id }).then((coupon) => {
     res.status(200).json(coupon);
   });
 });

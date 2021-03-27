@@ -35,7 +35,7 @@
       </form>
       <hr />
       <ul class="list-group">
-        <div *ngFor="let coupon of coupons; let i = index">
+        <div *ngFor="let coupon of couponsForm.value; let i = index">
           <!--To do: implement active-->
           <li class="list-group-item">
             <form [formGroup]="couponFormGroup">

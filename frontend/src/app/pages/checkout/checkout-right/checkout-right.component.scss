@@ -37,6 +37,7 @@
 }
 .shipping,
 .subtotal,
+.coupon,
 .top-cart,
 .total-top,
 .bottom-cart {
@@ -50,6 +51,7 @@
 }
 
 .subtotal,
+.coupon,
 .shipping,
 .total,
 .top-cart {
@@ -57,6 +59,10 @@
     font-size: 16px;
     font-weight: 800;
   }
+}
+
+.coupon-value {
+  color: $main-red;
 }
 
 .shipping-options {
