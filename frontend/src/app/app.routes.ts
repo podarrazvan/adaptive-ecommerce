@@ -29,7 +29,7 @@ const routes: Routes = [
   { path: 'wishlist', component: WishlistComponent },
   { path: 'search/:category/:search', component: SearchComponent },
   { path: 'search-by-brand/:brand', component: ProductsByBrandComponent },
-  { path: 'special-for-you', component: SpecialForYouComponent }, //TODO add authGuard
+  { path: 'special-for-you', component: SpecialForYouComponent,canActivate: [AuthGuard] },
   {
     path: 'product',
     loadChildren: () =>

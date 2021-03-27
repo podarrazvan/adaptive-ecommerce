@@ -3,7 +3,7 @@ import {
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
   Router,
-  UrlTree
+  UrlTree,
 } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -23,20 +23,27 @@ export class AuthGuard implements CanActivate {
     | UrlTree
     | Promise<boolean | UrlTree>
     | Observable<boolean | UrlTree> {
-    return this.authService.user$.pipe(
-      take(1),
-      map(user => {
-        const isAuth = !!user;
-        if (isAuth) {
-          return true;
-        }
-        return this.router.createUrlTree(['/auth']);
-      })
-      // tap(isAuth => {
-      //   if (!isAuth) {
-      //     this.router.navigate(['/auth']);
-      //   }
-      // })
-    );
+    //! NOT OK BUT WORKING
+    const user = JSON.parse(localStorage.getItem('userData'));
+    if (user === null) {
+      return this.router.createUrlTree(['/auth']);
+    } else {
+      const token = user._token;
+      return token != undefined ? true : this.router.createUrlTree(['/auth']);
+    }
+    //!
+    //! OK BUT NOT WORKING!
+    // return this.authService.user$.pipe(
+    //   take(1),
+    //   map(user => {
+    //     console.log(user);
+    //     const isAuth = !!user;
+    //     if (isAuth) {
+    //       return true;
+    //     }
+    //     return this.router.createUrlTree(['/auth']);
+    //   })
+    // );
+    //!
   }
 }

@@ -58,7 +58,7 @@ const COMPONENTS = [
   PageEditComponent,
   NameEditComponent,
   AdminsComponent,
-  ScheduleEditComponent
+  ScheduleEditComponent,
 ];
 
 export const MODULES = [
@@ -78,7 +78,7 @@ export const MODULES = [
       {
         path: '',
         component: AdminComponent,
-        // canActivate: [AdminGuard],
+        canActivate: [AdminGuard],
         children: [
           { path: 'add-product', component: AddProductComponent },
           { path: 'orders', component: OrdersComponent },
