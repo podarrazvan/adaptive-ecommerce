@@ -58,7 +58,6 @@ export class CouponsEditComponent {
 
   delete(index) {
     const id = this.couponsForm.value[index]._id;
-    console.log(id);
     this.discountService.deleteCoupon(id).subscribe(() => {
       this.couponsForm.value.splice(index, 1);
       this.newCoupons.emit(this.couponsForm.value);

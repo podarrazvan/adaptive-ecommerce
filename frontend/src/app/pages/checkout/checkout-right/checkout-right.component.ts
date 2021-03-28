@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DiscountService } from 'src/app/shared/services/database/discount.service';
+import { SharedDataService } from 'src/app/shared/services/shared-data.service';
 import { OrdersService } from '../../admin/orders/orders.service';
 import { CheckoutService } from '../checkout.service';
 
@@ -18,17 +19,14 @@ export class CheckoutRightComponent {
   products;
   shippingPrice;
   cutTotal = 0;
-  shippingMethods = [
-    { name: 'Free', price: 0 },
-    { name: '15$', price: 15 },
-  ];
 
   constructor(
     private fb: FormBuilder,
     private checkoutService: CheckoutService,
     private ordersService: OrdersService,
     private router: Router,
-    private discountService: DiscountService
+    private discountService: DiscountService,
+    public sharedDataService: SharedDataService
   ) {
     this.products = JSON.parse(localStorage.getItem('cart'));
     for (let product of this.products) {
@@ -80,38 +78,38 @@ export class CheckoutRightComponent {
   }
 
   checkCoupon(code) {
-    this.discountService.getCoupon(code).subscribe((coupon) =>  {
+    this.discountService.getCoupon(code).subscribe((coupon) => {
       this.cutTotal = coupon.discount;
-      if(this.cutTotal > this.total){
+      if (this.cutTotal > this.total) {
         this.cutTotal = this.total;
       }
       this.total -= this.cutTotal;
-    }); 
+    });
   }
 }
 
-//TODO 
- // paypal
-    //   .Buttons({
-    //     createOrder: (data, actions) => {
-    //       return actions.order.create({
-    //         purchase_units: [
-    //           {
-    //             // description: this.product.description,
-    //             amount: {
-    //               currency_code: 'USD',
-    //               value: this.sharedDataService.totalCart,
-    //             },
-    //           },
-    //         ],
-    //       });
-    //     },
-    //     onApprove: async (data, actions) => {
-    //       const order = await actions.order.capture();
-    //       this.paidFor = true;
-    //     },
-    //     onError: (err) => {
-    //       console.log(err);
-    //     },
-    //   })
-    //   .render(this.paypalElement.nativeElement);
+//TODO
+// paypal
+//   .Buttons({
+//     createOrder: (data, actions) => {
+//       return actions.order.create({
+//         purchase_units: [
+//           {
+//             // description: this.product.description,
+//             amount: {
+//               currency_code: 'USD',
+//               value: this.sharedDataService.totalCart,
+//             },
+//           },
+//         ],
+//       });
+//     },
+//     onApprove: async (data, actions) => {
+//       const order = await actions.order.capture();
+//       this.paidFor = true;
+//     },
+//     onError: (err) => {
+//       console.log(err);
+//     },
+//   })
+//   .render(this.paypalElement.nativeElement);

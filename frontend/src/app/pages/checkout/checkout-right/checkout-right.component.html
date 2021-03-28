@@ -8,26 +8,29 @@
       <p>Total</p>
     </div>
     <div class="bottom-cart" *ngFor="let product of products">
-      <p>{{product.name}} x {{product.quantity}}</p>
-      <p>$ {{product.price}}</p>
+      <p>{{ product.name }} x {{ product.quantity }}</p>
+      <p>$ {{ product.price }}</p>
     </div>
   </div>
   <hr />
   <div>
     <div class="subtotal">
       <p>Subtotal</p>
-      <p class="subtotal-value">$ {{subtotal}}</p>
+      <p class="subtotal-value">$ {{ subtotal }}</p>
     </div>
-    <div class="coupon" *ngIf="cutTotal>0">
+    <div class="coupon" *ngIf="cutTotal > 0">
       <p>Coupon</p>
-      <p class="coupon-value">$ -{{cutTotal}}</p>
+      <p class="coupon-value">$ -{{ cutTotal }}</p>
     </div>
   </div>
   <hr />
   <div class="shipping">
     <p>Shipping</p>
     <div class="shipping-options">
-      <div class="radio" *ngFor="let shipping of shippingMethods">
+      <div
+        class="radio"
+        *ngFor="let shipping of (sharedDataService.layout$ | async).shipping"
+      >
         <input
           type="radio"
           id="option"
@@ -35,7 +38,7 @@
           [value]="shipping.price"
           formControlName="shipping"
         />
-        <label for="option">{{shipping.name}}</label>
+        <label for="option">{{ shipping.name }} ( {{ shipping.price }}$ )</label>
       </div>
     </div>
   </div>
@@ -43,7 +46,7 @@
   <div class="total">
     <div class="total-top">
       <p>Total</p>
-      <h2>$ {{total+shippingPrice}}</h2>
+      <h2>$ {{ total + shippingPrice }}</h2>
     </div>
   </div>
   <hr />
@@ -78,7 +81,10 @@
         value="terms-of-use"
       />
       <label for="option2"
-        >I’ve read and accept the <a [routerLink]="['/info','terms-of-use']">terms & conditions *</a></label
+        >I’ve read and accept the
+        <a [routerLink]="['/info', 'terms-of-use']"
+          >terms & conditions *</a
+        ></label
       >
     </div>
     <button (click)="placeOrder()" class="gradient-btn">Place order</button>

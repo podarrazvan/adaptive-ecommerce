@@ -1,14 +1,15 @@
 .alert-box {
   top: 10vh;
   bottom: 20vh;
-  height: fit-content;
+  width: 50vw;
   max-height: 80vh;
   margin-left: -30vw;
+  
 }
 
-.main-btn {
-  margin-top: 20px;
-  width: 100px;
+.list-group {
+  height: 51%;
+  overflow-y: auto;
 }
 
 .cancel-btn {
@@ -16,11 +17,31 @@
   margin-bottom: 50px;
 }
 
-.red-btn {
+.cancel {
   float: right;
   margin-bottom: 10px;
 }
 
-.list-group-item {
-  text-align: center;
+.new-shipping {
+  width: 100%;
+}
+
+input {
+  margin-bottom: 5px;
+}
+
+.add-btn-area {
+  display: flex;
+  place-content: center;
+  align-items: center;
+  width: 100%;
+  .add-btn {
+    margin: 10px 0px;
+    padding: 0px 80px;
+  }
+}
+
+.shipping-info {
+  display: flex;
+  place-content: center;
 }
