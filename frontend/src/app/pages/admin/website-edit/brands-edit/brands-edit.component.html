@@ -1,4 +1,4 @@
-<button class="main-btn" type="button" (click)="brandsHide = !brandsHide">
+<button class="shadow-btn" type="button" (click)="brandsHide = !brandsHide">
   Edit
 </button>
 <div *ngIf="!brandsHide">
@@ -90,7 +90,7 @@
               </button>
               <ng-container *ngIf="editBrandMode == i">
                 <button class="btn red-btn" (click)="editBrandMode = null">Cancel</button>
-                <button (click)="edit(i)" class="">Done</button>
+                <button (click)="edit(i)" class="green-btn btn">Done</button>
               </ng-container>
             </div>
           </li>

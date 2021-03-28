@@ -2,6 +2,7 @@
 @import "/src/app/shared/styles/colors";
 
 .simple-btn {
+  height: fit-content;
   font-weight: bold;
   color: $gray-20;
   background: $non-color-2;

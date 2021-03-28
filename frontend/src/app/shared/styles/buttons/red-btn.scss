@@ -3,7 +3,6 @@
 .red-btn {
   border: none;
   border-radius: 10px;
-  //padding: 5px 10px;
   transition: all 0.3s ease 0s;
   background-color: $main-red;
   color: white;
@@ -11,5 +10,6 @@
 
 .red-btn:hover {
   background-color: white;
-  color: black;
+  color: $main-red;
+  box-shadow: 0px 2px 20px 2px $main-red;
 }
