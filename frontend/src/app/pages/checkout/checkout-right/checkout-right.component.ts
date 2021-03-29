@@ -12,6 +12,8 @@ import { CheckoutService } from '../checkout.service';
   styleUrls: ['./checkout-right.component.scss'],
 })
 export class CheckoutRightComponent {
+  createAccount: boolean;
+  
   total = 0;
   subtotal = 0;
   products;
@@ -56,7 +58,11 @@ export class CheckoutRightComponent {
 
   placeOrder() {
     if(this.termsAccepted) {
-      if(this.checkoutForm.valid) {
+      if(!this.checkoutForm.valid) {
+        const email = this.checkoutForm.value.billingDetails.email;
+        localStorage.setItem('emailNewAccount', JSON.stringify(email));
+        const url = `${window.location.origin}/auth`;
+        window.open(url, "_blank");
         for (let prod of this.products) {
           const product = prod.id;
           const quantity = prod.quantity;

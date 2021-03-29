@@ -18,8 +18,14 @@ export class SignupFormComponent {
   infoMessage: string;
   success: boolean;
   showInfo: boolean;
+  email;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {
+    const email = JSON.parse(localStorage.getItem('emailNewAccount'));
+    if (email != null) {
+      this.email = email;
+    }
+  }
 
   onSubmit(form: NgForm) {
     if (form.value.password === form.value.checkPassword) {
