@@ -15,6 +15,7 @@ const discountRoutes = require("./discount/route/discounts.route");
 const orderRoutes = require("./order/route/order.route");
 const emailSender = require("./shared/email-sender");
 const statisticsRoutes = require("./statistics/route/statistics.route");
+//TODO const paymentPaypalRoutes = require("./payment/paypal");  check payment in backend
 
 const app = express();
 
@@ -70,3 +71,4 @@ app.use("/api/discount", discountRoutes);
 app.use("/api/order", orderRoutes);
 app.use('/api/email-sender', emailSender);
 app.use("/api/statistics", statisticsRoutes);
+//TODO app.use("/api/payment/paypal", paymentPaypalRoutes); check payment in backend

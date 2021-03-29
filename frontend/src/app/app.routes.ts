@@ -12,6 +12,7 @@ import { ProductsByBrandComponent } from './pages/products-by-brand/products-by-
 import { SpecialForYouComponent } from './pages/special-for-you/special-for-you.component';
 import { TrackOrderComponent } from './pages/track-order/track-order.component';
 import { InfoComponent } from './pages/info/info.component';
+import { OrderPaymentComponent } from './pages/order-payment/order-payment.component';
 
 const routes: Routes = [
   {
@@ -46,6 +47,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/checkout/checkout.module').then((m) => m.CheckoutModule),
   },
+  { path: 'order-payment', component: OrderPaymentComponent },
 
   { path: 'track-order', component: TrackOrderComponent },
   { path: 'order-status/:number', component: OrderStatusPageComponent },

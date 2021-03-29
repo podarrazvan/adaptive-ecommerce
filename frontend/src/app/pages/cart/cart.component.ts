@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import { ProductsService } from '../admin/products/products.service';
 import { DiscountService } from 'src/app/shared/services/database/discount.service';
 
-declare var paypal;
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',

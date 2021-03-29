@@ -102,7 +102,6 @@ export class AuthService {
 
     if (loadedUser.token) {
       this.userSubject$.next(loadedUser);
-      console.log(expirationDuration);
       this.autoLogout(expirationDuration);
     }
   }

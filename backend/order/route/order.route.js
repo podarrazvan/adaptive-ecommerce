@@ -29,6 +29,7 @@ router.post("", (req, res, next) => {
   order
     .save()
     .then((result) => {
+      //TODO check payment!
       res.status(201).json({
         message: LOGS.ORDER.CREATED,
         order: result,
@@ -41,7 +42,7 @@ router.post("", (req, res, next) => {
     });
 });
 
-router.put("/update/:id/:status", (req, res, next) => {
+router.put("/update/:id/:status",checkAdmin, (req, res, next) => {
   const _id = req.params.id;
   const status = req.params.status;
   Order.findByIdAndUpdate({ _id }, { status }).then(
@@ -67,7 +68,7 @@ router.get("/:orderNumber", (req, res, next) => {
   });
 });
 
-router.delete("/delete/:id", (req, res, next) => {
+router.delete("/delete/:id",checkAdmin ,(req, res, next) => {
   const _id = req.params.id;
   Order.findOneAndDelete({ _id: _id }).then(
     (result) => {

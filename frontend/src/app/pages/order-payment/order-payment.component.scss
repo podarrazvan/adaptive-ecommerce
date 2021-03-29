@@ -1,0 +1,17 @@
+@import "/src/app/shared/styles/border-radius";
+@import "/src/app/shared/styles/colors";
+
+.shadow,
+.payment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  place-content: center;
+}
+.payment {
+  min-height: 50vh;
+}
+
+.shadow {
+    padding: 20px;
+}

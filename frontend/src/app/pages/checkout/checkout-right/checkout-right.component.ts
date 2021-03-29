@@ -12,8 +12,6 @@ import { CheckoutService } from '../checkout.service';
   styleUrls: ['./checkout-right.component.scss'],
 })
 export class CheckoutRightComponent {
-  //TODO @ViewChild('paypal', { static: true }) paypalElement: ElementRef;
-  //TODO paidFor = false;
   total = 0;
   subtotal = 0;
   products;
@@ -34,7 +32,9 @@ export class CheckoutRightComponent {
     }
     this.subtotal = this.total;
     const coupon = JSON.parse(localStorage.getItem('coupon'));
-    this.checkCoupon(coupon.code);
+    if (coupon != null) {
+      this.checkCoupon(coupon.code);
+    }
   }
 
   get checkoutForm() {
@@ -63,14 +63,20 @@ export class CheckoutRightComponent {
     this.orderDetailsForm.patchValue({ total: this.total });
     const date = new Date();
     this.orderDetailsForm.patchValue({ date });
-    this.ordersService
-      .addOrder(this.checkoutForm.value)
-      .subscribe((response) => {
-        const orderNumber = response.body.order.orderNumber;
-        localStorage.removeItem('cart');
-        localStorage.removeItem('coupon');
-        this.router.navigate(['../order-status', orderNumber]);
-      });
+    const payment = this.orderDetailsForm.value.payment;
+    if (payment === 'online') {
+      this.router.navigate(['/order-payment']);
+      localStorage.setItem('order', JSON.stringify(this.checkoutForm.value));
+    } else {
+      this.ordersService
+        .addOrder(this.checkoutForm.value)
+        .subscribe((response) => {
+          const orderNumber = response.body.order.orderNumber;
+          localStorage.removeItem('cart');
+          localStorage.removeItem('coupon');
+          this.router.navigate(['../order-status', orderNumber]);
+        });
+    }
   }
 
   public createProduct(product, quantity, price): FormGroup {
@@ -87,29 +93,3 @@ export class CheckoutRightComponent {
     });
   }
 }
-
-//TODO
-// paypal
-//   .Buttons({
-//     createOrder: (data, actions) => {
-//       return actions.order.create({
-//         purchase_units: [
-//           {
-//             // description: this.product.description,
-//             amount: {
-//               currency_code: 'USD',
-//               value: this.sharedDataService.totalCart,
-//             },
-//           },
-//         ],
-//       });
-//     },
-//     onApprove: async (data, actions) => {
-//       const order = await actions.order.capture();
-//       this.paidFor = true;
-//     },
-//     onError: (err) => {
-//       console.log(err);
-//     },
-//   })
-//   .render(this.paypalElement.nativeElement);

@@ -12,6 +12,7 @@ import { HomeNewReleasesComponent } from './home/home-new-releases/home-new-rele
 import { HomeComponent } from './home/home.component';
 import { HomeModules } from './home/home.modules';
 import { InfoComponent } from './info/info.component';
+import { OrderPaymentComponent } from './order-payment/order-payment.component';
 import { ProductsByBrandComponent } from './products-by-brand/products-by-brand.component';
 import { SearchComponent } from './search/search.component';
 import { SpecialForYouComponent } from './special-for-you/special-for-you.component';
@@ -32,7 +33,8 @@ const COMPONENTS = [
   ProductsByBrandComponent,
   SpecialForYouComponent,
   TrackOrderComponent,
-  InfoComponent
+  InfoComponent,
+  OrderPaymentComponent
 ];
 
 @NgModule({
