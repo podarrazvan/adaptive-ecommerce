@@ -10,12 +10,11 @@ import {
   AuthUserInfoDto,
   AutoLogout,
   Logout,
-  NewUserDto
+  NewUserDto,
 } from './entities';
 import { Router } from '@angular/router';
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-
   private userSubject$ = new BehaviorSubject<User>(null);
   public user$: Observable<User> = this.userSubject$.asObservable();
 
@@ -24,18 +23,18 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) {}
 
   signup(newUser: NewUserDto, addAdmin) {
-    if(addAdmin){
+    if (addAdmin) {
       return this.http
-      .post<AuthResponseData>(`${environment.api}/users/admins/signup`, {
-        ...newUser,
-        returnSecureToken: true,
-      })
-      .pipe(
-        catchError(this.handleError),
-        tap((resData) => {
-          this.handleAuthentication(resData);
+        .post<AuthResponseData>(`${environment.api}/users/admins/signup`, {
+          ...newUser,
+          returnSecureToken: true,
         })
-      );
+        .pipe(
+          catchError(this.handleError),
+          tap((resData) => {
+            this.handleAuthentication(resData);
+          })
+        );
     } else {
       return this.http
         .post<AuthResponseData>(`${environment.api}/users/signup`, {
@@ -68,6 +67,12 @@ export class AuthService {
 
   autoLogin() {
     const userData: AutoLogout = JSON.parse(localStorage.getItem('userData'));
+    const expirationDuration =
+      new Date(userData._tokenExpirationDate).getTime() - new Date().getTime();
+    if (expirationDuration < 0) {
+      this.logout();
+      return;
+    }
     if (!userData) {
       return;
     }
@@ -80,7 +85,7 @@ export class AuthService {
       favorites,
       _token,
       _tokenExpirationDate,
-      isAdmin
+      isAdmin,
     } = userData;
 
     const loadedUser = new User(
@@ -97,9 +102,7 @@ export class AuthService {
 
     if (loadedUser.token) {
       this.userSubject$.next(loadedUser);
-      const expirationDuration =
-        new Date(userData._tokenExpirationDate).getTime() -
-        new Date().getTime();
+      console.log(expirationDuration);
       this.autoLogout(expirationDuration);
     }
   }
