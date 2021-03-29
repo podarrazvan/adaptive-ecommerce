@@ -17,6 +17,7 @@ export class CheckoutRightComponent {
   products;
   shippingPrice;
   cutTotal = 0;
+  termsAccepted = false;
 
   constructor(
     private fb: FormBuilder,
@@ -54,28 +55,36 @@ export class CheckoutRightComponent {
   }
 
   placeOrder() {
-    for (let prod of this.products) {
-      const product = prod.id;
-      const quantity = prod.quantity;
-      const price = prod.price;
-      this.productsFrom.push(this.createProduct(product, quantity, price));
-    }
-    this.orderDetailsForm.patchValue({ total: this.total });
-    const date = new Date();
-    this.orderDetailsForm.patchValue({ date });
-    const payment = this.orderDetailsForm.value.payment;
-    if (payment === 'online') {
-      this.router.navigate(['/order-payment']);
-      localStorage.setItem('order', JSON.stringify(this.checkoutForm.value));
+    if(this.termsAccepted) {
+      if(this.checkoutForm.valid) {
+        for (let prod of this.products) {
+          const product = prod.id;
+          const quantity = prod.quantity;
+          const price = prod.price;
+          this.productsFrom.push(this.createProduct(product, quantity, price));
+        }
+        this.orderDetailsForm.patchValue({ total: this.total });
+        const date = new Date();
+        this.orderDetailsForm.patchValue({ date });
+        const payment = this.orderDetailsForm.value.payment;
+        if (payment === 'online') {
+          this.router.navigate(['/order-payment']);
+          localStorage.setItem('order', JSON.stringify(this.checkoutForm.value));
+        } else {
+          this.ordersService
+            .addOrder(this.checkoutForm.value)
+            .subscribe((response) => {
+              const orderNumber = response.body.order.orderNumber;
+              localStorage.removeItem('cart');
+              localStorage.removeItem('coupon');
+              this.router.navigate(['../order-status', orderNumber]);
+            });
+        }
+      } else {
+        alert("Please check all fields");
+      }
     } else {
-      this.ordersService
-        .addOrder(this.checkoutForm.value)
-        .subscribe((response) => {
-          const orderNumber = response.body.order.orderNumber;
-          localStorage.removeItem('cart');
-          localStorage.removeItem('coupon');
-          this.router.navigate(['../order-status', orderNumber]);
-        });
+      alert("You cannot place an order if you do not agree with the terms of use");
     }
   }
 

@@ -16,9 +16,9 @@ export const buildOrderFormGroup = () => {
       orderDetails: fb.group({
         shipping: ['', Validators.required],
         payment: ['', Validators.required],
-        total: ['', Validators.required],
+        total: [''],
         status: ['new'],
-        date: ['', Validators.required],
+        date: [''],
       }),
       products: fb.array([]),
       orderNotes: fb.control(''),

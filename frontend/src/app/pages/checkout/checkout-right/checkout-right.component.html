@@ -77,12 +77,13 @@
     </div>
     <div class="terms-of-use">
       <input
-        type="radio"
+        type="checkbox"
         id="terms-of-use"
         name="terms-of-use"
         value="terms-of-use"
+        (change)="termsAccepted = !termsAccepted"
       />
-      <label for="option2"
+      <label for="terms-of-use"
         >I’ve read and accept the
         <a [routerLink]="['/info', 'terms-of-use']"
           >terms & conditions *</a
