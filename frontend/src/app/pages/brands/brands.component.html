@@ -1,0 +1,11 @@
+<div class="content">
+  <div class="brands">
+    <div
+      [routerLink]="['/search-by-brand', brand.name]"
+      class="brand shadow"
+      *ngFor="let brand of (sharedDataService.layout$ | async).brands"
+    >
+      <img [src]="brand.image" [alt]="brand.name" />
+    </div>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+.content,
+.brand {
+  display: flex;
+  place-content: center;
+ 
+}
+.content {
+  min-height: 75vh;
+}
+.brands {
+  margin-top: 20px;
+  display: flex;
+  width: 50vw;
+  flex-wrap: wrap;
+  height: fit-content;
+}
+.brand {
+  margin: 15px;
+  padding: 10px;
+  height: 200px;
+  cursor: pointer;
+   align-items: center;
+  img {
+    width: 150px;
+  }
+}
+
+.brand:hover {
+  transform: scale(1.25);
+  transition: all 1s linear;
+}

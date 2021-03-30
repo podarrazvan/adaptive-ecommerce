@@ -24,6 +24,7 @@ export class SignupFormComponent {
     const email = JSON.parse(localStorage.getItem('emailNewAccount'));
     if (email != null) {
       this.email = email;
+      localStorage.removeItem('emailNewAccount');
     }
   }
 

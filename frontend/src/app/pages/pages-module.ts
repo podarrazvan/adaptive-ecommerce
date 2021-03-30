@@ -4,6 +4,7 @@ import { SharedModule } from '../shared/modules/shared.module';
 import { AboutUsComponent } from './additional-pages/about-us/about-us.component';
 import { PageNotFoundComponent } from './additional-pages/page-not-found/page-not-found.component';
 import { TermsOfUseComponent } from './additional-pages/terms-of-use/terms-of-use.component';
+import { BrandsComponent } from './brands/brands.component';
 import { CartModule } from './cart/cart.module';
 import { CategoriesComponent } from './categories/categories.component';
 import { FleshDealsComponent } from './home/flesh-deals/flesh-deals.component';
@@ -34,7 +35,8 @@ const COMPONENTS = [
   SpecialForYouComponent,
   TrackOrderComponent,
   InfoComponent,
-  OrderPaymentComponent
+  OrderPaymentComponent,
+  BrandsComponent,
 ];
 
 @NgModule({

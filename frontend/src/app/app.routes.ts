@@ -7,12 +7,12 @@ import { WishlistComponent } from './pages/wishlist/wishlist.component';
 import { SearchComponent } from './pages/search/search.component';
 import { CategoriesComponent } from './pages/categories/categories.component';
 import { OrderStatusPageComponent } from './pages/checkout/order-status-page/order-status-page.component';
-import { AuthComponent } from './auth/auth.component';
 import { ProductsByBrandComponent } from './pages/products-by-brand/products-by-brand.component';
 import { SpecialForYouComponent } from './pages/special-for-you/special-for-you.component';
 import { TrackOrderComponent } from './pages/track-order/track-order.component';
 import { InfoComponent } from './pages/info/info.component';
 import { OrderPaymentComponent } from './pages/order-payment/order-payment.component';
+import { BrandsComponent } from './pages/brands/brands.component';
 
 const routes: Routes = [
   {
@@ -30,6 +30,7 @@ const routes: Routes = [
   { path: 'wishlist', component: WishlistComponent },
   { path: 'search/:category/:search', component: SearchComponent },
   { path: 'search-by-brand/:brand', component: ProductsByBrandComponent },
+  { path: 'brands', component: BrandsComponent },
   { path: 'special-for-you', component: SpecialForYouComponent,canActivate: [AuthGuard] },
   {
     path: 'product',
