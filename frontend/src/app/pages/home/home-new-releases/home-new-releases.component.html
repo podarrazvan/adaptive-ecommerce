@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="buttons-area">
-      <div class="buttons"  *ngFor="let category of (sharedDataService.layout$ | async).categories">
+      <div class="buttons"  *ngFor="let category of categories">
         <button (click)="showProducts(category.name)"class="main-btn">{{category.name}}</button>
       </div>
     </div>

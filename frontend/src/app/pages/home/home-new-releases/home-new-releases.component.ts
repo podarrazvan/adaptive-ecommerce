@@ -12,20 +12,27 @@ export class HomeNewReleasesComponent {
   loading = true;
   selectedCategory: string;
   numberOfProducts = 10;
+  categories;
 
   constructor(
     private productService: ProductsService,
     public sharedDataService: SharedDataService
   ) {
-    //const categories = sharedDataService.layout$.categories;
-    const categories = ['Phones'];
-    this.showProducts(categories[0])
+    sharedDataService.layout$.subscribe((layout) => {
+      const categories = layout.categories;
+      this.categories = categories.slice(0,10);//TODO get 10 categories according to the user's preferences!
+      this.showProducts('Phones');
+      //this.showProducts(categories[0])
+    });
   }
 
   showProducts(selectedCategory) {
-    this.productService.getLastProducts(this.numberOfProducts, selectedCategory).subscribe((response) => {
-      this.products = response;
-      this.loading = false;
-    });
+    this.loading = true;
+    this.productService
+      .getLastProducts(this.numberOfProducts, selectedCategory)
+      .subscribe((response) => {
+        this.products = response;
+        this.loading = false;
+      });
   }
 }
