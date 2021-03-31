@@ -19,4 +19,5 @@ export interface Order {
   ];
   orderNotes: string;
   orderNumber: number;
+  awb: string;
 }

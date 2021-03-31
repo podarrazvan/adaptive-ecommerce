@@ -55,6 +55,11 @@
           ><br />
         </div>
       </div>
+      <hr />
+      <div class="awb">
+        <input #awb type="text" placeholder="Add AWB">
+        <button (click)="addAWB(awb.value)" class="green-btn">Add</button>
+      </div>
         <hr />
         <h1><b>Total</b></h1>
         <h2 style="color: green">{{ order.total }}</h2>

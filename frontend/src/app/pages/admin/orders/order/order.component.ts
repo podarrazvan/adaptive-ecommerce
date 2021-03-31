@@ -70,4 +70,9 @@ export class OrderComponent implements OnInit {
       this.close.emit();
     }
   }
+  addAWB(awb) {
+    this.ordersService.updateAWB(this.order._id, awb).subscribe(() => {
+      alert("AWB updated")
+    });
+  }
 }

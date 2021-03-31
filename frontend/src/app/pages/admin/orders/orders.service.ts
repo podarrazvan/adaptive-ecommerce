@@ -17,8 +17,13 @@ export class OrdersService {
   }
 
   updateOrder(id: string, status: string,) {
-    const user = JSON.parse(localStorage.getItem('userData'));
     return this.http.put(`${environment.api}/order/update/${id}/${status}`, {
+      observe: 'response',
+    });
+  }
+
+  updateAWB(id: string, awb: string,) {
+    return this.http.put(`${environment.api}/order/update/awb/${id}/${awb}`, {
       observe: 'response',
     });
   }

@@ -55,6 +55,19 @@ router.put("/update/:id/:status",checkAdmin, (req, res, next) => {
   );
 });
 
+router.put("/update/awb/:id/:awb",checkAdmin, (req, res, next) => {
+  const _id = req.params.id;
+  const awb = req.params.awb;
+  Order.findByIdAndUpdate({ _id }, { awb }).then(
+    (result) => {
+      res.status(200).json({ message: LOGS.ORDER.UPDATE });
+    },
+    (err) => {
+      res.status(401).json({ message: LOGS.ORDER.FAILED });
+    }
+  );
+});
+
 router.get("", (req, res, next) => {
   Order.find().then((orders) => {
     res.status(200).json(orders);

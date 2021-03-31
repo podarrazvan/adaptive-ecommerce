@@ -19,6 +19,10 @@
             <b>Order Number:</b>
             <h4>{{ order.orderNumber }}</h4>
           </div>
+          <div *ngIf="order.awb">
+            <b>AWB:</b>
+            <h4>{{ order.awb }}</h4>
+          </div>
         </div>
         <div class="vl"></div>
         <div class="adress">

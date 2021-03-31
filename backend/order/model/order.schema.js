@@ -13,6 +13,7 @@ const orderSchema = mongoose.Schema({
   total: { type: Number, requird: true },
   status: { type: String, requird: true },
   date: { type: Date, requird: true },
+  awb: { type: String },
 
   products: [
     {
