@@ -18,6 +18,7 @@ export class ProductsService {
       images: product.images,
       mainImg: product.mainImg,
       thumbnail: product.thumbnail,
+      shortDescription: product.shortDescription,
       description: product.description,
       tags: product.tags,
       quantity: product.quantity,
@@ -30,6 +31,7 @@ export class ProductsService {
       productModels: product.productModels,
       sold: 0,
       rating: null,
+      public: true, //TODO set it from add product interface
     };
     this.http
       .post<{ name: string }>(`${environment.api}/products`, productData, {

@@ -2,6 +2,7 @@ import { IProductModel } from "./product-model.interface";
 
 export interface IProduct {
   title: string;
+  shortDescription: string;
   description: string;
   price: number;
   category: string;
@@ -34,4 +35,5 @@ export interface IProduct {
   brand: string;
   productModels: IProductModel;
   sold: number;
+  public: boolean;
 }

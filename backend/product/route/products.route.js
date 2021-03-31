@@ -15,6 +15,7 @@ router.post("", (req, res, next) => {
     price,
     tags,
     description,
+    shortDescription,
     thumbnail,
     images,
     mainImg,
@@ -24,7 +25,8 @@ router.post("", (req, res, next) => {
     productNumber,
     minPrice,
     salesWeekTarget,
-    productModels
+    productModels,
+    public,
   } = req.body;
   const product = new Product({
     title,
@@ -33,6 +35,7 @@ router.post("", (req, res, next) => {
     price,
     tags,
     description,
+    shortDescription,
     thumbnail,
     images,
     mainImg,
@@ -50,6 +53,7 @@ router.post("", (req, res, next) => {
       average: 0,
     },
     productModels,
+    public,
     autoMode: {
       minPrice,
       salesWeekTarget,
@@ -75,6 +79,7 @@ router.put("/:id", (req, res, next) => {
     price,
     tags,
     description,
+    shortDescription,
     thumbnail,
     images,
     mainImg,
@@ -92,6 +97,7 @@ router.put("/:id", (req, res, next) => {
     average,
     minPrice,
     salesWeekTarget,
+    public,
   } = req.body;
   const product = new Product({
     //! new?!
@@ -102,6 +108,7 @@ router.put("/:id", (req, res, next) => {
     price,
     tags,
     description,
+    shortDescription,
     thumbnail,
     images,
     mainImg,
@@ -125,6 +132,7 @@ router.put("/:id", (req, res, next) => {
     },
     initialQuantity: req.body.initialQuantity,
     productNumber: req.body.productNumber,
+    public,
   });
 
   Product.updateOne({ _id: req.params.id }, product).then(

@@ -13,12 +13,14 @@ export const buildProductFormGroup = () => {
       images: fb.control('', Validators.required),
       thumbnail: fb.control('', Validators.required),
       mainImg: fb.control('', Validators.required),
+      shortDescription: fb.control('', Validators.required),
       description: fb.control('', Validators.required),
       tags: fb.control('', Validators.required),
       quantity: fb.control('', Validators.required),
       minPrice: fb.control(''),
       salesWeekTarget: fb.control(''),
       productModels: fb.control(''),
+      public: fb.control(Boolean),
     }),
   });
 };

@@ -9,10 +9,10 @@
   place-content: center;
   align-items: center;
   background-color: $main-red;
-  color: white;
   border-radius: $small-border-radius;
   p {
     font-weight: bold;
+    color: white!important;
   }
 }
 .success {

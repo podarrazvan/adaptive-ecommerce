@@ -172,9 +172,24 @@
     <hr />
     <div class="row">
       <div class="col">
+        <label for="inputShortDescription"><b>Short Description</b></label>
+        <textarea
+          id="inputShortDescription"
+          rows="3"
+          class="form-control"
+          placeholder="A short description about your product"
+          formControlName="shortDescription"
+        >
+        </textarea>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="col">
         <label for="inputDescription"><b>Description</b></label>
         <!-- <app-description-styles></app-description-styles> -->
         <text-editor
+          id="inputDescription"
           (contentChanged)="ckeditorContentChanged($event)"
           #tinyMce
         ></text-editor>
@@ -269,7 +284,11 @@
                   formControlName="price"
                 />
               </div>
-              <button type="button" (click)="addModel()" class="btn black-btn model-btn">
+              <button
+                type="button"
+                (click)="addModel()"
+                class="btn black-btn model-btn"
+              >
                 Add model
               </button>
             </div>
@@ -282,7 +301,9 @@
               (click)="deleteModel(i)"
               class="simple-btn model-btn"
             >
-              X <br>name: {{ model.name }}<hr> price: {{ model.price }}
+              X <br />name: {{ model.name }}
+              <hr />
+              price: {{ model.price }}
             </button>
           </div>
         </div>

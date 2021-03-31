@@ -5,6 +5,7 @@ const userSchema = mongoose.Schema({
   category: { type: String, require: true },
   price: { type: Number, require: true },
   tags: [{ type: String, require: true }],
+  shortDescription: { type: String, require: true },
   description: { type: String, require: true },
   thumbnail: { type: String, require: true },
   mainImg: { type: String },
@@ -33,6 +34,7 @@ const userSchema = mongoose.Schema({
     average: { type: Number },
   },
   productNumber: { type: Number, require: true }, //date in seconds since midnight, 1 Jan 1970
+  public: {type: Boolean, require: true}
 });
 
 module.exports = mongoose.model("Product", userSchema);
