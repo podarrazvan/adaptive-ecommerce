@@ -1,6 +1,5 @@
 import { Brand } from './brand.interface';
 import { Categories } from './categories.interface';
-import { Coupon } from './coupon.interface';
 import { Shipping } from './shipping.interface';
 
 export interface Layout {
@@ -40,4 +39,11 @@ export interface Layout {
   },
   aboutUs: string;
   termsOfUse: string;
+  shippingInfo: string;
+  paymentInfo: string;
+  returnsExchange: string;
+  faq: string;
+  customerService: string;
+  buyerProtection: string;
+  help: string;
 }

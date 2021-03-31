@@ -10,7 +10,7 @@ import { SharedDataService } from '../../../shared/services/shared-data.service'
 })
 export class WebsiteEditComponent {
   showEditTermsOfUse = false;
-  showEditAboutUs = false;
+  showEditPages = false;
   showEditFooter = false;
 
   coupons: Coupon[] = [];
@@ -30,14 +30,6 @@ export class WebsiteEditComponent {
 
   closeTermsOfUseEdit() {
     this.showEditTermsOfUse = false;
-  }
-
-  editAboutUs() {
-    this.showEditAboutUs = true;
-  }
-
-  closeEditAboutUs() {
-    this.showEditAboutUs = false;
   }
 
   footerEdit(footer) {

@@ -85,15 +85,10 @@ module.exports = {
       FAILED: "Schedule failed to update",
     }
   },
-  TERMS_OF_USE: {
-    SET: "TERMS OF USE added successfully",
-    UPDATE: "TERMS OF USE updated successfully",
-    FAILED: "TERMS OF USE failed to update",
-  },
-  ABOUT_US: {
-    SET: "ABOUT US added successfully",
-    UPDATE: "ABOUT US updated successfully",
-    FAILED: "ABOUT US failed to update",
+  PAGE: {
+    SET: "Page added successfully",
+    UPDATE: "Page updated successfully",
+    FAILED: "Page failed to update",
   },
   PRODUCT: {
     CREATED: "Product created successfully",

@@ -3,16 +3,13 @@
     <div *ngIf="showEditTermsOfUse">
       <app-page-edit
         (close)="closeTermsOfUseEdit()"
-        [content]="layout.termsOfUse"
         pageName="terms-of-use"
       ></app-page-edit>
     </div>
 
-    <div *ngIf="showEditAboutUs">
+    <div *ngIf="showEditPages">
       <app-page-edit
-        (close)="closeEditAboutUs()"
-        [content]="layout.aboutUs"
-        pageName="about-us"
+        (close)="showEditPages = false"
       ></app-page-edit>
     </div>
 
@@ -83,21 +80,10 @@
 
     </div>
     <hr />
-
-    <!--Terms of use-->
     <div class="edit-option">
-      <h2 class="left">Terms Of Use</h2>
-      <a class="center" routerLink="../../terms-of-use"> Open </a>
-      <button class="shadow-btn right" type="button" (click)="editTermsOfUse()">
-        Edit
-      </button>
-    </div>
-
-    <hr />
-    <div class="edit-option">
-      <h2 class="left">About Us</h2>
-      <a class="center" routerLink="../../about-us"> Open </a>
-      <button class="shadow-btn right" type="button" (click)="editAboutUs()">
+      <h2 class="left">Pages</h2>
+      <!-- <a class="center" routerLink="../../about-us"> Open </a> -->
+      <button class="shadow-btn right" type="button" (click)="showEditPages=true">
         Edit
       </button>
     </div>

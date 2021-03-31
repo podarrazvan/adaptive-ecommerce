@@ -1,38 +1,8 @@
-<h1>Here is hoing to be the content for {{ page }}</h1>
-<p>
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ac volutpat
-  dolor. Nam vitae eros ac turpis hendrerit volutpat. Nullam a suscipit est, ac
-  convallis risus. Vivamus consectetur scelerisque arcu, vitae tincidunt odio
-  porta non. Praesent elementum lacinia felis et viverra. Morbi non risus
-  egestas, lacinia leo vitae, porttitor risus. Suspendisse vitae libero mi.
-  Maecenas ac tellus non erat porttitor bibendum. Praesent fringilla eros
-  scelerisque sollicitudin vehicula. Morbi ut elit at elit porta venenatis. Duis
-  ullamcorper in est at ornare. Ut id viverra ipsum. Phasellus egestas quam non
-  magna hendrerit faucibus. Etiam efficitur metus libero, sit amet dapibus neque
-  vestibulum nec. Nulla vulputate sem a mi mollis, et pellentesque erat rhoncus.
-  Vivamus a elit nibh. Duis varius dictum euismod. Integer sit amet congue est.
-  Quisque maximus orci sed vulputate venenatis. Suspendisse ultrices maximus
-  luctus. Proin eros lectus, semper ac turpis eget, semper aliquam eros. Aenean
-  ullamcorper mauris ut mauris ornare dignissim. Morbi tincidunt posuere
-  bibendum. Vestibulum ac augue vehicula, pharetra ex eget, auctor enim.
-  Curabitur nec lectus imperdiet, commodo justo et, vulputate magna. Duis
-  venenatis pellentesque augue id aliquam. Cras sodales leo eget nulla tempus
-  mattis. Nullam dictum, enim ut egestas gravida, turpis dui iaculis urna, sit
-  amet lacinia sem massa tempus turpis. Nulla varius leo sed lorem iaculis
-  pharetra. Curabitur nec nunc ac neque faucibus convallis. Duis a ultricies
-  augue. Etiam non mattis est, convallis commodo nunc. Duis vitae augue velit.
-  Etiam nec lobortis nunc. Nulla facilisi. In suscipit et erat in gravida.
-  Vivamus vitae nunc eu mi semper viverra. Nullam risus purus, facilisis sed
-  quam sit amet, dapibus euismod velit. Suspendisse potenti. Aliquam eget leo
-  fermentum, pretium enim aliquet, tristique dolor. Pellentesque egestas
-  pulvinar quam, et ultrices elit interdum eget. Fusce ac erat quis nulla semper
-  ornare ac elementum eros. Fusce eget interdum tellus, sit amet consectetur
-  lorem. Praesent tincidunt luctus tortor, eget posuere mauris bibendum non.
-  Morbi maximus, nunc eget fringilla accumsan, leo metus mattis sapien, sit amet
-  vestibulum mi libero nec velit. Morbi sollicitudin porttitor condimentum. Duis
-  sed viverra massa. Sed id consequat magna. Cras malesuada neque tellus, et
-  mollis lorem consequat non. Nam auctor iaculis eros, quis molestie ligula
-  rhoncus sed. Fusce rutrum nec ipsum et ultricies. Duis nec ligula nulla.
-  Suspendisse rutrum felis sed sem varius, vel tincidunt magna lacinia. Proin a
-  porta ante.
-</p>
+<div class="page">
+  <div [innerHTML]="sanitizer.bypassSecurityTrustHtml(content)">
+    {{ content }}
+  </div>
+  <div *ngIf="noContent" class="no-elements">
+    <p>No content...</p>
+  </div>
+</div>

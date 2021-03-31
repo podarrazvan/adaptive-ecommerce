@@ -1,8 +1,6 @@
-import { map } from 'rxjs/operators';
 import { environment } from '../../../../environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { SharedDataService } from '../shared-data.service';
 import { Coupon } from '../../interfaces/coupon.interface';
 
 @Injectable()
@@ -10,10 +8,7 @@ export class ConfigsService {
   categories: string[];
   category;
 
-  constructor(
-    private http: HttpClient,
-    private sharedDataService: SharedDataService
-  ) {}
+  constructor(private http: HttpClient) {}
 
   createconfigs() {
     // !!! aveai configs aici
@@ -24,19 +19,17 @@ export class ConfigsService {
 
   updateWebsite(sectionName: string, value, id) {
     const data = { data: value };
-    return this.http
-      .put(`${environment.api}/website/${id}/${sectionName}`, data)
+    return this.http.put(
+      `${environment.api}/website/${id}/${sectionName}`,
+      data
+    );
   }
-
-
 
   getCoupons() {
     return this.http.get<Coupon[]>(`${environment.api}/coupons`);
   }
 
-  async editPages(content: string, page: string) {
-    // !!! nu stiu daca asta e cea mai buna solutie
-    const id = await this.sharedDataService.layout$.pipe(map(layout => layout._id)).toPromise();
+  async editPages(content: string, page: string, id) {
     const pageContent = { content };
     this.http
       .put(`${environment.api}/pages/${page}/${id}`, pageContent)
@@ -48,6 +41,4 @@ export class ConfigsService {
       `${environment.api}/pages/${page}`
     );
   }
-
-
 }
