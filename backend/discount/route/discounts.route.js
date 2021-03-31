@@ -1,6 +1,7 @@
 const express = require("express");
 
 const Discount = new require("../model/discount.schema");
+const checkAuth = require("../../shared/middlewares/check-auth");
 
 const LOGS = require("../../shared/logs");
 
@@ -22,7 +23,7 @@ router.post("", (req, res, next) => {
 });
 
 router.get("", (req, res, next) => {
-  Discount.find().then((discounts) => {
+  Discount.find({forUser: { $exists: false }}).then((discounts) => {
     const today = new Date();
     let activePromotions = [];
     for (let promotion of discounts) {
@@ -56,8 +57,7 @@ router.get("/by-product/:product", (req, res, next) => {
   });
 });
 
-router.get("/by-product/auth/:product", (req, res, next) => {
-  //! use chceckAuth
+router.get("/by-product/auth/:product",checkAuth, (req, res, next) => {
   const productId = req.params.product;
   const forUser = "60142c44c463fe314b645bbc"; //! Replace this with user's id!
   Discount.findOne({ $or: [{ productId }, { forUser }] }).then((promotion) => {
