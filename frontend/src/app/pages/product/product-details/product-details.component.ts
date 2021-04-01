@@ -12,6 +12,7 @@ import { UsersService } from '../../admin/users/user.service';
 export class ProductDetailsComponent implements OnInit {
   @Input() product;
   brand: Brand;
+  inFavorites = false;
 
   constructor(
     private sharedDataService: SharedDataService,

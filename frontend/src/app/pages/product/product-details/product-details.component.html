@@ -51,7 +51,7 @@
         ><img src="../../../../assets/shopping-cart.svg" />
       </button>
     </div>
-    <button (click)="addFavorite()" class="empty-btn favorites">
+    <button (click)="addFavorite()" class="empty-btn favorites"[class.added]="inFavorites">
       <img src="../../../../assets/heart.svg" />
     </button>
   </div>
