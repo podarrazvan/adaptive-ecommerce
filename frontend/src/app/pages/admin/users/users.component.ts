@@ -53,6 +53,17 @@ export class UsersComponent {
     }
   }
 
+  updateAdmin(id, isAdmin, index) {
+    if(this.users[index].username != "admin") {
+      this.userService.updateAdmin(id,isAdmin).subscribe(()=>{
+        alert('Admin Updated!');
+        this.users[index].isAdmin = isAdmin;
+      });
+    } else {
+      alert('This user can\'t be updated!')
+    }
+  }
+
   previousPage() {
     this.currentPage--;
     this.getUsers(this.currentPage, this.limit);

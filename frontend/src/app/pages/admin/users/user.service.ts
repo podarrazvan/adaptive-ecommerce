@@ -54,4 +54,9 @@ export class UsersService {
     const user = { email, favorites };
     return this.http.put(`${environment.api}/users/favorites`, user);
   }
+
+  updateAdmin(_id, isAdmin) {
+    const user = { _id, isAdmin };
+    return this.http.put(`${environment.api}/users/update/admin`, user);
+  }
 }

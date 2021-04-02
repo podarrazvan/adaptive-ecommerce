@@ -1,15 +1,34 @@
+@import "/src/app/shared/styles/colors";
+
 .content {
   margin-top: 50px;
   width: 100%;
 }
 
 table {
-  max-width: 500px;
+  max-width: 620px;
   margin: auto;
+}
+
+th,td {
+  text-align: center;
 }
 
 .active {
   display: flex;
   min-width: 100px;
   border-bottom: 1px solid #dee2e6; //! this should not be here, fix it!
+}
+
+.admin-col {
+  width: 100px;
+}
+
+.material-icons{
+  cursor: pointer;
+}
+
+.simple-btn:hover,.material-icons:hover {
+  transition: all 0.3s ease 0s;
+  color: $main-red;
 }

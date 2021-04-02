@@ -131,6 +131,18 @@ router.put("/update", checkAuth, (req, res, next) => {
   );
 });
 
+router.put("/update/admin", checkAdmin, (req, res, next) => {
+  const {_id, isAdmin} = req.body;
+  User.findByIdAndUpdate({ _id }, {isAdmin}).then(
+    (result) => {
+      res.status(200).json({ message: LOGS.USER.UPDATED });
+    },
+    (err) => {
+      res.status(401).json({ message: LOGS.USER.DELETED }); //! DELETED?!
+    }
+  );
+});
+
 router.put("/history", (req, res, next) => { // TODO add checkAuth
   const history = req.body.history;
   const email = req.body.email;
