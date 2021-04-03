@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 import { FooterComponent } from '../../components/footer/footer.component';
 import { GetProductComponent } from '../components/get-product/get-product.component';
@@ -40,6 +41,7 @@ import { CountdownModule } from 'ngx-countdown';
 import { CountdownComponent } from '../components/countdown/countdown.component';
 import { InfoAlertComponent } from '../components/info-alert/info-alert.component';
 import { PaginationComponent } from '../components/pagination/pagination.component';
+import { LoadingComponent } from '../loading/loading.component';
 
 const COMPONENTS = [
   NavbarComponent,
@@ -69,6 +71,7 @@ const COMPONENTS = [
   CountdownComponent,
   InfoAlertComponent,
   PaginationComponent,
+  LoadingComponent,
 ];
 
 const MODULES = [
@@ -80,6 +83,7 @@ const MODULES = [
   MatMenuModule,
   MatIconModule,
   CountdownModule,
+  MatProgressSpinnerModule
 ];
 @NgModule({
   declarations: [...COMPONENTS],
