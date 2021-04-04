@@ -12,8 +12,6 @@ import { CheckoutService } from '../checkout.service';
   styleUrls: ['./checkout-right.component.scss'],
 })
 export class CheckoutRightComponent {
-  createAccount: boolean;
-  
   total = 0;
   subtotal = 0;
   products;
@@ -57,12 +55,16 @@ export class CheckoutRightComponent {
   }
 
   placeOrder() {
-    if(this.termsAccepted) {
-      if(!this.checkoutForm.valid) {
-        const email = this.checkoutForm.value.billingDetails.email;
-        localStorage.setItem('emailNewAccount', JSON.stringify(email));
-        const url = `${window.location.origin}/auth`;
-        window.open(url, "_blank");
+    if (this.termsAccepted) {
+      if (!this.checkoutForm.valid) {
+        this.checkoutService.createAccount$.subscribe((createAccount) => {
+          if (createAccount) {
+            const email = this.checkoutForm.value.billingDetails.email;
+            localStorage.setItem('emailNewAccount', JSON.stringify(email));
+            const url = `${window.location.origin}/auth`;
+            window.open(url, '_blank');
+          }
+        });
         for (let prod of this.products) {
           const product = prod.id;
           const quantity = prod.quantity;
@@ -75,7 +77,10 @@ export class CheckoutRightComponent {
         const payment = this.orderDetailsForm.value.payment;
         if (payment === 'online') {
           this.router.navigate(['/order-payment']);
-          localStorage.setItem('order', JSON.stringify(this.checkoutForm.value));
+          localStorage.setItem(
+            'order',
+            JSON.stringify(this.checkoutForm.value)
+          );
         } else {
           this.ordersService
             .addOrder(this.checkoutForm.value)
@@ -87,10 +92,12 @@ export class CheckoutRightComponent {
             });
         }
       } else {
-        alert("Please check all fields");
+        alert('Please check all fields');
       }
     } else {
-      alert("You cannot place an order if you do not agree with the terms of use");
+      alert(
+        'You cannot place an order if you do not agree with the terms of use'
+      );
     }
   }
 
