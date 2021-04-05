@@ -12,7 +12,9 @@ import { UsersService } from '../../admin/users/user.service';
 export class ProductDetailsComponent implements OnInit {
   @Input() product;
   brand: Brand;
-  inFavorites = false;
+  addedToFavorite = false;
+  user;
+  id;
 
   constructor(
     private sharedDataService: SharedDataService,
@@ -20,6 +22,15 @@ export class ProductDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.sharedDataService.userDetails$.subscribe((response) => {
+      this.user = response;
+      const id = this.product._id;
+      if (this.user.favorites.indexOf(id) === -1) {
+        this.addedToFavorite = false;
+      } else {
+        this.addedToFavorite = true;
+      }
+    });
     this.sharedDataService.layout$.subscribe((response) => {
       this.brand = response.brands.find(
         ({ name }) => name === this.product.brand
@@ -58,20 +69,22 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   addFavorite() {
-    this.sharedDataService.userDetails$.subscribe((response) => {
-      let user = response;
-      const id = this.product._id;
-      if (user.favorites.indexOf(id) === -1) {
-        user.favorites.push(id);
-        this.sharedDataService.updateUserDetails(user);
-        if (user.email != undefined) {
-          this.usersService
-            .updateFavorites(user.email, user.favorites)
-            .subscribe(() => {
-              alert('Added to favorites!');
-            });
-        }
+    const id = this.product._id;
+    if (!this.addedToFavorite) {
+      this.user.favorites.push(id);
+      if (this.user.email != undefined) {
+        this.usersService
+        .updateFavorites(this.user.email, this.user.favorites)
+        .subscribe(() => {
+          alert('Added to favorites!');
+          this.sharedDataService.updateUserDetails(this.user);
+          this.addedToFavorite = true;
+          });
+      } else {
+        alert('Added to favorites!');
+        this.sharedDataService.updateUserDetails(this.user);
+        this.addedToFavorite = true;
       }
-    });
+    }
   }
 }
