@@ -72,15 +72,12 @@
     border-radius: 50%;
     border: solid 1px $gray-20;
     img {
-      filter: invert(64%) sepia(0%) saturate(107%) hue-rotate(222deg)
-        brightness(97%) contrast(86%);
+      filter: invert(0%) sepia(0%) saturate(7500%) hue-rotate(47deg) brightness(99%) contrast(105%);
     }
   }
   .added {
-    border: none;
-    box-shadow: 0px 2px 20px 2px $main-green;
     img {
-      filter: invert(34%) sepia(97%) saturate(676%) hue-rotate(79deg) brightness(98%) contrast(84%);
+      filter: invert(74%) sepia(10%) saturate(5%) hue-rotate(314deg) brightness(82%) contrast(83%);
     }
   }
 }
