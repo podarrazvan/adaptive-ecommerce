@@ -40,11 +40,13 @@
               class="form-control"
               placeholder="Facebook link"
             />
+            <label class="upload-btn" for="imgInput">Facebook logo</label>
             <input
-              class="custom-input-file"
+              id="imgInput"
               type="file"
               accept="image/*"
               (change)="facebookLogo($event)"
+              hidden
             />
           </div>
           <div class="col">
@@ -54,11 +56,13 @@
               class="form-control"
               placeholder="Instagram link"
             />
+            <label class="upload-btn" for="imgInput">Instagram logo</label>
             <input
-              class="custom-input-file"
+              id="imgInput"
               type="file"
-              accept=".png,.jpg,.jpeg,.svg"
+              accept="image/*"
               (change)="instagramLogo($event)"
+              hidden
             />
           </div>
           <div class="col">
@@ -68,15 +72,17 @@
               class="form-control"
               placeholder="Twitter link"
             />
+            <label class="upload-btn" for="imgInput">Twitter logo</label>
             <input
-              class="custom-input-file"
+              id="imgInput"
               type="file"
-              accept=".png,.jpg,.jpeg,.svg"
+              accept="image/*"
               (change)="twitterLogo($event)"
+              hidden
             />
           </div>
         </div>
-        <hr>
+        <hr />
         <app-schedule-edit></app-schedule-edit>
         <button
           [disabled]="!footerForm.valid"

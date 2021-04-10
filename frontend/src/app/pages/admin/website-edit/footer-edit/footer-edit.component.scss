@@ -19,3 +19,13 @@
 form {
   margin-top: 50px;
 }
+
+.col {
+  display: flex;
+  flex-direction: column;
+  place-content: center;
+}
+
+.upload-btn {
+  margin-top: 10px;
+}
