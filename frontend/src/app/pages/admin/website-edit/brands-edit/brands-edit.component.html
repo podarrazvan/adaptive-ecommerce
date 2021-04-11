@@ -21,11 +21,13 @@
         rows="3"
         placeholder="Short description"
       ></textarea>
+      <label class="upload-btn" for="imgInput">Brand logo</label>
       <input
-        class="custom-input-file"
+        id="imgInput"
         type="file"
         accept="image/*"
         (change)="brandLogo($event)"
+        hidden
       />
 
       <!--To do: fix newCategory.valid-->
@@ -66,12 +68,13 @@
                   [alt]="brand.name"
                 />
               </div>
+              <label class="upload-btn" for="imgInput">Brand logo</label>
               <input
-                *ngIf="editBrandLogo"
-                class="custom-input-file"
+                id="imgInput"
                 type="file"
                 accept="image/*"
                 (change)="brandLogo($event)"
+                hidden
               />
             </ng-container>
             <!--=====-->
@@ -89,7 +92,9 @@
                 <mat-icon>create</mat-icon>
               </button>
               <ng-container *ngIf="editBrandMode == i">
-                <button class="btn red-btn" (click)="editBrandMode = null">Cancel</button>
+                <button class="btn red-btn" (click)="editBrandMode = null">
+                  Cancel
+                </button>
                 <button (click)="edit(i)" class="green-btn btn">Done</button>
               </ng-container>
             </div>
