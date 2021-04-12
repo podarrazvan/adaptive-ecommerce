@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { AuthService } from './auth/auth.service';
 import { StatisticsService } from './shared/services/database/statistics.service';
+import { LoadingService } from './shared/loading/loading.service';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,8 @@ export class AppComponent implements OnInit {
     public sharedDataService: SharedDataService,
     private authService: AuthService,
     private router: Router,
-    private statisticsService: StatisticsService
+    private statisticsService: StatisticsService,
+    private loadingService: LoadingService
   ) {}
 
   async ngOnInit() {
@@ -26,12 +28,14 @@ export class AppComponent implements OnInit {
       window.scrollTo(0, 0);
     });
 
-    this.sharedDataService.setLayout(
-      await this.sharedDataService.getLayout().toPromise()
-    );
+    const layout = this.sharedDataService.getLayout();
+    const layout$ = this.loadingService.showLoaderUntilCompleted(layout);
+    layout$.subscribe((response) => {
+      this.sharedDataService.setLayout(response);
+    });
     this.sharedDataService.setStatistics(
       await this.statisticsService.getStatistics().toPromise()
-    )
+    );
 
     if (JSON.parse(localStorage.getItem('userData')) != null) {
       this.sharedDataService.setUserDetails(

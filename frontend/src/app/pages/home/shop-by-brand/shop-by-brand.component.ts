@@ -16,7 +16,7 @@ export class ShopByBrandComponent {
   pageLimit = 4;
   selectedBrand: Brand;
   products: IProduct[];
-  
+
   constructor(private sharedDataService: SharedDataService, private productsService: ProductsService) {
     this.sharedDataService.layout$.subscribe((response)=> {
       if(response.brands.length>0){
