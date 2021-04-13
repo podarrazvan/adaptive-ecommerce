@@ -2,6 +2,7 @@ const express = require("express");
 const Product = require("../model/product.schema");
 const Discount = require("../../discount/model/discount.schema");
 const checkAdmin = require("../../shared/middlewares/check-admin");
+const checkAuth = require("../../shared/middlewares/check-auth");
 
 const LOGS = require("../../shared/logs");
 
@@ -294,8 +295,7 @@ router.get("/featured-products", (req, res, next) => {
   });
 });
 
-router.get("/special-for-you", (req, res, next) => {
-  //TODO add checkAuth
+router.get("/special-for-you", checkAuth,(req, res, next) => {
   const limit = 6;
   const forUser = "60142c44c463fe314b645bbc"; //! Replace this with user's id!
   Discount.find({ forUser }).then((discounts) => {

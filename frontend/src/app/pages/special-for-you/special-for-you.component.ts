@@ -11,9 +11,10 @@ export class SpecialForYouComponent {
   productsFound = false;
   products: IProduct[] = [];
 
-  constructor(private productsService: ProductsService,private discountService: DiscountService) { 
-    this.productsService.getSpecialForYouProducts().subscribe(()=>{
-      this.discountService.getPromotions().subscribe(response => {
+  constructor(private productsService: ProductsService,private discountService: DiscountService) {
+    this.productsService.getSpecialForYouProducts().subscribe((response)=>{
+      // this.discountService.getPromotions().subscribe(response => {
+        console.log(response)
         for(let promotion of response) {
           const promo = {
             cut: promotion.cut,
@@ -22,10 +23,10 @@ export class SpecialForYouComponent {
           this.getProducts(promotion.productId, promo);
         }
       })
-    })
+    //})
   }
 
-  
+
   getProducts(id,discount) {
     this.productsService.getProduct(id).subscribe(response => {
       const product = Object.assign(response, {discount: discount});

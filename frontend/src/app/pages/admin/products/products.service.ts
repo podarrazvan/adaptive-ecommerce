@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment.prod';
 import { IProduct } from 'src/app/shared/interfaces/product.interface';
+import { Discount } from 'src/app/shared/interfaces/discount.interface';
 
 @Injectable()
 export class ProductsService {
@@ -132,7 +133,7 @@ export class ProductsService {
   }
 
   getSpecialForYouProducts() {
-    return this.http.get<IProduct[]>(
+    return this.http.get<Discount[]>(
       `${environment.api}/products/special-for-you`
     );
   }
