@@ -1,4 +1,8 @@
 <ng-container *ngIf="!loading">
-    <app-home-you-may-like-top (refresh)="getProducts()"></app-home-you-may-like-top>
-    <app-home-you-may-like-products [products]="products"></app-home-you-may-like-products>
+  <app-home-you-may-like-top
+    (refresh)="getProducts()"
+  ></app-home-you-may-like-top>
+  <app-home-you-may-like-products
+    [products]="products"
+  ></app-home-you-may-like-products>
 </ng-container>

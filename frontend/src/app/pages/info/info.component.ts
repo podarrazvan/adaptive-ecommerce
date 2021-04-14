@@ -30,6 +30,8 @@ export class InfoComponent {
       if (this.content === undefined || '') {
         this.content = '';
         this.noContent = true;
+      } else {
+        this.noContent = false;
       }
     });
   }

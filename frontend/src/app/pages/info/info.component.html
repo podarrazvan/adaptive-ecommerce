@@ -1,5 +1,5 @@
 <div class="page">
-  <div [innerHTML]="sanitizer.bypassSecurityTrustHtml(content)">
+  <div *ngIf="!noContent" [innerHTML]="sanitizer.bypassSecurityTrustHtml(content)">
     {{ content }}
   </div>
   <div *ngIf="noContent" class="no-elements">

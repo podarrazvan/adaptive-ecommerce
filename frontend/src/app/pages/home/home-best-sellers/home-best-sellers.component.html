@@ -1,5 +1,10 @@
 <ng-container *ngIf="!loading">
-    <app-home-best-sellers-top></app-home-best-sellers-top>
-    <app-home-best-sellers-middle [products]="middleProducts" [mainProduct]="mainProduct"></app-home-best-sellers-middle>
-    <app-home-best-sellers-bottom [products]="bottomProducts"></app-home-best-sellers-bottom>
+  <app-home-best-sellers-top></app-home-best-sellers-top>
+  <app-home-best-sellers-middle
+    [products]="middleProducts"
+    [mainProduct]="mainProduct"
+  ></app-home-best-sellers-middle>
+  <app-home-best-sellers-bottom
+    [products]="bottomProducts"
+  ></app-home-best-sellers-bottom>
 </ng-container>

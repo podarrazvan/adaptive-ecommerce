@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IProduct } from 'src/app/shared/interfaces/product.interface';
+import { LoadingService } from 'src/app/shared/loading/loading.service';
 import { DiscountService } from 'src/app/shared/services/database/discount.service';
 import { StatisticsService } from 'src/app/shared/services/database/statistics.service';
 import { ProductsService } from '../admin/products/products.service';
@@ -26,7 +27,8 @@ export class SearchComponent {
     private route: ActivatedRoute,
     private productsService: ProductsService,
     private discountService: DiscountService,
-    private statisticsService: StatisticsService
+    private statisticsService: StatisticsService,
+    private loadingService: LoadingService
   ) {
     this.route.url.subscribe((url) => {
       this.newSearch();
@@ -51,7 +53,9 @@ export class SearchComponent {
 
   getAllProducts() {
     let products = [];
-    this.productsService.getProducts().subscribe((response) => {
+    const allProducts = this.productsService.getProducts();
+    const allProducts$ = this.loadingService.showLoaderUntilCompleted(allProducts);
+    allProducts$.subscribe((response) => {
       for (let product of response) {
         products.push(product);
       }
