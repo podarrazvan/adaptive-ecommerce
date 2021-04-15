@@ -8,11 +8,11 @@ import { SharedDataService } from 'src/app/shared/services/shared-data.service';
 })
 export class HomeMainCategoriesComponent {
   categories = [];
-  numberOfCategories = 9;
   constructor(public sharedDataService: SharedDataService) {
     this.sharedDataService.layout$.subscribe((response) => {
       const categories = response.categories;
-      while (this.categories.length < this.numberOfCategories) {
+      let numberOfCategories = categories.length > 9? 9: categories.length;
+      while (this.categories.length < numberOfCategories) {
         const category =
           categories[Math.floor(Math.random() * categories.length)];
         if (this.categories.indexOf(category) === -1) {

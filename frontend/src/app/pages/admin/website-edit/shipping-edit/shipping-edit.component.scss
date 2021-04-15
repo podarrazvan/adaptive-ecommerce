@@ -2,13 +2,14 @@
   top: 10vh;
   bottom: 20vh;
   width: 50vw;
-  height: 80vh;
-  margin-left: -30vw;
-  
+  height: fit-content;
+  max-height: 70vh;
+  margin-left: -50vw;
+
 }
 
 .list-group {
-  height: 27vh;
+  height: 36vh;
   overflow-y: auto;
 }
 

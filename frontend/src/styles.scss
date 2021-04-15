@@ -67,6 +67,8 @@ ul {
 }
 
 .alert {
+  display: flex;
+  width: 100%;
   place-content: center;
   align-items: center;
   margin: auto;
