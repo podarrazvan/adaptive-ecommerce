@@ -310,7 +310,7 @@
       </div>
     </div>
     <hr />
-    <mat-checkbox (click)="autoMode = !autoMode">Auto Mode</mat-checkbox>
+    <mat-checkbox (change)="autoMode = !autoMode">Auto Mode</mat-checkbox>
     <div class="auto-mode" *ngIf="autoMode">
       <mat-form-field>
         <input

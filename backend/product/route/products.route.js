@@ -297,7 +297,7 @@ router.get("/featured-products", (req, res, next) => {
 
 router.get("/special-for-you", checkAuth,(req, res, next) => {
   const limit = 6;
-  const forUser = "60142c44c463fe314b645bbc"; //! Replace this with user's id!
+  const forUser = req.userData.userId;
   Discount.find({ forUser }).then((discounts) => {
     let activePromotions = [];
     const expirationDate = new Date();

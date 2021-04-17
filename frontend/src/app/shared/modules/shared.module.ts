@@ -42,6 +42,7 @@ import { CountdownComponent } from '../components/countdown/countdown.component'
 import { InfoAlertComponent } from '../components/info-alert/info-alert.component';
 import { PaginationComponent } from '../components/pagination/pagination.component';
 import { LoadingComponent } from '../loading/loading.component';
+import { AngularMaterialModule } from './angular-material.module';
 
 const COMPONENTS = [
   NavbarComponent,
@@ -83,7 +84,8 @@ const MODULES = [
   MatMenuModule,
   MatIconModule,
   CountdownModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  AngularMaterialModule
 ];
 @NgModule({
   declarations: [...COMPONENTS],

@@ -64,10 +64,6 @@ const COMPONENTS = [
 export const MODULES = [
   CommonModule,
   SharedModule,
-  // !!! MOVE ALL MATERIAL MODULES TO A SEPARATE MODULE . FOR EX. angular-material.module.ts, import and export that in SharedModule
-  MatFormFieldModule,
-  MatCheckboxModule,
-  MatInputModule,
 ];
 
 @NgModule({

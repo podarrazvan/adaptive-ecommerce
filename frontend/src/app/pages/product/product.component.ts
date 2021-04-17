@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { LoadingService } from 'src/app/shared/loading/loading.service';
 import { DiscountService } from 'src/app/shared/services/database/discount.service';
 import { User } from '../../shared/interfaces/user.interface';
 import { SharedDataService } from '../../shared/services/shared-data.service';
@@ -23,7 +24,8 @@ export class ProductComponent {
     public sanitizer: DomSanitizer,
     private sharedDataService: SharedDataService,
     private usersService: UsersService,
-    private discountService: DiscountService
+    private discountService: DiscountService,
+    private loadingService: LoadingService
   ) {
     this.route.url.subscribe(() => {
       this.loading = true;
@@ -54,8 +56,9 @@ export class ProductComponent {
     let authenticated = false;
     //
     if (authenticated) {
-      this.discountService
-        .checkAuthForPromotion(product._id)
+      const discount = this.discountService.checkAuthForPromotion(product._id);
+     const discount$ = this.loadingService.showLoaderUntilCompleted(discount);
+      discount$
         .subscribe((response) => {
           if (response.length > 0) {
             for (let discount of response) {
@@ -70,11 +73,12 @@ export class ProductComponent {
           }
         });
     } else {
-      this.discountService
-        .checkForPromotion(product._id)
+      const discount = this.discountService.checkForPromotion(product._id);
+      const discount$ = this.loadingService.showLoaderUntilCompleted(discount);
+      discount$
         .subscribe((response) => {
           if (response != null) {
-            price = product.price - response.cut;
+            price = product.price - response[0].cut;
           } else {
             price = product.price;
           }
