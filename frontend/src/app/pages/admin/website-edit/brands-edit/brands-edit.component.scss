@@ -1,3 +1,5 @@
+@import "/src/app/shared/styles/border-radius";
+
 .list-group {
   height: 27vh;
   margin-top: 10px;
@@ -12,9 +14,10 @@
 .alert-box {
   top: 10vh;
   bottom: 20vh;
+  margin-left: -50vw;
   height: fit-content;
   max-height: 60vh;
-  margin-left: -50vw;
+  width: 50vw;
 }
 
 .cancel-btn {
@@ -25,6 +28,9 @@
 .red-btn {
   float: right;
   margin-bottom: 10px;
+  margin-top: 5px;
+  height: 30px;
+  padding: 5px 10px;
 }
 
 .img-edit-btn {
@@ -40,12 +46,17 @@
   }
 }
 
-.red-btn {
-  margin-top: 5px;
-  height: 30px;
-  padding: 5px 10px;
-}
-
 .buttons-website-edit {
   align-items: center;
+}
+
+.green-btn {
+  float: right;
+  border-radius: $huge-border-radius;
+  padding: 0px 30px;
+}
+
+.green-btn,
+.upload-btn {
+  height: 50px;
 }

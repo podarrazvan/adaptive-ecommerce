@@ -16,6 +16,6 @@
         <h2 [routerLink]="['/product',product._id]">Shop now <span> <mat-icon>keyboard_arrow_right</mat-icon></span></h2>
     </div>
     <div class="img">
-        <img [src]="product.thumbnail" [alt]="product.title">
+        <img [routerLink]="['/product',product._id]" [src]="product.thumbnail" [alt]="product.title">
     </div>
 </div>

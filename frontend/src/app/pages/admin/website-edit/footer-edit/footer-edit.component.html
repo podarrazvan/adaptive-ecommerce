@@ -1,8 +1,8 @@
 <div class="backdrop"></div>
 <div class="alert">
   <div class="alert-box">
+    <button (click)="onClose()" class="btn red-btn">X</button>
     <div>
-      <button (click)="onClose()" class="btn red-btn">X</button>
       <form [formGroup]="footerForm">
         <div class="row">
           <div class="col">
@@ -87,7 +87,7 @@
         <button
           [disabled]="!footerForm.valid"
           (click)="onSubmit()"
-          class="btn btn-primary"
+          class="btn green-btn"
         >
           Save
         </button>
