@@ -1,5 +1,6 @@
 import { Brand } from './brand.interface';
 import { Categories } from './categories.interface';
+import { ISchedule } from './schedule.interface';
 import { Shipping } from './shipping.interface';
 
 export interface Layout {
@@ -21,22 +22,7 @@ export interface Layout {
     instagramImage: string;
     instagramUrl: string;
   };
-  schedule: {
-    sundayStart: string,
-    sundayEnd: string,
-    mondayStart: string,
-    mondayEnd: string,
-    tuesdayStart: string,
-    tuesdayEnd: string,
-    wednesdayStart: string,
-    wednesdayEnd: string,
-    thursdaysStart: string,
-    thursdaysEnd: string,
-    fridayStart: string,
-    fridayEnd: string,
-    saturdayStart: string,
-    saturdayEnd: string,
-  },
+  schedule: ISchedule,
   aboutUs: string;
   termsOfUse: string;
   shippingInfo: string;
