@@ -10,7 +10,6 @@
 # dependencies
 /node_modules
 /backend/node_modules
-/backend/shared/images
 
 # profiling files
 chrome-profiler-events*.json
@@ -49,4 +48,4 @@ Thumbs.db
 
 frontend/node_modules
 backend/node_modules
-backend/shared/images
+backend/src/shared/images
