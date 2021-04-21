@@ -6,7 +6,7 @@ import { IShipping } from 'src/shared/interfaces/shipping.interface';
 import { IConfigs } from './configs.model';
 import { ConfigsService } from './configs.service';
 
-@Controller('configs')
+@Controller('website')
 export class ConfigsController {
   constructor(private configsService: ConfigsService) {}
 
