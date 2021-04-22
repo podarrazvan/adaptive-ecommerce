@@ -5,9 +5,11 @@ import { DiscountSchema } from './discount.model';
 import { DiscountService } from './discount.service';
 
 Module({
-    imports: [
-      MongooseModule.forFeature([{ name: 'Discount', schema: DiscountSchema }]),
-    ],
-    controllers: [DiscountController],
-    providers: [DiscountService],
-  });
+  imports: [
+    MongooseModule.forFeature([{ name: 'Discount', schema: DiscountSchema }]),
+  ],
+  controllers: [DiscountController],
+  providers: [DiscountService],
+});
+
+export class DiscountModule {}

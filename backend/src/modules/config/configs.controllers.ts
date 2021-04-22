@@ -11,9 +11,7 @@ export class ConfigsController {
   constructor(private configsService: ConfigsService) {}
 
   @Post()
-  async createConfigs(
-    @Body('data') data: IConfigs)
-   {
+  async createConfigs(@Body('data') data: IConfigs) {
     const configs = this.configsService.createCongigs(data);
     return configs;
   }
@@ -24,52 +22,47 @@ export class ConfigsController {
   }
 
   @Put(':id/websiteName')
-  async updateName(
-    @Param('id') id: string,
-    @Body('name') name: string
-  ) {
-   return this.configsService.updateName(id, name);
+  async updateName(@Param('id') id: string, @Body('name') name: string) {
+    return this.configsService.updateName(id, name);
   }
 
   @Put(':id/websiteCategories')
   async updateCategories(
     @Param('id') id: string,
-    @Body('categories') categories: string[]
+    @Body('categories') categories: string[],
   ) {
-   return this.configsService.updateCategories(id, categories);
+    return this.configsService.updateCategories(id, categories);
   }
 
   @Put(':id/websiteBrands')
   async updateBrands(
     @Param('id') id: string,
-    @Body('brands') brands: IBrand[]
+    @Body('brands') brands: IBrand[],
   ) {
-   return this.configsService.updateBrands(id, brands);
+    return this.configsService.updateBrands(id, brands);
   }
 
   @Put(':id/websiteShipping')
   async updateShipping(
     @Param('id') id: string,
-    @Body('shipping') shipping: IShipping[]
+    @Body('shipping') shipping: IShipping[],
   ) {
-   return this.configsService.updateShipping(id, shipping);
+    return this.configsService.updateShipping(id, shipping);
   }
 
   @Put(':id/websiteContact')
   async updateContact(
     @Param('id') id: string,
-    @Body('contact') contact: IContact
+    @Body('contact') contact: IContact,
   ) {
-   return this.configsService.updateContact(id, contact);
+    return this.configsService.updateContact(id, contact);
   }
 
   @Put(':id/websiteSchedule')
   async updateSchedule(
     @Param('id') id: string,
-    @Body('schedule') schedule: ISchedule
+    @Body('schedule') schedule: ISchedule,
   ) {
-   return this.configsService.updateSchedule(id, schedule);
+    return this.configsService.updateSchedule(id, schedule);
   }
- 
- 
 }

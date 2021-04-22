@@ -11,3 +11,4 @@ Module({
   controllers: [CouponController],
   providers: [CouponService],
 });
+export class CouponModule {}

@@ -10,10 +10,10 @@ export const EmailSchema = new mongoose.Schema({
 });
 
 export interface IEmail {
-    name: string;
-    email: string;
-    subject: string;
-    message: string;
-    date: Date;
-    seen: string;
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+  date: Date;
+  seen: string;
 }

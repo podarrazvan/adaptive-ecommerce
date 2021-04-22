@@ -8,14 +8,7 @@ export class ContactService {
   constructor(@InjectModel('Contact') private contactModel: Model<any>) {}
 
   async createEmail(data: IEmail) {
-    const {
-      name,
-      email,
-      subject,
-      message,
-      date,
-      seen,
-    } = data;
+    const { name, email, subject, message, date, seen } = data;
     const emailData = {
       name,
       email,

@@ -7,9 +7,7 @@ export class ContactController {
   constructor(private contactService: ContactService) {}
 
   @Post()
-  async createEmail(
-    @Body('data') data: IEmail)
-   {
+  async createEmail(@Body('data') data: IEmail) {
     const contact = this.contactService.createEmail(data);
     return contact;
   }
@@ -20,11 +18,7 @@ export class ContactController {
   }
 
   @Put(':id')
-  async updateEmail(
-    @Param('id') id: string,
-    @Body('status') status: string
-  ) {
-   return this.contactService.updateEmail(id, status);
+  async updateEmail(@Param('id') id: string, @Body('status') status: string) {
+    return this.contactService.updateEmail(id, status);
   }
- 
 }

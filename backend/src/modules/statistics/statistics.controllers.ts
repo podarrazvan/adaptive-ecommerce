@@ -1,15 +1,9 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Post,
-  Put,
-} from '@nestjs/common';
+import { Body, Controller, Get, Post, Put } from '@nestjs/common';
 import { StatisticsService } from './statistics.service';
 
-@Controller('statitics')
+@Controller('statistics')
 export class StatisticsController {
-  constructor(private statiticsService: StatisticsService) { }
+  constructor(private statiticsService: StatisticsService) {}
 
   @Post()
   async createStatistics() {
@@ -21,11 +15,13 @@ export class StatisticsController {
     return this.statiticsService.addSearch(search);
   }
 
-  @Get("/most-searched")
-  async getMostSearched() { return this.statiticsService.getMostSearched() }
-
   @Get()
   async getAllStatistics() {
     return this.statiticsService.getAllStatistics();
+  }
+
+  @Get('/most-searched')
+  async getMostSearched() {
+    return this.statiticsService.getMostSearched();
   }
 }
