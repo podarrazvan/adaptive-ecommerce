@@ -2,19 +2,23 @@ import { environment } from '../../../../environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Coupon } from '../../interfaces/coupon.interface';
+import { SharedDataService } from '../shared-data.service';
+import { Layout } from '../../interfaces/website-details';
 
 @Injectable()
 export class ConfigsService {
   categories: string[];
   category;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private sharedDataService: SharedDataService
+  ) {}
 
   createconfigs() {
-    // !!! aveai configs aici
-    this.http
-      .post(`${environment.api}/website`, null)
-      .subscribe(() => location.reload());
+    this.http.post<Layout>(`${environment.api}/website`, null).subscribe((response) => {
+      this.sharedDataService.setLayout(response);
+    });
   }
 
   updateWebsite(sectionName: string, value, id) {

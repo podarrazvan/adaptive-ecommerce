@@ -3,7 +3,6 @@ import { IBrand } from 'src/shared/interfaces/brand.interface';
 import { IContact } from 'src/shared/interfaces/contact.interface';
 import { ISchedule } from 'src/shared/interfaces/schedule.interface';
 import { IShipping } from 'src/shared/interfaces/shipping.interface';
-import { IConfigs } from './configs.model';
 import { ConfigsService } from './configs.service';
 
 @Controller('website')
@@ -11,8 +10,8 @@ export class ConfigsController {
   constructor(private configsService: ConfigsService) {}
 
   @Post()
-  async createConfigs(@Body('data') data: IConfigs) {
-    const configs = this.configsService.createCongigs(data);
+  async createConfigs() {
+    const configs = this.configsService.createCongigs();
     return configs;
   }
 

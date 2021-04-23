@@ -68,8 +68,16 @@ export class ProductService {
   }
 
   //! Should be displayed according to the user's preferences
-  async getMainProducts() {
-    //TODO
+  async getMainProducts(size) {
+    const products = await this.productModel
+      .aggregate([{ $sample: { size } }])
+      .exec();
+    const responseProducts = {
+      products: products.splice(0, 2),
+      mainAd: products[0],
+      mainProduct: products[1],
+    };
+    return responseProducts;
   }
 
   async getYouMayLike(size: number) {
@@ -86,7 +94,20 @@ export class ProductService {
   //!
 
   async getBestSellers() {
-    //TODO
+    const extraProducts = 3;
+    const limit = 7 + extraProducts;
+    const products = await this.productModel
+      .find()
+      .find()
+      .sort({ sold: -1 })
+      .limit(limit);
+    const returnProducts = {
+      main: products[0],
+      middle: products.slice(1, 4),
+      bottom: products.slice(4, 7),
+      extra: products.slice(7, limit),
+    };
+    return returnProducts;
   }
 
   //! Should be selected according to the rating

@@ -71,8 +71,8 @@ export class ProductController {
     return this.productService.getLastProductsByCategory(category, +limit);
   }
   @Get('main-products')
-  async getMainProducts() {
-    return this.productService.getMainProducts();
+  async getMainProducts(@Query('size') size: string) {
+    return this.productService.getMainProducts(+size);
   }
   @Get('you-may-like')
   async getYouMayLike(@Query('size') size: string) {
@@ -88,7 +88,6 @@ export class ProductController {
   }
   @Get('best-sellers')
   async getBestSellers() {
-    console.log('best-sellers');
     return this.productService.getBestSellers();
   }
   @Get('top-rated')

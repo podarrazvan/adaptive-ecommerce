@@ -26,7 +26,7 @@ export class AdminComponent {
     this.adminService.productFormGroup = buildProductFormGroup();
 
     this.sharedDataService.layout$.subscribe((response) => {
-      if (response === null) {
+      if (response._id === undefined) {
         this.configsService.createconfigs();
       }
       setTimeout(()=>{//! not ok, fix it!

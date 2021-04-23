@@ -12,37 +12,17 @@ import { IConfigs } from './configs.model';
 export class ConfigsService {
   configs: IConfigs[] = [];
 
-  constructor(@InjectModel('Configs') private configsModel: Model<any>) {}
+  constructor(@InjectModel('configs') private configsModel: Model<any>) {}
 
-  async createCongigs(data: IConfigs) {
-    const {
-      name,
-      categories,
-      brands,
-      shipping,
-      program,
-      contact,
-      aboutUs,
-      termsOfUse,
-    } = data;
-    const configs = {
-      name,
-      categories,
-      brands,
-      shipping,
-      program,
-      contact,
-      aboutUs,
-      termsOfUse,
-    };
-    const newConfigs = new this.configsModel(configs);
+  async createCongigs() {
+    const newConfigs = new this.configsModel({});
     const result = await newConfigs.save();
     return result;
   }
 
   async getConfigs() {
     const result = await this.configsModel.find().exec();
-    return result;
+    return result[0];
   }
 
   async updateName(_id: string, name: string) {

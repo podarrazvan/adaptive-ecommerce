@@ -6,7 +6,7 @@ import { ConfigsService } from './configs.service';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: 'Configs', schema: ConfigsSchema }]),
+    MongooseModule.forFeature([{ name: 'configs', schema: ConfigsSchema }]),
   ],
   controllers: [ConfigsController],
   providers: [ConfigsService],

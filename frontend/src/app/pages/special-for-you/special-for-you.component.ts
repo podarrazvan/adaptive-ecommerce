@@ -14,7 +14,6 @@ export class SpecialForYouComponent {
     private productsService: ProductsService,
   ) {
     this.productsService.getSpecialForYouProducts().subscribe((response) => {
-      console.log(response);
       for (let promotion of response) {
         const promo = {
           cut: promotion.cut,

@@ -19,6 +19,7 @@ import { OrderController } from './modules/order/order.controllers';
 import { StatisticsService } from './modules/statistics/statistics.service';
 import { StatisticsController } from './modules/statistics/statistics.controllers';
 import { StatisticsSchema } from './modules/statistics/statistics.model';
+import { UsersModule } from './modules/user/user.module';
 
 //! ok but not working!
 // @Module({
@@ -31,7 +32,7 @@ import { StatisticsSchema } from './modules/statistics/statistics.model';
 //     ProductModule,
 //     StatisticsModule,
 //     MongooseModule.forRoot(
-//       'mongodb+srv://razvan:30DUSP766JmuJgyt@cluster0.lseak.mongodb.net/myFirstDatabase',
+//       'mongodb+srv://admin:admin@backend-test.6tqwn.mongodb.net/ecommerce',
 //     ),
 //   ],
 //   controllers: [AppController],
@@ -44,8 +45,9 @@ import { StatisticsSchema } from './modules/statistics/statistics.model';
   imports: [
     ConfigsModule,
     ContactModule,
+    UsersModule,
     MongooseModule.forRoot(
-      'mongodb+srv://razvan:30DUSP766JmuJgyt@cluster0.lseak.mongodb.net/myFirstDatabase',
+      'mongodb+srv://admin:admin@backend-test.6tqwn.mongodb.net/ecommerce',
     ),
     MongooseModule.forFeature([
       { name: 'Coupon', schema: CouponSchema },
