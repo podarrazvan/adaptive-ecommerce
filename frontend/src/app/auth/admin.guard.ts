@@ -23,21 +23,25 @@ export class AdminGuard implements CanActivate {
     | UrlTree
     | Promise<boolean | UrlTree>
     | Observable<boolean | UrlTree> {
-    //! NOT OK BUT WORKING
-    const user = JSON.parse(localStorage.getItem('userData'));
-    if (user === null) {
-      return this.router.createUrlTree(['/auth']);
-    } else {
-      if (user._token === undefined) {
-        return this.router.createUrlTree(['/auth']);
-      } else {
-        const isAdmin = user.isAdmin;
-        return isAdmin != undefined
-          ? true
-          : this.router.createUrlTree(['/auth']);
-      }
-    }
+      //TODO
+      return true;//DELETE THIS
+    // //! NOT OK BUT WORKING
+    // AND USE THIS:
+    // const user = JSON.parse(localStorage.getItem('userData'));
+    // if (user === null) {
+    //   return this.router.createUrlTree(['/auth']);
+    // } else {
+    //   if (user._token === undefined) {
+    //     return this.router.createUrlTree(['/auth']);
+    //   } else {
+    //     const isAdmin = user.isAdmin;
+    //     return isAdmin != undefined
+    //       ? true
+    //       : this.router.createUrlTree(['/auth']);
+    //   }
+    // }
     //!
+    //TODO
     //! OK BUT NOT WORKING
     // return this.authService.user$.pipe(
     //   take(1),

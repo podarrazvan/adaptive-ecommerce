@@ -20,6 +20,7 @@ import { StatisticsService } from './modules/statistics/statistics.service';
 import { StatisticsController } from './modules/statistics/statistics.controllers';
 import { StatisticsSchema } from './modules/statistics/statistics.model';
 import { UsersModule } from './modules/user/user.module';
+import { UploadImageModule } from './shared/modules/images/upload-images.module';
 
 //! ok but not working!
 // @Module({
@@ -46,6 +47,7 @@ import { UsersModule } from './modules/user/user.module';
     ConfigsModule,
     ContactModule,
     UsersModule,
+    UploadImageModule,
     MongooseModule.forRoot(
       'mongodb+srv://admin:admin@backend-test.6tqwn.mongodb.net/ecommerce',
     ),
