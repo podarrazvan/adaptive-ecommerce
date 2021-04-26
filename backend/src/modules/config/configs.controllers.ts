@@ -21,7 +21,7 @@ export class ConfigsController {
   }
 
   @Put(':id/websiteName')
-  async updateName(@Param('id') id: string, @Body('name') name: string) {
+  async updateName(@Param('id') id: string, @Body('data') name: string) {
     return this.configsService.updateName(id, name);
   }
 
@@ -34,17 +34,14 @@ export class ConfigsController {
   }
 
   @Put(':id/websiteBrands')
-  async updateBrands(
-    @Param('id') id: string,
-    @Body('brands') brands: IBrand[],
-  ) {
+  async updateBrands(@Param('id') id: string, @Body('data') brands: IBrand[]) {
     return this.configsService.updateBrands(id, brands);
   }
 
   @Put(':id/websiteShipping')
   async updateShipping(
     @Param('id') id: string,
-    @Body('shipping') shipping: IShipping[],
+    @Body('data') shipping: IShipping[],
   ) {
     return this.configsService.updateShipping(id, shipping);
   }
@@ -52,7 +49,7 @@ export class ConfigsController {
   @Put(':id/websiteContact')
   async updateContact(
     @Param('id') id: string,
-    @Body('contact') contact: IContact,
+    @Body('data') contact: IContact,
   ) {
     return this.configsService.updateContact(id, contact);
   }
@@ -60,7 +57,7 @@ export class ConfigsController {
   @Put(':id/websiteSchedule')
   async updateSchedule(
     @Param('id') id: string,
-    @Body('schedule') schedule: ISchedule,
+    @Body('data') schedule: ISchedule,
   ) {
     return this.configsService.updateSchedule(id, schedule);
   }

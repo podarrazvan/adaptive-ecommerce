@@ -63,7 +63,7 @@ __decorate([
 ], ConfigsController.prototype, "getConfigs", null);
 __decorate([
     common_1.Put(':id/websiteName'),
-    __param(0, common_1.Param('id')), __param(1, common_1.Body('name')),
+    __param(0, common_1.Param('id')), __param(1, common_1.Body('data')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, String]),
     __metadata("design:returntype", Promise)
@@ -78,8 +78,7 @@ __decorate([
 ], ConfigsController.prototype, "updateCategories", null);
 __decorate([
     common_1.Put(':id/websiteBrands'),
-    __param(0, common_1.Param('id')),
-    __param(1, common_1.Body('brands')),
+    __param(0, common_1.Param('id')), __param(1, common_1.Body('data')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, Array]),
     __metadata("design:returntype", Promise)
@@ -87,7 +86,7 @@ __decorate([
 __decorate([
     common_1.Put(':id/websiteShipping'),
     __param(0, common_1.Param('id')),
-    __param(1, common_1.Body('shipping')),
+    __param(1, common_1.Body('data')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, Array]),
     __metadata("design:returntype", Promise)
@@ -95,7 +94,7 @@ __decorate([
 __decorate([
     common_1.Put(':id/websiteContact'),
     __param(0, common_1.Param('id')),
-    __param(1, common_1.Body('contact')),
+    __param(1, common_1.Body('data')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, Object]),
     __metadata("design:returntype", Promise)
@@ -103,7 +102,7 @@ __decorate([
 __decorate([
     common_1.Put(':id/websiteSchedule'),
     __param(0, common_1.Param('id')),
-    __param(1, common_1.Body('schedule')),
+    __param(1, common_1.Body('data')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, Object]),
     __metadata("design:returntype", Promise)

@@ -17,7 +17,7 @@ export class BrandsEditComponent {
   editBrandLogo: boolean;
   brandLogoPath: string;
   valid: boolean;
-  brands; //! NOT OK
+  brands = []; //! NOT OK
 
   constructor(
     private fb: FormBuilder,
@@ -46,6 +46,9 @@ export class BrandsEditComponent {
 
   addNewValue() {
     this.brandsForm.push(this.createBrand());
+    if (this.brands === null) {
+      this.brands = [];
+    }
     this.brands.push({
       name: this.brandName,
       description: this.brandDescription,

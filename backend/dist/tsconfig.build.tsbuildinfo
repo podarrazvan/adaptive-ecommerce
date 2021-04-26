@@ -1562,7 +1562,7 @@
         "affectsGlobalScope": false
       },
       "../src/modules/config/configs.controllers.ts": {
-        "version": "f9b179ba01de981f3f6aef10a39fae99c522fde11a3fd59e23b8af12511d2406",
+        "version": "8fa5f43e083b86e8076faf26ecab4dc868c50faed2eb5d00f7f3b622fa038009",
         "signature": "911c3423811f4cd8a4f9fcb93ae75553789468ec81a35eed31604fd4af591055",
         "affectsGlobalScope": false
       },
@@ -1822,8 +1822,8 @@
         "affectsGlobalScope": true
       },
       "../src/shared/modules/images/upload-image.controllers.ts": {
-        "version": "cf644f033b127b7cb7a9481dd5b09504a802473412e622e6b52055cd3abec2ea",
-        "signature": "70b37469b37852853bd001055d135f590c37d7e774533553be35e0c7f7a128d3",
+        "version": "dfd25bc572685220c26334b44d0187d33c07b6f027c4bc4828fe8305a5a6f75c",
+        "signature": "765fb8362722a0c307f25e92999346e78e42c912b1c62491de6a3d67812f930a",
         "affectsGlobalScope": false
       },
       "../src/shared/modules/images/upload-images.module.ts": {
@@ -3870,7 +3870,9 @@
       "../src/shared/modules/images/upload-image.controllers.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
         "../node_modules/@nestjs/platform-express/index.d.ts",
-        "../node_modules/@types/multer/index.d.ts"
+        "../node_modules/@types/multer/index.d.ts",
+        "../node_modules/@types/node/path.d.ts",
+        "../node_modules/rxjs/index.d.ts"
       ],
       "../src/shared/modules/images/upload-images.module.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
@@ -5384,6 +5386,9 @@
       ],
       "../src/modules/user/user.service.ts": [
         "../node_modules/mongoose/index.d.ts"
+      ],
+      "../src/shared/modules/images/upload-image.controllers.ts": [
+        "../node_modules/rxjs/index.d.ts"
       ],
       "../../../../../../../node_modules/@types/glob/index.d.ts": [
         "../../../../../../../node_modules/@types/minimatch/index.d.ts",

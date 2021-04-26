@@ -16,9 +16,15 @@ exports.UploadImageController = void 0;
 const common_1 = require("@nestjs/common");
 const platform_express_1 = require("@nestjs/platform-express");
 const multer_1 = require("multer");
+const path_1 = require("path");
+const rxjs_1 = require("rxjs");
 let UploadImageController = class UploadImageController {
-    async uploadedFile(file) {
-        return `http://localhost:3000/images/${file.originalname}`;
+    uploadedFile(file) {
+        const path = `http://localhost:3000/images/${file.originalname}`;
+        return { url: path };
+    }
+    findProfileImage(imagename, res) {
+        return rxjs_1.of(res.sendFile(path_1.join(process.cwd(), '../images/' + imagename)));
     }
 };
 __decorate([
@@ -34,8 +40,15 @@ __decorate([
     __param(0, common_1.UploadedFile()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", Promise)
+    __metadata("design:returntype", void 0)
 ], UploadImageController.prototype, "uploadedFile", null);
+__decorate([
+    common_1.Get(':imagename'),
+    __param(0, common_1.Param('imagename')), __param(1, common_1.Res()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", rxjs_1.Observable)
+], UploadImageController.prototype, "findProfileImage", null);
 UploadImageController = __decorate([
     common_1.Controller('images')
 ], UploadImageController);
