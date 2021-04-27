@@ -22,6 +22,9 @@ let DiscountController = class DiscountController {
     async createDiscount(discount) {
         return this.discountService.createDiscount(discount);
     }
+    async getDiscounts() {
+        return this.discountService.getDiscounts();
+    }
     async getDiscountByProduct(product) {
         return this.getDiscountByProduct(product);
     }
@@ -40,6 +43,12 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], DiscountController.prototype, "createDiscount", null);
+__decorate([
+    common_1.Get(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], DiscountController.prototype, "getDiscounts", null);
 __decorate([
     common_1.Get('by-product/:product'),
     __param(0, common_1.Param('product')),

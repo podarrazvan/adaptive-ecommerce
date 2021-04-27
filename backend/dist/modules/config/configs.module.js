@@ -9,10 +9,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ConfigsModule = void 0;
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
+const check_admin_1 = require("../../shared/middlewares/check-admin");
 const configs_controllers_1 = require("./configs.controllers");
 const configs_model_1 = require("./configs.model");
 const configs_service_1 = require("./configs.service");
 let ConfigsModule = class ConfigsModule {
+    configure(consumer) {
+        consumer.apply(check_admin_1.CheckAdmin).forRoutes(configs_controllers_1.ConfigsController);
+    }
 };
 ConfigsModule = __decorate([
     common_1.Module({

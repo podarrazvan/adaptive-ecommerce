@@ -11,6 +11,11 @@ export class DiscountController {
     return this.discountService.createDiscount(discount);
   }
 
+  @Get()
+  async getDiscounts() {
+    return this.discountService.getDiscounts();
+  }
+
   @Get('by-product/:product')
   async getDiscountByProduct(@Param('product') product: string) {
     return this.getDiscountByProduct(product);

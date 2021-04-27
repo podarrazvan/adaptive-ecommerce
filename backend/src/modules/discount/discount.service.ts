@@ -27,7 +27,9 @@ export class DiscountService {
   }
 
   async updateDiscount(discount: IDiscount) {
-    const {_id, cut, expirationDate, productId, forUser} = discount;
-    return this.discountModel.findByIdAndUpdate({_id},{cut, expirationDate, productId, forUser}).exec();
+    const { _id, cut, expirationDate, productId, forUser } = discount;
+    return this.discountModel
+      .findByIdAndUpdate({ _id }, { cut, expirationDate, productId, forUser })
+      .exec();
   }
 }

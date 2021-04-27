@@ -37,7 +37,9 @@ let DiscountService = class DiscountService {
     }
     async updateDiscount(discount) {
         const { _id, cut, expirationDate, productId, forUser } = discount;
-        return this.discountModel.findByIdAndUpdate({ _id }, { cut, expirationDate, productId, forUser }).exec();
+        return this.discountModel
+            .findByIdAndUpdate({ _id }, { cut, expirationDate, productId, forUser })
+            .exec();
     }
 };
 DiscountService = __decorate([

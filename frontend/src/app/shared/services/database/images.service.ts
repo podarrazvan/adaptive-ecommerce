@@ -7,7 +7,6 @@ export class ImagesService {
 
   uploadImg(image: File) {
     const img = new FormData();
-    console.log(image);
     const date = new Date().getTime();
     const imgName = Math.round(date / 1000 - 160000000).toString();
     const extension = image.name.split('.')[1];

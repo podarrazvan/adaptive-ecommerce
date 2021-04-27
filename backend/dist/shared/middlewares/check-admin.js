@@ -6,16 +6,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UploadImageService = void 0;
+exports.CheckAdmin = void 0;
 const common_1 = require("@nestjs/common");
-let UploadImageService = class UploadImageService {
-    async uploadImage(img) {
-        console.log(img);
-        return;
+let CheckAdmin = class CheckAdmin {
+    use(req, res, next) {
+        next();
     }
 };
-UploadImageService = __decorate([
+CheckAdmin = __decorate([
     common_1.Injectable()
-], UploadImageService);
-exports.UploadImageService = UploadImageService;
-//# sourceMappingURL=upload-image.service.js.map
+], CheckAdmin);
+exports.CheckAdmin = CheckAdmin;
+//# sourceMappingURL=check-admin.js.map

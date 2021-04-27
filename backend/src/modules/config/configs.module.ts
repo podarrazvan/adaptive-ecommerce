@@ -1,5 +1,6 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
+import { CheckAdmin } from 'src/shared/middlewares/check-admin';
 import { ConfigsController } from './configs.controllers';
 import { ConfigsSchema } from './configs.model';
 import { ConfigsService } from './configs.service';
@@ -11,4 +12,8 @@ import { ConfigsService } from './configs.service';
   controllers: [ConfigsController],
   providers: [ConfigsService],
 })
-export class ConfigsModule {}
+export class ConfigsModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(CheckAdmin).forRoutes(ConfigsController);
+  }
+}
