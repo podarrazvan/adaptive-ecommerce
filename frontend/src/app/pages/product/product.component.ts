@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { IProduct } from 'src/app/shared/interfaces/product.interface';
 import { LoadingService } from 'src/app/shared/loading/loading.service';
 import { DiscountService } from 'src/app/shared/services/database/discount.service';
 import { User } from '../../shared/interfaces/user.interface';
@@ -39,7 +40,7 @@ export class ProductComponent {
             this.user.history.push(productId);
             this.sharedDataService.updateUserDetails(this.user);
             this.productsService.updateProduct(product);
-            if (this.user.email != undefined) {
+            if (this.user.email !== undefined) {
               this.usersService
                 .updateHistory(this.user.email, this.user.history)
                 .subscribe();
@@ -50,42 +51,42 @@ export class ProductComponent {
     });
   }
 
-  checkPromotion(product) {
+  checkPromotion(product): void {
     let price;
-    //TODO check auth
-    let authenticated = false;
+    // TODO check auth
+    const authenticated = false;
     //
     if (authenticated) {
       const discount = this.discountService.checkAuthForPromotion(product._id);
-     const discount$ = this.loadingService.showLoaderUntilCompleted(discount);
-      discount$
-        .subscribe((response) => {
-          if (response.length > 0) {
-            for (let discount of response) {
-              price = product.price - discount.cut;
-              this.product = product;
-              this.product.price = price;
-              this.loading = false;
-            }
-          } else {
+      const discount$ = this.loadingService.showLoaderUntilCompleted<
+        IProduct[]
+      >(discount);
+      discount$.subscribe((response) => {
+        if (response.length > 0) {
+          for (const discount of response) {
+            price = product.price - discount.cut;
             this.product = product;
+            this.product.price = price;
             this.loading = false;
           }
-        });
+        } else {
+          this.product = product;
+          this.loading = false;
+        }
+      });
     } else {
       const discount = this.discountService.checkForPromotion(product._id);
       const discount$ = this.loadingService.showLoaderUntilCompleted(discount);
-      discount$
-        .subscribe((response) => {
-          if (response != null) {
-            price = product.price - response[0].cut;
-          } else {
-            price = product.price;
-          }
-          this.product = product;
-          this.product.price = price;
-          this.loading = false;
-        });
+      discount$.subscribe((response) => {
+        if (response !== null) {
+          price = product.price - response[0].cut;
+        } else {
+          price = product.price;
+        }
+        this.product = product;
+        this.product.price = price;
+        this.loading = false;
+      });
     }
   }
 }

@@ -21,19 +21,21 @@ export class WishlistComponent {
     this.sharedDataService.userDetails$.subscribe((response) => {
       this.user = response;
       this.products = [];
-      for (let product of response.favorites) {
-        this.productsService.getProduct(product).subscribe((response) => {
-          this.products.push(response);
+      for (const product of response.favorites) {
+        this.productsService.getProduct(product).subscribe((responseProduct) => {
+          this.products.push(responseProduct);
         });
       }
     });
   }
 
-  deletedProduct(product) {
-    const index = this.products.indexOf(product)
+  deletedProduct(product): void {
+    const index = this.products.indexOf(product);
     this.user.favorites.splice(index, 1);
     this.products.splice(index, 1);
     this.sharedDataService.updateUserDetails(this.user);
-    this.usersService.updateFavorites(this.user.email, this.user.favorites).subscribe();
+    this.usersService
+      .updateFavorites(this.user.email, this.user.favorites)
+      .subscribe();
   }
 }

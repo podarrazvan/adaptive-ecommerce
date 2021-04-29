@@ -15,13 +15,15 @@ export class ConfigsService {
     private sharedDataService: SharedDataService
   ) {}
 
-  createconfigs() {
-    this.http.post<Layout>(`${environment.api}/website`, null).subscribe((response) => {
-      this.sharedDataService.setLayout(response);
-    });
+  createconfigs(): void {
+    this.http
+      .post<Layout>(`${environment.api}/website`, null)
+      .subscribe((response) => {
+        this.sharedDataService.setLayout(response);
+      });
   }
 
-  updateWebsite(sectionName: string, value, id) {
+  updateWebsite(sectionName: string, value, id): any {
     const data = { data: value };
     return this.http.put(
       `${environment.api}/website/${id}/${sectionName}`,
@@ -29,18 +31,18 @@ export class ConfigsService {
     );
   }
 
-  getCoupons() {
+  getCoupons(): any {
     return this.http.get<Coupon[]>(`${environment.api}/coupons`);
   }
 
-  async editPages(content: string, page: string, id) {
+  async editPages(content: string, page: string, id): Promise<void> {
     const pageContent = { content };
     this.http
       .put(`${environment.api}/pages/${page}/${id}`, pageContent)
       .subscribe();
   }
 
-  getPages(page) {
+  getPages(page): any {
     return this.http.get<{ info: [{ content: string; _id: string }] }>(
       `${environment.api}/pages/${page}`
     );

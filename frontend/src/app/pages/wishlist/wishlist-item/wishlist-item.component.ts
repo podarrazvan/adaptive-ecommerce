@@ -6,14 +6,14 @@ import { CartItem } from 'src/app/shared/interfaces/cartItem.interface';
 @Component({
   selector: 'app-wishlist-item',
   templateUrl: './wishlist-item.component.html',
-  styleUrls: ['./wishlist-item.component.scss']
+  styleUrls: ['./wishlist-item.component.scss'],
 })
 export class WishlistItemComponent {
   @Input() product;
   @Output() delete = new EventEmitter();
 
-  addToCart() {
-    let cart: CartItem[] = [];
+  addToCart(): void {
+    const cart: CartItem[] = [];
     const cartItem: CartItem = {
       id: this.product._id,
       quantity: 1,
@@ -26,7 +26,7 @@ export class WishlistItemComponent {
     alert('Product added to cart');
   }
 
-  deleteProduct() {
+  deleteProduct(): void {
     this.delete.emit(this.product._id);
   }
 }

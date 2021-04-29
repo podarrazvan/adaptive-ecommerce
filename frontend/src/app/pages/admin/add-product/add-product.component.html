@@ -188,11 +188,11 @@
       <div class="col">
         <label for="inputDescription"><b>Description</b></label>
         <!-- <app-description-styles></app-description-styles> -->
-        <text-editor
+        <app-text-edito
           id="inputDescription"
           (contentChanged)="ckeditorContentChanged($event)"
           #tinyMce
-        ></text-editor>
+        ></app-text-edito>
         <span
           class="help-blok"
           *ngIf="

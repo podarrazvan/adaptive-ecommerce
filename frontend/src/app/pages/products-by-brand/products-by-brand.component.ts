@@ -6,7 +6,7 @@ import { ProductsService } from '../admin/products/products.service';
 @Component({
   selector: 'app-products-by-brand',
   templateUrl: './products-by-brand.component.html',
-  styleUrls: ['./products-by-brand.component.scss']
+  styleUrls: ['./products-by-brand.component.scss'],
 })
 export class ProductsByBrandComponent {
   loading = true;
@@ -16,14 +16,20 @@ export class ProductsByBrandComponent {
   currentPage = 1;
   haveNext = true;
 
-  constructor(private route: ActivatedRoute, private productsService: ProductsService) {
+  constructor(
+    private route: ActivatedRoute,
+    private productsService: ProductsService
+  ) {
     this.getProducts(this.currentPage, this.productsOnPage);
-   }
+  }
 
-   getProducts(page, limit) {
+  getProducts(page, limit): void {
     const brand = this.route.snapshot.params['brand'];
-    this.productsService.getPaginatedProductsByBrand(page, limit, brand).subscribe((response)=> {
-        if (response.length < limit) { //!FIX THIS  USE SOMETHING SIMILAR WITH product.component
+    this.productsService
+      .getPaginatedProductsByBrand(page, limit, brand)
+      .subscribe((response) => {
+        if (response.length < limit) {
+          // !FIX THIS  USE SOMETHING SIMILAR WITH product.component
           this.haveNext = false;
         } else {
           this.haveNext = true;
@@ -33,14 +39,13 @@ export class ProductsByBrandComponent {
       });
   }
 
-   previousPage() {
+  previousPage(): void {
     this.currentPage--;
     this.getProducts(this.currentPage, this.productsOnPage);
   }
 
-  nextPage() {
+  nextPage(): void {
     this.currentPage++;
     this.getProducts(this.currentPage, this.productsOnPage);
   }
-
 }

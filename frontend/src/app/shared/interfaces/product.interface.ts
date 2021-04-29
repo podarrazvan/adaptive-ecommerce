@@ -1,4 +1,4 @@
-import { IProductModel } from "./product-model.interface";
+import { IProductModel } from './product-model.interface';
 
 export interface IProduct {
   title: string;
@@ -11,7 +11,8 @@ export interface IProduct {
   images: any;
   thumbnail: string;
   mainImg?: string;
-  rating: { //TODO use iterface!
+  rating: {
+    // TODO use iterface!
     average: number;
     fiveStars: number;
     forStars: number;
@@ -20,13 +21,13 @@ export interface IProduct {
     twoStars: number;
   };
   _id?: string;
-  //! duplicate cut!
+  // ! duplicate cut!
   discount?: {
     cut: number;
     expirationDate: Date;
   };
   cut?: number;
-  //!
+  // !
   minPrice: number;
   salesWeekTarget: number;
   initialQuantity: number;

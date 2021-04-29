@@ -32,12 +32,12 @@ export class ShopByBrandComponent {
     });
   }
 
-  selected(index) {
+  selected(index): void {
     this.selectedBrand = this.brands[index];
     this.getProducts(this.selectedBrand.name);
   }
 
-  getProducts(name) {
+  getProducts(name): void {
     const products = this.productsService.getPaginatedProductsByBrand(
       this.page,
       this.pageLimit,

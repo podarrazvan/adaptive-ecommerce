@@ -24,7 +24,7 @@ export class InfoComponent {
     });
   }
 
-  getContent(name) {
+  getContent(name): void {
     this.sharedDataService.layout$.subscribe((layout) => {
       this.content = layout[name];
       if (this.content === undefined || '') {
@@ -36,7 +36,7 @@ export class InfoComponent {
     });
   }
 
-  camelize(str) {
+  camelize(str): string {
     return str
       .replace(/(?:^\w|[A-Z]|\b\w)/g, function (word, index) {
         return index === 0 ? word.toLowerCase() : word.toUpperCase();

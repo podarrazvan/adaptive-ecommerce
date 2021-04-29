@@ -10,7 +10,7 @@ export class ShopByBrandLogosComponent {
   @Input() brands: Brand[];
   @Output() selectedBrand = new EventEmitter<Brand>();
 
-  brandSelected(index) {
+  brandSelected(index): void {
     this.selectedBrand.emit(index);
   }
 }

@@ -22,7 +22,7 @@ export interface Layout {
     instagramImage: string;
     instagramUrl: string;
   };
-  schedule: ISchedule,
+  schedule: ISchedule;
   aboutUs: string;
   termsOfUse: string;
   shippingInfo: string;

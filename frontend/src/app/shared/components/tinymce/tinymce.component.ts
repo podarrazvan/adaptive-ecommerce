@@ -1,12 +1,11 @@
 import { environment } from './../../../../environments/environment';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-
 import { Init } from './tinymce.config';
 
 @Component({
-  selector: 'text-editor',
-  templateUrl: 'tinymce.component.html'
+  selector: 'app-text-edito',
+  templateUrl: 'tinymce.component.html',
 })
 export class TinyMCEComponent implements OnInit {
   public Init: typeof Init = Init;
@@ -24,8 +23,8 @@ export class TinyMCEComponent implements OnInit {
   constructor() {}
 
   public ngOnInit(): void {
-    this.Init.init_instance_callback = el => {
-      el.on('keyup', ev => {
+    this.Init.init_instance_callback = (el) => {
+      el.on('keyup', (ev) => {
         if (ev.keyCode === 27) {
           this.closeModal.emit();
         }

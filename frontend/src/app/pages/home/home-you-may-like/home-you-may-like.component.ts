@@ -5,7 +5,7 @@ import { ProductsService } from '../../admin/products/products.service';
 @Component({
   selector: 'app-home-you-may-like',
   templateUrl: './home-you-may-like.component.html',
-  styleUrls: ['./home-you-may-like.component.scss']
+  styleUrls: ['./home-you-may-like.component.scss'],
 })
 export class HomeYouMayLikeComponent {
   products: IProduct[];
@@ -16,10 +16,12 @@ export class HomeYouMayLikeComponent {
     this.getProducts();
   }
 
-  getProducts() {
-    this.productsService.getYouMayLikeProducts(this.numberOfProducts).subscribe((response) => {
-      this.products = response;
-      this.loading = false;
-    });
+  getProducts(): void {
+    this.productsService
+      .getYouMayLikeProducts(this.numberOfProducts)
+      .subscribe((response) => {
+        this.products = response;
+        this.loading = false;
+      });
   }
 }

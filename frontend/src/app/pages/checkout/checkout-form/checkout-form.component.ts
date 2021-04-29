@@ -11,11 +11,11 @@ export class CheckoutFormComponent {
 
   constructor(private checkoutService: CheckoutService) {}
 
-  get checkoutForm() {
+  get checkoutForm(): any {
     return this.checkoutService.orderFormGroup.get('order.billingDetails');
   }
 
-  createAccount() {
+  createAccount(): void {
     this.createBoolean = !this.createBoolean;
     this.checkoutService.setCreateAccount(this.createBoolean);
   }

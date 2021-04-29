@@ -24,37 +24,42 @@ export class FooterEditComponent {
     private adminService: AdminService,
     public sharedDataService: SharedDataService,
     private configsService: ConfigsService
-  ) {
-  }
+  ) {}
 
-  get footerForm() {
+  get footerForm(): any {
     return this.adminService.adminFormGroup.get(['configs', 'footer']);
   }
 
-  get scheduleForm() {
+  get scheduleForm(): any {
     return this.adminService.adminFormGroup.get('schedule');
   }
 
-  onClose() {
+  onClose(): void {
     this.close.emit();
   }
 
-  facebookLogo(img: any) {
+  facebookLogo(img: any): void {
     const image = (img.target as HTMLInputElement).files[0];
-    this.imagesService.uploadImg(image).subscribe((response) => (this.facebookImagePath = response.url));
+    this.imagesService
+      .uploadImg(image)
+      .subscribe((response) => (this.facebookImagePath = response.url));
   }
 
-  twitterLogo(img: any) {
+  twitterLogo(img: any): void {
     const image = (img.target as HTMLInputElement).files[0];
-    this.imagesService.uploadImg(image).subscribe((response) => (this.twitterImagePath = response.url));
+    this.imagesService
+      .uploadImg(image)
+      .subscribe((response) => (this.twitterImagePath = response.url));
   }
 
-  instagramLogo(img: any) {
+  instagramLogo(img: any): void {
     const image = (img.target as HTMLInputElement).files[0];
-    this.imagesService.uploadImg(image).subscribe((response) => (this.instagramImagePath = response.url));
+    this.imagesService
+      .uploadImg(image)
+      .subscribe((response) => (this.instagramImagePath = response.url));
   }
 
-  onSubmit() {
+  onSubmit(): void {
     this.footerForm.patchValue({
       facebookImage: this.facebookImagePath,
       twitterImage: this.twitterImagePath,
@@ -77,27 +82,37 @@ export class FooterEditComponent {
       adress,
     };
     const twitter = {
-      url:twitterUrl,
-      image:twitterImage,
+      url: twitterUrl,
+      image: twitterImage,
     };
     const facebook = {
-      url:facebookUrl,
-      image:facebookImage,
+      url: facebookUrl,
+      image: facebookImage,
     };
     const instagram = {
-      url:instagramUrl,
-      image:instagramImage,
+      url: instagramUrl,
+      image: instagramImage,
     };
-    //! send a request only for what you change!
-    this.sharedDataService.layout$.subscribe((response)=>{
+    // ! send a request only for what you change!
+    this.sharedDataService.layout$.subscribe((response) => {
       const id = response._id;
-      this.configsService.updateWebsite('websiteFooter', footer,id).subscribe();
-      this.configsService.updateWebsite('websiteTwitter', twitter,id).subscribe();
-      this.configsService.updateWebsite('websiteFacebook', facebook,id).subscribe();
-      this.configsService.updateWebsite('websiteInstagram', instagram,id).subscribe();
-      this.configsService.updateWebsite('websiteScheduleForm', this.scheduleForm.value,id).subscribe();
+      this.configsService
+        .updateWebsite('websiteFooter', footer, id)
+        .subscribe();
+      this.configsService
+        .updateWebsite('websiteTwitter', twitter, id)
+        .subscribe();
+      this.configsService
+        .updateWebsite('websiteFacebook', facebook, id)
+        .subscribe();
+      this.configsService
+        .updateWebsite('websiteInstagram', instagram, id)
+        .subscribe();
+      this.configsService
+        .updateWebsite('websiteScheduleForm', this.scheduleForm.value, id)
+        .subscribe();
     });
-    //!
+    // !
     this.close.emit(this.footerForm.value);
   }
 }

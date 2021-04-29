@@ -1,9 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-} from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { SharedDataService } from 'src/app/shared/services/shared-data.service';
 
@@ -20,7 +15,7 @@ export class CartItemComponent {
 
   constructor(private sharedDataService: SharedDataService) {}
 
-  onQuantityChange(value) {
+  onQuantityChange(value): void {
     this.sharedDataService.updateCartItemQuantity(
       this.index,
       value,
@@ -28,7 +23,7 @@ export class CartItemComponent {
     );
   }
 
-  onDelete() {
+  onDelete(): void {
     this.deleteIndex.emit(this.index);
   }
 }

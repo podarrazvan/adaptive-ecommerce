@@ -39,19 +39,12 @@ const COMPONENTS = [
   ShopByBrandProductsComponent,
   HomeYouMayLikeComponent,
   HomeYouMayLikeTopComponent,
-  HomeYouMayLikeProductsComponent
-]
+  HomeYouMayLikeProductsComponent,
+];
 
 @NgModule({
-    declarations: [
-      ...COMPONENTS
-    ],
-    imports: [
-        SharedModule,
-        CommonModule,
-        RouterModule,
-    ],
-    exports: [...COMPONENTS,]
-  })
-
-export class HomeModules { }
+  declarations: [...COMPONENTS],
+  imports: [SharedModule, CommonModule, RouterModule],
+  exports: [...COMPONENTS],
+})
+export class HomeModules {}

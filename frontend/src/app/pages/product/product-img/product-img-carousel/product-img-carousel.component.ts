@@ -14,7 +14,7 @@ export class ProductImgCarouselComponent implements OnInit {
   singleSlide: any;
   index = 0;
 
-  ngOnInit() {
+  ngOnInit(): void {
     const elements = 2;
 
     let times = 0;
@@ -22,7 +22,7 @@ export class ProductImgCarouselComponent implements OnInit {
 
     for (let i = 0; i < this.images.length; i++) {
       times++;
-      slide.push( this.images[i]);
+      slide.push(this.images[i]);
 
       if (times === elements) {
         times = 0;
@@ -31,7 +31,7 @@ export class ProductImgCarouselComponent implements OnInit {
       }
     }
     const slideLength = slide.length;
-    if (slideLength != 0) {
+    if (slideLength !== 0) {
       for (let i = slideLength - 1; i < elements - 1; i++) {
         slide.push(this.images[i]);
       }
@@ -40,17 +40,17 @@ export class ProductImgCarouselComponent implements OnInit {
     this.singleSlide = this.slides[this.index];
   }
 
-  imgSelected(img) {
+  imgSelected(img): void {
     this.selectedImg.emit(img);
   }
 
-  next() {
-    this.index == this.singleSlide.length - 1 ? (this.index = 0) : this.index++;
+  next(): void {
+    this.index === this.singleSlide.length - 1 ? (this.index = 0) : this.index++;
     this.singleSlide = this.slides[this.index];
   }
 
-  previous() {
-    this.index == 0 ? (this.index = this.singleSlide.length - 1) : this.index--;
+  previous(): void {
+    this.index === 0 ? (this.index = this.singleSlide.length - 1) : this.index--;
     this.singleSlide = this.slides[this.index];
   }
 }

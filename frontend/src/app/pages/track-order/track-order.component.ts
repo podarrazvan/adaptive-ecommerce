@@ -9,8 +9,8 @@ import { Router } from '@angular/router';
 export class TrackOrderComponent {
   constructor(private router: Router) {}
 
-  openOrder(orderNumber) {
-    const number = orderNumber.value;
-    this.router.navigate(['/order-status', number]);
+  openOrder(orderNumber): void {
+    const orderNr = orderNumber.value;
+    this.router.navigate(['/order-status', orderNr]);
   }
 }

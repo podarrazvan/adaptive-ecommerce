@@ -35,7 +35,7 @@ export class SearchComponent {
     });
   }
 
-  newSearch() {
+  newSearch(): void {
     this.pages = [];
     this.urlData = {
       category: this.route.snapshot.params['category'],
@@ -44,41 +44,43 @@ export class SearchComponent {
     this.statisticsService
       .updateSearch(this.urlData.search.join(' '))
       .subscribe();
-    if (this.urlData.category != 'all') {
+    if (this.urlData.category !== 'all') {
       this.getProductsByCategory(this.urlData.category);
     } else {
       this.getAllProducts();
     }
   }
 
-  getAllProducts() {
-    let products = [];
+  getAllProducts(): void {
+    const products = [];
     const allProducts = this.productsService.getProducts();
-    const allProducts$ = this.loadingService.showLoaderUntilCompleted(allProducts);
+    const allProducts$ = this.loadingService.showLoaderUntilCompleted(
+      allProducts
+    );
     allProducts$.subscribe((response) => {
-      for (let product of response) {
+      for (const product of response) {
         products.push(product);
       }
-      this.filtreResult(products); //! do it in backend!
+      this.filtreResult(products); // ! do it in backend!
     });
   }
 
-  getProductsByCategory(cat: string) {
-    let products = [];
+  getProductsByCategory(cat: string): void {
+    const products = [];
     this.productsService.getProductsByCategory(cat).subscribe((response) => {
-      for (let product of response) {
+      for (const product of response) {
         products.push(product);
       }
-      this.filtreResult(products); //! do it in backend!
+      this.filtreResult(products); // ! do it in backend!
     });
   }
 
-  filtreResult(products) {
+  filtreResult(products): void {
     const search = this.urlData.search;
     const prod = [];
-    for (let product of products) {
+    for (const product of products) {
       for (let word of search) {
-        if (word != '') {
+        if (word !== '') {
           word = word.toLowerCase();
           product.title = product.title.toLowerCase();
           if (product.title.includes(word)) {
@@ -103,8 +105,8 @@ export class SearchComponent {
     this.paginaton(prod);
   }
 
-  //! NOT OK, FIX IT!
-  paginaton(products: IProduct[]) {
+  // ! NOT OK, FIX IT!
+  paginaton(products: IProduct[]): void {
     let index = -1;
     let productsLeft = products.length;
 
@@ -114,7 +116,7 @@ export class SearchComponent {
 
     this.pagesNumber = Math.ceil(productsLeft / this.limit);
     for (let pageNumber = 0; pageNumber < this.pagesNumber; pageNumber++) {
-      let page = [];
+      const page = [];
       let productsOnPage;
 
       if (productsLeft - this.limit > 0) {
@@ -126,8 +128,8 @@ export class SearchComponent {
 
       for (let i = 0; i < productsOnPage; i++) {
         index++;
-        let product = products[index];
-        //! too many requests!
+        const product = products[index];
+        // ! too many requests!
         this.discountService
           .checkForPromotion(product._id)
           .subscribe((response) => {
@@ -140,19 +142,19 @@ export class SearchComponent {
             product.price = price;
             page.push(product);
           });
-        //!
+        // !
       }
       this.pages.push(page);
     }
   }
-  //!
+  // !
 
-  previousPage() {
+  previousPage(): void {
     this.pageIndex--;
     this.haveNext = true;
   }
 
-  nextPage() {
+  nextPage(): void {
     this.pageIndex++;
     this.pageIndex === this.pages.length - 1
       ? (this.haveNext = false)

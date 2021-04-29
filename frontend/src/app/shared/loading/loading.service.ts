@@ -2,7 +2,7 @@ import { Observable, BehaviorSubject, of } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { concatMap, finalize, tap } from 'rxjs/operators';
 
-@Injectable({providedIn: "root"})
+@Injectable({ providedIn: 'root' })
 export class LoadingService {
   private loadingSubject = new BehaviorSubject<boolean>(false);
   loading$: Observable<boolean> = this.loadingSubject.asObservable();
@@ -17,11 +17,11 @@ export class LoadingService {
     );
   }
 
-  loadingOn() {
+  loadingOn(): void {
     this.loadingSubject.next(true);
   }
 
-  loadingOff() {
+  loadingOff(): void {
     this.loadingSubject.next(false);
   }
 }

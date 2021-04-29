@@ -12,11 +12,11 @@
         <h1>{{ page }}</h1>
       </div>
       <div class="editor">
-        <text-editor
+        <app-text-edito
           (contentChanged)="ckeditorContentChanged($event)"
           #tinyMce
           [initialValue]="initialValue"
-        ></text-editor>
+        ></app-text-edito>
       </div>
       <!-- <textarea #about rows="15" class="form-control">{{content}}</textarea> -->
       <hr />

@@ -41,26 +41,26 @@ export class SharedDataService implements OnDestroy {
 
   constructor(private http: HttpClient) {}
 
-  getLayout() {
+  getLayout(): any {
     return this.http.get<Layout>(`${environment.api}/website`);
   }
 
-  setLayout(layout: Layout) {
+  setLayout(layout: Layout): void {
     this.layoutSubject$.next(layout);
   }
 
-  getCart() {
+  getCart(): void {
     const cart = JSON.parse(localStorage.getItem('cart'));
     this.cartSubject$.next(cart);
   }
 
-  setCart(cart: CartItem[]) {
+  setCart(cart: CartItem[]): void {
     localStorage.setItem('cart', JSON.stringify(cart));
     this.cartSubject$.next(cart);
   }
 
-  updateCartItemQuantity(index, quantity, product) {
-    let cart = JSON.parse(localStorage.getItem('cart'));
+  updateCartItemQuantity(index, quantity, product): void {
+    const cart = JSON.parse(localStorage.getItem('cart'));
 
     product.quantity = quantity;
     product.total = +quantity * +product.price;
@@ -69,25 +69,25 @@ export class SharedDataService implements OnDestroy {
     this.setCart(cart);
   }
 
-  setStatistics(statistics: Statistics) {
+  setStatistics(statistics: Statistics): void {
     this.statisticsSubject$.next(statistics);
   }
 
-  setBestSellers(bestSellers) {
+  setBestSellers(bestSellers): void {
     this.bestSellersSubject$.next(bestSellers);
   }
 
-  setUserDetails(details: User) {
+  setUserDetails(details: User): void {
     this.userDetailsSubject$.next(details);
     localStorage.setItem('userData', JSON.stringify(details));
   }
 
-  updateUserDetails(details: User) {
+  updateUserDetails(details: User): void {
     localStorage.setItem('userData', JSON.stringify(details));
     this.userDetailsSubject$.next(details);
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.productEdit = null;
     this.product = null;
     this.unreadMessages = null;

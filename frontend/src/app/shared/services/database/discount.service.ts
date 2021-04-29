@@ -8,7 +8,7 @@ import { Coupon } from '../../interfaces/coupon.interface';
 export class DiscountService {
   constructor(private http: HttpClient) {}
 
-  createCoupon(coupon: Coupon) {
+  createCoupon(coupon: Coupon): any {
     const couponToAdd: Coupon = {
       code: coupon.code,
       discount: coupon.discount,
@@ -16,23 +16,23 @@ export class DiscountService {
     return this.http.post(`${environment.api}/coupons`, couponToAdd);
   }
 
-  getCoupon(code) {
+  getCoupon(code): any {
     return this.http.get<Coupon>(`${environment.api}/coupons/${code}`);
   }
 
-  getCoupons() {
+  getCoupons(): any {
     return this.http.get<Coupon[]>(`${environment.api}/coupons`);
   }
 
-  editCoupon(coupon){
-    return this.http.put(`${environment.api}/coupons`,coupon);
+  editCoupon(coupon): any {
+    return this.http.put(`${environment.api}/coupons`, coupon);
   }
 
-  deleteCoupon(id){
+  deleteCoupon(id): any {
     return this.http.delete(`${environment.api}/coupons/${id}`);
   }
 
-  createDiscount(discount: Discount) {
+  createDiscount(discount: Discount): void {
     const discountData = {
       cut: discount.cut,
       expirationDate: discount.expirationDate,
@@ -41,15 +41,20 @@ export class DiscountService {
     this.http.post(`${environment.api}/discount`, discountData).subscribe();
   }
 
-  getPromotions() {
+  getPromotions(): any {
     return this.http.get<Discount[]>(`${environment.api}/discount`);
   }
 
-  checkForPromotion(product) {
-    return this.http.get<Discount>(`${environment.api}/discount/by-product/${product}`);
+  checkForPromotion(product): any {
+    return this.http.get<Discount>(
+      `${environment.api}/discount/by-product/${product}`
+    );
   }
 
-  checkAuthForPromotion(product) {//! send user _id too!
-    return this.http.get<Discount[]>(`${environment.api}/discount/by-product/auth/${product}`);
+  checkAuthForPromotion(product): any {
+    // ! send user _id too!
+    return this.http.get<Discount[]>(
+      `${environment.api}/discount/by-product/auth/${product}`
+    );
   }
 }

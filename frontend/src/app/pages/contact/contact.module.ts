@@ -17,8 +17,8 @@ import { ContactComponent } from './contact.component';
     MatInputModule,
     RouterModule.forChild([
       {
-        path:'',
-        component: ContactComponent
+        path: '',
+        component: ContactComponent,
       },
     ]),
   ],

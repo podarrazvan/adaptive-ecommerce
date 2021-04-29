@@ -20,8 +20,8 @@ export class HomeMainComponent {
       .subscribe((response) => {
         if (
           response.products.length > 0 &&
-          response.mainAd != undefined &&
-          response.mainProduct != undefined
+          response.mainAd !== undefined &&
+          response.mainProduct !== undefined
         ) {
           this.products = response.products;
           this.mainProduct = response.mainProduct;

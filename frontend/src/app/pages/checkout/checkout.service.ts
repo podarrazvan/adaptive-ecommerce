@@ -12,7 +12,7 @@ export class CheckoutService {
   private createAccountSubject$ = new BehaviorSubject<boolean>(false);
   public createAccount$: Observable<boolean> = this.createAccountSubject$.asObservable();
 
-  setCreateAccount(value) {
+  setCreateAccount(value): void {
     this.createAccountSubject$.next(value);
   }
 }

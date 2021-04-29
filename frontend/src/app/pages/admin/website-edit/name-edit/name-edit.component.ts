@@ -16,18 +16,19 @@ export class NameEditComponent {
     private adminService: AdminService,
     private configsService: ConfigsService,
     public sharedDataService: SharedDataService
-  ) {
-  }
+  ) {}
 
   get formName() {
     return this.adminService.adminFormGroup.get('configs');
   }
 
   setName() {
-    this.sharedDataService.layout$.subscribe((response)=>{
+    this.sharedDataService.layout$.subscribe((response) => {
       const id = response._id;
-      this.configsService.updateWebsite('websiteName', this.formName.value.name, id).subscribe();
+      this.configsService
+        .updateWebsite('websiteName', this.formName.value.name, id)
+        .subscribe();
       this.editName = false;
-    })
+    });
   }
 }

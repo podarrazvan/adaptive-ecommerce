@@ -4,17 +4,16 @@ import { DiscountService } from 'src/app/shared/services/database/discount.servi
 @Component({
   selector: 'app-cart-coupon',
   templateUrl: './cart-coupon.component.html',
-  styleUrls: ['./cart-coupon.component.scss']
+  styleUrls: ['./cart-coupon.component.scss'],
 })
 export class CartCouponComponent {
   @Output() discount = new EventEmitter();
 
-  constructor(private discountService: DiscountService) { }
+  constructor(private discountService: DiscountService) {}
 
-  addCoupon(coupon) {
-    this.discountService.getCoupon(coupon.value).subscribe(response =>  {
+  addCoupon(coupon): void {
+    this.discountService.getCoupon(coupon.value).subscribe((response) => {
       this.discount.emit(response);
     });
   }
-
 }

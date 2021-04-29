@@ -8,13 +8,13 @@ import { AdminService } from '../../../admin.service';
 export class ScheduleEditComponent {
   scheduleHours = ['-'];
 
-  constructor( private adminService: AdminService,) {
+  constructor(private adminService: AdminService) {
     for (let i = 0; i < 25; i++) {
       this.scheduleHours.push(i.toString());
     }
   }
-  
-  get scheduleForm() {
+
+  get scheduleForm(): any {
     return this.adminService.adminFormGroup.get('schedule');
   }
 }

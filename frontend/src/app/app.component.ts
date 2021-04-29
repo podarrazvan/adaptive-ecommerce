@@ -4,6 +4,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { AuthService } from './auth/auth.service';
 import { StatisticsService } from './shared/services/database/statistics.service';
 import { LoadingService } from './shared/loading/loading.service';
+import { Layout } from './shared/interfaces/website-details';
 
 @Component({
   selector: 'app-root',
@@ -29,7 +30,7 @@ export class AppComponent implements OnInit {
     });
 
     const layout = this.sharedDataService.getLayout();
-    const layout$ = this.loadingService.showLoaderUntilCompleted(layout);
+    const layout$ = this.loadingService.showLoaderUntilCompleted<Layout>(layout);
     layout$.subscribe((response) => {
       this.sharedDataService.setLayout(response);
     });

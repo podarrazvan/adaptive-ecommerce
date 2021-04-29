@@ -7,12 +7,12 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class DeleteAlertComponent {
   @Output() delete = new EventEmitter<boolean>(null);
-    
-  yes() {
-      this.delete.emit(true);
+
+  yes(): void {
+    this.delete.emit(true);
   }
 
-  no() {
-      this.delete.emit(false);
+  no(): void {
+    this.delete.emit(false);
   }
 }

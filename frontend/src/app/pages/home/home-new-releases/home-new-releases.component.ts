@@ -20,13 +20,12 @@ export class HomeNewReleasesComponent {
   ) {
     sharedDataService.layout$.subscribe((layout) => {
       const categories = layout.categories;
-      this.categories = categories.slice(0,10);//TODO get 10 categories according to the user's preferences!
+      this.categories = categories.slice(0, 10); // TODO get 10 categories according to the user's preferences!
       this.showProducts('Phones');
-      //this.showProducts(categories[0])
     });
   }
 
-  showProducts(selectedCategory) {
+  showProducts(selectedCategory): void {
     this.loading = true;
     this.productService
       .getLastProducts(this.numberOfProducts, selectedCategory)

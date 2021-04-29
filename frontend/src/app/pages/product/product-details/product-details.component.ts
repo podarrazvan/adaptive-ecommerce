@@ -21,7 +21,7 @@ export class ProductDetailsComponent implements OnInit {
     private usersService: UsersService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.sharedDataService.userDetails$.subscribe((response) => {
       this.user = response;
       const id = this.product._id;
@@ -38,7 +38,7 @@ export class ProductDetailsComponent implements OnInit {
     });
   }
 
-  addToCart(quantity) {
+  addToCart(quantity): void {
     let cart = JSON.parse(localStorage.getItem('cart'));
     if (cart === null) {
       cart = [];
@@ -59,26 +59,26 @@ export class ProductDetailsComponent implements OnInit {
     }
   }
 
-  productExists(id, cart) {
-    for (let product of cart) {
-      if (product.id == id) {
+  productExists(id, cart): boolean {
+    for (const product of cart) {
+      if (product.id === id) {
         return true;
       }
     }
     return false;
   }
 
-  addFavorite() {
+  addFavorite(): void {
     const id = this.product._id;
     if (!this.addedToFavorite) {
       this.user.favorites.push(id);
-      if (this.user.email != undefined) {
+      if (this.user.email !== undefined) {
         this.usersService
-        .updateFavorites(this.user.email, this.user.favorites)
-        .subscribe(() => {
-          alert('Added to favorites!');
-          this.sharedDataService.updateUserDetails(this.user);
-          this.addedToFavorite = true;
+          .updateFavorites(this.user.email, this.user.favorites)
+          .subscribe(() => {
+            alert('Added to favorites!');
+            this.sharedDataService.updateUserDetails(this.user);
+            this.addedToFavorite = true;
           });
       } else {
         alert('Added to favorites!');

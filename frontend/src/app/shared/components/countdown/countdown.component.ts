@@ -25,17 +25,17 @@ export class CountdownComponent implements OnInit {
     };
   }
 
-  handleEvent(event) {
+  handleEvent(event): void {
     event.action = 'done' && this.done.emit();
   }
 
-  private calculateFormatTime() {
+  private calculateFormatTime(): any {
     return this.calculateRemainingTime() <= this.secondsInADay
       ? 'HH:mm:ss'
       : 'd HH:mm:ss';
   }
 
-  private calculateRemainingTime() {
+  private calculateRemainingTime(): any {
     return Math.floor((this.end.getTime() - new Date().getTime()) / 1000);
   }
 }

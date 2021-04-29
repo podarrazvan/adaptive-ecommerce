@@ -12,19 +12,19 @@ export class ContactComponent {
 
   constructor(
     private fb: FormBuilder,
-    private messagesService: MessagesService,
+    private messagesService: MessagesService
   ) {
     this.buildFormGroup();
   }
 
-  onSubmit() {
-    this.messagesService.addMessage(this.contactForm.value).subscribe(()=> {
+  onSubmit(): void {
+    this.messagesService.addMessage(this.contactForm.value).subscribe(() => {
       this.contactForm.reset();
       alert('Message sent!');
     });
   }
 
-  private buildFormGroup() {
+  private buildFormGroup(): void {
     this.contactForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],

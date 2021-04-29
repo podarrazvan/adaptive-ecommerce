@@ -15,12 +15,12 @@ export class PaginationComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  previous() {
+  previous(): void {
     this.currentPage--;
     this.previousPage.emit();
   }
 
-  next() {
+  next(): void {
     this.currentPage++;
     this.nextPage.emit();
   }

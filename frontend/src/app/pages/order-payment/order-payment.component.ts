@@ -17,8 +17,8 @@ export class OrderPaymentComponent implements OnInit {
 
   ngOnInit(): void {
     this.order = JSON.parse(localStorage.getItem('order'));
-    if(this.order === null) {
-      this.router.navigate([""]);
+    if (this.order === null) {
+      this.router.navigate(['']);
     } else {
       const total = this.order.orderDetails.total;
       paypal
@@ -27,7 +27,7 @@ export class OrderPaymentComponent implements OnInit {
             return actions.order.create({
               purchase_units: [
                 {
-                  //TODO add products's name in an array
+                  // TODO add products's name in an array
                   amount: {
                     currency_code: 'USD',
                     value: total,
@@ -48,7 +48,7 @@ export class OrderPaymentComponent implements OnInit {
         .render(this.paypalElement.nativeElement);
     }
   }
-  createOrder() {
+  createOrder(): void {
     this.ordersService.addOrder(this.order).subscribe((response) => {
       const orderNumber = response.body.order.orderNumber;
       localStorage.removeItem('cart');
