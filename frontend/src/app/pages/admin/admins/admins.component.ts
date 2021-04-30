@@ -19,7 +19,7 @@ export class AdminsComponent {
     });
   }
 
-  onDelete(confirmed) {
+  onDelete(confirmed): void {
     if (confirmed) {
       this.usersService
         .deleteAdmin(this.admins[this.deleteIndex].username)
@@ -30,15 +30,15 @@ export class AdminsComponent {
     }
   }
 
-  deleteAlert(index) {
-    this.deleteIndex = index
+  deleteAlert(index): void {
+    this.deleteIndex = index;
     if (this.admins[this.deleteIndex].username === 'admin') {
-      alert("This admin can't be deleted!");
+      alert('This admin can\'t be deleted!');
     } else {
       this.deleteAdmin = true;
     }
   }
-  adminCreated(newAdmin) {
+  adminCreated(newAdmin): void {
     this.addAdmin = false;
     this.admins.push(newAdmin);
   }

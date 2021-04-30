@@ -28,10 +28,10 @@ export class CartComponent {
     this.getCart();
   }
 
-  getCart() {
+  getCart(): void {
     this.total = 0;
     const coupon = JSON.parse(localStorage.getItem('coupon'));
-    if(coupon != null) {
+    if (coupon !== null) {
       this.total -= coupon.discount;
     }
     this.sharedDataService.cart$.subscribe((response) => {
@@ -40,7 +40,7 @@ export class CartComponent {
       if (products.length === 0) {
         localStorage.removeItem('cart');
       }
-      for (let product of products) {
+      for (const product of products) {
         const key = product.id;
         const quantity = product.quantity;
         const price = product.price;
@@ -50,21 +50,21 @@ export class CartComponent {
     });
   }
 
-  getProduct(id: string, quantity: number, price: number) {
+  getProduct(id: string, quantity: number, price: number): void {
     this.cart = [];
 
     this.productsService.getProduct(id).subscribe((response) => {
       const product = response;
-      if (product != null) {
-        if (product.price != price) {
-          //TODO check auth
-          let authenticated = true;
+      if (product !== null) {
+        if (product.price !== price) {
+          // TODO check auth
+          const authenticated = true;
           //
           if (authenticated) {
             this.discountService
               .checkAuthForPromotion(product._id)
-              .subscribe((response) => {
-                if (response != null) {
+              .subscribe((promotion) => {
+                if (promotion != null) {
                   this.addProductToCart(product, price, quantity, product._id);
                 } else {
                   this.addProductToCart(
@@ -78,8 +78,8 @@ export class CartComponent {
           } else {
             this.discountService
               .checkForPromotion(product._id)
-              .subscribe((response) => {
-                if (response != null) {
+              .subscribe((promotion) => {
+                if (promotion != null) {
                   this.addProductToCart(product, price, quantity, product._id);
                 }
               });
@@ -91,14 +91,14 @@ export class CartComponent {
     });
   }
 
-  addProductToCart(product, price, quantity, id) {
+  addProductToCart(product, price, quantity, id): void {
     let itemTotal = 0;
     itemTotal += price * quantity;
     this.cart.push({
       id,
       img: product.images[0],
       name: product.title,
-      quantity: quantity,
+      quantity,
       total: itemTotal,
       price,
     });
@@ -106,12 +106,12 @@ export class CartComponent {
       this.updatedCart = this.cart;
     }
     this.total += itemTotal;
-    if(this.total < 0) {
+    if (this.total < 0) {
       this.total = 0;
     }
   }
 
-  onDelete(index: number) {
+  onDelete(index: number): void {
     this.total -= this.cart[index].total;
     this.cart.splice(index, 1);
     if (this.cart.length === 0) {
@@ -121,24 +121,23 @@ export class CartComponent {
     }
   }
 
-
-  coupon(coupon) {
-    localStorage.setItem('coupon', JSON.stringify(coupon))
+  coupon(coupon): void {
+    localStorage.setItem('coupon', JSON.stringify(coupon));
     this.total -= coupon.discount;
-    if(this.total < 0) {
+    if (this.total < 0) {
       this.total = 0;
     }
   }
 
-  //! find a better way!
-  findIndex(id) {
+  // ! find a better way!
+  findIndex(id): number {
     let index = 0;
-    for (let item of this.cart) {
+    for (const item of this.cart) {
       if (item._id === id) {
         return index;
       }
       index++;
     }
   }
-  //!
+  // !
 }

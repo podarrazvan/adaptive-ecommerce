@@ -18,11 +18,11 @@ export class NameEditComponent {
     public sharedDataService: SharedDataService
   ) {}
 
-  get formName() {
+  get formName(): any {
     return this.adminService.adminFormGroup.get('configs');
   }
 
-  setName() {
+  setName(): void {
     this.sharedDataService.layout$.subscribe((response) => {
       const id = response._id;
       this.configsService

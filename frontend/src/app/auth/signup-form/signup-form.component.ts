@@ -28,7 +28,7 @@ export class SignupFormComponent {
     }
   }
 
-  onSubmit(form: NgForm) {
+  onSubmit(form: NgForm): void {
     if (form.value.password === form.value.checkPassword) {
       let authObs: Observable<AuthResponseData>;
 
@@ -58,7 +58,7 @@ export class SignupFormComponent {
         }
       );
     } else {
-      this.infoMessage = "Passwords don't match";
+      this.infoMessage = 'Passwords don\'t match';
       this.success = false;
       this.showInfo = true;
     }

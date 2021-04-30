@@ -23,15 +23,15 @@ export class MessagesComponent implements OnInit {
   ngOnInit(): void {
     this.emails = [];
     this.messagesService.getMessages().subscribe((response) => {
-      for (let email of response) {
+      for (const email of response) {
         this.emails.push(email);
       }
     });
   }
 
-  openEmail(i) {
+  openEmail(i): void {
     if (!this.deleteAlertMessage) {
-      //! you can do it better, don't emit openEmail!
+      // ! you can do it better, don't emit openEmail!
       const index = i;
       this.messageToShow = this.emails[index];
       this.showMessage = true;
@@ -43,7 +43,7 @@ export class MessagesComponent implements OnInit {
     }
   }
 
-  onDelete(confirmed) {
+  onDelete(confirmed): void {
     if (confirmed) {
       this.messagesService
         .deleteMessage(this.emails[this.deleteIndex]._id)
@@ -55,12 +55,12 @@ export class MessagesComponent implements OnInit {
     }
   }
 
-  deleteAlert(index) {
+  deleteAlert(index): void {
     this.deleteIndex = index;
     this.deleteAlertMessage = true;
   }
 
-  close() {
+  close(): void {
     this.showMessage = false;
   }
 }

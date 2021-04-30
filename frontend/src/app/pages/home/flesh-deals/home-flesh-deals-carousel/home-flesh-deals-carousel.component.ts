@@ -16,7 +16,10 @@ export class HomeFleshDealsCarouselComponent implements OnInit {
   singleSlide: any;
   index = 0;
 
-  constructor(private router: Router, private sharedDataService: SharedDataService) {}
+  constructor(
+    private router: Router,
+    private sharedDataService: SharedDataService
+  ) {}
 
   ngOnInit(): void {
     const elements = 3;
@@ -35,7 +38,7 @@ export class HomeFleshDealsCarouselComponent implements OnInit {
           product.initialQuantity
       );
 
-      Object.assign(product, { progressBar: progressBar });
+      Object.assign(product, { progressBar });
 
       slide.push(product);
 
@@ -47,7 +50,7 @@ export class HomeFleshDealsCarouselComponent implements OnInit {
     }
 
     const slideLength = Object.keys(slide).length;
-    if (slideLength != 0) {
+    if (slideLength !== 0) {
       for (let i = slideLength - 1; i < elements - 1; i++) {
         slide.push(this.products[i]);
       }
@@ -56,19 +59,17 @@ export class HomeFleshDealsCarouselComponent implements OnInit {
     this.singleSlide = this.slides[this.index];
   }
 
-  next() {
-    // ! must be this.singleSlide.length -1 not -2 !
-    this.index == this.singleSlide.length - 2 ? (this.index = 0) : this.index++;
+  next(): void {
+    this.index === this.singleSlide.length - 2 ? (this.index = 0) : this.index++;
     this.singleSlide = this.slides[this.index];
   }
 
-  previous() {
-    // ! must be this.singleSlide.length -1 not -2 !
-    this.index == 0 ? (this.index = this.singleSlide.length - 2) : this.index--;
+  previous(): void {
+    this.index === 0 ? (this.index = this.singleSlide.length - 2) : this.index--;
     this.singleSlide = this.slides[this.index];
   }
 
-  addToCart(product: IProduct) {
+  addToCart(product: IProduct): void {
     let cart = JSON.parse(localStorage.getItem('cart'));
     if (cart === null) {
       cart = [];
@@ -89,9 +90,9 @@ export class HomeFleshDealsCarouselComponent implements OnInit {
     }
   }
 
-  productExists(id, cart) {
-    for (let product of cart) {
-      if (product.id == id) {
+  productExists(id, cart): boolean {
+    for (const product of cart) {
+      if (product.id === id) {
         return true;
       }
     }

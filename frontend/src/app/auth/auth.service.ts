@@ -18,11 +18,11 @@ export class AuthService {
   private userSubject$ = new BehaviorSubject<User>(null);
   public user$: Observable<User> = this.userSubject$.asObservable();
 
-  tokenExpirationTimer; //! NOT USED!
+  tokenExpirationTimer; // ! NOT USED!
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  signup(newUser: NewUserDto, addAdmin) {
+  signup(newUser: NewUserDto, addAdmin): any {
     if (addAdmin) {
       return this.http
         .post<AuthResponseData>(`${environment.api}/users/admins/signup`, {
@@ -31,7 +31,7 @@ export class AuthService {
         })
         .pipe(
           catchError(this.handleError),
-          tap((resData) => {
+          tap<AuthResponseData>((resData) => {
             this.handleAuthentication(resData);
           })
         );
@@ -43,29 +43,29 @@ export class AuthService {
         })
         .pipe(
           catchError(this.handleError),
-          tap((resData) => {
+          tap<AuthResponseData>((resData) => {
             this.handleAuthentication(resData);
           })
         );
     }
   }
 
-  login(email: string, password: string) {
+  login(email: string, password: string): any {
     return this.http
       .post<AuthResponseData>(`${environment.api}/users/login`, {
-        email: email,
-        password: password,
+        email,
+        password,
         returnSecureToken: true,
       })
       .pipe(
         catchError(this.handleError),
-        tap((resData) => {
+        tap<AuthResponseData>((resData) => {
           this.handleAuthentication(resData);
         })
       );
   }
 
-  autoLogin() {
+  autoLogin(): any {
     const userData: AutoLogout = JSON.parse(localStorage.getItem('userData'));
     const expirationDuration =
       new Date(userData._tokenExpirationDate).getTime() - new Date().getTime();
@@ -106,7 +106,7 @@ export class AuthService {
     }
   }
 
-  public handleAuthentication(authUserInfo: AuthUserInfoDto) {
+  public handleAuthentication(authUserInfo: AuthUserInfoDto): void {
     const {
       email,
       password,
@@ -135,7 +135,7 @@ export class AuthService {
     localStorage.setItem('userData', JSON.stringify(user));
   }
 
-  logout() {
+  logout(): void {
     this.userSubject$.next(null);
     const userData: Logout = JSON.parse(localStorage.getItem('userData'));
     this.updateUser(userData);
@@ -147,13 +147,13 @@ export class AuthService {
     this.tokenExpirationTimer = null;
   }
 
-  autoLogout(expirationDuration: number) {
+  autoLogout(expirationDuration: number): void {
     this.tokenExpirationTimer = setTimeout(() => {
       this.logout();
     }, expirationDuration);
   }
 
-  updateUser(updateUser: AuthUserInfoDto) {
+  updateUser(updateUser: AuthUserInfoDto): void {
     const {
       email,
       password,
@@ -177,7 +177,7 @@ export class AuthService {
     this.http.put(`${environment.api}/users/update`, user).subscribe();
   }
 
-  private handleError(errorRes: HttpErrorResponse) {
+  private handleError(errorRes: HttpErrorResponse): any {
     let errorMessage = 'An unknown error occurred!';
     if (!errorRes.error || !errorRes.error.error) {
       return throwError(errorMessage);

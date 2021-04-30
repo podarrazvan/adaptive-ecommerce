@@ -20,7 +20,7 @@ export class UsersComponent {
     this.getUsers(this.currentPage, this.limit);
   }
 
-  getUsers(page, limit) {
+  getUsers(page, limit): void {
     this.userService.getUsers(page, limit).subscribe((response) => {
       if (response.next === undefined) {
         this.haveNext = false;
@@ -32,16 +32,16 @@ export class UsersComponent {
     });
   }
 
-  deleteUserAlert(index) {
+  deleteUserAlert(index): void {
     this.deleteIndex = index;
     if (this.users[index].username === 'admin') {
-      alert("This user can't be deleted!");
+      alert('This user can\'t be deleted!');
     } else {
       this.deleteUser = true;
     }
   }
 
-  onDelete(confirmed) {
+  onDelete(confirmed): void {
     if (confirmed) {
       const username = this.users[this.deleteIndex].username;
       this.userService.deleteUser(username).subscribe(() => {
@@ -53,23 +53,23 @@ export class UsersComponent {
     }
   }
 
-  updateAdmin(id, isAdmin, index) {
-    if(this.users[index].username != "admin") {
-      this.userService.updateAdmin(id,isAdmin).subscribe(()=>{
+  updateAdmin(id, isAdmin, index): void {
+    if (this.users[index].username !== 'admin') {
+      this.userService.updateAdmin(id, isAdmin).subscribe(() => {
         alert('Admin Updated!');
         this.users[index].isAdmin = isAdmin;
       });
     } else {
-      alert('This user can\'t be updated!')
+      alert('This user can\'t be updated!');
     }
   }
 
-  previousPage() {
+  previousPage(): void {
     this.currentPage--;
     this.getUsers(this.currentPage, this.limit);
   }
 
-  nextPage() {
+  nextPage(): void {
     this.currentPage++;
     this.getUsers(this.currentPage, this.limit);
   }

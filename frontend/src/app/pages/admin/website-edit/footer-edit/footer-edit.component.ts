@@ -11,7 +11,7 @@ import { AdminService } from '../../admin.service';
   styleUrls: ['./footer-edit.component.scss'],
 })
 export class FooterEditComponent {
-  @Output() close = new EventEmitter<FormGroup>();
+  @Output() closeFooter = new EventEmitter<FormGroup>();
 
   facebookImagePath: string;
   instagramImagePath: string;
@@ -35,7 +35,7 @@ export class FooterEditComponent {
   }
 
   onClose(): void {
-    this.close.emit();
+    this.closeFooter.emit();
   }
 
   facebookLogo(img: any): void {
@@ -113,6 +113,6 @@ export class FooterEditComponent {
         .subscribe();
     });
     // !
-    this.close.emit(this.footerForm.value);
+    this.closeFooter.emit(this.footerForm.value);
   }
 }

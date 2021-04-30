@@ -3,20 +3,20 @@ import { HttpClient } from '@angular/common/http';
 import { Message } from 'src/app/shared/interfaces/message.interface';
 import { environment } from 'src/environments/environment.prod';
 
-@Injectable({providedIn:"root"})
+@Injectable({ providedIn: 'root' })
 export class MessagesService {
   error: any;
 
   constructor(private http: HttpClient) {}
 
-  addMessage(message: Message) {
+  addMessage(message: Message): any {
     const date = new Date();
     const messageToAdd = {
       name: message.name,
       subject: message.subject,
       email: message.email,
       message: message.message,
-      date: date,
+      date,
       seen: false,
     };
     return this.http.post(`${environment.api}/contact`, messageToAdd, {
@@ -24,8 +24,7 @@ export class MessagesService {
     });
   }
 
-  updateMessage(message: Message) {
-    const user = JSON.parse(localStorage.getItem('userData'));
+  updateMessage(message: Message): void {
     const messageToAdd = {
       name: message.name,
       subject: message.subject,
@@ -41,12 +40,11 @@ export class MessagesService {
       .subscribe();
   }
 
-  getMessages() {
+  getMessages(): any {
     return this.http.get<Message[]>(`${environment.api}/contact`);
   }
 
-  deleteMessage(id: string) {
-    const user = JSON.parse(localStorage.getItem('userData'));
+  deleteMessage(id: string): any {
     return this.http.delete(`${environment.api}/contact/${id}`);
   }
 }

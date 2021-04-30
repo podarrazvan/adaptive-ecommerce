@@ -17,7 +17,7 @@ export class BrandsEditComponent {
   editBrandLogo: boolean;
   brandLogoPath: string;
   valid: boolean;
-  brands = []; //! NOT OK
+  brands = []; // ! NOT OK
 
   constructor(
     private fb: FormBuilder,
@@ -28,23 +28,23 @@ export class BrandsEditComponent {
   ) {
     this.buildFormGroup(fb);
     this.sharedDataService.layout$.subscribe((response) => {
-      this.brands = response.brands; //! DON'T USE brands, USE brandsForm()
+      this.brands = response.brands; // ! DON'T USE brands, USE brandsForm()
     });
   }
 
-  get brandsForm() {
+  get brandsForm(): FormArray {
     return this.adminService.adminFormGroup.get('configs.brands') as FormArray;
   }
 
-  get brandName() {
+  get brandName(): FormGroup {
     return this.formGroup.get('name').value;
   }
 
-  get brandDescription() {
+  get brandDescription(): FormGroup {
     return this.formGroup.get('description').value;
   }
 
-  addNewValue() {
+  addNewValue(): void {
     this.brandsForm.push(this.createBrand());
     if (this.brands === null) {
       this.brands = [];
@@ -53,7 +53,7 @@ export class BrandsEditComponent {
       name: this.brandName,
       description: this.brandDescription,
       image: this.brandLogoPath,
-    }); //! NOT OK!
+    }); // ! NOT OK!
     this.sharedDataService.layout$.subscribe((response) => {
       const id = response._id;
       this.configsService
@@ -71,10 +71,10 @@ export class BrandsEditComponent {
     });
   }
 
-  delete(index) {
+  delete(index): void {
     const img = this.brands[index].image.split('/')[5];
     this.brandsForm.value.splice(index, 1);
-    this.brands.splice(index, 1); //! NOT OK!
+    this.brands.splice(index, 1); // ! NOT OK!
     this.sharedDataService.layout$.subscribe((response) => {
       const id = response._id;
       this.configsService
@@ -84,7 +84,7 @@ export class BrandsEditComponent {
     });
   }
 
-  edit(index) {
+  edit(index): void {
     let image;
     if (this.editBrandLogo) {
       image = this.brandLogoPath;
@@ -94,7 +94,7 @@ export class BrandsEditComponent {
     } else {
       image = this.brands[index].image;
     }
-    this.brands[index] = { name: this.brandName, image }; //! NOT OK!
+    this.brands[index] = { name: this.brandName, image }; // ! NOT OK!
     this.sharedDataService.layout$.subscribe((response) => {
       const id = response._id;
       this.configsService
@@ -106,7 +106,7 @@ export class BrandsEditComponent {
     });
   }
 
-  brandLogo(img: Event) {
+  brandLogo(img: Event): void {
     const image = (img.target as HTMLInputElement).files[0];
     this.imagesService.uploadImg(image).subscribe((response) => {
       this.brandLogoPath = response.url;
@@ -114,7 +114,7 @@ export class BrandsEditComponent {
     });
   }
 
-  private buildFormGroup(fb) {
+  private buildFormGroup(fb): void {
     this.formGroup = fb.group({
       name: fb.control(null),
       image: fb.control(null),

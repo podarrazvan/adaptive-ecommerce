@@ -23,16 +23,16 @@ export class AuthGuard implements CanActivate {
     | UrlTree
     | Promise<boolean | UrlTree>
     | Observable<boolean | UrlTree> {
-    //! NOT OK BUT WORKING
+    // ! NOT OK BUT WORKING
     const user = JSON.parse(localStorage.getItem('userData'));
     if (user === null) {
       return this.router.createUrlTree(['/auth']);
     } else {
       const token = user._token;
-      return token != undefined ? true : this.router.createUrlTree(['/auth']);
+      return token !== undefined ? true : this.router.createUrlTree(['/auth']);
     }
-    //!
-    //! OK BUT NOT WORKING!
+    // !
+    // ! OK BUT NOT WORKING!
     // return this.authService.user$.pipe(
     //   take(1),
     //   map(user => {
@@ -44,6 +44,6 @@ export class AuthGuard implements CanActivate {
     //     return this.router.createUrlTree(['/auth']);
     //   })
     // );
-    //!
+    // !
   }
 }

@@ -24,15 +24,15 @@ export class ShippingEditComponent {
     this.buildFormGroup(fb);
   }
 
-  get name() {
+  get name(): any {
     return this.shippingFormGroup.get('name');
   }
 
-  get price() {
+  get price(): any {
     return this.shippingFormGroup.get('price');
   }
 
-  addNewValue() {
+  addNewValue(): void {
     const shipping = {
       name: this.name.value,
       price: this.price.value,
@@ -41,7 +41,7 @@ export class ShippingEditComponent {
     this.updateDb();
   }
 
-  edit(index) {
+  edit(index): void {
     this.editShippingMode = null;
     const shipping = {
       name: this.name.value,
@@ -51,12 +51,12 @@ export class ShippingEditComponent {
     this.updateDb();
   }
 
-  delete(index) {
+  delete(index): void {
     this.shippings.splice(index, 1);
     this.updateDb();
   }
 
-  updateDb() {
+  updateDb(): void {
     this.sharedDataService.layout$.subscribe((response) => {
       const id = response._id;
       this.configsService
@@ -66,7 +66,7 @@ export class ShippingEditComponent {
     });
   }
 
-  private buildFormGroup(fb) {
+  private buildFormGroup(fb): void {
     this.shippingFormGroup = fb.group({
       name: fb.control(null),
       price: fb.control(null),

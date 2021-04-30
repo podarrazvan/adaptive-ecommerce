@@ -10,7 +10,7 @@ import { MessagesService } from '../messages/messages.service';
 export class SidebarComponent implements OnInit, DoCheck {
   unread: number;
   hide = false;
-  
+
   constructor(
     private messagesService: MessagesService,
     private sharedDataService: SharedDataService
@@ -19,7 +19,7 @@ export class SidebarComponent implements OnInit, DoCheck {
   ngOnInit(): void {
     this.messagesService.getMessages().subscribe((response) => {
       this.sharedDataService.unreadMessages = 0;
-      for (let email of response) {
+      for (const email of response) {
         if (!email.seen) {
           this.sharedDataService.unreadMessages++;
         }
@@ -28,7 +28,7 @@ export class SidebarComponent implements OnInit, DoCheck {
     });
   }
 
-  ngDoCheck() {
+  ngDoCheck(): void {
     this.unread = this.sharedDataService.unreadMessages;
   }
 }

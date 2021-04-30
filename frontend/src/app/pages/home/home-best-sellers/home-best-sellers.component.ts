@@ -15,7 +15,7 @@ export class HomeBestSellersComponent {
 
   constructor(private sharedDataService: SharedDataService) {
     setTimeout(() => {
-      //TODO use something similar with layout$ and in HTML
+      // TODO use something similar with layout$ and in HTML
       this.sharedDataService.bestSellers$.subscribe((response) => {
         this.mainProduct = response.mainProduct;
         this.middleProducts = response.middleProducts;

@@ -24,24 +24,15 @@ export class WebsiteEditComponent {
     });
   }
 
-  editTermsOfUse() {
+  editTermsOfUse(): void {
     this.showEditTermsOfUse = true;
   }
 
-  closeTermsOfUseEdit() {
+  closeTermsOfUseEdit(): void {
     this.showEditTermsOfUse = false;
   }
 
-  footerEdit(footer) {
+  footerEdit(): void {
     this.showEditFooter = false;
-    // !! tre alta tehnica aici
-    // this.configs.footer.adress = footer.adress;
-    // this.configs.footer.email = footer.email;
-    // this.configs.footer.phone = footer.phone;
-    //this.configs.footer.program = footer.program;
-    // this.configs.footer.facebookImage = footer.facebookLogo;
-    // this.configs.footer.twitterImage = footer.twitterLogo;
-    // this.configs.footer.instagramImage = footer.instagramLogo;
-    // this.configs.youtube.image = footer.youtubeLogo;
   }
 }

@@ -11,52 +11,50 @@ export class UsersService {
   categories: string[];
   category;
 
-  getAdmins() {
+  getAdmins(): any {
     return this.http.get<User[]>(`${environment.api}/users/admins`);
   }
 
-  getUsers(page: number, limit: number) {
+  getUsers(page: number, limit: number): any {
     return this.http.get<{
       next: { page: number; limit: number };
       results: User[];
     }>(`${environment.api}/users?page=${page}&limit=${limit}`);
   }
 
-  deleteAdmin(username: string) {
+  deleteAdmin(username: string): any {
     return this.http.delete(
       `${environment.api}/users/admins/delete/${username}`
     );
   }
 
-  deleteUser(username: string) {
-    return this.http.delete(
-      `${environment.api}/users/delete/${username}`
-    );
+  deleteUser(username: string): any {
+    return this.http.delete(`${environment.api}/users/delete/${username}`);
   }
 
-  updatePassword(email, recoveryPasswordCode, password) {
+  updatePassword(email, recoveryPasswordCode, password): any {
     const user = { email, recoveryPasswordCode, password };
     return this.http.put(`${environment.api}/users/update-password`, user);
   }
 
-  checkCode(email, code) {
+  checkCode(email, code): any {
     return this.http.get(
       `${environment.api}/users/check-code/${email}/${code}`
     );
   }
 
-  updateHistory(email, history) {
+  updateHistory(email, history): any {
     const user = { email, history };
     return this.http.put(`${environment.api}/users/history`, user);
   }
 
-  updateFavorites(email, favorites) {
+  updateFavorites(email, favorites): any {
     const user = { email, favorites };
     return this.http.put(`${environment.api}/users/favorites`, user);
   }
 
-  updateAdmin(_id, isAdmin) {
-    const user = { _id, isAdmin };
+  updateAdmin(id, isAdmin): any {
+    const user = { _id: id, isAdmin };
     return this.http.put(`${environment.api}/users/update/admin`, user);
   }
 }

@@ -8,9 +8,9 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class MessageComponent {
   @Input() message: Message;
-  @Output() close = new EventEmitter<void>();
+  @Output() closeMessage = new EventEmitter<void>();
 
-  onClose() {
-    this.close.emit();
+  onClose(): void {
+    this.closeMessage.emit();
   }
 }

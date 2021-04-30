@@ -9,18 +9,18 @@ import { DiscountService } from 'src/app/shared/services/database/discount.servi
 })
 export class DiscountModalComponent {
   @Input() id: string;
-  @Output() close = new EventEmitter();
+  @Output() closeDiscount = new EventEmitter();
 
   constructor(
     private formBuilder: FormBuilder,
-    private discountService: DiscountService,
+    private discountService: DiscountService
   ) {
     this.buildFormGroup();
   }
 
   discountForm: FormGroup;
-  onSubmit() {
-    //*TODO Try alternative to Date(): https://momentjs.com/
+  onSubmit(): void {
+    // TODO Try alternative to Date(): https://momentjs.com/
     const expDate = new Date();
     expDate.setDate(
       new Date().getDate() + this.discountForm.value.expirationDate
@@ -31,9 +31,9 @@ export class DiscountModalComponent {
       expirationDate: expDate,
     });
     this.discountService.createDiscount(this.discountForm.value);
-    this.close.emit();
+    this.closeDiscount.emit();
   }
-  private buildFormGroup() {
+  private buildFormGroup(): void {
     this.discountForm = this.formBuilder.group({
       cut: ['', Validators.required],
       expirationDate: ['', Validators.required],

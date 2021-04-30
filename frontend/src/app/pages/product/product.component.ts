@@ -34,8 +34,8 @@ export class ProductComponent {
       this.productsService.getProduct(productId).subscribe((response) => {
         const product = response;
         this.checkPromotion(response);
-        this.sharedDataService.userDetails$.subscribe((response) => {
-          this.user = response;
+        this.sharedDataService.userDetails$.subscribe((user) => {
+          this.user = user;
           if (this.user.history.indexOf(productId) === -1) {
             this.user.history.push(productId);
             this.sharedDataService.updateUserDetails(this.user);

@@ -21,7 +21,7 @@ export class SearchBarComponent {
     this.buildFormGroup();
   }
 
-  onSearch() {
+  onSearch(): void {
     const search = this.searchBar.value.search;
     this.router.navigate([
       '../search',
@@ -30,14 +30,14 @@ export class SearchBarComponent {
     ]);
   }
 
-  searchInCategories(category) {
+  searchInCategories(category): void {
     this.searchBar.patchValue({
-      category: category,
+      category,
     });
     this.selectedCategory = category.name;
   }
 
-  private buildFormGroup() {
+  private buildFormGroup(): void {
     this.searchBar = this.fb.group({
       search: ['', Validators.required],
       category: ['all'],

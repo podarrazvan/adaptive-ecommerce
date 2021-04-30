@@ -25,7 +25,7 @@ export const buildProductFormGroup = () => {
   });
 };
 
-export function mapProducts(formArray, products: IProduct[] = []) {
+export function mapProducts(formArray, products: IProduct[] = []): void {
   formArray.clear();
   products.forEach((p) => {
     formArray.push(

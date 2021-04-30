@@ -10,7 +10,7 @@ export const buildAdminFormGroup = () => {
       brands: fb.array([]),
       categories: fb.array([]),
       coupons: fb.array([]),
-      shipping: fb.array([]), //! NOT USED!
+      shipping: fb.array([]), // ! NOT USED!
       footer: fb.group({
         adress: fb.control(null),
         phone: fb.control(null),
@@ -42,4 +42,4 @@ export const buildAdminFormGroup = () => {
   });
 };
 
-export function patchAdminFormGroup(formGroup, message) {}
+export function patchAdminFormGroup(formGroup, message): void {}

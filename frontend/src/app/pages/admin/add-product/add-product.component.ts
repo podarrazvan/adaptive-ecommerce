@@ -19,7 +19,7 @@ export class AddProductComponent implements OnDestroy {
   tagsForm: FormGroup;
   modelsForm: FormGroup;
 
-  loading = true; //TODO
+  loading = true; // TODO
   autoMode = false;
 
   addDiscount = false;
@@ -50,24 +50,24 @@ export class AddProductComponent implements OnDestroy {
     this.buildForms();
   }
 
-  get productForm() {
+  get productForm(): any {
     return this.adminService.productFormGroup.get('product');
   }
 
-  get tag() {
+  get tag(): any {
     return this.tagsForm.get('tag').value;
   }
 
-  get name() {
+  get name(): any {
     return this.modelsForm.get('name').value;
   }
 
-  get price() {
+  get price(): any {
     return this.modelsForm.get('price').value;
   }
 
-  onSubmit() {
-    if (this.images != undefined) {
+  onSubmit(): void {
+    if (this.images !== undefined) {
       this.productForm.patchValue({
         images: this.images,
         tags: this.tags,
@@ -82,7 +82,7 @@ export class AddProductComponent implements OnDestroy {
             this.sharedDataService.product._id
           );
         } else {
-          //! DELETE THIS!
+          // ! DELETE THIS!
           // const title = this.productForm.value.title;
           // for (let i = 0; i < 5; i++) {
           //   this.productForm.patchValue({
@@ -90,7 +90,7 @@ export class AddProductComponent implements OnDestroy {
           //   });
           //   this.productsService.createAndStoreProduct(this.productForm.value);
           // }
-          //!
+          // !
           this.productsService.createAndStoreProduct(this.productForm.value);
         }
         this.notComplete = false;
@@ -99,7 +99,7 @@ export class AddProductComponent implements OnDestroy {
         this.images = [];
         this.thumbnail = null;
         this.mainImg = null;
-        this.productForm.get('description').patchValue(null); //! NOT WORKING!
+        this.productForm.get('description').patchValue(null); // : void! NOT WORKING!
         this.productForm.reset();
       } else {
         alert('Invalid form!');
@@ -109,54 +109,54 @@ export class AddProductComponent implements OnDestroy {
     }
   }
 
-  upload(img: any) {
+  upload(img: any): void {
     const image = (img.target as HTMLInputElement).files[0];
     this.imagesService.uploadImg(image).subscribe((responseData) => {
       this.images.push(responseData.url);
     });
   }
 
-  uploadThumbnail(img: any) {
+  uploadThumbnail(img: any): void {
     const image = (img.target as HTMLInputElement).files[0];
     this.imagesService.uploadImg(image).subscribe((responseData) => {
       this.thumbnail = responseData.url;
     });
   }
 
-  uploadMainImg(img: any) {
+  uploadMainImg(img: any): void {
     const image = (img.target as HTMLInputElement).files[0];
     this.imagesService.uploadImg(image).subscribe((responseData) => {
       this.mainImg = responseData.url;
     });
   }
 
-  deleteThumbnail(img) {
+  deleteThumbnail(img): void {
     this.imagesService.deletePhoto(img).subscribe();
     this.thumbnail = null;
   }
 
-  deleteMainImg(img) {
+  deleteMainImg(img): void {
     this.imagesService.deletePhoto(img).subscribe();
     this.mainImg = null;
   }
 
-  deletePhoto(img, i) {
+  deletePhoto(img, i): void {
     this.imagesService.deletePhoto(img).subscribe();
     this.images.splice(i, 1);
   }
 
-  addTag() {
+  addTag(): void {
     if (this.tagsForm.valid) {
       this.tags.push(this.tag);
       this.tagsForm.reset();
     }
   }
 
-  deleteTag(index) {
+  deleteTag(index): void {
     this.tags.splice(index, 1);
   }
 
-  addModel() {
+  addModel(): void {
     if (this.modelsForm.valid) {
       const model = {
         name: this.name,
@@ -167,17 +167,17 @@ export class AddProductComponent implements OnDestroy {
     }
   }
 
-  deleteModel(index) {
+  deleteModel(index): void {
     this.models.splice(index, 1);
   }
 
-  ckeditorContentChanged(content) {
+  ckeditorContentChanged(content): void {
     const div = document.createElement('div');
     div.innerHTML = content;
     this.productForm.get('description').patchValue(div.innerHTML);
   }
 
-  private buildForms() {
+  private buildForms(): void {
     this.tagsForm = this.fb.group({
       tag: ['', Validators.required],
     });
@@ -191,7 +191,7 @@ export class AddProductComponent implements OnDestroy {
     this.sharedDataService.product = null;
     this.sharedDataService.productEdit = false;
     if (this.notComplete && !this.onEditMode) {
-      for (let img of this.images) {
+      for (const img of this.images) {
         this.imagesService.deletePhoto(img);
       }
     }

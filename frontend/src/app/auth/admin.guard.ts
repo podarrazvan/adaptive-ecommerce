@@ -23,8 +23,8 @@ export class AdminGuard implements CanActivate {
     | UrlTree
     | Promise<boolean | UrlTree>
     | Observable<boolean | UrlTree> {
-      //TODO
-      return true;//DELETE THIS
+    // TODO
+    return true; // DELETE THIS
     // //! NOT OK BUT WORKING
     // AND USE THIS:
     // const user = JSON.parse(localStorage.getItem('userData'));
@@ -40,9 +40,9 @@ export class AdminGuard implements CanActivate {
     //       : this.router.createUrlTree(['/auth']);
     //   }
     // }
-    //!
-    //TODO
-    //! OK BUT NOT WORKING
+    // !
+    // TODO
+    // ! OK BUT NOT WORKING
     // return this.authService.user$.pipe(
     //   take(1),
     //   map((user$) => {
@@ -54,6 +54,6 @@ export class AdminGuard implements CanActivate {
     //     return this.router.createUrlTree(['/auth']);
     //   })
     // );
-    //!
+    // !
   }
 }

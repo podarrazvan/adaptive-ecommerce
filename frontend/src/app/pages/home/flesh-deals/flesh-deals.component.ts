@@ -20,7 +20,7 @@ export class FleshDealsComponent implements OnInit {
 
   ngOnInit(): void {
     this.discountService.getPromotions().subscribe((response) => {
-      for (let promotion of response) {
+      for (const promotion of response) {
         const promo = {
           cut: promotion.cut,
           expirationDate: promotion.expirationDate,
@@ -30,9 +30,9 @@ export class FleshDealsComponent implements OnInit {
     });
   }
 
-  getProducts(id, discount) {
+  getProducts(id, discount): void {
     this.productsService.getProduct(id).subscribe((response) => {
-      const product = Object.assign(response, { discount: discount });
+      const product = Object.assign(response, { discount });
       this.products.push(product);
       if (this.products.length > 3) {
         this.productsFound = true;

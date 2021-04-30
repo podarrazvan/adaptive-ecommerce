@@ -10,7 +10,7 @@ import { SharedDataService } from 'src/app/shared/services/shared-data.service';
   styleUrls: ['./page-edit.component.scss'],
 })
 export class PageEditComponent {
-  @Output() close = new EventEmitter<void>();
+  @Output() closeEdit = new EventEmitter<void>();
   public tinyMCE: TinyMCEComponent;
   content;
   initialValue;
@@ -46,16 +46,16 @@ export class PageEditComponent {
     });
   }
 
-  onClose() {
-    this.close.emit();
+  onClose(): void {
+    this.closeEdit.emit();
   }
 
-  onSave() {
+  onSave(): void {
     const pageName = this.page.replace(/\s/g, '-').toLocaleLowerCase();
     this.configsService.editPages(this.content, pageName, this.id);
-    this.close.emit();
+    this.closeEdit.emit();
   }
-  ckeditorContentChanged(content) {
+  ckeditorContentChanged(content): void {
     const div = document.createElement('div');
     div.innerHTML = content;
     this.content = div.innerHTML;
@@ -64,7 +64,7 @@ export class PageEditComponent {
     this.sharedDataService.setLayout(this.layout);
   }
 
-  onPageChange(page) {
+  onPageChange(page): void {
     this.pageChanged = true;
     this.page = page;
     this.sharedDataService.layout$.subscribe((layout) => {
@@ -75,9 +75,9 @@ export class PageEditComponent {
       }
     });
   }
-  camelize(str) {
+  camelize(str): string {
     return str
-      .replace(/(?:^\w|[A-Z]|\b\w)/g, function (word, index) {
+      .replace(/(?:^\w|[A-Z]|\b\w)/g, function (word, index): string {
         return index === 0 ? word.toLowerCase() : word.toUpperCase();
       })
       .replace(/\s+/g, '');

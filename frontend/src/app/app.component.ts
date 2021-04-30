@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
     private loadingService: LoadingService
   ) {}
 
-  async ngOnInit() {
+  async ngOnInit(): Promise<any> {
     this.router.events.subscribe((evt) => {
       if (!(evt instanceof NavigationEnd)) {
         return;
@@ -30,7 +30,9 @@ export class AppComponent implements OnInit {
     });
 
     const layout = this.sharedDataService.getLayout();
-    const layout$ = this.loadingService.showLoaderUntilCompleted<Layout>(layout);
+    const layout$ = this.loadingService.showLoaderUntilCompleted<Layout>(
+      layout
+    );
     layout$.subscribe((response) => {
       this.sharedDataService.setLayout(response);
     });

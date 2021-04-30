@@ -11,7 +11,7 @@ export class HomeMainCategoriesComponent {
   constructor(public sharedDataService: SharedDataService) {
     this.sharedDataService.layout$.subscribe((response) => {
       const categories = response.categories;
-      let numberOfCategories = categories.length > 9? 9: categories.length;
+      const numberOfCategories = categories.length > 9 ? 9 : categories.length;
       while (this.categories.length < numberOfCategories) {
         const category =
           categories[Math.floor(Math.random() * categories.length)];

@@ -12,7 +12,7 @@ import { OrdersService } from '../orders.service';
 export class OrderComponent implements OnInit {
   @Input() order: Order;
 
-  @Output() close = new EventEmitter<void>();
+  @Output() closeOrder = new EventEmitter<void>();
   @Output() updated = new EventEmitter<void>();
 
   constructor(
@@ -25,18 +25,18 @@ export class OrderComponent implements OnInit {
 
   products: [
     { quantity?: number; name?: string; total?: number; id?: string }
-  ] = [{}]; //TODO use interface
+  ] = [{}]; // TODO use interface
 
   ngOnInit(): void {
     this.products.splice(0, 1);
-    for (let product of this.order.products) {
+    for (const product of this.order.products) {
       this.productsService.getProduct(product.product).subscribe((response) => {
         const prod = response;
         const total = prod.price * product.quantity;
         this.products.push({
           quantity: product.quantity,
           name: prod.title,
-          total: total,
+          total,
           id: product.product,
         });
       });
@@ -44,12 +44,12 @@ export class OrderComponent implements OnInit {
     this.loading = false;
   }
 
-  openProduct(id) {
+  openProduct(id): void {
     this.router.navigate(['/product', id]);
   }
 
-  updateOrder(status: string) {
-    if (status === 'processed' && this.order.status != status) {
+  updateOrder(status: string): void {
+    if (status === 'processed' && this.order.status !== status) {
       this.ordersService.updateOrder(this.order._id, status).subscribe(() => {
         this.productsService
           .updateSold(status, this.order.products)
@@ -57,8 +57,8 @@ export class OrderComponent implements OnInit {
             this.updated.emit();
           });
       });
-    } else if (status === 'canceled' && this.order.status != status) {
-      alert("Please don't forget to refund the money!");
+    } else if (status === 'canceled' && this.order.status !== status) {
+      alert('Please do not forget to refund the money!');
       this.ordersService.updateOrder(this.order._id, status).subscribe(() => {
         this.productsService
           .updateSold(status, this.order.products)
@@ -67,12 +67,12 @@ export class OrderComponent implements OnInit {
           });
       });
     } else {
-      this.close.emit();
+      this.closeOrder.emit();
     }
   }
-  addAWB(awb) {
+  addAWB(awb): void {
     this.ordersService.updateAWB(this.order._id, awb).subscribe(() => {
-      alert("AWB updated")
+      alert('AWB updated');
     });
   }
 }

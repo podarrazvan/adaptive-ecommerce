@@ -51,7 +51,7 @@ export class ProductsComponent implements OnInit {
     this.getProducts(this.currentPage, 10);
   }
 
-  getProducts(page, limit) {
+  getProducts(page, limit): void {
     this.loading = true;
     this.productsService
       .getPaginatedProducts(page, limit)
@@ -65,7 +65,7 @@ export class ProductsComponent implements OnInit {
       });
   }
 
-  onDelete(confirmed) {
+  onDelete(confirmed): void {
     if (confirmed) {
       this.deleteAlert = false;
       this.onProductDeleted();
@@ -74,69 +74,63 @@ export class ProductsComponent implements OnInit {
     }
   }
 
-  openDeleteAlert(index) {
+  openDeleteAlert(index): void {
     this.productToDeleteIndex = index;
     this.deleteAlert = true;
   }
 
-  openEdit(type: string, product: IProduct) {
+  openEdit(type: string, product: IProduct): void {
     this.showEditProduct = true;
   }
 
-  close(type: string) {
+  close(type: string): void {
     this.showEditProduct = false;
   }
 
-  openEditProduct(product: IProduct) {
+  openEditProduct(product: IProduct): void {
     this.sharedDataService.product = product;
     this.sharedDataService.productEdit = true;
     this.router.navigate(['admin', 'add-product']);
   }
 
-  onProductDeleted() {
+  onProductDeleted(): void {
     const product = this.products[this.productToDeleteIndex];
-    this.productsService
-      .deleteProduct(product._id)
-      .subscribe(() => {
-        const mainImg = product.mainImg.split('/');
-        this.imagesService
-          .deletePhoto(mainImg[5])
-          .subscribe();
-          const thumbnail = product.thumbnail.split('/');
-        this.imagesService
-          .deletePhoto(thumbnail[5])
-          .subscribe();
-        for (let img of product.images) {
-          const image = img.split('/');
-          this.imagesService.deletePhoto(image[5]).subscribe();
-        }
-      });
+    this.productsService.deleteProduct(product._id).subscribe(() => {
+      const mainImg = product.mainImg.split('/');
+      this.imagesService.deletePhoto(mainImg[5]).subscribe();
+      const thumbnail = product.thumbnail.split('/');
+      this.imagesService.deletePhoto(thumbnail[5]).subscribe();
+      for (const img of product.images) {
+        const image = img.split('/');
+        this.imagesService.deletePhoto(image[5]).subscribe();
+      }
+    });
     this.products.splice(this.productToDeleteIndex, 1);
     this.deleteAlert = false;
   }
 
-  onCancelDelete() {
+  onCancelDelete(): void {
     this.deleteAlert = false;
   }
 
-  openDiscount(id) {
+  openDiscount(id): void {
     this.discountProductId = id;
     this.showDiscount = true;
   }
 
-  previousPage() {
+  previousPage(): void {
     this.currentPage--;
     this.getProducts(this.currentPage, this.limit);
   }
 
-  nextPage() {
+  nextPage(): void {
     this.currentPage++;
     this.getProducts(this.currentPage, this.limit);
   }
 
-  checkPrice(products) {
+  checkPrice(products): void {
     this.products = [];
-    for (let product of products) {
+    for (const product of products) {
       this.discountService
         .checkForPromotion(product._id)
         .subscribe((response) => {

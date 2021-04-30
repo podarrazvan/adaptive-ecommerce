@@ -30,10 +30,7 @@ export class LoginFormComponent {
     private usersService: UsersService
   ) {}
 
-  onSubmit(form: NgForm) {
-    // if (!form.valid && !this.resetPasswordMode) {
-    //   this.error = true;
-    // }
+  onSubmit(form: NgForm): void {
     const password = form.value.password;
     if (this.showResetPasswordCode) {
       this.code = form.value.code;
@@ -72,7 +69,7 @@ export class LoginFormComponent {
             }, 5000);
           });
       } else {
-        this.infoMessage = "Passwords don't match";
+        this.infoMessage = 'Passwords don\'t match';
         this.success = false;
         this.showInfo = true;
       }

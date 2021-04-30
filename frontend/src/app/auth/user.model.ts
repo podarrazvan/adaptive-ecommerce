@@ -11,7 +11,7 @@ export class User {
     private _tokenExpirationDate?: Date,
   ) { }
 
-  get token() {
+  get token(): any {
     if (!this._tokenExpirationDate || new Date() > this._tokenExpirationDate) {
       return null;
     }

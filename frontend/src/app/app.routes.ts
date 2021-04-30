@@ -31,7 +31,11 @@ const routes: Routes = [
   { path: 'search/:category/:search', component: SearchComponent },
   { path: 'search-by-brand/:brand', component: ProductsByBrandComponent },
   { path: 'brands', component: BrandsComponent },
-  { path: 'special-for-you', component: SpecialForYouComponent,canActivate: [AuthGuard] },
+  {
+    path: 'special-for-you',
+    component: SpecialForYouComponent,
+    canActivate: [AuthGuard],
+  },
   {
     path: 'product',
     loadChildren: () =>
@@ -73,8 +77,6 @@ const routes: Routes = [
   exports: [RouterModule],
 })
 export class AppRoutesModule {}
-
-
 
 // {
 //   path: 'profile',

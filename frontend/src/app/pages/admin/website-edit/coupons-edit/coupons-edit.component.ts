@@ -26,25 +26,25 @@ export class CouponsEditComponent {
   ) {
     this.buildFormGroup(fb);
     this.discountService.getCoupons().subscribe((coupons) => {
-      for (let coupon of coupons) {
+      for (const coupon of coupons) {
         this.couponsForm.push(this.createCoupon(coupon));
       }
     });
   }
 
-  get code() {
+  get code(): any {
     return this.couponFormGroup.get('code');
   }
 
-  get discount() {
+  get discount(): any {
     return this.couponFormGroup.get('discount');
   }
 
-  get couponsForm() {
+  get couponsForm(): any {
     return this.adminService.adminFormGroup.get('configs.coupons') as FormArray;
   }
 
-  addNewValue() {
+  addNewValue(): void {
     const coupon = {
       code: this.code.value,
       discount: this.discount.value,
@@ -56,7 +56,7 @@ export class CouponsEditComponent {
     });
   }
 
-  delete(index) {
+  delete(index): void {
     const id = this.couponsForm.value[index]._id;
     this.discountService.deleteCoupon(id).subscribe(() => {
       this.couponsForm.value.splice(index, 1);
@@ -64,7 +64,7 @@ export class CouponsEditComponent {
     });
   }
 
-  edit(index) {
+  edit(index): void {
     this.editCouponMode = null;
     const coupon = {
       _id: this.couponsForm.value[index]._id,
@@ -86,7 +86,7 @@ export class CouponsEditComponent {
     });
   }
 
-  private buildFormGroup(fb) {
+  private buildFormGroup(fb): void {
     this.couponFormGroup = fb.group({
       _id: fb.control(null),
       code: fb.control(null),

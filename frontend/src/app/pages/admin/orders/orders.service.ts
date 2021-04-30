@@ -3,41 +3,43 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Order } from 'src/app/shared/interfaces/order.interface';
 
-@Injectable({providedIn:"root"})
+@Injectable({ providedIn: 'root' })
 export class OrdersService {
   error: any;
 
   constructor(private http: HttpClient) {}
 
-  addOrder(order: Order) {
-    return this.http
-      .post<{message: string, order: Order}>(`${environment.api}/order`, order, {
+  addOrder(order: Order): any {
+    return this.http.post<{ message: string; order: Order }>(
+      `${environment.api}/order`,
+      order,
+      {
         observe: 'response',
-      });      
+      }
+    );
   }
 
-  updateOrder(id: string, status: string,) {
+  updateOrder(id: string, status: string): any {
     return this.http.put(`${environment.api}/order/update/${id}/${status}`, {
       observe: 'response',
     });
   }
 
-  updateAWB(id: string, awb: string,) {
+  updateAWB(id: string, awb: string): any {
     return this.http.put(`${environment.api}/order/update/awb/${id}/${awb}`, {
       observe: 'response',
     });
   }
 
-  getOrders() {
-    const user = JSON.parse(localStorage.getItem('userData'));
+  getOrders(): any {
     return this.http.get<Order[]>(`${environment.api}/order`);
   }
 
-  getOrder(number) {
-    return this.http.get<Order>(`${environment.api}/order/${number}`);
+  getOrder(orderNumber): any {
+    return this.http.get<Order>(`${environment.api}/order/${orderNumber}`);
   }
 
-  deleteOrder(id: string) {
+  deleteOrder(id: string): any {
     const user = JSON.parse(localStorage.getItem('userData'));
     return this.http.delete(`${environment.api}/order/delete/${id}`);
   }

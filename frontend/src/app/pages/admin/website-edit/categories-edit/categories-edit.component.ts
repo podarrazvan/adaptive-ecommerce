@@ -13,7 +13,7 @@ export class CategoriesEditComponent {
   categoriesFormGroup: FormGroup;
   categoriesHide = true;
   editCategoryMode: number;
-  categories; //! NOT OK
+  categories; // ! NOT OK
 
   constructor(
     private fb: FormBuilder,
@@ -23,23 +23,23 @@ export class CategoriesEditComponent {
   ) {
     this.buildFormGroup(fb);
     this.sharedDataService.layout$.subscribe((response) => {
-      this.categories = response.categories; //! DON'T USE categories, USE categoriesForm()
+      this.categories = response.categories; // ! DON'T USE categories, USE categoriesForm()
     });
   }
 
-  get categoriesForm() {
+  get categoriesForm(): FormArray {
     return this.adminService.adminFormGroup.get(
       'configs.categories'
     ) as FormArray;
   }
 
-  get categoryName() {
+  get categoryName(): FormGroup {
     return this.categoriesFormGroup.get('name').value;
   }
 
-  addNewValue() {
+  addNewValue(): void {
     this.categoriesForm.push(this.createCategory());
-    this.categories.push({ name: this.categoryName }); //! NOT OK!
+    this.categories.push({ name: this.categoryName }); // ! NOT OK!
     this.sharedDataService.layout$.subscribe((response) => {
       const id = response._id;
       this.configsService
@@ -48,7 +48,7 @@ export class CategoriesEditComponent {
     });
   }
 
-  delete(index) {
+  delete(index): void {
     this.categoriesForm.value.splice(index, 1);
     this.categories.splice(index, 1);
     this.sharedDataService.layout$.subscribe((response) => {
@@ -59,9 +59,9 @@ export class CategoriesEditComponent {
     });
   }
 
-  edit(index) {
-    this.categories[index] = { name: this.categoryName }; //! NOT OK!
-    this.categoriesForm.value[index] = { name: this.categoryName }; //! NOT OK!
+  edit(index): void {
+    this.categories[index] = { name: this.categoryName }; // ! NOT OK!
+    this.categoriesForm.value[index] = { name: this.categoryName }; // ! NOT OK!
     this.sharedDataService.layout$.subscribe((response) => {
       const id = response._id;
       this.configsService
@@ -77,7 +77,7 @@ export class CategoriesEditComponent {
     return this.fb.group({ name });
   }
 
-  private buildFormGroup(fb) {
+  private buildFormGroup(fb): void {
     this.categoriesFormGroup = fb.group({
       name: fb.control(null),
     });

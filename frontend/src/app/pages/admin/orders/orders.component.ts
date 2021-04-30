@@ -19,7 +19,7 @@ export class OrdersComponent {
   deleteAlert: boolean;
   deleteIndex: number;
 
-  getOrders() {
+  getOrders(): void {
     this.orders = [];
     this.ordersService.getOrders().subscribe((response) => {
       this.orders = response;
@@ -28,28 +28,28 @@ export class OrdersComponent {
     });
   }
 
-  openOrder(order: Order) {
+  openOrder(order: Order): void {
     if (!this.deleteAlert) {
-      //! you can do it better, don't emit openOrder!
+      // ! you can do it better, don't emit openOrder!
       this.orderToShow = order;
       this.showOrder = true;
     }
   }
 
-  closeOrder() {
+  closeOrder(): void {
     this.showOrder = false;
   }
 
-  orderUpdated() {
+  orderUpdated(): void {
     this.getOrders();
     this.showOrder = false;
   }
 
-  updateOrder(status: string, order) {
+  updateOrder(status: string, order): void {
     this.ordersService.updateOrder(order._id, status).subscribe();
   }
 
-  onDelete(confirmed) {
+  onDelete(confirmed): void {
     const order = this.orders[this.deleteIndex]._id;
     if (confirmed) {
       this.ordersService.deleteOrder(order).subscribe(() => {
@@ -60,7 +60,7 @@ export class OrdersComponent {
       this.deleteAlert = false;
     }
   }
-  openDeleteAlert(index) {
+  openDeleteAlert(index): void {
     this.deleteIndex = index;
     this.deleteAlert = true;
   }

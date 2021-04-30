@@ -41,7 +41,7 @@ export interface AuthUserInfoDto {
 //     favorites: string[]
 // }
 
-//!
+// !
 export interface Logout {
   email: string;
   password: string;
@@ -65,4 +65,4 @@ export interface AutoLogout {
   _tokenExpirationDate: string;
   isAdmin: boolean;
 }
-//!
+// !

@@ -28,7 +28,7 @@ export class CheckoutRightComponent {
     public sharedDataService: SharedDataService
   ) {
     this.products = JSON.parse(localStorage.getItem('cart'));
-    for (let product of this.products) {
+    for (const product of this.products) {
       this.total += product.price;
     }
     this.subtotal = this.total;
@@ -38,23 +38,23 @@ export class CheckoutRightComponent {
     }
   }
 
-  get checkoutForm() {
+  get checkoutForm(): any {
     return this.checkoutService.orderFormGroup.get('order');
   }
-  get orderDetailsForm() {
+  get orderDetailsForm(): any {
     this.shippingPrice = this.checkoutService.orderFormGroup.get(
       'order.orderDetails'
     ).value.shipping;
     return this.checkoutService.orderFormGroup.get('order.orderDetails');
   }
 
-  get productsFrom() {
+  get productsFrom(): any {
     return this.checkoutService.orderFormGroup.get(
       'order.products'
     ) as FormArray;
   }
 
-  placeOrder() {
+  placeOrder(): void {
     if (this.termsAccepted) {
       if (!this.checkoutForm.valid) {
         this.checkoutService.createAccount$.subscribe((createAccount) => {
@@ -65,7 +65,7 @@ export class CheckoutRightComponent {
             window.open(url, '_blank');
           }
         });
-        for (let prod of this.products) {
+        for (const prod of this.products) {
           const product = prod.id;
           const quantity = prod.quantity;
           const price = prod.price;
@@ -105,7 +105,7 @@ export class CheckoutRightComponent {
     return this.fb.group({ product, quantity, price });
   }
 
-  checkCoupon(code) {
+  checkCoupon(code): void {
     this.discountService.getCoupon(code).subscribe((coupon) => {
       this.cutTotal = coupon.discount;
       if (this.cutTotal > this.total) {

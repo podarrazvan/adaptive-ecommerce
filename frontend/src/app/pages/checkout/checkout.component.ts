@@ -12,7 +12,7 @@ export class CheckoutComponent {
     this.checkoutService.orderFormGroup = buildOrderFormGroup();
   }
 
-  get orderNotesForm() {
+  get orderNotesForm(): any {
     return this.checkoutService.orderFormGroup.get('order');
   }
 }

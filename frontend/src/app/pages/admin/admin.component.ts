@@ -25,28 +25,29 @@ export class AdminComponent {
     this.adminService.adminFormGroup = buildAdminFormGroup();
     this.adminService.productFormGroup = buildProductFormGroup();
 
-    this.sharedDataService.layout$.subscribe((response) => {
-      if (response._id === undefined) {
+    this.sharedDataService.layout$.subscribe((layout) => {
+      if (layout._id === undefined) {
         this.configsService.createconfigs();
       }
-      setTimeout(()=>{//! not ok, fix it!
-      this.sharedDataService.statistics$.subscribe((response) => {
-          if (response === null) {
+      setTimeout(() => {
+        // ! not ok, fix it!
+        this.sharedDataService.statistics$.subscribe((statistics) => {
+          if (statistics === null) {
             this.statisticsService.createStatistics().subscribe();
           }
         });
-      },300);
+      }, 300);
     });
   }
 
-  //TODO use observabile!
+  // TODO use observable!
   ngDoCheck(): void {
     this.checkUrl();
   }
 
-  checkUrl() {
-    var _activeChild = this.activeRouter.children.length;
-    if (_activeChild != 0) {
+  checkUrl(): void {
+    const activeChild = this.activeRouter.children.length;
+    if (activeChild !== 0) {
       this.nothingSelected = false;
     }
   }

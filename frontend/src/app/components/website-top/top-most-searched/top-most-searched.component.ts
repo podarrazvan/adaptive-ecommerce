@@ -5,13 +5,13 @@ import { StatisticsService } from 'src/app/shared/services/database/statistics.s
 @Component({
   selector: 'app-top-most-searched',
   templateUrl: './top-most-searched.component.html',
-  styleUrls: ['./top-most-searched.component.scss']
+  styleUrls: ['./top-most-searched.component.scss'],
 })
 export class TopMostSearchedComponent {
-  elements:ISearch[];
+  elements: ISearch[];
 
   constructor(private statisticsService: StatisticsService) {
-    this.statisticsService.getMostSearched().subscribe((result)=>{
+    this.statisticsService.getMostSearched().subscribe((result) => {
       this.elements = result;
     });
   }

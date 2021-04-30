@@ -38,47 +38,12 @@ export class StatisticsComponent {
 
   constructor(
     private productsService: ProductsService,
-    private statisticsService: StatisticsService,
     private router: Router
   ) {}
 
-  websiteWiews() {
-    this.websiteStatistics = [{}];
-    this.websiteStatistics.splice(0, 1);
-    const date = new Date();
-    const startYear = +date.getFullYear();
-    let startMonth = +date.getMonth();
-    let startDay = +date.getDate();
-    this.statisticsService.getAllWebsiteViews().subscribe((response) => {
-      for (let year = startYear; year > 2019; year--) {
-        for (let month = startMonth; month > 0; month--) {
-          for (let day = startDay; day > 0; day--) {
-            try {
-              response[year][month][day].views;
-              if (day === 0) {
-                startDay = 31;
-              }
-              if (month === 0) {
-                startMonth = 11;
-              }
-              const singleDay = {
-                year: year,
-                month: month + 1,
-                day: day,
-                views: response[year][month][day].views,
-              };
-              this.websiteStatistics.push(singleDay);
-            } catch {
-              break;
-            }
-          }
-        }
-      }
-      this.loading = false;
-    });
-  }
+  websiteWiews(): void {}
 
-  statisticsWebsite() {
+  statisticsWebsite(): void {
     this.loading = true;
     this.showWebsite = !this.showWebsite;
     this.showProducts = false;
@@ -86,41 +51,38 @@ export class StatisticsComponent {
     this.websiteWiews();
   }
 
-  statisticsProducts() {
+  statisticsProducts(): void {
     this.loading = true;
     this.showWebsite = false;
     this.showProducts = !this.showProducts;
     this.showOrders = false;
   }
 
-  statisticsOrders() {
-    // this.loading = true;
+  statisticsOrders(): void {
     this.showWebsite = false;
     this.showProducts = false;
     this.showOrders = !this.showOrders;
   }
 
-  getProducts(cat: string) {
+  getProducts(cat: string): void {
     this.products = [{}];
     this.products.splice(0, 1);
-    this.productsService
-      .getProductsByCategory(cat)
-      .subscribe((products) => {
-        // for (let product of products) {
-        //   this.dbStatisticsService
-        //     .getProductViews(product.key)
-        //     .subscribe((responseViews) => {
-        //       this.products.push({
-        //         product: product,
-        //         views: responseViews.views,
-        //       });
-        //     });
-        // }
-      });
+    this.productsService.getProductsByCategory(cat).subscribe((products) => {
+      // for (let product of products) {
+      //   this.dbStatisticsService
+      //     .getProductViews(product.key)
+      //     .subscribe((responseViews) => {
+      //       this.products.push({
+      //         product: product,
+      //         views: responseViews.views,
+      //       });
+      //     });
+      // }
+    });
     this.loading = false;
   }
 
-  openProduct(category: string, key: string) {
+  openProduct(category: string, key: string): void {
     this.router.navigate(['/product', category, key]);
   }
 }
